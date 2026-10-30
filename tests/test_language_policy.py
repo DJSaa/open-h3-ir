@@ -6,9 +6,9 @@ from h3ir.models import Brief, DialogueLine, Mode, AssetRef, AssetKind, Role, As
 from h3ir.compile import compile_brief
 
 @pytest.mark.parametrize('intent,description,speech_language,text',[
- ('她看着镜头用普通话说：“准备好了，现在开始。”','Chinese','Chinese','准备好了，现在开始。'),
+ ('她看着镜头用普通话说：“准备好了，现在开始。”','English','Chinese','准备好了，现在开始。'),
  ('She says in English: "Ready, let us begin."','English','English','Ready, let us begin.'),
- ('她用英语说：“Ready, let us begin.”','Chinese','English','Ready, let us begin.'),
+ ('她用英语说：“Ready, let us begin.”','English','English','Ready, let us begin.'),
  ('She says in Mandarin: “准备好了，现在开始。”','English','Chinese','准备好了，现在开始。'),
 ])
 def test_independent_description_and_spoken_languages(intent,description,speech_language,text):
@@ -21,7 +21,7 @@ def test_subtitle_is_not_speech_and_speech_not_subtitle():
  assert not prepare(Brief(intent='不要说“你好”。')).dialogue
 
 @pytest.mark.parametrize('mode',list(Mode))
-def test_chinese_draft_and_curly_quotes_are_valid(monkeypatch,mode):
+def test_english_draft_scaffold_keeps_chinese_speech_and_curly_quotes(monkeypatch,mode):
  import h3ir.compile as module
  assets=[];cards={}
  if mode in (Mode.I2VA,Mode.FL2VA,Mode.L2VA,Mode.REF2VA):
@@ -36,8 +36,8 @@ def test_chinese_draft_and_curly_quotes_are_valid(monkeypatch,mode):
  doc=compile_brief(Brief(intent='固定镜头，她用普通话说：“准备好了，现在开始。”',mode=mode,assets=assets),backend=backend,llm=False)
  assert doc.ok,doc.errors
  assert '<d>[Chinese] 准备好了，现在开始。</d>' in doc.prompt
- assert doc.provenance['description_language']=='Chinese'
- assert not language_findings(doc.prompt,'Chinese',(('准备好了，现在开始。','Chinese'),))
+ assert doc.provenance['description_language']=='English'
+ assert any(f.rule=='DINGO-draft-untranslated-input' for f in doc.findings)
 
 
 def test_wrong_spoken_language_is_error():
@@ -45,7 +45,7 @@ def test_wrong_spoken_language_is_error():
  assert any(x.rule=='DINGO-dialogue-language' and x.severity=='ERROR' for x in f)
 
 def test_wrong_description_language_is_error():
- f=language_findings('integrated_multimodal_description: [Shot 1] A woman turns around.\noverall_soundscape: A quiet room.\nnon_diegetic_music: N/A','Chinese')
+ f=language_findings('integrated_multimodal_description: [Shot 1] 镜头保持固定，一位女士转身。\noverall_soundscape: A quiet room.\nnon_diegetic_music: N/A','English')
  assert any(x.rule=='DINGO-description-language' for x in f)
 
 @pytest.mark.parametrize('intent,language,line',[
@@ -92,8 +92,8 @@ def test_native_writer_and_wrong_language_fallback(monkeypatch,reply_language):
  writer=Writer();doc=compile_brief(Brief(intent='固定镜头，她用普通话说：“准备好了，现在开始。”',mode=Mode.T2VA),backend=writer)
  assert doc.ok,doc.errors
  assert '<d>[Chinese] 准备好了，现在开始。</d>' in doc.prompt
- assert not language_findings(doc.prompt,'Chinese',(('准备好了，现在开始。','Chinese'),))
- assert doc.source==('written' if reply_language=='Chinese' else 'draft')
+ assert doc.source==('written' if reply_language=='English' else 'draft')
+ if reply_language=='English':assert not language_findings(doc.prompt,'English',(('准备好了，现在开始。','Chinese'),))
  assert all('准备好了，现在开始。' not in str(messages) for messages in writer.asks)
 
 
@@ -108,27 +108,27 @@ def test_http_intent_only_chinese_speech_is_protected(monkeypatch):
  response=TestClient(service.app).post('/v1/briefs',json={'intent':'固定镜头。她用普通话说：“准备好了，现在开始。”'})
  assert response.status_code==201,response.text
  body=response.json();assert '<d>[Chinese] 准备好了，现在开始。</d>' in body['ir']['prompt']
- assert body['ir']['provenance']['description_language']=='Chinese'
+ assert body['ir']['provenance']['description_language']=='English'
 
 
-def test_native_chinese_reference_writer(monkeypatch):
+def test_native_english_reference_writer_preserves_chinese_dialogue(monkeypatch):
  import h3ir.compile as module
  from h3ir.config import get_config
  reply='''subject_definitions:
-<Subject 1> 是<Picture 1>中的人物，保留黑色上衣。
+<Subject 1> is the woman in <Picture 1>, wearing a black top.
 
 summary:
-[reference generation] 参考人物在原场景中说话。
+[reference generation] The referenced woman speaks in the original setting.
 
 retention_analysis:
-<Subject 1> (appears in [Shot 1]): fully_preserved - 外貌和黑色上衣保持一致。
+<Subject 1> (appears in [Shot 1]): fully_preserved - Her appearance and black top remain consistent.
 
 detailed_description:
-写实摄影风格，光线柔和。
-[Shot 1] <Subject 1>看向镜头，黑色上衣保持一致。镜头保持固定。人物说道：{{D1}}
+Live-action portrait with soft diffused lighting.
+[Shot 1] <Subject 1> looks toward the lens, wearing a black top. The camera holds a static shot. She says: <d>[Chinese] {{D1}}</d>
 
 overall_soundscape:
-轻微室内环境声。
+Faint room ambience.
 
 non_diegetic_music:
 N/A
@@ -147,28 +147,28 @@ N/A
  assert '<d>[Chinese] 准备好了，现在开始。</d>' in doc.prompt
 
 
-def test_one_english_section_cannot_hide_in_chinese_prompt():
+def test_one_chinese_section_cannot_hide_in_english_prompt():
  text='''subject_definitions:
-<Subject 1> is a woman in a black shirt from <Picture 1>.
+<Subject 1> 是参考图中的人物，穿黑色上衣。
 summary:
-[reference generation] 人物在办公室中说话。
+[reference generation] The person speaks in an office.
 retention_analysis:
-<Subject 1>: fully_preserved - 外貌保持一致。
+<Subject 1>: fully_preserved - Her appearance remains consistent.
 detailed_description:
-写实摄影。[Shot 1] 镜头保持固定，人物看向前方。
+Live-action. [Shot 1] The camera holds a static shot as she looks forward.
 overall_soundscape:
-轻微环境声。
+Faint room ambience.
 non_diegetic_music:
 N/A'''
- assert any(x.rule=='DINGO-description-language' and 'subject_definitions' in x.msg for x in language_findings(text,'Chinese'))
+ assert any(x.rule=='DINGO-description-language' and 'subject_definitions' in x.msg for x in language_findings(text,'English'))
 
 
 def test_two_speakers_keep_distinct_ids_and_exact_lines():
  from h3ir.language import restore_dialogue
  b=prepare(Brief(intent='甲说“你好。”乙说“开始。”'))
  text=restore_dialogue('{{D1}} {{D2}}',b)
- assert '(S1)用普通话说：<d>[Chinese] 你好。</d>' in text
- assert '(S2)用普通话说：<d>[Chinese] 开始。</d>' in text
+ assert '(S1) says: <d>[Chinese] 你好。</d>' in text
+ assert '(S2) says: <d>[Chinese] 开始。</d>' in text
  assert '{{D' not in text
 
 
@@ -180,7 +180,7 @@ def test_missing_inline_speech_cannot_ship_as_written(monkeypatch):
   def require_available(self):pass
   def server_version(self):return 'test'
   def chat(self,*a,**kw):
-   return SimpleNamespace(content='integrated_multimodal_description: [Shot 1] 镜头保持固定。人物看向镜头。\noverall_soundscape: 轻微室内环境声。\nnon_diegetic_music: N/A')
+   return SimpleNamespace(content='integrated_multimodal_description: [Shot 1] The camera holds a static shot. She looks toward the lens.\noverall_soundscape: Quiet room ambience.\nnon_diegetic_music: N/A')
  monkeypatch.setattr(module,'analyse_all',lambda *a,**k:{})
  doc=compile_brief(Brief(intent='固定镜头，她说：“准备好了，现在开始。”',mode=Mode.T2VA),backend=Writer())
  assert doc.ok,doc.errors
@@ -224,3 +224,13 @@ def test_model_owned_wrapper_never_turns_delivery_directions_into_speech(wrapped
 def test_nested_speech_is_rejected_even_when_expected_line_is_inside():
  text='<d>[Chinese] (S1)用普通话说：<d>[Chinese] 准备好了，现在开始。</d></d>'
  assert any(f.rule=='DINGO-nested-dialogue' and f.severity=='ERROR' for f in language_findings(text,'Chinese',(('准备好了，现在开始。','Chinese'),)))
+
+
+@pytest.mark.parametrize('intent',['她说：“你好。”','She says in English: "Hello."','请使用中文描述场景。'])
+def test_official_english_prose_policy_does_not_follow_input_language(intent):
+ from h3ir.language import prompt_policy, POLICY_VERSION
+ b=prepare(Brief(intent=intent));system=prompt_policy('Write in English.',b)
+ assert b.description_language=='English'
+ assert 'DESCRIPTION LANGUAGE: English.' in system
+ assert 'Write in English.' in system
+ assert POLICY_VERSION=='dingo-language-v2'

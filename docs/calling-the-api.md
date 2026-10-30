@@ -69,9 +69,9 @@ each are in [`../.env.example`](../.env.example).
 
 ## Description and dialogue languages (Dingo branch)
 
-On `dingo-base`, descriptive prose follows the Chinese or English language detected from
-`intent`, excluding quoted content. Protocol field names, reference labels and timestamps remain
-unchanged. Speech has its own language: set `dialogue[].language` explicitly when needed; an omitted
+On `dingo-base`, model-written descriptive prose uses English for both Chinese and English
+`intent`, following the official H3 guides. Protocol field names, reference labels and timestamps
+remain unchanged. Speech has its own language: set `dialogue[].language` explicitly when needed; an omitted
 language is inferred from the explicit delivery instruction or the line's text rather than defaulting
 to English. For example:
 
@@ -85,7 +85,10 @@ to English. For example:
 Clear quoted speech in `intent` is also protected, but structured `dialogue` avoids ambiguity in
 complex requests. Literal speech and punctuation are restored by the compiler, not rewritten by the
 model. Check `source` and `fallback_reason` to distinguish validated model prose from the deterministic
-draft. See [Dingo language policy and verification limits](dingo-base.md).
+draft. A deterministic draft cannot translate arbitrary input without a model: it retains the
+source instructions and reports `DINGO-draft-untranslated-input` plus
+`provenance.draft_retains_source_language` when applicable. Do not present that fallback as a
+successful English model compilation. See [Dingo language policy and verification limits](dingo-base.md).
 
 ## Mode selection is never the user's problem
 

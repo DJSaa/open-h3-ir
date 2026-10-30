@@ -12,7 +12,7 @@ decision rather than something we hope the model remembers.
 from __future__ import annotations
 
 import re
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 
 from .grid import instruction_line_for, ms_to_timestamp
 from .models import (AssetKind, DialogueLine, Mode, Plan, Role, SWAP_ROLES, SpeakerPlan,
@@ -302,11 +302,6 @@ def dialogue_markup(line: DialogueLine, speaker: SpeakerPlan | None, description
         voice = ""
     from .language import canonical_language
     body = f"<d>[{canonical_language(line.language, line.text)}] {line.text}</d>"
-    if description_language == "Chinese":
-        spoken_language = {"Chinese":"普通话", "English":"英语"}.get(canonical_language(line.language, line.text), canonical_language(line.language, line.text))
-        delivery = "以画外音说" if line.voiceover else "说"
-        voice_zh = f"采用{speaker.voice_ref}的音色，" if speaker and speaker.voice_ref else ""
-        return f"{subj}{sid}{voice_zh}用{spoken_language}{delivery}：{body}"
     if line.voiceover:
         return (f"{desc}{subj}{sid} says in an off-screen voiceover: {body} "
                 "while their lips remain completely closed.")
@@ -385,15 +380,19 @@ def _fill_shot_body(shot, plan: Plan, opts: ProfileOptions, notes: list[str]) ->
             notes.append(f"shot {shot.n}: attached {subj.label} to its first mention "
                          f"({head!r}); the prose described it without the label")
 
+    def speech_speaker(line):
+        sp = next((s for s in plan.speakers
+                   if (line.speaker_hint or "") == (s.descriptor or "")), None) \
+            or (plan.speakers[0] if plan.speakers else None)
+        return replace(sp, subject=None) if sp and plan.mode.is_base else sp
+
     used: set[int] = set()
     def _sub(m: re.Match) -> str:
         i = int(m.group(1))
         used.add(i)
         if 1 <= i <= len(shot.dialogue):
             line = shot.dialogue[i - 1]
-            sp = next((s for s in plan.speakers
-                       if (line.speaker_hint or "") == (s.descriptor or "")), None) \
-                or (plan.speakers[0] if plan.speakers else None)
+            sp = speech_speaker(line)
             return dialogue_markup(line, sp)
         return ""
 
@@ -402,7 +401,7 @@ def _fill_shot_body(shot, plan: Plan, opts: ProfileOptions, notes: list[str]) ->
     for i in missing:
         notes.append(f"shot {shot.n}: dialogue token {{{{D{i}}}}} missing from prose, appended")
         line = shot.dialogue[i - 1]
-        sp = plan.speakers[0] if plan.speakers else None
+        sp = speech_speaker(line)
         body = body.rstrip()
         if body and not body.endswith((".", "!", "?")):
             body += "."

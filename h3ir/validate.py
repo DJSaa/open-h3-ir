@@ -1333,9 +1333,6 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
     #
     # This is the one complaint in its class that is mechanical: absence of a required field, not a
     # judgement about the writing.
-    from .language import CAMERA_ZH
-    if ctx.description_language == "Chinese":
-        has_motion = has_motion or any(x in desc for x in CAMERA_ZH.values()) or bool(re.search(r"固定(?:机位|镜头)|镜头(?:别动|不动|保持静止)", desc))
     if not re.search(r"\bcamera\b|\bshot\b|镜头|机位", desc, re.I):
         add("P4-no-camera-at-all", "ERROR",
             "the camera is never described; H3 drifts and reframes on its own when it is "

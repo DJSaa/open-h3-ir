@@ -1,6 +1,6 @@
-"""Input-language policy and byte-preserving speech extraction.
+"""Official English description policy and byte-preserving speech extraction.
 
-Language is inferred from instructions outside quoted user content. Speech is a separate
+Descriptions use English regardless of the input language. Speech is a separate
 channel: its language comes from the explicit delivery request, otherwise from the line.
 Nothing in this module translates user text or guesses spoken content from audio.
 """
@@ -10,7 +10,7 @@ import re
 from dataclasses import replace
 from .models import Brief, DialogueLine, Finding
 
-POLICY_VERSION = "dingo-language-v1"
+POLICY_VERSION = "dingo-language-v2"
 QUOTES = re.compile(r'“([^”]*)”|「([^」]*)」|『([^』]*)』|"((?:\\.|[^"\\])*)"|(?<!\w)\'([^\'\n]+)\'', re.S)
 HAN = re.compile(r'[\u3400-\u9fff]')
 SPEECH = re.compile(r'说(?:道|一句|一次|出)?|回答|回复|喊(?:道)?|念(?:出)?|口播|台词|对白|朗读|旁白|\b(?:say|says|said|saying|speak|speaks|speaking|spoken|reply|replies|replied|replying|shout|shouts|shouting|whisper|whispers|whispering|dialogue|voiceover|reads?|reading)\b', re.I)
@@ -28,11 +28,9 @@ def content_language(text: str) -> str:
 
 
 def description_language(intent: str) -> str:
-    text = QUOTES.sub('', intent)
-    text = re.sub(r'<[^>]+>|\b(?:Picture|Subject|Video|Audio)\s+\d+', '', text)
-    han = len(HAN.findall(text))
-    words = len(re.findall(r'[A-Za-z]+', text))
-    return 'Chinese' if han and han >= words else 'English'
+    """Follow the official H3 description language; never translate literal speech."""
+    return 'English'
+
 
 
 def canonical_language(value: str, text: str = '') -> str:
@@ -101,14 +99,9 @@ def restore_dialogue(text: str, brief: Brief, speakers=None) -> str:
 
 
 def prompt_policy(system: str, brief: Brief) -> str:
-    language = brief.description_language or description_language(brief.intent)
-    if language == 'Chinese':
-        system = re.sub(r'Write in English', 'Write descriptive prose in Chinese', system, flags=re.I)
-        system = re.sub(r'(\d[–-]\d) English sentences', r'\1 Chinese sentences', system)
-        system = system.replace('natural English', 'natural Chinese').replace('English sentences', 'Chinese sentences')
     from pathlib import Path
-    policy = (Path(__file__).parent / 'prompts' / 'language_policy.v1.txt').read_text(encoding='utf-8')
-    return system + '\n\n' + policy.replace('{language}', language)
+    policy = (Path(__file__).parent / 'prompts' / 'language_policy.v2.txt').read_text(encoding='utf-8')
+    return system + '\n\n' + policy
 
 
 
@@ -149,17 +142,6 @@ def language_findings(text: str, language: str, dialogue=()) -> list[Finding]:
             if expected_text in actual_text and canonical_language(actual_language) != canonical_language(expected_language):
                 findings.append(Finding('DINGO-dialogue-language', 'ERROR', f'spoken line must be tagged [{expected_language}], not [{actual_language}]'))
     return findings
-
-
-CAMERA_ZH = {
- 'Zoom In':'镜头变焦拉近','Zoom Out':'镜头变焦拉远','Push In':'镜头向前推进',
- 'Pull Out':'镜头向后拉远','Pan Left':'镜头向左摇摄','Pan Right':'镜头向右摇摄',
- 'Truck Left':'镜头向左平移','Truck Right':'镜头向右平移','Tilt Up':'镜头向上俯仰',
- 'Tilt Down':'镜头向下俯仰','Pedestal Up':'镜头垂直升高','Pedestal Down':'镜头垂直降低',
- 'Arc Shot':'镜头环绕主体','Tracking Shot':'镜头跟随主体','Static Shot':'镜头保持固定',
- 'Shake Slightly':'镜头轻微晃动','Shake Strongly':'镜头强烈晃动','POV':'镜头采用主观视角',
- 'Roll Clockwise':'镜头顺时针旋转','Roll Counterclockwise':'镜头逆时针旋转',
-}
 
 
 def draft_intent(brief: Brief) -> str:

@@ -255,7 +255,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                   prose_prompt: str = "prose_shot.v2.txt",
                   omit: tuple[str, ...] = (),
                   transcripts: dict[str, str] | None = None) -> IRDocument:
-    from .language import prepare
+    from .language import prepare, POLICY_VERSION, HAN, draft_intent
     brief = prepare(brief)
     cfg = get_config()
     opts = opts or ProfileOptions(name=cfg.profile)
@@ -395,7 +395,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     "omit": list(omit) or None,
                     "request": brief.intent,
                     "description_language": brief.description_language,
-                    "language_policy": "dingo-language-v1",
+                    "language_policy": POLICY_VERSION,
+                    "draft_retains_source_language": source == "draft" and bool(HAN.search(draft_intent(brief))),
                     "beatsheet_prompt": beatsheet_prompt,
                 "shotplan_prompt": shotplan_prompt,
                 "shot_plan": dict(shot_plan_record) or None,
@@ -1048,17 +1049,20 @@ def _assess(plan, brief: Brief, mode, opts: ProfileOptions,
             audio_transcripts: tuple[tuple[str, str], ...] = (), is_draft: bool = False) -> tuple[Any, list[Finding], int]:
     """Render, prove the render is reproducible, and validate. One path for the deterministic
     draft and for the enriched brief, so they cannot diverge in how they are checked."""
-    from .localization import render_chinese
     from .textnorm import normalize_prose
     def render():
-        r = (render_chinese(plan, brief, opts, enriched=not is_draft)
-             if brief.description_language == "Chinese" else render_ir(plan, opts))
+        r = render_ir(plan, opts)
         r.prompt = normalize_prose(r.prompt)
         r.sections = {k:normalize_prose(v) for k,v in r.sections.items()}
         return r
     result = render()
     again = render()
     findings: list[Finding] = list(lora_findings)
+    from .language import HAN, draft_intent
+    if is_draft and HAN.search(draft_intent(brief)):
+        findings.append(Finding("DINGO-draft-untranslated-input", "WARN",
+                                "The deterministic draft retains non-English source instructions; "
+                                "it is not a model-written English translation."))
     if again.prompt != result.prompt:
         findings.append(Finding("X1-render-determinism", "ERROR",
                                 "re-rendering the same plan produced different text"))
@@ -1073,7 +1077,7 @@ def _assess(plan, brief: Brief, mode, opts: ProfileOptions,
         duration_s=plan.target.effective_seconds,
         n_pictures=counts["Picture"], n_videos=counts["Video"], n_audios=counts["Audio"],
         expected_dialogue=tuple(d.text for d in brief.dialogue),
-        description_language=brief.description_language,
+        description_language="" if is_draft else brief.description_language,
         dialogue_languages=tuple((d.text,d.language) for d in brief.dialogue),
         lora_triggers=tuple(t for l in plan.loras for t in l.triggers),
         onscreen_text=tuple(brief.onscreen_text),

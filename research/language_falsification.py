@@ -14,14 +14,14 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 CASES = [
     ('description-language', 'h3ir/language.py',
-     "return 'Chinese' if han and han >= words else 'English'", "return 'English'",
+     "return 'English'", "return 'Chinese'",
      'test_independent_description_and_spoken_languages'),
     ('literal-speech', 'h3ir/language.py',
      'dialogue_markup(line, speaker, brief.description_language)', "'ALTERED SPEECH'",
      'test_two_speakers_keep_distinct_ids_and_exact_lines'),
     ('output-language-guard', 'h3ir/language.py',
-     "if language == 'Chinese' and (han == 0 or words > han):",
-     "if False and language == 'Chinese' and (han == 0 or words > han):",
+     "elif language == 'English' and han > max(words, 2):",
+     "elif False and language == 'English' and han > max(words, 2):",
      'test_wrong_description_language_is_error'),
 ]
 
