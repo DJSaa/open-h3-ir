@@ -47,3 +47,11 @@ def sentence(s: str) -> str:
 
 def sentences(items: list[str]) -> str:
     return " ".join(x for x in (sentence(i) for i in items) if x)
+
+
+def normalize_prose(s: str) -> str:
+    """Canonicalize structural prose while preserving user speech and lettering byte-exact."""
+    out=[];last=0
+    for m in re.finditer(r'<d>.*?</d>|"[^"\n]*"',s,re.S):
+        out.extend((normalize(s[last:m.start()]),m.group()));last=m.end()
+    return ''.join(out)+normalize(s[last:])

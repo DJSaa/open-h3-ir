@@ -65,7 +65,8 @@ def test_the_beat_sheet_call_builds_its_ask_and_names_the_dialogue():
     backend = _Stub()
     sheet = beat_sheet(backend, brief, Mode.T2VA, plan.subjects, {}, plan.shots)
     assert sheet["style_phrase"] == "Live-action, cinematic"
-    assert LINE.text in backend.asks[0], "the ask has to carry the line it says will be spoken"
+    assert "{{D1}}" in backend.asks[0], "planning sees the protected speech slot"
+    assert LINE.text not in backend.asks[0], "literal speech is inserted by code, not retyped by a model"
     assert "{dial}" not in backend.asks[0]
 
 

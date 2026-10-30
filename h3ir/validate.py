@@ -291,6 +291,8 @@ class Context:
     # every caller that predates the dial gets -- including the golden controls and the independent
     # validator, neither of which knows what was asked.
     scope: Scope | None = None
+    description_language: str = ""
+    dialogue_languages: tuple[tuple[str,str], ...] = ()
 
 
 def _sections(text: str, names: Iterable[str]) -> tuple[dict[str, str], list[str]]:
@@ -469,7 +471,7 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
 
     defined_subj = set()
     for line in defs.splitlines():
-        m = re.match(r"\s*<Subject\s+(\d+)>\s+is\b", line)
+        m = re.match(r"\s*<Subject\s+(\d+)>\s*(?:is\b|是)", line)
         if m:
             defined_subj.add(int(m.group(1)))
     for n in sorted(used["Subject"] - defined_subj):
@@ -579,7 +581,7 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
                 # by prepending the sentence it had already written, and the brief shipped with it
                 # twice. So a comma continuation satisfies the rule and the doubling is what gets
                 # caught.
-                opening = re.compile(r"The target video is an edited version of <Video \d+>\s*[.,]")
+                opening = re.compile(r"(?:The target video is an edited version of <Video \d+>\s*[.,]|目标视频是\s*<Video \d+>\s*的编辑版本[。,])")
                 hits = opening.findall(summ)
                 if not used["Video"]:
                     add("M5-editing-without-video", "ERROR",
@@ -1331,7 +1333,10 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
     #
     # This is the one complaint in its class that is mechanical: absence of a required field, not a
     # judgement about the writing.
-    if not re.search(r"\bcamera\b|\bshot\b", desc, re.I):
+    from .language import CAMERA_ZH
+    if ctx.description_language == "Chinese":
+        has_motion = has_motion or any(x in desc for x in CAMERA_ZH.values()) or bool(re.search(r"固定(?:机位|镜头)|镜头(?:别动|不动|保持静止)", desc))
+    if not re.search(r"\bcamera\b|\bshot\b|镜头|机位", desc, re.I):
         add("P4-no-camera-at-all", "ERROR",
             "the camera is never described; H3 drifts and reframes on its own when it is "
             "unspecified, so an unstated camera is a defect rather than a stylistic choice")
@@ -1848,6 +1853,8 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
                     f"LoRA trigger {want_text!r} is present but not in the style slot "
                     f"({'style line before [Shot 1]' if is_ref else '[Shot 1] style prefix'})")
 
+    from .language import language_findings
+    f.extend(language_findings(text, ctx.description_language, ctx.dialogue_languages))
     return f
 
 

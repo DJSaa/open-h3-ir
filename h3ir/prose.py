@@ -29,6 +29,7 @@ from . import director as _director
 from .creativity import ELEMENTS
 from .models import AMPLITUDES, AssetCard, Brief, CAMERA_TYPES, Mode, SPEEDS, ShotPlan, SubjectPlan
 from .textnorm import normalize
+from .language import prompt_policy, protected_intent, restore_dialogue
 
 
 @functools.lru_cache(maxsize=32)
@@ -97,7 +98,8 @@ def _asset_digest(cards: dict[str, AssetCard], subjects: list[SubjectPlan]) -> s
 
 def fix_with_findings(backend: Backend, written: str, findings: list, *,
                       labels: tuple[str, ...] = (), sections: tuple[str, ...] = (),
-                      seed: int | None = None, thinking: bool = False) -> str:
+                      seed: int | None = None, thinking: bool = False,
+                      brief: Brief | None = None) -> str:
     """Hand the model its own text plus the findings and ask for a surgical fix.
 
     The owner's idea, and better than the code repairers it replaces: a bespoke editor per failure
@@ -118,7 +120,16 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     the composing call already hands over, and withholding it was an accident of where the split fell
     rather than a decision.
     """
+    protected = {}
+    if brief is not None:
+        def hide(m):
+            token = '{{UTTERANCE%d}}' % (len(protected)+1)
+            protected[token] = m.group()
+            return token
+        written = re.sub(r'<d>.*?</d>', hide, written, flags=re.S)
     numbered = "\n".join(f"{i}. [{f.rule}] {f.msg}" for i, f in enumerate(findings, 1))
+    if brief is not None:
+        for i,d in enumerate(brief.dialogue,1):numbered=numbered.replace(d.text, '{{D%d}}'%i)
     inventory = ""
     if labels:
         inventory = (
@@ -141,10 +152,13 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     )
     reply = backend.chat(
         [{"role": "system", "content": "You correct mechanical faults in your own H3 brief. You "
-                                       "make the smallest edit that satisfies each finding."},
+                                       "make the smallest edit that satisfies each finding." +
+                                       (f" Keep descriptive prose in {brief.description_language}; preserve every {{{{UTTERANCE}}}} / {{{{D}}}} placeholder exactly." if brief else "")},
          {"role": "user", "content": ask}],
         thinking=thinking, temperature=0.2, seed=seed, max_tokens=20000)
-    return reply.content
+    text=reply.content
+    for token,original in protected.items():text=text.replace(token,original)
+    return restore_dialogue(text,brief) if brief is not None else text
 
 
 def _reference_governed(licence) -> list[str]:
@@ -764,13 +778,13 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
             # emitted only when a <Picture N> existed, so a brief with no pictures at all was left to
             # infer from the specification in its system prompt, which teaches the construct.
             label_facts += ("\n" if label_facts else "") + NO_PICTURES_AT_ALL
-    dlg = "\n".join(f'- "{d.text}" ({d.language})'
+    dlg = "\n".join(f'- {{{{D{i}}}}} ({d.language})'
                       + (f", spoken by {d.speaker_hint}" if d.speaker_hint else "")
                       + (" as an off-screen voiceover" if d.voiceover else "")
-                      for d in brief.dialogue) or "none — the video has no dialogue"
+                      for i,d in enumerate(brief.dialogue,1)) or "none — the video has no dialogue"
 
     ask = (
-        f"Request: {brief.intent}\n\n"
+        f"Request: {protected_intent(brief)}\n\n"
         f"Duration is exactly {target.effective_seconds:.3f} seconds; every cut time strictly less "
         f"than {int(target.effective_seconds // 60):02d}:"
         f"{target.effective_seconds % 60:06.3f}, written MM:SS.mmm.\n\n"
@@ -856,14 +870,19 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
         ask += "\nHard constraints:\n" + "\n".join(f"- {c}" for c in brief.constraints)
 
     reply = backend.chat(
-        [{"role": "system", "content": load_prompt(prompt_name)},
+        [{"role": "system", "content": prompt_policy(load_prompt(prompt_name), brief)},
          user_message(ask, images)],
         thinking=(True if thinking is None else thinking),
         # 0.3, not 0.85. The binding constraint on a free write is format compliance, and a
         # side-by-side showed 0.3 returning a near-valid six-section brief while 0.85 drifted into
         # preamble and dropped sections. Creativity here comes from the latitude, not the sampler.
         temperature=0.3, seed=seed, max_tokens=20000)
-    return reply.content
+    from .plan import build_speakers
+    speakers = build_speakers(brief, [] if mode and mode.is_base else subjects, [])
+    voice = next((label for label, role in audio_roles if role == "voice_timbre"), None)
+    for speaker in speakers:
+        speaker.voice_ref = voice
+    return restore_dialogue(reply.content, brief, speakers)
 
 
 def _definition_lines(subjects: list[SubjectPlan], cards: dict[str, AssetCard],
@@ -905,7 +924,7 @@ def plan_shots(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
     # and the schema closes both ends so the count cannot come back wrong.
     limit = brief.shots or max_shots
     ask = (
-        f"Request: {brief.intent}\n\n"
+        f"Request: {protected_intent(brief)}\n\n"
         f"Total duration: {target.effective_seconds:.3f} seconds "
         f"({target.frames} frames at 24 fps). Every cut must fall inside it.\n\n"
         f"Available subject labels:\n{_asset_digest(cards, subjects)}\n\n"
@@ -937,7 +956,7 @@ def plan_shots(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
         ask += "\n" + director_block(director, scope=scope) + "\n"
 
     raw = backend.json_call(
-        [{"role": "system", "content": load_prompt(prompt_name)},
+        [{"role": "system", "content": prompt_policy(load_prompt(prompt_name), brief)},
          {"role": "user", "content": ask}],
         shot_schema(limit, exact=brief.shots), required=("shots",), seed=seed, max_tokens=16000,
         thinking=True if thinking is None else thinking)
@@ -952,9 +971,9 @@ def beat_sheet(backend: Backend, brief: Brief, mode: Mode, subjects: list[Subjec
     spans = "\n".join(
         f"Shot {s.n}: {s.start_ms / 1000:.2f}s to {s.end_ms / 1000:.2f}s "
         f"({s.duration_ms / 1000:.2f}s long)" for s in shots)
-    dlg = "\n".join(f'- "{d.text}" ({d.language})' for d in brief.dialogue) or "none"
+    dlg = "\n".join(f'- {{{{D{i}}}}} ({d.language})' for i,d in enumerate(brief.dialogue,1)) or "none"
     ask = (
-        f"Creative request: {brief.intent}\n\n"
+        f"Creative request: {protected_intent(brief)}\n\n"
         f"Total duration: {sum(s.duration_ms for s in shots) / 1000:.3f} seconds, "
         f"{len(shots)} shot(s).\n{spans}\n\n"
         f"Available subject labels:\n{_asset_digest(cards, subjects)}\n\n"
@@ -982,7 +1001,7 @@ def beat_sheet(backend: Backend, brief: Brief, mode: Mode, subjects: list[Subjec
                 "Ambient and physical sound still belong in ambient_sound and sync_sound.")
 
     obj = backend.json_call(
-        [{"role": "system", "content": load_prompt(prompt_name)},
+        [{"role": "system", "content": prompt_policy(load_prompt(prompt_name), brief)},
          {"role": "user", "content": ask}],
         beat_schema(len(shots)),
         required=("shots", "style_phrase", "summary", "music"),
@@ -1107,12 +1126,12 @@ def shot_body(backend: Backend, brief: Brief, plan_mode: Mode, shot: ShotPlan,
     text_on_screen = "\n".join(f'- "{t}"' for t in shot.onscreen_text) or "none"
 
     ask = (
-        f"Creative request: {brief.intent}\n"
+        f"Creative request: {protected_intent(brief)}\n"
         f"Overall style (already stated elsewhere, do not restate it): {style_opening}\n\n"
         f"You are writing SHOT {shot.n} of {'1' if shot.n == 1 else 'the sequence'}, covering "
         f"{shot.start_ms / 1000:.2f}s to {shot.end_ms / 1000:.2f}s "
         f"({shot.duration_ms / 1000:.2f} seconds of screen time).\n"
-        f"What must happen in this shot: {shot.beat or brief.intent}\n\n"
+        f"What must happen in this shot: {shot.beat or protected_intent(brief)}\n\n"
         f"Subjects visible in this shot:\n{subj_lines}\n\n"
         f"Synchronized sound caused inside this shot (weave in where it occurs):\n{sync}\n\n"
         f"Dialogue placeholders to place:\n{dlg}\n\n"
@@ -1138,7 +1157,7 @@ def shot_body(backend: Backend, brief: Brief, plan_mode: Mode, shot: ShotPlan,
         ask += "\n" + director_block(director) + "\n"
 
     reply = backend.chat(
-        [{"role": "system", "content": load_prompt(prompt_name)},
+        [{"role": "system", "content": prompt_policy(load_prompt(prompt_name), brief)},
          user_message(ask, images)],
         thinking=thinking, temperature=0.8, seed=seed, max_tokens=6000)
     return _clean_body(reply.content, keep_subjects=ref2va, keep_picture=bool(anchor_label))

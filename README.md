@@ -1,5 +1,7 @@
 # OpenH3-IR
 
+Dingo fork: development and image builds use branch `dingo-base`. See [语言与台词修复说明](docs/dingo-base.md).
+
 Open-source local Context-IR for MiniMax H3.
 
 [![tests](https://github.com/ruashots/open-h3-ir/actions/workflows/ci.yml/badge.svg)](https://github.com/ruashots/open-h3-ir/actions/workflows/ci.yml)

@@ -289,7 +289,7 @@ def render_summary(plan: Plan) -> str:
     return f"{prefix} {body}"
 
 
-def dialogue_markup(line: DialogueLine, speaker: SpeakerPlan | None) -> str:
+def dialogue_markup(line: DialogueLine, speaker: SpeakerPlan | None, description_language: str = "English") -> str:
     """The user's words, byte-for-byte, inside the spec's markup."""
     sid = speaker.sid if speaker else "(S1)"
     subj = f"{speaker.subject} " if speaker and speaker.subject else ""
@@ -300,7 +300,13 @@ def dialogue_markup(line: DialogueLine, speaker: SpeakerPlan | None) -> str:
         voice = f", using the voice timbre referenced from {speaker.voice_ref},"
     else:
         voice = ""
-    body = f"<d>[{line.language}] {line.text}</d>"
+    from .language import canonical_language
+    body = f"<d>[{canonical_language(line.language, line.text)}] {line.text}</d>"
+    if description_language == "Chinese":
+        spoken_language = {"Chinese":"普通话", "English":"英语"}.get(canonical_language(line.language, line.text), canonical_language(line.language, line.text))
+        delivery = "以画外音说" if line.voiceover else "说"
+        voice_zh = f"采用{speaker.voice_ref}的音色，" if speaker and speaker.voice_ref else ""
+        return f"{subj}{sid}{voice_zh}用{spoken_language}{delivery}：{body}"
     if line.voiceover:
         return (f"{desc}{subj}{sid} says in an off-screen voiceover: {body} "
                 "while their lips remain completely closed.")

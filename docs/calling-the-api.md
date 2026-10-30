@@ -67,6 +67,26 @@ brief, which on a reachable service is a way to read files off that host. `H3IR_
 turns path reads off entirely and leaves uploads as the only way in. Both settings and the reason for
 each are in [`../.env.example`](../.env.example).
 
+## Description and dialogue languages (Dingo branch)
+
+On `dingo-base`, descriptive prose follows the Chinese or English language detected from
+`intent`, excluding quoted content. Protocol field names, reference labels and timestamps remain
+unchanged. Speech has its own language: set `dialogue[].language` explicitly when needed; an omitted
+language is inferred from the explicit delivery instruction or the line's text rather than defaulting
+to English. For example:
+
+```json
+{
+  "intent": "固定镜头，人物看向镜头说话。",
+  "dialogue": [{"text": "准备好了，现在开始。", "language": "Chinese"}]
+}
+```
+
+Clear quoted speech in `intent` is also protected, but structured `dialogue` avoids ambiguity in
+complex requests. Literal speech and punctuation are restored by the compiler, not rewritten by the
+model. Check `source` and `fallback_reason` to distinguish validated model prose from the deterministic
+draft. See [Dingo language policy and verification limits](dingo-base.md).
+
 ## Mode selection is never the user's problem
 
 T2VA, I2VA, FL2VA, L2VA and Ref2VA are inferred from what is attached, because the wiring is the

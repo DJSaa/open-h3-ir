@@ -184,7 +184,7 @@ class DialogueLine:
     """User-supplied speech. `text` is pasted verbatim and never passes through a model."""
 
     text: str
-    language: str = "English"
+    language: str = ""
     speaker_hint: str | None = None
     voiceover: bool = False
 
@@ -219,6 +219,7 @@ class Brief:
     # canvas and is the user's to edit from that moment. See director.py.
     director: str = ""
     director_profile: dict[str, Any] | None = None
+    description_language: str = ""
 
     def hash(self) -> str:
         return _sha(asdict(self))

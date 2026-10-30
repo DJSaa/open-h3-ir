@@ -255,6 +255,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                   prose_prompt: str = "prose_shot.v2.txt",
                   omit: tuple[str, ...] = (),
                   transcripts: dict[str, str] | None = None) -> IRDocument:
+    from .language import prepare
+    brief = prepare(brief)
     cfg = get_config()
     opts = opts or ProfileOptions(name=cfg.profile)
     own_backend = backend is None
@@ -348,7 +350,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
 
         # --- the product floor: a complete, valid IR with no prose model involved ---------
         t = time.time()
-        draft_plan = deterministic_draft(brief, mode, cards, opts=opts, loras=loras,
+        from .language import draft_intent
+        draft_plan = deterministic_draft(replace(brief, intent=draft_intent(brief)), mode, cards, opts=opts, loras=loras,
                                          mode_decision=decision)
         # Before anything is written or scored: a swap the wiring cannot make unambiguous is a
         # caller error, and the draft plan is the first object that holds the binding to check.
@@ -357,7 +360,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
         sheet_flags = tuple(c.is_reference_sheet for c in cards.values())
         draft_result, draft_findings, draft_tokens = _assess(
             draft_plan, brief, mode, opts, lora_findings, sheet_flags, licence, style,
-            audio_transcripts=_audio_transcripts(draft_plan, cards))
+            audio_transcripts=_audio_transcripts(draft_plan, cards), is_draft=True)
         timings["draft_s"] = round(time.time() - t, 2)
         draft_errors = [f for f in draft_findings if f.severity == "ERROR"]
         if draft_errors:
@@ -391,6 +394,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     "director": director_mod.note(director),
                     "omit": list(omit) or None,
                     "request": brief.intent,
+                    "description_language": brief.description_language,
+                    "language_policy": "dingo-language-v1",
                     "beatsheet_prompt": beatsheet_prompt,
                 "shotplan_prompt": shotplan_prompt,
                 "shot_plan": dict(shot_plan_record) or None,
@@ -494,7 +499,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     # full-reference format during the pass meant to correct it.
                     candidate = fix_with_findings(backend, fixed.text, errors,
                                                   labels=inventory, sections=_sections_for(mode),
-                                                  seed=seed)
+                                                  seed=seed, brief=brief)
                     timings[f"fix{rounds}_s"] = round(time.time() - t2, 2)
                     fixed, found, n_tokens = _verify(candidate)
                     mechanical_repairs += fixed.repairs
@@ -756,6 +761,8 @@ def _written_context(brief: Brief, mode, plan, cards, n_tokens: int, style, lice
         duration_s=plan.target.effective_seconds,
         n_pictures=counts["Picture"], n_videos=counts["Video"], n_audios=counts["Audio"],
         expected_dialogue=tuple(d.text for d in brief.dialogue),
+        description_language=brief.description_language,
+        dialogue_languages=tuple((d.text,d.language) for d in brief.dialogue),
         lora_triggers=tuple(t for l in plan.loras for t in l.triggers),
         onscreen_text=tuple(brief.onscreen_text),
         prompt_tokens=n_tokens,
@@ -1038,11 +1045,19 @@ def wiring_findings(plan, brief: Brief) -> list[Finding]:
 def _assess(plan, brief: Brief, mode, opts: ProfileOptions,
             lora_findings: list[Finding], sheet_flags=(),
             licence=None, style=None,
-            audio_transcripts: tuple[tuple[str, str], ...] = ()) -> tuple[Any, list[Finding], int]:
+            audio_transcripts: tuple[tuple[str, str], ...] = (), is_draft: bool = False) -> tuple[Any, list[Finding], int]:
     """Render, prove the render is reproducible, and validate. One path for the deterministic
     draft and for the enriched brief, so they cannot diverge in how they are checked."""
-    result = render_ir(plan, opts)
-    again = render_ir(plan, opts)
+    from .localization import render_chinese
+    from .textnorm import normalize_prose
+    def render():
+        r = (render_chinese(plan, brief, opts, enriched=not is_draft)
+             if brief.description_language == "Chinese" else render_ir(plan, opts))
+        r.prompt = normalize_prose(r.prompt)
+        r.sections = {k:normalize_prose(v) for k,v in r.sections.items()}
+        return r
+    result = render()
+    again = render()
     findings: list[Finding] = list(lora_findings)
     if again.prompt != result.prompt:
         findings.append(Finding("X1-render-determinism", "ERROR",
@@ -1058,6 +1073,8 @@ def _assess(plan, brief: Brief, mode, opts: ProfileOptions,
         duration_s=plan.target.effective_seconds,
         n_pictures=counts["Picture"], n_videos=counts["Video"], n_audios=counts["Audio"],
         expected_dialogue=tuple(d.text for d in brief.dialogue),
+        description_language=brief.description_language,
+        dialogue_languages=tuple((d.text,d.language) for d in brief.dialogue),
         lora_triggers=tuple(t for l in plan.loras for t in l.triggers),
         onscreen_text=tuple(brief.onscreen_text),
         prompt_tokens=n_tokens,

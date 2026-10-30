@@ -97,7 +97,7 @@ class DialogueIn(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     text: str
-    language: str = "English"
+    language: str = ""
     speaker: str | None = None
     voiceover: bool = False
 
