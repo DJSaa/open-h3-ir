@@ -85,6 +85,12 @@ def protected_intent(brief: Brief) -> str:
 
 def restore_dialogue(text: str, brief: Brief, speakers=None) -> str:
     from .render import dialogue_markup
+    # A writer may ignore the no-wrapper instruction. Never paste a full speech
+    # construct inside model-owned <d>: that turns delivery directions into speech.
+    def unwrap(match):
+        tokens = re.findall(r'\{\{D\d+\}\}', match.group())
+        return ' '.join(tokens) if tokens else match.group()
+    text = re.sub(r'<d>.*?</d>', unwrap, text, flags=re.S)
     if speakers is None:
         from .plan import build_speakers
         speakers = build_speakers(brief, [], [])
@@ -113,6 +119,14 @@ def without_protected(text: str) -> str:
 
 def language_findings(text: str, language: str, dialogue=()) -> list[Finding]:
     findings = []
+    depth = 0
+    for tag in re.finditer(r'</?d>', text):
+        if tag.group() == '<d>':
+            if depth:
+                findings.append(Finding('DINGO-nested-dialogue', 'ERROR', 'dialogue blocks must not be nested'))
+            depth += 1
+        else:
+            depth = max(0, depth - 1)
     # Audit the actual prose fields, not header names or the English FL2VA protocol line.
     for name in ('subject_definitions','summary','retention_analysis','detailed_description', 'integrated_multimodal_description', 'overall_soundscape', 'non_diegetic_music'):
         match = re.search(r'(?:^|\n)'+name+r':\s*(.*?)(?=\n(?:[a-z_]+):|\Z)', text, re.S)

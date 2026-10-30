@@ -86,7 +86,7 @@ def test_native_writer_and_wrong_language_fallback(monkeypatch,reply_language):
   def server_version(self):return 'test'
   def chat(self,messages,**kw):
    self.asks.append(messages)
-   sentence='镜头保持固定。她看向镜头，说道：{{D1}}' if reply_language=='Chinese' else 'The camera holds a static shot. She says {{D1}}'
+   sentence='镜头保持固定。她看向镜头，说道：<d>[Chinese] {{D1}}</d>' if reply_language=='Chinese' else 'The camera holds a static shot. She says {{D1}}'
    return SimpleNamespace(content='integrated_multimodal_description: [Shot 1] '+sentence+'\noverall_soundscape: '+('轻微环境声。' if reply_language=='Chinese' else 'A quiet room.')+'\nnon_diegetic_music: N/A')
  monkeypatch.setattr(module,'analyse_all',lambda *a,**k:{})
  writer=Writer();doc=compile_brief(Brief(intent='固定镜头，她用普通话说：“准备好了，现在开始。”',mode=Mode.T2VA),backend=writer)
@@ -204,3 +204,23 @@ def test_english_continuous_speech_does_not_become_forbidden_subtitles(monkeypat
  assert doc.ok,doc.errors
  assert f'<d>[{language}] {line}</d>' in doc.prompt
  assert doc.prompt.count(line)==1
+
+
+@pytest.mark.parametrize('wrapped',[
+ '<d>[Chinese] {{D1}}</d>',
+ '<d>[English] {{D1}}</d>',
+ '<d>[Chinese] (S1) {{D1}}</d>',
+ '<d>[Chinese] 用普通话说：{{D1}}</d>',
+])
+def test_model_owned_wrapper_never_turns_delivery_directions_into_speech(wrapped):
+ from h3ir.language import restore_dialogue
+ b=prepare(Brief(intent='她用普通话说：“准备好了，现在开始。”'))
+ result=restore_dialogue(wrapped,b)
+ assert result.count('<d>')==1 and result.count('</d>')==1
+ assert result.split('<d>',1)[1].split('</d>',1)[0]=='[Chinese] 准备好了，现在开始。'
+ assert not language_findings(result,'Chinese',(('准备好了，现在开始。','Chinese'),))
+
+
+def test_nested_speech_is_rejected_even_when_expected_line_is_inside():
+ text='<d>[Chinese] (S1)用普通话说：<d>[Chinese] 准备好了，现在开始。</d></d>'
+ assert any(f.rule=='DINGO-nested-dialogue' and f.severity=='ERROR' for f in language_findings(text,'Chinese',(('准备好了，现在开始。','Chinese'),)))
