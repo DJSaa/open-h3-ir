@@ -187,3 +187,20 @@ def test_missing_inline_speech_cannot_ship_as_written(monkeypatch):
  assert doc.source=='draft'
  assert '<d>[Chinese] 准备好了，现在开始。</d>' in doc.prompt
  assert doc.fallback_reason
+
+
+@pytest.mark.parametrize('delivery,language,line',[
+ ('saying in Mandarin','Chinese','准备好了，现在开始。'),
+ ('speaking in English','English','Ready, let us begin.'),
+])
+def test_english_continuous_speech_does_not_become_forbidden_subtitles(monkeypatch,delivery,language,line):
+ import h3ir.compile as module
+ monkeypatch.setattr(module,'analyse_all',lambda *a,**k:{})
+ backend=SimpleNamespace(require_available=lambda:None,server_version=lambda:'test',cfg=SimpleNamespace(model='test'))
+ intent=f'A fixed camera shows one person looking at the lens, {delivery} exactly once: “{line}” No subtitles or music.'
+ brief=prepare(Brief(intent=intent,mode=Mode.T2VA))
+ assert [(d.text,d.language) for d in brief.dialogue]==[(line,language)]
+ doc=compile_brief(brief,backend=backend,llm=False)
+ assert doc.ok,doc.errors
+ assert f'<d>[{language}] {line}</d>' in doc.prompt
+ assert doc.prompt.count(line)==1

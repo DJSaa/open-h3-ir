@@ -13,7 +13,7 @@ from .models import Brief, DialogueLine, Finding
 POLICY_VERSION = "dingo-language-v1"
 QUOTES = re.compile(r'“([^”]*)”|「([^」]*)」|『([^』]*)』|"((?:\\.|[^"\\])*)"|(?<!\w)\'([^\'\n]+)\'', re.S)
 HAN = re.compile(r'[\u3400-\u9fff]')
-SPEECH = re.compile(r'说(?:道|一句|一次|出)?|回答|回复|喊(?:道)?|念(?:出)?|口播|台词|对白|朗读|旁白|\b(?:say|says|said|speak|speaks|reply|replies|shout|shouts|whisper|whispers|dialogue|voiceover|reads?)\b', re.I)
+SPEECH = re.compile(r'说(?:道|一句|一次|出)?|回答|回复|喊(?:道)?|念(?:出)?|口播|台词|对白|朗读|旁白|\b(?:say|says|said|saying|speak|speaks|speaking|spoken|reply|replies|replied|replying|shout|shouts|shouting|whisper|whispers|whispering|dialogue|voiceover|reads?|reading)\b', re.I)
 LETTERING = re.compile(r'字幕|标牌|招牌|屏幕(?:上)?(?:显示|文字)|写着|文字|\b(?:subtitle|caption|sign|lettering|onscreen|on-screen|written|reads)\b', re.I)
 ALIASES = {'zh':'Chinese','zh-cn':'Chinese','chinese':'Chinese','mandarin':'Chinese','中文':'Chinese','普通话':'Chinese','汉语':'Chinese','en':'English','en-us':'English','english':'English','英语':'English','英文':'English'}
 
