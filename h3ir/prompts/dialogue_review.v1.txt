@@ -1,0 +1,8 @@
+H3 dialogue continuity and speaker structure rules (v1)
+- Descriptive prose is English; protected speech keeps its exact original language, punctuation and words.
+- A speech event has ONE introduction: its speaker identity, delivery, any assigned voice reference, then its protected utterance token. Do not nest a second says/speaks introduction inside begins to speak, delivers the line, finishes the sentence or responds. Remove repeated voice explanations around the same utterance without changing the voice assignment.
+- Keep source voice references attached to the same speaker. Scene characters, source labels and reference roles cannot be reassigned during review.
+- Each supplied line is spoken once unless the caller explicitly requests repetition. A line crossing a cut is one continuous utterance; use protected ordered parts if provided, with the same speaker and paired <scenetrans> continuity markers. Do not restart the whole line on the listening shot.
+- A short line does not license invented words to fill a shot. Once a supplied line finishes, describe the listener or a nonverbal reaction; do not leave a direction to keep talking beyond the supplied words. Honor requested off-screen continuation without adding speech.
+- Preserve caller-specified cut times and action constraints. Do not force each short line to fill an entire long shot. Timing not fixed by the caller may be adjusted to support the supplied speech, without changing total duration. Keep <d> content distinct from directions and visible lettering.
+- All protected tokens are opaque. Never put delivery directions, speaker identities or another <d> wrapper inside a token. Return only the complete corrected H3 document, with no explanation.

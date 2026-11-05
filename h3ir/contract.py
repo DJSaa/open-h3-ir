@@ -52,7 +52,7 @@ from .shots import PINNED_SHOTS_MAX
 # 2 are interchangeable" -- what it needs to know is whether the particular field, role or limit IT
 # is about to use exists on the other side, and that is answered by comparing the sections, not the
 # number. The number is what a message quotes so two people can say which contract they each have.
-CONTRACT_VERSION = 2
+CONTRACT_VERSION = 4
 
 
 # --------------------------------------------------------------------------- the wire
@@ -89,7 +89,7 @@ ROLE_OF_THE_FIELD_LISTS = (
 # did not know, and this list is how a client can tell before it spends the request.
 ASSET_FIELDS: tuple[str, ...] = (
     "path", "sha256", "url", "note", "replaces", "kind", "role", "sizing", "seconds", "frames",
-    "paired_video_path", "paired_video_sha256", "provenance",
+    "paired_video_path", "paired_video_sha256", "provenance", "soundtrack_policy",
 )
 
 # Every top-level key of a request, which is `service.BriefIn`'s field list. Same reasoning, same
@@ -127,6 +127,13 @@ DIALOGUE_FIELDS: tuple[str, ...] = ("text", "language", "speaker", "voiceover")
 # refusal reaches a client with a sentence attached.
 BRIEFS, ASSETS = "briefs", "assets"
 ERROR_CODES: dict[str, dict[str, Any]] = {
+    "invalid-soundtrack-policy": {"status": 422, "on": [BRIEFS]},
+    "invalid-asset-lease": {"status": 422, "on": [BRIEFS, ASSETS]},
+    "asset-lease-conflict": {"status": 409, "on": [BRIEFS, ASSETS]},
+    "asset-lease-capacity": {"status": 503, "on": [BRIEFS, ASSETS]},
+    "asset-lease-still-executing": {"status": 409, "on": [BRIEFS, ASSETS]},
+    "asset-lease-missing": {"status": 409, "on": [BRIEFS]},
+    "asset-lease-already-executing": {"status": 409, "on": [BRIEFS]},
     "analysis-tool-missing": {"status": 503, "on": [BRIEFS]},
     "aspect-invalid": {"status": 422, "on": [BRIEFS]},
     "asset-digest-mismatch": {"status": 422, "on": [ASSETS]},
@@ -172,7 +179,7 @@ ROLES_BY_KIND: dict[str, tuple[Role, ...]] = {
     "image": (Role.FRAME_ANCHOR_FIRST, Role.FRAME_ANCHOR_LAST, Role.SUBJECT, Role.ENVIRONMENT,
               Role.STYLE, Role.STORYBOARD, Role.PLACED_SUBJECT, Role.REPLACEMENT_SUBJECT),
     "video": (Role.EDIT_SOURCE, Role.CONTINUATION_SOURCE, Role.SUBJECT, Role.ENVIRONMENT,
-              Role.STYLE, Role.STORYBOARD, Role.STRUCTURE),
+              Role.STYLE, Role.STORYBOARD, Role.STRUCTURE, Role.MOTION_REFERENCE),
     "audio": (Role.VOICE_TIMBRE, Role.BGM, Role.MUSIC_STYLE, Role.BEAT_REFERENCE, Role.SFX),
 }
 

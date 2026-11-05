@@ -125,6 +125,10 @@ class AssetConfig:
     # only bytes the service reads are bytes a caller sent it.
     allow_paths: bool = field(default_factory=lambda: _env_bool("H3IR_ALLOW_ASSET_PATHS", True))
 
+    analysis_cache_bytes: int = field(default_factory=lambda: max(0, _env_int("H3IR_ANALYSIS_CACHE_BYTES", 256 * 1024 * 1024)))
+    analysis_cache_ttl_hours: int = field(default_factory=lambda: max(0, _env_int("H3IR_ANALYSIS_CACHE_TTL_HOURS", 24)))
+    compile_temp_bytes: int = field(default_factory=lambda: max(1, _env_int("H3IR_COMPILE_TEMP_BYTES", 128 * 1024 * 1024)))
+
 
 @dataclass(frozen=True)
 class Paths:

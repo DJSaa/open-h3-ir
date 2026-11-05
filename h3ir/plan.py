@@ -93,7 +93,7 @@ def build_manifest(brief: Brief, target: Target) -> list[ManifestEntry]:
     standalone = []
     for a in audios:
         if a.paired_video_sha256:
-            paired[a.paired_video_sha256] = a
+            paired.setdefault(a.paired_video_sha256, []).append(a)
         else:
             standalone.append(a)
 
@@ -126,13 +126,15 @@ def build_manifest(brief: Brief, target: Target) -> list[ManifestEntry]:
 
     for v in videos:
         n_vid += 1
-        snd = paired.get(v.sha256)
+        candidates = paired.get(v.sha256, [])
+        snd = (candidates.pop(0) if len(candidates) > 1 else candidates[0]) if candidates else None
         if snd is not None:
             n_aud += 1
             out.append(ManifestEntry(slot=slot, label=f"<Audio {n_aud}>", kind=snd.kind,
                                      sha256=snd.sha256, wiring=f"ref_video_audio_{n_vid}",
                                      role=snd.role, seconds=snd.seconds,
                                      paired_with=f"<Video {n_vid}>",
+                                     soundtrack_policy=snd.soundtrack_policy,
                                      characterisation=(snd.note or "").strip()))
             slot += 1
         v_rows = 0
@@ -175,6 +177,7 @@ _ROLE_MARKER = {
     Role.STYLE: "weak_reference",
     Role.STORYBOARD: "weak_reference",
     Role.STRUCTURE: "weak_reference",
+    Role.MOTION_REFERENCE: "weak_reference",
     # Both swap roles carry the plate's subject into the clip whole, so the plate's own defined
     # role -- supply this identity -- is fully preserved. What changes is the CLIP, and that is
     # said on the clip's line and on the line of the figure being taken over, not here.
@@ -219,7 +222,7 @@ def build_subjects(manifest: list[ManifestEntry],
         # A style plate lends its look and a structure clip its camera and cutting; like a
         # storyboard they are planning material, never visible units, so they get no
         # <Subject N> and earn their standalone lines in render.py.
-        if e.role in (Role.STORYBOARD, Role.STYLE, Role.STRUCTURE):
+        if e.role in (Role.STORYBOARD, Role.STYLE, Role.STRUCTURE, Role.MOTION_REFERENCE):
             continue
         card = cards.get(e.sha256)
         if card is None:
@@ -477,9 +480,11 @@ def bind_replacement(subjects: list[SubjectPlan],
 
 
 def build_speakers(brief: Brief, subjects: list[SubjectPlan],
-                   manifest: list[ManifestEntry]) -> list[SpeakerPlan]:
+                   manifest: list[ManifestEntry], *, audio_roles=None) -> list[SpeakerPlan]:
     """(SN) in order of first actual vocal event in the TARGET video, contiguous from 1."""
-    voice_refs = [m.label for m in manifest if m.role is Role.VOICE_TIMBRE]
+    from .voice_binding import resolve
+    roles = audio_roles if audio_roles is not None else [(m.label, m.role.value) for m in manifest]
+    voice_bindings = resolve(brief, roles)
     people = [s for s in subjects if s.kind in ("person", "character", "subject")]
     out: list[SpeakerPlan] = []
     seen: dict[str, SpeakerPlan] = {}
@@ -491,7 +496,7 @@ def build_speakers(brief: Brief, subjects: list[SubjectPlan],
         subj = people[len(out)].label if len(out) < len(people) else (
             people[0].label if people else None)
         sp = SpeakerPlan(sid=sid, subject=subj,
-                         voice_ref=voice_refs[0] if voice_refs else None,
+                         voice_ref=voice_bindings.get(line.speaker_hint or ""),
                          onscreen=not line.voiceover,
                          descriptor=line.speaker_hint or "")
         seen[key] = sp
@@ -632,7 +637,7 @@ def derive_task_types(manifest: list[ManifestEntry], brief: Brief) -> list[str]:
     # the picture "provides generation guidance for a character ... without serving as a concrete
     # frame or as the source video being edited or continued". The clip is what is edited; the
     # picture is guidance, and both types are true at once, which is what ` + ` is for.
-    if roles & {Role.SUBJECT, Role.ENVIRONMENT, Role.STYLE, Role.STORYBOARD, Role.STRUCTURE,
+    if roles & {Role.SUBJECT, Role.ENVIRONMENT, Role.STYLE, Role.STORYBOARD, Role.STRUCTURE, Role.MOTION_REFERENCE,
                 Role.VOICE_TIMBRE, *SWAP_ROLES}:
         types.append("reference generation")
     if Role.EDIT_SOURCE in roles:
@@ -648,9 +653,9 @@ def derive_task_types(manifest: list[ManifestEntry], brief: Brief) -> list[str]:
         # timbre reference, a sound-effect texture, a music style and a beat are all named in that
         # second sentence, so they are not. A summary claiming reuse over a retention line saying
         # `reference` is the document contradicting itself, and M15 now catches that shape.
-        if any(m.role is Role.BGM for m in manifest):
+        if any(m.role is Role.BGM and m.soundtrack_policy != "ignore" for m in manifest):
             types.append("audio reuse")
-        if any(m.role in AUDIO_REFERENCE_ROLES for m in manifest):
+        if any(m.role in AUDIO_REFERENCE_ROLES or m.soundtrack_policy == "ignore" for m in manifest):
             types.append("audio reference")
     out: list[str] = []
     for t in types:
@@ -772,6 +777,9 @@ def audio_relations(plan: Plan) -> list[tuple[str, str, str]]:
     out = []
     for m in plan.manifest:
         if m.kind is not AssetKind.AUDIO:
+            continue
+        if m.soundtrack_policy == "ignore":
+            out.append((m.label, "weak_reference", "the paired source soundtrack is not retained in the target audio"))
             continue
         marker = _AUDIO_MARKER.get(m.role, "reference")
         if m.role is Role.VOICE_TIMBRE:

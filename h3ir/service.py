@@ -28,6 +28,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from . import contract as C
 from . import uploads
+from . import asset_leases
 from .analyse import AssetAnalysisError, ToolMissing, sha256_file
 from .backend import Backend, BackendError, BackendUnavailable
 from .compile import BriefRefused, compile_brief, refine
@@ -91,6 +92,7 @@ class AssetIn(BaseModel):
         None, description="The uploaded video this soundtrack belongs to, named by its sha256. The "
                           "upload counterpart of `paired_video_path`.")
     provenance: dict[str, Any] | None = None
+    soundtrack_policy: Literal["preserve", "ignore"] | None = None
 
 
 class DialogueIn(BaseModel):
@@ -313,10 +315,13 @@ def _to_brief(b: BriefIn) -> Brief:
                     "message": f"no such file: {a.paired_video_path} (given as the video this "
                                "soundtrack is paired with)"})
             paired = sha256_file(paired_path)
+        if a.soundtrack_policy is not None and (a.kind != "audio" or not paired or role is not Role.BGM):
+            raise HTTPException(422, detail={"code": "invalid-soundtrack-policy"})
         assets.append(AssetRef(kind=AssetKind(a.kind), role=role, sha256=sha,
                                path=str(p), note=a.note, sizing=a.sizing, seconds=a.seconds,
                                frames=a.frames, provenance=a.provenance,
                                paired_video_sha256=paired, role_stated=stated,
+                               soundtrack_policy=a.soundtrack_policy,
                                replaces=(a.replaces or "").strip()))
 
     # An answered clarification becomes an explicit role, which is exactly how it would have
@@ -397,8 +402,18 @@ def _envelope(brief_id: str, doc: IRDocument, brief: Brief) -> dict[str, Any]:
     }
 
 
+def _prune_briefs():
+    now = time.time()
+    for key, rec in list(_STORE.items()):
+        if now - rec.get("at", now) > 3600:
+            _STORE.pop(key, None)
+    while len(_STORE) >= 128:
+        _STORE.pop(min(_STORE, key=lambda key: _STORE[key].get("at", now)), None)
+
+
 def _remember(brief_id: str, brief: Brief, doc: IRDocument) -> None:
     with _LOCK:
+        _prune_briefs()
         _STORE[brief_id] = {"brief": brief, "doc": doc, "at": time.time(),
                             "versions": _STORE.get(brief_id, {}).get("versions", 0) + 1}
 
@@ -552,6 +567,7 @@ def capabilities() -> dict[str, Any]:
             "upload_store_bytes": cfg.assets.upload_store_bytes,
             "upload_ttl_hours": cfg.assets.upload_ttl_hours,
         },
+        "gateway_contract": {"asset_leases": True, "paired_soundtrack_ignore": True, "version": 1},
         "note": "2K output needs MiniMax's closed regeneration stage; local output is 768p.",
     }
 
@@ -637,8 +653,39 @@ async def _drain(request: Request, budget: int = 0) -> None:
         return
 
 
+@app.put("/v1/asset-leases/{token}")
+def reserve_asset_lease(token: str, body: dict) -> dict:
+    if set(body) != {"digests"}:
+        raise HTTPException(422, detail={"code": "invalid-asset-lease"})
+    asset_leases.reserve(token, body["digests"])
+    return {"reserved": True}
+
+
+@app.delete("/v1/asset-leases/{token}")
+def release_asset_lease(token: str) -> dict:
+    asset_leases.release(token)
+    return {"released": True}
+
+
 @app.post("/v1/briefs")
-def create_brief(body: BriefIn) -> JSONResponse:
+def create_brief(body: BriefIn, request: Request = None) -> JSONResponse:
+    _require_uploaded(body)
+    token = request.headers.get("X-H3IR-Asset-Lease") if request is not None else None
+    # Legacy callers get request-duration pins; Gateway reserves before upload.
+    own = token is None
+    token = token or "legacy-" + uuid.uuid4().hex
+    digests = [d for a in body.assets for d in (a.sha256, a.paired_video_sha256) if d]
+    if own:
+        asset_leases.reserve(token, digests)
+    try:
+        with asset_leases.compiling(token, digests):
+            return _create_brief(body)
+    finally:
+        if own:
+            asset_leases.release(token)
+
+
+def _create_brief(body: BriefIn) -> JSONResponse:
     brief = _to_brief(body)
     opts = ProfileOptions(name=get_config().profile)
     try:
@@ -681,7 +728,9 @@ def create_brief(body: BriefIn) -> JSONResponse:
 
 @app.get("/v1/briefs/{brief_id}")
 def get_brief(brief_id: str) -> dict[str, Any]:
-    rec = _STORE.get(brief_id)
+    with _LOCK:
+        _prune_briefs()
+        rec = _STORE.get(brief_id)
     if not rec:
         raise HTTPException(404, detail={"code": "unknown-brief", "message": brief_id})
     return _envelope(brief_id, rec["doc"], rec["brief"])
@@ -689,7 +738,9 @@ def get_brief(brief_id: str) -> dict[str, Any]:
 
 @app.patch("/v1/briefs/{brief_id}")
 def refine_brief(brief_id: str, body: RefineIn) -> JSONResponse:
-    rec = _STORE.get(brief_id)
+    with _LOCK:
+        _prune_briefs()
+        rec = _STORE.get(brief_id)
     if not rec:
         raise HTTPException(404, detail={"code": "unknown-brief", "message": brief_id})
     if not body.change.strip():
@@ -726,7 +777,9 @@ def refine_brief(brief_id: str, body: RefineIn) -> JSONResponse:
 @app.get("/v1/briefs/{brief_id}/prompt")
 def get_prompt(brief_id: str) -> dict[str, Any]:
     """The one field the renderer needs, for a caller that already has its own wiring."""
-    rec = _STORE.get(brief_id)
+    with _LOCK:
+        _prune_briefs()
+        rec = _STORE.get(brief_id)
     if not rec:
         raise HTTPException(404, detail={"code": "unknown-brief", "message": brief_id})
     doc: IRDocument = rec["doc"]

@@ -96,10 +96,32 @@ def _asset_digest(cards: dict[str, AssetCard], subjects: list[SubjectPlan]) -> s
     return "\n".join(lines) or "no references attached"
 
 
+def correction_spec(sections: tuple[str, ...], written: str) -> str:
+    """Independent correction calls carry the same vendored H3 format contract.
+
+    Reference mode also needs the base guide's common dialogue/cut conventions.
+    Only extract specification blocks, not the composer's creative-writing brief.
+    """
+    is_ref = 'subject_definitions' in sections if sections else bool(
+        re.search(r'^subject_definitions\s*:', written, re.M))
+    names = ['compose_base.v1.txt'] + (['compose.v2.txt'] if is_ref else [])
+    specs = []
+    for name in names:
+        text = load_prompt(name)
+        start, end = '=== SPECIFICATION ===', '=== END SPECIFICATION ==='
+        if start not in text or end not in text:
+            raise ValueError(f'{name} lacks a delimited H3 specification')
+        specs.append(text.split(start, 1)[1].split(end, 1)[0].strip())
+    heading = ('Use the six-section full-reference format below; the base guide supplies shared shot and dialogue conventions only.'
+               if is_ref else 'Use the three-section base-mode format below.')
+    return heading + '\n\n' + '\n\n'.join(specs)
+
+
 def fix_with_findings(backend: Backend, written: str, findings: list, *,
                       labels: tuple[str, ...] = (), sections: tuple[str, ...] = (),
                       seed: int | None = None, thinking: bool = False,
-                      brief: Brief | None = None) -> str:
+                      brief: Brief | None = None, review: bool = False,
+                      speaker_bindings: tuple = ()) -> str:
     """Hand the model its own text plus the findings and ask for a surgical fix.
 
     The owner's idea, and better than the code repairers it replaces: a bespoke editor per failure
@@ -107,8 +129,8 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     while the model already holds the intent behind the text. Validator findings happen to be
     ideal review feedback -- they name the rule, the offence and the offending line.
 
-    The spec is NOT resent. It is already in the system prompt of the composing call, and
-    repeating it invites a wholesale rewrite instead of a surgical fix.
+    This is a new, independent chat request: the composing call's system prompt
+    is not inherited. Carry the shared H3 specification on every correction/review.
 
     The LABEL INVENTORY is resent, and that distinction is the whole point. The first eval run of
     this loop fell back on three of six briefs, every time on `L2-undefined-subject` /
@@ -121,15 +143,77 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     rather than a decision.
     """
     protected = {}
+    by_block = {}
+    speech_tokens = {}
+    dialogue_inventory = []
+    duplicate_error = any(f.rule == "D10-dialogue-line-duplicated" for f in findings)
     if brief is not None:
+        # Identities come from caller lines, not whichever split the previous draft
+        # happened to contain. Every independent pass gets the SAME whole/part map.
+        literal_tokens = {}
+        for i, line in enumerate(brief.dialogue, 1):
+            token = '{{UTTERANCE%d}}' % i
+            from .language import canonical_language
+            language = canonical_language(line.language, line.text)
+            protected[token] = f'<d>[{language}] {line.text}</d>'
+            speech_tokens[line.text] = token
+            literal_tokens.setdefault(line.text, token)
+            cuts = [m.end() for m in re.finditer(r'[,，;；:：.!?。！？]+\s*', line.text)
+                    if m.end() < len(line.text)]
+            parts, start = [], 0
+            for end in cuts + [len(line.text)]:
+                parts.append(line.text[start:end]); start = end
+            if len(parts) > 1:
+                aliases = []
+                for n, part in enumerate(parts, 1):
+                    alias = token[:-2] + '_PART%d}}' % n
+                    protected[alias] = f'<d>[{language}] {part}</d>'
+                    literal_tokens.setdefault(part, alias)
+                    aliases.append(alias)
+                dialogue_inventory.append(
+                    token + ' is ONE caller-supplied line. Its exact ordered parts are: '
+                    + ' then '.join(aliases) + '. Use the whole token ONCE, OR every '
+                    'part ONCE in that order, NEVER both. For a line continuing across '
+                    'a cut, place the parts on opposite sides and put <scenetrans> at '
+                    'both connecting points. Keep the same speaker and voice reference; '
+                    'state continuity before the connecting marker and continuation token in the following '
+                    'shot, never after the first shot closing <scenetrans>.')
+
         def hide(m):
-            token = '{{UTTERANCE%d}}' % (len(protected)+1)
-            protected[token] = m.group()
-            return token
+            block = m.group()
+            inner = re.fullmatch(r'<d>\s*\[([^\]]+)\]\s*(.*?)</d>', block, re.S)
+            if inner and inner.group(2) in literal_tokens:
+                return literal_tokens[inner.group(2)]
+            # Preserve unrecognised/generated speech opaquely for the validator and
+            # correction loop. It must never steal a caller utterance's identity.
+            if block not in by_block:
+                token = '{{UTTERANCE%d}}' % (len(brief.dialogue) + len(by_block) + 1)
+                by_block[block] = token
+                protected[token] = block
+            return by_block[block]
         written = re.sub(r'<d>.*?</d>', hide, written, flags=re.S)
+    # Every protected occurrence is visible to the reviewer, including already
+    # split lines. Literal speech never enters the model call.
+    token_facts = []
+    for token, block in protected.items():
+        tag = re.search(r'\[([^\]]+)\]', block)
+        if tag:
+            count = len(re.sub(r'<[^>]+>|\[[^\]]+\]|\s+', '', block))
+            token_facts.append(f'{token}: language={tag.group(1)}, characters={count}')
+    protected_inventory = '\n'.join(token_facts) or 'none'
     numbered = "\n".join(f"{i}. [{f.rule}] {f.msg}" for i, f in enumerate(findings, 1))
     if brief is not None:
-        for i,d in enumerate(brief.dialogue,1):numbered=numbered.replace(d.text, '{{D%d}}'%i)
+        for i, d in enumerate(brief.dialogue, 1):
+            numbered = numbered.replace(d.text, speech_tokens.get(d.text, '{{D%d}}' % i))
+    dialogue_guidance = ""
+    if dialogue_inventory:
+        dialogue_guidance = "\nPROTECTED SPEECH INVENTORY\n" + "\n".join(dialogue_inventory) + "\n"
+    if brief is not None and duplicate_error:
+        dialogue_guidance += (
+            "You may remove duplicate occurrences of the same protected speech, but must not "
+            "drop a caller-supplied line, change its speaker, translate it, or remove the requested "
+            "audio continuity across the cut. Token spelling is immutable; duplicate occurrences "
+            "are NOT immutable. Do not remove unrelated utterances.\n")
     inventory = ""
     if labels:
         inventory = (
@@ -137,27 +221,54 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
             "no others are — a label outside this list references nothing at all, so the fix for an "
             "unknown label is to remove it or replace it with one of these, never to define it:\n"
             + ", ".join(labels) + "\n")
+    purpose = ("Review this H3 draft for dialogue continuity and duplicate speech introductions. "
+               "The draft may have passed mechanical checks; do not assume its speech structure is correct. "
+               "Make the smallest necessary edits; if already correct, return it unchanged.\n\n"
+               if review else "Your brief failed mechanical verification. Below are the exact findings, then your text.\n\n")
+    requirements = protected_intent(brief) if brief else 'not supplied'
+    if brief:
+        for i, line in enumerate(brief.dialogue, 1):
+            if line.text in speech_tokens:
+                requirements = requirements.replace('{{D%d}}' % i, speech_tokens[line.text])
+
+    bindings = '\n'.join(f'{sid}: subject={subject or "unspecified"}, voice={voice or "unspecified"}'
+                         for sid, subject, voice in speaker_bindings) or 'preserve the existing bindings'
     ask = (
-        "Your brief failed mechanical verification. Below are the exact findings, then your text.\n\n"
-        f"FINDINGS\n{numbered}\n"
-        f"{inventory}\n"
-        "Fix every finding and change nothing else. "
-        + ("" if any(f.rule == "T11-shot-count-pinned" for f in findings) else "Keep your shots, ")
-        + "Keep your camera moves, your "
-        "performance beats, your wording. Do not rewrite, do not shorten, do not re-plan — this is "
-        "a correction pass, not a second draft. Output the corrected "
+        purpose
+        + f"ORIGINAL REQUIREMENTS (protected speech)\n{requirements}\n\n"
+        + f"SPEAKER BINDINGS\n{bindings}\nPROTECTED TOKENS\n{protected_inventory}\n\n"
+        + f"FINDINGS\n{numbered}\n"
+        f"{inventory}{dialogue_guidance}\n"
+        + ("Resolve speech scheduling contradictions even when FINDINGS is empty. " if review else "Fix every finding and inconsistent speech scheduling; change nothing else. ")
+        + (("Preserve the scene, caller-specified shot count, times and actions. "
+            "You may change draft-invented shot count, cut timing and speaking beats if necessary. "
+            "Only where the caller did not fix timing, you may adjust draft-invented cut timing "
+            "to keep short supplied speech natural and continuous. Do not fill a long shot with "
+            "invented speech; use nonverbal reactions after the supplied words end. "
+            "Use the protected utterance length metadata, never invent words. ") if review else
+           (("" if any(f.rule == "T11-shot-count-pinned" for f in findings) else "Keep your shots, ")
+            + "Keep unrelated camera moves and scene detail; do not preserve contradictory speaking beats. "))
+        + "This is a focused correction, not a new scene. Output the corrected "
         + (f"{len(sections)} sections ({', '.join(sections)})" if sections else "brief in full")
         + " and nothing else.\n\n"
         f"YOUR TEXT\n{written}"
     )
     reply = backend.chat(
-        [{"role": "system", "content": "You correct mechanical faults in your own H3 brief. You "
-                                       "make the smallest edit that satisfies each finding." +
-                                       (f" Keep descriptive prose in {brief.description_language}; preserve every {{{{UTTERANCE}}}} / {{{{D}}}} placeholder exactly." if brief else "")},
+        [{"role": "system", "content": (prompt_policy(correction_spec(sections, written), brief) if brief else correction_spec(sections, written)) + ("\n\nYou audit and repair semantic dialogue continuity, not just listed mechanical faults. "
+                                       "Resolve contradictory speaking directions even with no findings. " if review else
+                                       "\n\nYou correct mechanical faults while preserving semantic dialogue continuity. ") +
+                                       (f" Keep descriptive prose in {brief.description_language}; preserve protected token spelling and caller speech exactly; follow the speech inventory for occurrence counts." if brief else "")},
          {"role": "user", "content": ask}],
-        thinking=thinking, temperature=0.2, seed=seed, max_tokens=20000)
-    text=reply.content
-    for token,original in protected.items():text=text.replace(token,original)
+        thinking=thinking, temperature=0.0 if review else 0.2, seed=seed, max_tokens=20000)
+    text = reply.content
+    # Models sometimes wrap a protected token in another speech block. Restore
+    # only one layer, otherwise delivery markup becomes literal spoken content.
+    text = re.sub(r'<d>.*?</d>',
+                  lambda m: ' '.join(re.findall(r'\{\{UTTERANCE\d+(?:_PART\d+)?\}\}', m.group()))
+                  if re.search(r'\{\{UTTERANCE\d+(?:_PART\d+)?\}\}', m.group()) else m.group(),
+                  text, flags=re.S)
+    for token, original in protected.items():
+        text = text.replace(token, original)
     return restore_dialogue(text,brief) if brief is not None else text
 
 
@@ -202,7 +313,8 @@ _AUDIO_PROPERTY = {
 
 
 def audio_task_facts(labels: tuple[str, ...], task_types: tuple[str, ...],
-                     audio_roles: tuple[tuple[str, str], ...] = ()) -> str:
+                     audio_roles: tuple[tuple[str, str], ...] = (),
+                     ignored_audio_labels: tuple[str, ...] = ()) -> str:
     """What the wiring settles about the two audio task types, stated as a fact in the ask.
 
     The renderer already owns this: "a prose stage that could write the prefix could invent a
@@ -246,7 +358,16 @@ def audio_task_facts(labels: tuple[str, ...], task_types: tuple[str, ...],
     # recording is FOR, so it is stated as a fact here for the same reason `video_task_facts` states
     # the declared video role: the writer was reading the intent and answering the question it
     # seemed to ask.
+    for label in ignored_audio_labels:
+        out.append(f"{label} is the paired source soundtrack with an explicit ignore policy. Keep its label and define it, but its retention marker is weak_reference and its original signal must not be copied into the target audio.")
     for label, role in audio_roles:
+        if label in ignored_audio_labels:
+            continue
+        if role == "bgm":
+            out.append(f"{label} is explicitly supplied as bgm: its signal is reused, not just its style. "
+                       "Define it using the supplied note, and use fully_copy or partially_copy as "
+                       "appropriate in retention_analysis; reference and weak_reference do not express this role. "
+                       "State where this supplied audio is heard in the soundscape or music section.")
         named = _AUDIO_PROPERTY.get(role)
         if not named:
             continue
@@ -266,7 +387,7 @@ def audio_task_facts(labels: tuple[str, ...], task_types: tuple[str, ...],
     # the same role. What the writer was missing is the marker table's definition: `S2-copy-part`,
     # whose request lays other sound over the top of part of the track, claimed `fully_copy` and
     # "reused 1:1 as the target video's complete final audio track" in 5 of 5 runs.
-    if any(role == "bgm" for _lb, role in audio_roles):
+    if any(role == "bgm" and _lb not in ignored_audio_labels for _lb, role in audio_roles):
         out.append("`fully_copy` says the complete source audio is the target video's complete "
                    "final audio track, with nothing added, removed or laid over it. If the request "
                    "keeps only part of the timeline, or adds, removes or replaces any sound after "
@@ -423,9 +544,16 @@ def structure_facts(video_roles: tuple[tuple[str, str], ...]) -> str:
     deterministic check behind this statement.
     """
     clips = [label for label, role in video_roles if role == "structure"]
-    if not clips:
-        return ""
     lines = []
+    for label, role in video_roles:
+        if role == "motion_reference":
+            lines.append(
+                f"{label} is a SUBJECT-MOTION REFERENCE: transfer only the action requested by "
+                f"the user to the target character. This is NOT video editing or a camera reference. "
+                f"Do not adopt the clip's people, clothing, background, camera moves or audio. "
+                f"Give {label} a standalone subject_definitions line describing its motion-only "
+                f"purpose, and a retention line '{label} (subject motion): weak_reference - ...'. "
+                f"Do not define a <Subject N> from this clip. The user's target scene and camera win.")
     for label in clips:
         lines.append(
             f"{label} is a STRUCTURE REFERENCE, declared by the caller: it lends how it is shot "
@@ -717,6 +845,7 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
                   picture_roles: tuple[tuple[str, str], ...] = (),
                   video_roles: tuple[tuple[str, str], ...] = (),
                   audio_roles: tuple[tuple[str, str], ...] = (),
+                  ignored_audio_labels: tuple[str, ...] = (),
                   audio_transcripts: tuple[tuple[str, str], ...] = (),
                   # (label, what the clip shows, what its camera does) for every video attached
                   # as `edit_source`, and (picture label, the subject it takes over from) for every
@@ -778,6 +907,11 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
             # emitted only when a <Picture N> existed, so a brief with no pictures at all was left to
             # infer from the specification in its system prompt, which teaches the construct.
             label_facts += ("\n" if label_facts else "") + NO_PICTURES_AT_ALL
+    from .plan import build_speakers
+    voice_speakers = build_speakers(brief, [] if mode and mode.is_base else subjects, [],
+                                  audio_roles=audio_roles)
+    voice_facts = "\n".join(f"{sp.descriptor or sp.sid} {sp.sid} uses {sp.voice_ref}."
+                            for sp in voice_speakers if sp.voice_ref)
     dlg = "\n".join(f'- {{{{D{i}}}}} ({d.language})'
                       + (f", spoken by {d.speaker_hint}" if d.speaker_hint else "")
                       + (" as an off-screen voiceover" if d.voiceover else "")
@@ -785,6 +919,7 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
 
     ask = (
         f"Request: {protected_intent(brief)}\n\n"
+        f"Resolved speaker voice references (preserve consistently):\n{voice_facts or 'unspecified'}\n\n"
         f"Duration is exactly {target.effective_seconds:.3f} seconds; every cut time strictly less "
         f"than {int(target.effective_seconds // 60):02d}:"
         f"{target.effective_seconds % 60:06.3f}, written MM:SS.mmm.\n\n"
@@ -806,7 +941,7 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
         + (f"\n{reference_audio_words(audio_transcripts)}\n" if audio_transcripts else "")
         # Scoped to the full-reference shape: a base mode has no task-type prefix to constrain, and
         # cannot have an <Audio N> at all -- any audio attachment routes to ref2va (mode.py 12.2#1).
-        + (f"\n{audio_task_facts(labels, task_types, audio_roles)}\n" if is_ref else "")
+        + (f"\n{audio_task_facts(labels, task_types, audio_roles, ignored_audio_labels)}\n" if is_ref else "")
         + (f"\n{video_task_facts(video_roles, task_types)}\n"
            if is_ref and video_task_facts(video_roles, task_types) else "")
         + (f"\n{edit_source_facts(video_worlds, picture_roles)}\n"
@@ -878,10 +1013,8 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
         # preamble and dropped sections. Creativity here comes from the latitude, not the sampler.
         temperature=0.3, seed=seed, max_tokens=20000)
     from .plan import build_speakers
-    speakers = build_speakers(brief, [] if mode and mode.is_base else subjects, [])
-    voice = next((label for label, role in audio_roles if role == "voice_timbre"), None)
-    for speaker in speakers:
-        speaker.voice_ref = voice
+    speakers = build_speakers(brief, [] if mode and mode.is_base else subjects, [],
+                              audio_roles=audio_roles)
     return restore_dialogue(reply.content, brief, speakers)
 
 

@@ -81,7 +81,8 @@ def _strip_fence(text: str) -> str:
 def repair(text: str, *, target: Target, mode: Mode, labels: tuple[str, ...],
            dialogue: tuple[str, ...] = (), style_phrase: str = "",
            definitions: tuple[str, ...] = (),
-           task_types: tuple[str, ...] = ()) -> RepairResult:
+           task_types: tuple[str, ...] = (),
+           motion_labels: tuple[str, ...] = ()) -> RepairResult:
     """Correct everything mechanical in a written brief."""
     res = RepairResult(text=_strip_fence(text))
     if res.text != text.strip():
@@ -102,6 +103,9 @@ def repair(text: str, *, target: Target, mode: Mode, labels: tuple[str, ...],
     res.text = _fix_instruction_line(res.text, target, mode, res)
     res.text = _fix_dialogue(res.text, dialogue, res)
     res.text = _fix_echoed_dialogue(res.text, dialogue, res)
+    res.text = _strip_retention_speakers(res.text, res)
+    res.text = _motion_definitions(res.text, motion_labels, res)
+    res.text = _cut_time_before_static_shot(res.text, res)
     if not res.text.endswith("\n"):
         res.text += "\n"
     return res
@@ -338,6 +342,45 @@ def _fix_markers(text: str, res: RepairResult) -> str:
                   sub, text)
 
 
+def _motion_definitions(text: str, labels: tuple[str, ...], res: RepairResult) -> str:
+    """A motion-only video's definition is wiring, not prose or instructions to the writer."""
+    m = re.search(r"^subject_definitions\s*:(.*?)(?=^summary\s*:|\Z)", text, re.M | re.S)
+    if not m or not labels:
+        return text
+    body = m.group(1)
+    for label in labels:
+        line = (f"{label} is a subject-motion reference for the target video; only the requested "
+                "action is referenced, not its people, setting, camera or audio.")
+        body = re.sub(rf"(?m)^{re.escape(label)}[^\n]*", lambda _: line, body)
+    if body != m.group(1):
+        res.repairs.append("derived motion-only video definitions from the resolved asset roles")
+    return text[:m.start(1)] + body + text[m.end(1):]
+
+
+def _cut_time_before_static_shot(text: str, res: RepairResult) -> str:
+    """Reorder an existing cut prefix; never invent a timestamp or move speech."""
+    m = re.search(r"^(?:detailed_description|integrated_multimodal_description)\s*:(.*?)(?=^overall_soundscape\s*:|\Z)", text, re.M | re.S)
+    if not m:
+        return text
+    pattern = r"(?m)^(\[Shot\s+([2-9]|[1-9]\d+)\])\s+(Static Shot\.)\s+(At\s+\d{2}:\d{2}\.\d{3},)"
+    body, count = re.subn(pattern, r"\1 \4 \3", m.group(1))
+    if count:
+        res.repairs.append("moved existing cut times before Static Shot without changing their values")
+    return text[:m.start(1)] + body + text[m.end(1):]
+
+
+def _strip_retention_speakers(text: str, res: RepairResult) -> str:
+    """Speaker IDs are forbidden here; subject and audio labels carry the relationship."""
+    m = re.search(r"^retention_analysis\s*:(.*?)(?=^\w+\s*:|\Z)", text, re.M | re.S)
+    if not m:
+        return text
+    cleaned = re.sub(r"[ \t]*\(S\d+\)", "", m.group(1))
+    if cleaned == m.group(1):
+        return text
+    res.repairs.append("removed speaker IDs from retention_analysis; speech bindings unchanged")
+    return text[:m.start(1)] + cleaned + text[m.end(1):]
+
+
 def _fix_speaker_ids(text: str, res: RepairResult) -> str:
     """(SN) numbered by first speech, and never inside retention_analysis."""
     body = text
@@ -370,6 +413,12 @@ def _fix_dialogue(text: str, expected: tuple[str, ...], res: RepairResult) -> st
     blocks = list(re.finditer(r"<d>\s*(\[[^\]]*\]\s*)?(.*?)</d>", text, re.S))
     for want in expected:
         if any(want in b.group(2) for b in blocks):
+            continue
+        # A verbatim line may span a cut. Do not turn a valid split back into
+        # the whole line plus its tail, which would schedule speech twice.
+        from .validate import _consecutive_run
+        spoken = [re.sub(r"\s+", " ", b.group(2)).strip() for b in blocks]
+        if _consecutive_run(spoken, re.sub(r"\s+", " ", want).strip()) is not None:
             continue
         if not blocks:
             res.findings.append(Finding("D4-dialogue-not-verbatim", "ERROR",

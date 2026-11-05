@@ -32,13 +32,13 @@ REPO = pathlib.Path(__file__).resolve().parents[1]
 # than a discovery somebody makes on a user's machine. A failure here is not a bug: it means the
 # thing that crossed the boundary moved, and the fix is to bump `CONTRACT_VERSION` and paste the new
 # digest in. That is the whole ceremony, and it exists so the version number means something.
-PINNED_VERSION = 2
+PINNED_VERSION = 3
 PINNED = {
     "asset_fields": "38190799fcfb6cf1",
     "brief_fields": "cf2fb5307dd7d72f",
     "dialogue_fields": "a63047779f907e58",
     "error_codes": "19906fa6afaf0a20",
-    "roles": "4b85814fed5254ab",
+    "roles": "a62d21b69578bce8",
     "directors": "8e50d53980fd8777",
     "camera_moves": "e0ebdca0a4dcaea8",
     "limits": "78554cef21934947",
@@ -142,7 +142,7 @@ def test_the_contract_lists_every_refusal_the_service_can_raise():
     """
     src = (REPO / "h3ir" / "service.py").read_text(encoding="utf-8")
     chunks = re.split(r"\n(?=@app\.)", src)
-    on_assets = [c for c in chunks if re.match(r'@app\.\w+\("/v1/assets', c)]
+    on_assets = [c for c in chunks if re.match(r'@app\.\w+\("/v1/asset', c)]
     assert on_assets, "no /v1/assets route was found, so the route half of this scan is blind"
 
     def codes(text):
@@ -167,6 +167,17 @@ def test_the_contract_lists_every_refusal_the_service_can_raise():
     for code in refusals:
         raised.setdefault(code, []).append(C.BRIEFS)
 
+    leases = (REPO / "h3ir" / "asset_leases.py").read_text(encoding="utf-8")
+    lease_codes = codes(leases)
+    assert len(lease_codes) >= 5, "asset lease refusal scan is blind"
+    # Legacy briefs reserve/release internally; Gateway uses explicit lease routes.
+    import ast
+    tree = ast.parse(leases)
+    for node in tree.body:
+        if isinstance(node, ast.FunctionDef):
+            routes = [C.BRIEFS] if node.name == "compiling" else [C.BRIEFS, C.ASSETS]
+            for code in codes(ast.get_source_segment(leases, node)):
+                raised.setdefault(code, []).extend(routes)
     assert raised, "no refusal codes were found in the source, so this scan is blind"
     assert not set(raised) - set(C.ERROR_CODES), (
         f"these refusals are raised and not published: {sorted(set(raised) - set(C.ERROR_CODES))}")

@@ -119,7 +119,7 @@ def test_the_refine_path_answers_the_same_way(client, monkeypatch):
     """PATCH recompiles, so it reaches the analyser too. One of the two endpoints handling this
     and the other not is how a caller learns to distrust the error surface.
     """
-    stored = {"brief": None, "doc": None, "at": 0.0, "versions": 1}
+    stored = {"brief": None, "doc": None, "at": __import__("time").time(), "versions": 1}
     monkeypatch.setitem(service._STORE, "abc123", stored)
 
     def boom(*a, **kw):

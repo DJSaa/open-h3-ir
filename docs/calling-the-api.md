@@ -247,3 +247,43 @@ Three layers. A UI should read the first two and never the third.
   absolute maximum. Over capacity is a `422` naming what to drop, never a manifest that publishes a
   socket the graph does not have. `GET /v1/capabilities` reports all four numbers, so read them rather
   than copying them into your client.
+
+
+### Motion-only video references (contract v3)
+
+For an action reference rather than editing the source clip, set the video asset's
+`role` to `motion_reference`. Describe the target person and the action to borrow
+in `intent`. This role does not adopt the source identity, setting, camera or audio.
+Use `structure` for camera/cut references and `edit_source` for editing the source.
+When a video role is omitted, explicit scoped motion-only clauses such as
+“视频1只参考转头” are recognised; this is a narrow convenience, not general role
+inference. Explicit roles take precedence, and ambiguous wording keeps the existing default.
+
+
+### Gateway upload leases and bounded state (contract v4)
+
+`GET /v1/capabilities` advertises `gateway_contract.asset_leases` and
+`gateway_contract.paired_soundtrack_ignore`. A Gateway can pin the uploaded
+assets for one compilation attempt:
+
+1. `PUT /v1/asset-leases/{token}` with `{"digests": ["<sha256>"]}` before uploading.
+2. Upload the assets, then send `POST /v1/briefs` with header
+   `X-H3IR-Asset-Lease: {token}`.
+3. Release with `DELETE /v1/asset-leases/{token}` after compilation finishes.
+
+Tokens contain 1–128 letters, digits, underscores or hyphens. They identify an
+attempt; they are not authentication credentials. Preparing leases expire after
+20 minutes; executing leases stay pinned until compilation exits. A lease cannot
+run two compilations concurrently or be released while executing. Calls without
+the header receive a temporary request-duration lease automatically. This state
+is process-local; use one API process per upload store.
+
+For a paired audio asset with role `bgm`, `soundtrack_policy: "ignore"` excludes
+that source video's soundtrack from the compiled description. `"preserve"` keeps
+it; the field is invalid for unpaired audio, non-audio assets or other roles.
+
+Analysis cache limits default to 256 MiB and 24 hours, configurable with
+`H3IR_ANALYSIS_CACHE_BYTES` and `H3IR_ANALYSIS_CACHE_TTL_HOURS`. Compilation
+workspace budget defaults to 128 MiB (`H3IR_COMPILE_TEMP_BYTES`) and the workspace
+is removed when compilation exits. Brief lookup records are bounded in memory
+(128 entries, one hour); they are not a durable job database.

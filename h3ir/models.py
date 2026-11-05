@@ -51,6 +51,8 @@ class Role(str, Enum):
     # structure sibling of STYLE, added when the sentence alone measurably could not keep a
     # clip's contents out of the target video (matrix row 26).
     STRUCTURE = "structure"
+    # Subject motion only; neither the source identity nor its camera is adopted.
+    MOTION_REFERENCE = "motion_reference"
     EDIT_SOURCE = "edit_source"
     CONTINUATION_SOURCE = "continuation_source"
     # The two halves of "put this into the clip". Both ride a PICTURE and both require an
@@ -164,6 +166,7 @@ class AssetRef:
     composition: str = "unknown"     # bare_plate | composed_scene | unknown
     provenance: dict[str, Any] | None = None
     paired_video_sha256: str | None = None   # a soundtrack points at its video
+    soundtrack_policy: str | None = None
     # Who this picture takes over from, in the caller's own words, and only on a
     # `replacement_subject`. Free text because nothing here can enumerate the people in a clip: the
     # analyser sees three sampled frames of it, so a figure can be absent from all three and walk in
@@ -291,6 +294,7 @@ class ManifestEntry:
     sizing: str = "match"
     rows: int = 0
     paired_with: str | None = None
+    soundtrack_policy: str | None = None
     # The caller's own words about the asset. Reaches the renderer this way because
     # render_subject_definitions sees the plan and not the cards, and for audio it is the ONLY thing
     # that can describe the sound -- nothing in this system can hear.

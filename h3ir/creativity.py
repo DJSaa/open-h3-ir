@@ -319,6 +319,7 @@ class Scope:
 def build(intent: str, *, level: str | Creativity | None = None,
           constraints: tuple[str, ...] | list[str] = (),
           has_dialogue: bool = False, has_onscreen_text: bool = False,
+          has_music_reference: bool = False,
           dialogue_texts: tuple[str, ...] = (),
           silent: bool = False) -> Scope:
     """Read the scope off the request once.
@@ -349,7 +350,7 @@ def build(intent: str, *, level: str | Creativity | None = None,
                  if " ".join(q.split()) not in spoken]
     if lettering:
         supplied.add(ONSCREEN_TEXT)
-    mentioned = set(mentions(*texts)) - forbidden
+    mentioned = (set(mentions(*texts)) | ({SCORE} if has_music_reference else set())) - forbidden
     forbidden -= supplied
     return Scope(level=parse(level), requested=frozenset(supplied | mentioned),
                  forbidden=frozenset(forbidden))

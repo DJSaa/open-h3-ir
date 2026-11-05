@@ -60,7 +60,7 @@ EVICT_GRACE_S = 900.0
 PARTIAL_PREFIX = "incoming-"
 PARTIAL_SUFFIX = ".part"
 
-_LOCK = threading.Lock()
+_LOCK = threading.RLock()
 # Bytes promised to uploads currently in flight, counted against the store cap for the same reason
 # the cap exists at all: without it, twenty parallel uploads each read a store that is under the cap
 # and each write a full file, and the cap bounds nothing. Reserved at the start and released at the
@@ -172,7 +172,7 @@ def _unlink(p: Path) -> None:
         pass
 
 
-def sweep(*, reserve: int = 0, now: float | None = None) -> dict[str, int]:
+def _sweep_locked(*, reserve: int = 0, now: float | None = None) -> dict[str, int]:
     """Drop what has expired, then the least recently used, until the store fits under its cap.
 
     `reserve` is room to leave for an upload that is about to start. Returns what happened, which is
@@ -195,6 +195,10 @@ def sweep(*, reserve: int = 0, now: float | None = None) -> dict[str, int]:
     keep: list[tuple[Path, os.stat_result]] = []
     for p, st in items:
         age = now - st.st_mtime
+        from .asset_leases import pinned
+        if pinned(p.name):
+            keep.append((p, st))
+            continue
         if ttl and age > ttl and age > EVICT_GRACE_S:
             _unlink(p)
             dropped, freed, total = dropped + 1, freed + st.st_size, total - st.st_size
@@ -205,7 +209,8 @@ def sweep(*, reserve: int = 0, now: float | None = None) -> dict[str, int]:
     for p, st in keep:                                  # least recently used first
         if total <= want:
             break
-        if now - st.st_mtime <= EVICT_GRACE_S:
+        from .asset_leases import pinned
+        if pinned(p.name) or now - st.st_mtime <= EVICT_GRACE_S:
             continue
         _unlink(p)
         dropped, freed, total = dropped + 1, freed + st.st_size, total - st.st_size
@@ -370,3 +375,9 @@ def _next_ticket() -> int:
     global _TICKET
     _TICKET += 1
     return _TICKET
+
+
+def sweep(*, reserve: int = 0, now: float | None = None) -> dict[str, int]:
+    # Reserve/pin and eviction share one RLock, including the actual unlink.
+    with _LOCK:
+        return _sweep_locked(reserve=reserve, now=now)

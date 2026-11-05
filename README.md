@@ -467,3 +467,20 @@ Read the [MiniMax H3 Community License Agreement](https://huggingface.co/MiniMax
 rather than trusting this summary. This project is independent and unofficial: it is not affiliated
 with, endorsed by, or supported by MiniMax, and nothing in this repository is a MiniMax work. No model
 code, no weights, no checkpoint.
+
+
+### Multiple speaker voice references
+
+Voice-timbre bindings are shared by the deterministic draft and protected-dialogue
+restoration. Explicit clauses such as `甲只借<Audio 1>的音色，乙只借<Audio 2>的音色`
+and `两人的声音分别参考音频1、音频2` retain their corresponding assignments;
+reversed references and explicitly shared voices are supported. Background music
+and other audio roles are excluded. A single speaker with a single voice reference
+can be assigned automatically. Ambiguous multi-speaker assignments remain unassigned
+and produce `DINGO-voice-binding-unresolved` rather than assigning everyone Audio 1.
+For other wording, state each speaker's reference explicitly and check the diagnostics.
+
+Final text is checked for contradictory explicit speaker/voice associations
+(`DINGO-voice-binding`). This validates the prompt wiring; it does not establish
+voice similarity or eliminate unwanted speech in generated videos. Original dialogue
+and its language remain protected. Regression coverage: `tests/test_voice_binding.py`.

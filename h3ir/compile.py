@@ -257,6 +257,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                   transcripts: dict[str, str] | None = None) -> IRDocument:
     from .language import prepare, POLICY_VERSION, HAN, draft_intent
     brief = prepare(brief)
+    from .reference_roles import resolve_motion_references
+    brief = resolve_motion_references(brief)
     cfg = get_config()
     opts = opts or ProfileOptions(name=cfg.profile)
     own_backend = backend is None
@@ -372,6 +374,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
 
         # Filled by the planning stage; read by _document, which is defined before it runs.
         shot_plan_record: dict[str, Any] = {}
+        review_record: dict[str, Any] = {}
 
         def _document(plan, result, findings, n_tokens, source, reason=None) -> IRDocument:
             return IRDocument(
@@ -383,6 +386,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     "analyzer_model": backend.cfg.model,
                     "prose_model": backend.cfg.model if source == "enriched" else None,
                     "source": source,
+                    "dialogue_review": dict(review_record) or None,
                     "fallback_reason": reason,
                     "seed": seed,
                     # What the dial decided, in the record. Proportionality is now part of the bar
@@ -450,6 +454,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                        mode=mode, task_types=tuple(draft_plan.task_types),
                                        picture_roles=pic_roles, video_roles=vid_roles,
                                        audio_roles=aud_roles,
+                                       ignored_audio_labels=tuple(m.label for m in draft_plan.manifest if m.soundtrack_policy == "ignore"),
                                        audio_transcripts=transcribed,
                                        video_worlds=worlds, taken_over=taken,
                                        generation_task=("video editing"
@@ -457,7 +462,6 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                        omit=omit)
                 timings["compose_s"] = round(time.time() - t, 2)
 
-                from .prose import _definition_lines
                 from .prose import _definition_lines, fix_with_findings
 
                 def _verify(candidate: str):
@@ -467,11 +471,40 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                       style_phrase=style.phrase,
                                       definitions=tuple(_definition_lines(
                                           draft_plan.subjects, cards, labels)),
-                                      task_types=tuple(draft_plan.task_types))
+                                      task_types=tuple(draft_plan.task_types),
+                                      motion_labels=tuple(lb for lb, role in vid_roles
+                                                          if role == "motion_reference"))
                     n = token_count(fx.text)
                     found = validate(fx.text, _written_context(
                         brief, mode, draft_plan, cards, n, style, licence))
+                    from .voice_binding import findings as voice_findings
+                    found += voice_findings(fx.text, draft_plan.speakers, aud_roles)
+                    if brief.dialogue and creativity.SPEECH not in scope.licensed:
+                        from collections import Counter
+                        # D4 proves each exact line survives (including legal cut splits).
+                        # Also compare the total literal inventory: D4 alone permits extra
+                        # words alongside an otherwise intact line. Whitespace is immaterial.
+                        blocks = re.findall(r'<d>\s*\[[^\]]+\]\s*(.*?)</d>', fx.text, re.S)
+                        expected = re.sub(r'\s+', '', ''.join(d.text for d in brief.dialogue))
+                        actual = re.sub(r'\s+', '', ''.join(blocks))
+                        if Counter(expected) != Counter(actual):
+                            found.append(Finding('DINGO-speech-inventory', 'ERROR',
+                                'Spoken content differs from the supplied dialogue inventory. '
+                                'Restore all caller lines exactly, preserving ordered split parts; '
+                                'remove any extra spoken content or duplicate occurrence.'))
                     return fx, found, n
+
+                review_bindings = tuple((sp.sid, sp.subject, sp.voice_ref) for sp in draft_plan.speakers)
+                if brief.dialogue:
+                    t_review = time.time()
+                    review_record.update(attempted=True, performed=False, policy="dialogue_review.v3")
+                    written = fix_with_findings(
+                        backend, written, [], labels=labels + tuple(x.label for x in draft_plan.subjects),
+                        sections=_sections_for(mode), seed=seed, brief=brief, review=True,
+                        speaker_bindings=review_bindings)
+                    timings["dialogue_review_s"] = round(time.time() - t_review, 2)
+                    review_record.update(performed=True, policy="dialogue_review.v3",
+                                         seconds=timings["dialogue_review_s"])
 
                 fixed, found, n_tokens = _verify(written)
                 errors = [f for f in found if f.severity == "ERROR"]
@@ -500,7 +533,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     # full-reference format during the pass meant to correct it.
                     candidate = fix_with_findings(backend, fixed.text, errors,
                                                   labels=inventory, sections=_sections_for(mode),
-                                                  seed=seed, brief=brief)
+                                                  seed=seed, brief=brief, speaker_bindings=review_bindings)
                     timings[f"fix{rounds}_s"] = round(time.time() - t2, 2)
                     fixed, found, n_tokens = _verify(candidate)
                     mechanical_repairs += fixed.repairs
@@ -516,6 +549,21 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                     ", ".join(sorted(survived)))
                     if not errors:
                         break
+
+                # A mechanical correction can change speech scheduling after the first
+                # audit. Review its final output once; revalidate, never retry unboundedly.
+                if brief.dialogue and rounds and not errors:
+                    t_review = time.time()
+                    candidate = fix_with_findings(
+                        backend, fixed.text, [], labels=labels + tuple(x.label for x in draft_plan.subjects),
+                        sections=_sections_for(mode), seed=seed, brief=brief, review=True,
+                        speaker_bindings=review_bindings)
+                    timings["dialogue_final_review_s"] = round(time.time() - t_review, 2)
+                    review_record.update(final_performed=True,
+                                         final_seconds=timings["dialogue_final_review_s"])
+                    fixed, found, n_tokens = _verify(candidate)
+                    mechanical_repairs += fixed.repairs
+                    errors = [f for f in found if f.severity == "ERROR"]
 
                 for r in mechanical_repairs:
                     lora_findings.append(Finding("X12-brief-repaired", "INFO", r))
@@ -554,6 +602,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                 doc.provenance["repairs"] = mechanical_repairs
                 doc.provenance["fix_rounds"] = rounds
                 doc.provenance["unfixable"] = list(dict.fromkeys(stuck))
+                doc.provenance["correction_rules"] = "shared-h3-spec-v1"
                 doc.provenance["compose_prompt"] = chosen_compose
                 doc.provenance["timings"] = timings
                 return doc
@@ -773,6 +822,8 @@ def _written_context(brief: Brief, mode, plan, cards, n_tokens: int, style, lice
         pinned_shots=brief.shots,
         declared_roles=declared, paired_audio=paired,
         standalone_audio=_standalone_audio(plan),
+        audio_marker_constraints=tuple((m.label, ("weak_reference",) if m.soundtrack_policy == "ignore"
+            else ("fully_copy", "partially_copy")) for m in plan.manifest if m.role is Role.BGM),
         audio_transcripts=_audio_transcripts(plan, cards),
         forbid_keyframe_refs=(mode is Mode.REF2VA),
         pose_licensed=any(x.pose_licensed for x in plan.subjects),
@@ -917,6 +968,7 @@ def _scope(brief: Brief, plan) -> Scope:
         brief.intent, level=brief.creativity, constraints=tuple(brief.constraints),
         has_dialogue=bool(brief.dialogue) or counts["Audio"] > 0,
         has_onscreen_text=bool(brief.onscreen_text),
+        has_music_reference=any(m.role is Role.BGM and m.soundtrack_policy != "ignore" for m in plan.manifest),
         dialogue_texts=tuple(d.text for d in brief.dialogue),
         silent=brief.silent)
 
@@ -1089,6 +1141,8 @@ def _assess(plan, brief: Brief, mode, opts: ProfileOptions,
         declared_roles=declared,
         paired_audio=paired,
         standalone_audio=_standalone_audio(plan),
+        audio_marker_constraints=tuple((m.label, ("weak_reference",) if m.soundtrack_policy == "ignore"
+            else ("fully_copy", "partially_copy")) for m in plan.manifest if m.role is Role.BGM),
         audio_transcripts=audio_transcripts,
         forbid_keyframe_refs=(mode is Mode.REF2VA),
         pose_licensed=any(x.pose_licensed for x in plan.subjects),
@@ -1099,6 +1153,8 @@ def _assess(plan, brief: Brief, mode, opts: ProfileOptions,
     )
     findings += wiring_findings(plan, brief)
     findings += validate(result.prompt, ctx)
+    from .voice_binding import findings as voice_findings
+    findings += voice_findings(result.prompt, plan.speakers, [(m.label, m.role.value) for m in plan.manifest])
     for note in result.notes:
         # INFO, not WARN. Each of these reports a repair that SUCCEEDED -- a missing label
         # attached, a redundant camera sentence removed, an overrun trimmed. The artifact is

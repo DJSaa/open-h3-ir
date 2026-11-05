@@ -234,7 +234,8 @@ def _consecutive_run(spoken: list[str], want: str) -> tuple[int, int] | None:
     """
     for i in range(len(spoken)):
         for j in range(i + 1, len(spoken)):
-            if want in " ".join(spoken[i:j + 1]):
+            if (want in " ".join(spoken[i:j + 1])
+                    or want in "".join(spoken[i:j + 1])):
                 return i, j
     return None
 
@@ -269,6 +270,7 @@ class Context:
     # Audio labels the wiring KNOWS are attached standalone rather than as a video's soundtrack. A
     # positive assertion on purpose: an empty tuple means "not stated", never "none are paired".
     standalone_audio: tuple[str, ...] = ()
+    audio_marker_constraints: tuple[tuple[str, tuple[str, ...]], ...] = ()
     # (audio_label, transcript) for every attached recording the CALLER transcribed with a real
     # recogniser. Nothing here listens, so this is the only channel by which the words on a
     # recording are known, and ref-en.txt 5.4 governs where they may and may not appear.
@@ -905,6 +907,18 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
                     "composition reference for the target video, defining ...'.")
                 break
 
+    # A motion-only source transfers action, never the depicted person's identity.
+    for label, role, _marker in ctx.declared_roles:
+        if role != "motion_reference":
+            continue
+        for line_ in defs.splitlines():
+            if re.match(r"\s*<Subject \d+>", line_) and label in line_:
+                add("R33-motion-cited-as-content", "ERROR",
+                    f"{label} is a subject-motion reference, not an identity source. "
+                    "Define the target subject from its picture and give the motion video "
+                    "a standalone definition describing only the requested action transfer.")
+                break
+
     # A declared REPLACEMENT that the document never records. The mirror of M13 one section over:
     # M13 stops a declared `edit_source` from going unclaimed in the task-type prefix, and nothing
     # stopped a declared `replacement_subject` from going unrecorded in the section the format
@@ -998,6 +1012,15 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
                 f"all: say what {a_label} IS and what it is for, using only the note supplied for "
                 f"it, and delete the words 'from {v_label}'. Nothing here can hear the asset, so its "
                 "provenance is only what the manifest says it is")
+
+    # Typed soundtrack policy and BGM wiring settle copy versus reference, not the writer.
+    for label, allowed in ctx.audio_marker_constraints:
+        entry = re.search(rf"^\s*{re.escape(label)}\s*(\([^)]*\))?\s*:\s*(\w+)", ret, re.M)
+        if entry is None or entry.group(2) not in allowed:
+            add("R35-audio-marker-contract", "ERROR",
+                f"{label} has an explicit audio role/policy requiring one of {allowed}; "
+                "define and retain its label, use the corresponding marker, and make the audio "
+                "description agree. An ignored soundtrack must not be copied; supplied bgm is reused.")
 
     # Audio marker legality against the audio ROLE. Visual markers have had this since R6-R8; audio
     # never did, and the edit case demonstrated the gap on real output -- a `voice_timbre` reference

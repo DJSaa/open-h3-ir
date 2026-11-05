@@ -163,7 +163,7 @@ def test_an_empty_refinement_is_refused_before_it_costs_a_recompile(monkeypatch)
     called = []
     monkeypatch.setattr(service, "refine", lambda *a, **k: called.append(1))
     monkeypatch.setitem(service._STORE, "abc123",
-                        {"brief": None, "doc": None, "at": 0.0, "versions": 1})
+                        {"brief": None, "doc": None, "at": __import__("time").time(), "versions": 1})
     r = _client().patch("/v1/briefs/abc123", json={"change": "   "})
     assert r.status_code == 422, r.text
     assert r.json()["detail"]["code"] == "change-empty"

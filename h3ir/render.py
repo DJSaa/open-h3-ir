@@ -110,6 +110,9 @@ def render_subject_definitions(plan: Plan) -> str:
             # form the spec gives a style-only picture. R29 holds the written path to it.
             lines.append(f"{m.label} is the style and composition reference for the target video, "
                          "defining its medium, line, palette, shading and composition.")
+        elif m.kind is AssetKind.VIDEO and m.role is Role.MOTION_REFERENCE:
+            lines.append(f"{m.label} is a subject-motion reference for the target video; only "
+                         "the requested action is transferred, not its people, setting, camera or audio.")
         elif m.kind is AssetKind.VIDEO and m.role is Role.STRUCTURE:
             # The structure sibling: the clip lends how it is shot and cut, never what is in it.
             # R30 holds the written path to this form.
@@ -126,7 +129,9 @@ def render_subject_definitions(plan: Plan) -> str:
         # nothing at all.
         said = m.characterisation
         detail = f" — {said}" if said else ""
-        if m.role is Role.VOICE_TIMBRE and sid:
+        if m.soundtrack_policy == "ignore":
+            lines.append(f"{m.label} is the source soundtrack of {m.paired_with}, which is not retained in the target audio.")
+        elif m.role is Role.VOICE_TIMBRE and sid:
             who = f"{subj} {sid}" if subj else f"the speaker {sid}"
             lines.append(f"{m.label} is the voice-timbre reference for {who}, "
                          f"containing a spoken vocal layer{detail}.")
@@ -204,6 +209,10 @@ def render_retention(plan: Plan) -> str:
             elif m.role is Role.CONTINUATION_SOURCE:
                 lines.append(f"{m.label} (continuation source): partially_preserved - the setting "
                              "and subject continue from its final state.")
+            elif m.role is Role.MOTION_REFERENCE:
+                lines.append(f"{m.label} (subject motion): weak_reference - only the requested "
+                             "action is transferred to the target subject; the source identity, "
+                             "setting, camera movement and sound are not reproduced.")
             elif m.role is Role.STRUCTURE:
                 lines.append(f"{m.label} (camera movement and cutting rhythm): weak_reference - "
                              "the camera moves and edit timing are followed, while the video's "
@@ -294,8 +303,12 @@ def dialogue_markup(line: DialogueLine, speaker: SpeakerPlan | None, description
     sid = speaker.sid if speaker else "(S1)"
     subj = f"{speaker.subject} " if speaker and speaker.subject else ""
     desc = ""
-    if speaker and speaker.descriptor:
-        desc = f"{speaker.descriptor} "
+    # A speaker hint is intake metadata (e.g. 图1), not English scene prose.
+    # A resolved subject already identifies the person; do not echo the hint.
+    if speaker and speaker.descriptor and not speaker.subject:
+        from .language import HAN
+        if description_language != "English" or not HAN.search(speaker.descriptor):
+            desc = f"{speaker.descriptor} "
     if speaker and speaker.voice_ref:
         voice = f", using the voice timbre referenced from {speaker.voice_ref},"
     else:
@@ -303,7 +316,7 @@ def dialogue_markup(line: DialogueLine, speaker: SpeakerPlan | None, description
     from .language import canonical_language
     body = f"<d>[{canonical_language(line.language, line.text)}] {line.text}</d>"
     if line.voiceover:
-        return (f"{desc}{subj}{sid} says in an off-screen voiceover: {body} "
+        return (f"{desc}{subj}{sid}{voice} says in an off-screen voiceover: {body} "
                 "while their lips remain completely closed.")
     return f"{desc}{subj}{sid}{voice} says: {body}"
 

@@ -34,7 +34,7 @@ log = logging.getLogger("h3ir.analyse")
 # 4: `characterisation` split out of an audio card's `summary`. Version 3 audio cards fold the role
 # prefix and the duration into the summary, and the draft appended that whole string to the
 # soundscape -- so reusing one puts asset provenance back into a content section.
-ANALYZER_VERSION = "5"
+ANALYZER_VERSION = "6"
 
 # Enough to see a change without paying for a filmstrip. Sampled at 10/50/90% rather than at the ends
 # because the first and last frames of a real clip are routinely black or mid-fade.
@@ -157,7 +157,7 @@ def _cache_path(key: str) -> Path:
 
 def _cache_key(ref: AssetRef, model: str) -> str:
     return hashlib.sha256(
-        f"{ref.sha256}|{ANALYZER_VERSION}|{model}|{ref.kind.value}".encode()).hexdigest()[:24]
+        f"{ref.sha256}|{ANALYZER_VERSION}|{model}|{ref.kind.value}|{ref.role.value}|{ref.note or ''}".encode()).hexdigest()[:24]
 
 
 def load_cached(ref: AssetRef, model: str) -> AssetCard | None:
@@ -165,7 +165,8 @@ def load_cached(ref: AssetRef, model: str) -> AssetCard | None:
     if not p.exists():
         return None
     try:
-        raw = json.loads(p.read_text())
+        from .cache_io import read
+        raw = json.loads(read(p))
         raw["kind"] = AssetKind(raw["kind"])
         return AssetCard(**raw)
     except Exception:  # noqa: BLE001 - a bad cache entry is not an error, just a miss
@@ -176,7 +177,8 @@ def save_cached(ref: AssetRef, card: AssetCard, model: str) -> None:
     from dataclasses import asdict
     d = asdict(card)
     d["kind"] = card.kind.value
-    _cache_path(_cache_key(ref, model)).write_text(json.dumps(d, indent=1, ensure_ascii=False))
+    from .cache_io import write
+    write(_cache_path(_cache_key(ref, model)), json.dumps(d, indent=1, ensure_ascii=False))
 
 
 def analyse_image(backend: Backend, ref: AssetRef, *, seed: int | None = None) -> AssetCard:
@@ -488,7 +490,9 @@ def sample_frames(path: str | Path, sha256: str,
     # is exactly how a falsification run passed when it should have failed, the cache quietly serving
     # correct frames to a sampler that had been broken on purpose.
     key = hashlib.sha256(repr(tuple(fractions)).encode()).hexdigest()[:8]
-    out_dir = get_config().paths.cache_dir() / "frames" / f"{sha256[:16]}-{key}"
+    from .asset_leases import analysis_workspace
+    workspace = analysis_workspace()
+    out_dir = (workspace if workspace is not None else get_config().paths.cache_dir()) / "frames" / f"{sha256[:16]}-{key}"
     out_dir.mkdir(parents=True, exist_ok=True)
     seconds = probe_seconds(p)
     made: list[str] = []
@@ -503,6 +507,8 @@ def sample_frames(path: str | Path, sha256: str,
                 log.warning("frame at %.2fs failed for %s: %s", at, p.name,
                             r.stderr.strip()[-200:])
                 continue
+        if workspace is not None and sum(q.stat().st_size for q in workspace.rglob("*") if q.is_file()) > get_config().assets.compile_temp_bytes:
+            raise AssetAnalysisError("compiler temporary media exceeds the configured byte budget")
         made.append(str(dest))
     if not made:
         raise AssetAnalysisError(

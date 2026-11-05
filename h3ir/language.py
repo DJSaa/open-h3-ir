@@ -81,6 +81,62 @@ def protected_intent(brief: Brief) -> str:
     return text
 
 
+# Only immediate speech introductions are consumed. Never match across a sentence,
+# shot boundary, dialogue block or an arbitrary action clause.
+_SPEAKER_ATOM = r'(?:<Subject\s+\d+>(?:\s+\(S\d+\))?|\(S\d+\))'
+_VOICE_CLAUSE = r'(?:\s*,?\s*using the voice timbre referenced from <Audio\s+\d+>\s*,?)?'
+_DELIVERY = r'(?:(?:softly|quietly|gently|calmly)\s+)?(?:says|speaks|replies|whispers|shouts)(?:\s+(?:in an? off-screen voiceover|off-screen|softly|quietly|gently|in a whisper))?'
+
+
+def _restore_token(text, token, markup, speaker):
+    """Replace one compiler-owned token and any redundant structured introduction.
+
+    Keep model-written delivery modifiers. Unknown prose is not deleted: the final
+    validator can send a remaining duplicate to the existing correction pass.
+    """
+    identities = [_SPEAKER_ATOM, r'\b(?:[Ss]he|[Hh]e|[Tt]hey|[Tt]he speaker)\b']
+    if speaker and speaker.descriptor:
+        hint = re.escape(speaker.descriptor)
+        identities.insert(0, hint + r'(?:\s+' + _SPEAKER_ATOM + r')?')
+    intro = re.compile(r'(?<!\w)(?:' + '|'.join(identities) + r')' + _VOICE_CLAUSE
+                       + r'\s+(?P<delivery>' + _DELIVERY + r')\s*[,：:]?\s*$', re.I)
+    voice_intro = re.compile(r'(?<!\w)(?:' + '|'.join(identities) + r')'
+                             r'\s+uses the (?P<quality>(?:[a-z-]+\s+){0,5})voice timbre '
+                             r'referenced from <Audio\s+\d+> to (?:say|speak)\s*[,：:]?\s*$', re.I)
+
+    def introduction(prefix):
+        return intro.search(prefix) or voice_intro.search(prefix)
+
+    def insert(match):
+        prefix = match.group('prefix')
+        found = introduction(prefix)
+        if not found:
+            return prefix + markup
+        delivery = found.groupdict().get('delivery') or 'says'
+        # Repeated adjacent introductions are all wrappers of this one token.
+        start = found.start()
+        while previous := introduction(prefix[:start].rstrip()):
+            start = previous.start()
+        rendered = markup
+        if ' says:' in rendered:
+            rendered = rendered.replace(' says:', ' ' + delivery + ':', 1)
+        quality = found.groupdict().get('quality')
+        if quality:
+            rendered = rendered.replace('using the voice timbre',
+                                        'using the ' + quality + 'voice timbre', 1)
+        # A pronoun is useful in a base-mode request with no resolved subject.
+        lead = found.group().split()[0]
+        if rendered.startswith('(S') and lead.lower() in {'she', 'he', 'they'}:
+            rendered = lead + ' ' + rendered
+        return prefix[:start] + rendered
+
+    # Work only in text segments preceding this token, never inside protected speech.
+    parts = re.split(r'(<d>.*?</d>)', text, flags=re.S)
+    for n in range(0, len(parts), 2):
+        parts[n] = re.sub(r'(?P<prefix>[^\n]*?)' + re.escape(token), insert, parts[n])
+    return ''.join(parts)
+
+
 def restore_dialogue(text: str, brief: Brief, speakers=None) -> str:
     from .render import dialogue_markup
     # A writer may ignore the no-wrapper instruction. Never paste a full speech
@@ -94,20 +150,31 @@ def restore_dialogue(text: str, brief: Brief, speakers=None) -> str:
         speakers = build_speakers(brief, [], [])
     for i, line in enumerate(brief.dialogue, 1):
         speaker = next((s for s in speakers if s.descriptor == (line.speaker_hint or "")), None)
-        text = text.replace('{{D%d}}' % i, dialogue_markup(line, speaker, brief.description_language))
+        text = _restore_token(text, '{{D%d}}' % i,
+                              dialogue_markup(line, speaker, brief.description_language), speaker)
     return text
 
 
 def prompt_policy(system: str, brief: Brief) -> str:
     from pathlib import Path
     policy = (Path(__file__).parent / 'prompts' / 'language_policy.v2.txt').read_text(encoding='utf-8')
-    return system + '\n\n' + policy
+    speech = (Path(__file__).parent / 'prompts' / 'dialogue_review.v3.txt').read_text(encoding='utf-8')
+    return system + '\n\n' + policy + '\n\n' + speech
 
 
 
 def without_protected(text: str) -> str:
     text = re.sub(r'<d>.*?</d>', '', text, flags=re.S)
-    return QUOTES.sub('', text)
+    # Official H3 permits original-language *visible lettering*, not every quoted
+    # instruction. A bare quote around 图1 or a stage direction must still be audited.
+    def visible(match):
+        before = text[:match.start()]
+        clause = re.split(r'[.!?。！？\n;]', before)[-1]
+        cue = re.search(r'\b(?:sign|caption|subtitle|lettering|on-screen text|onscreen text|'
+                        r'screen displays?|text (?:reads|says)|words? (?:written|printed))\b',
+                        clause, re.I)
+        return '' if cue else match.group()
+    return QUOTES.sub(visible, text)
 
 
 def language_findings(text: str, language: str, dialogue=()) -> list[Finding]:
@@ -126,16 +193,26 @@ def language_findings(text: str, language: str, dialogue=()) -> list[Finding]:
         if not match:
             continue
         body = without_protected(match.group(1))
-        body = re.sub(r'<[^>]+>|\[Shot\s+\d+\]|At\s+\d+:\d+\.\d+|\bPicture\s+\d+', '', body)
-        body = re.sub(r'\[[^\]]+\]|\b(?:appears in|fully_preserved|partially_preserved|weak_reference|attribute_transfer|fully_copy|reference)\b', '', body)
+        body = re.sub(r'<(?:Subject|Picture|Video|Audio)\s+\d+>|<scenetrans>|\[Shot\s+\d+\]|At\s+\d+:\d+\.\d+|\bPicture\s+\d+', '', body)
+        body = re.sub(r'\b(?:appears in|fully_preserved|partially_preserved|weak_reference|attribute_transfer|fully_copy|reference)\b', '', body)
         body = body.replace('N/A', '').strip()
         if not body:
             continue
         han = len(HAN.findall(body)); words = len(re.findall(r'[A-Za-z]+', body))
         if language == 'Chinese' and (han == 0 or words > han):
             findings.append(Finding('DINGO-description-language', 'ERROR', f'{name} must use Chinese descriptive prose'))
-        elif language == 'English' and han > max(words, 2):
+        elif language == 'English' and han:
             findings.append(Finding('DINGO-description-language', 'ERROR', f'{name} must use English descriptive prose'))
+    # A single utterance must not have two nested speech introductions. Repeated
+    # appearances of the same speaker elsewhere are legitimate and are untouched.
+    duplicate = re.compile(r'(?:' + _DELIVERY + r'|to say|to speak|delivers? the line|delivering(?: the line)?|finishing the sentence)'
+                           + r'\s*[,：:]?\s*' + _SPEAKER_ATOM + _VOICE_CLAUSE
+                           + r'\s+' + _DELIVERY + r'\s*[,：:]?\s*<d>', re.I)
+    prose_only = re.sub(r'<d>.*?</d>', '<d>', text, flags=re.S)
+    if duplicate.search(prose_only):
+        findings.append(Finding('DINGO-duplicate-speech-prefix', 'ERROR',
+                                'one dialogue block has repeated speaker introductions; '
+                                'keep a single speaker, delivery and voice binding before <d>'))
     blocks = re.findall(r'<d>\s*\[([^\]]+)\]\s*(.*?)</d>', text, re.S)
     for expected_text, expected_language in dialogue:
         for actual_language, actual_text in blocks:
