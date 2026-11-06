@@ -41,6 +41,8 @@ from .validate import Context, validate
 
 log = logging.getLogger("h3ir.compile")
 
+from .dialogue_schedule import evidence as schedule_evidence
+
 IR_VERSION = "1"
 
 # Two rounds. A third has never converged in practice and each costs a full generation.
@@ -387,6 +389,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     "prose_model": backend.cfg.model if source == "enriched" else None,
                     "source": source,
                     "dialogue_review": dict(review_record) or None,
+                    "dialogue_schedule": schedule_evidence(brief),
                     "fallback_reason": reason,
                     "seed": seed,
                     # What the dial decided, in the record. Proportionality is now part of the bar
@@ -477,6 +480,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     n = token_count(fx.text)
                     found = validate(fx.text, _written_context(
                         brief, mode, draft_plan, cards, n, style, licence))
+                    from .dialogue_schedule import findings as schedule_findings
+                    found += schedule_findings(fx.text, brief)
                     from .voice_binding import findings as voice_findings
                     found += voice_findings(fx.text, draft_plan.speakers, aud_roles)
                     if brief.dialogue and creativity.SPEECH not in scope.licensed:
@@ -497,13 +502,13 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                 review_bindings = tuple((sp.sid, sp.subject, sp.voice_ref) for sp in draft_plan.speakers)
                 if brief.dialogue:
                     t_review = time.time()
-                    review_record.update(attempted=True, performed=False, policy="dialogue_review.v3")
+                    review_record.update(attempted=True, performed=False, policy="dialogue_review.v5")
                     written = fix_with_findings(
                         backend, written, [], labels=labels + tuple(x.label for x in draft_plan.subjects),
                         sections=_sections_for(mode), seed=seed, brief=brief, review=True,
                         speaker_bindings=review_bindings)
                     timings["dialogue_review_s"] = round(time.time() - t_review, 2)
-                    review_record.update(performed=True, policy="dialogue_review.v3",
+                    review_record.update(performed=True, policy="dialogue_review.v5",
                                          seconds=timings["dialogue_review_s"])
 
                 fixed, found, n_tokens = _verify(written)

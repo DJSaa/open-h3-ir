@@ -20,7 +20,7 @@ def test_independent_correction_carries_mode_rules_and_protected_original_reques
  assert '=== SPECIFICATION ===' not in system  # Extracted content, not creative writer instructions.
  assert 'Video Prompt Writing Guide' in system
  assert ('Full-Reference Mode Rewrite Output Format Guide' in system)==ref
- assert 'H3 dialogue continuity and speaker structure rules (v3)' in system
+ assert 'H3 dialogue continuity and speaker structure rules (v5)' in system
  assert 'ORIGINAL REQUIREMENTS' in ask and 'SPEAKER BINDINGS' in ask
  assert '<Audio 1>' in ask and LINE not in str(messages)
  assert '她说：{{UTTERANCE1}}' in ask
@@ -28,9 +28,9 @@ def test_independent_correction_carries_mode_rules_and_protected_original_reques
 
 def test_initial_and_correction_share_dialogue_rule_version():
  brief=Brief(intent='test')
- assert 'H3 dialogue continuity and speaker structure rules (v3)' in prompt_policy('compose',brief)
+ assert 'H3 dialogue continuity and speaker structure rules (v5)' in prompt_policy('compose',brief)
  b=Capture();fix_with_findings(b,'text',[],brief=brief)
- assert 'H3 dialogue continuity and speaker structure rules (v3)' in b.calls[0][0][0]['content']
+ assert 'H3 dialogue continuity and speaker structure rules (v5)' in b.calls[0][0][0]['content']
 
 
 def test_review_protects_split_dialogue_and_records_explicit_voice_binding():
@@ -69,7 +69,7 @@ def test_clean_first_draft_is_still_reviewed_and_result_revalidated(monkeypatch)
  b=Pipeline();doc=compile_fake(monkeypatch,b)
  assert doc.source=='written' and len(b.calls)==2
  assert doc.provenance['dialogue_review']['performed'] is True
- assert doc.provenance['dialogue_review']['policy']=='dialogue_review.v3'
+ assert doc.provenance['dialogue_review']['policy']=='dialogue_review.v5'
  assert 'dialogue_review_s' in doc.provenance['timings']
  assert doc.prompt.count(LINE)==1
  assert all(LINE not in str(x) for x in b.calls)

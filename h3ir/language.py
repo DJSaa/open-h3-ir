@@ -10,7 +10,7 @@ import re
 from dataclasses import replace
 from .models import Brief, DialogueLine, Finding
 
-POLICY_VERSION = "dingo-language-v2"
+POLICY_VERSION = "dingo-language-v3"
 QUOTES = re.compile(r'“([^”]*)”|「([^」]*)」|『([^』]*)』|"((?:\\.|[^"\\])*)"|(?<!\w)\'([^\'\n]+)\'', re.S)
 HAN = re.compile(r'[\u3400-\u9fff]')
 SPEECH = re.compile(r'说(?:道|一句|一次|出)?|回答|回复|喊(?:道)?|念(?:出)?|口播|台词|对白|朗读|旁白|\b(?:say|says|said|saying|speak|speaks|speaking|spoken|reply|replies|replied|replying|shout|shouts|shouting|whisper|whispers|whispering|dialogue|voiceover|reads?|reading)\b', re.I)
@@ -85,7 +85,7 @@ def protected_intent(brief: Brief) -> str:
 # shot boundary, dialogue block or an arbitrary action clause.
 _SPEAKER_ATOM = r'(?:<Subject\s+\d+>(?:\s+\(S\d+\))?|\(S\d+\))'
 _VOICE_CLAUSE = r'(?:\s*,?\s*using the voice timbre referenced from <Audio\s+\d+>\s*,?)?'
-_DELIVERY = r'(?:(?:softly|quietly|gently|calmly)\s+)?(?:says|speaks|replies|whispers|shouts)(?:\s+(?:in an? off-screen voiceover|off-screen|softly|quietly|gently|in a whisper))?'
+_DELIVERY = r'(?:(?:softly|quietly|gently|calmly)\s+)?(?:says|speaks|replies|responds|whispers|shouts)(?:\s+(?:in an? off-screen voiceover|off-screen|softly|quietly|gently|in a whisper))?'
 
 
 def _restore_token(text, token, markup, speaker):
@@ -158,7 +158,7 @@ def restore_dialogue(text: str, brief: Brief, speakers=None) -> str:
 def prompt_policy(system: str, brief: Brief) -> str:
     from pathlib import Path
     policy = (Path(__file__).parent / 'prompts' / 'language_policy.v2.txt').read_text(encoding='utf-8')
-    speech = (Path(__file__).parent / 'prompts' / 'dialogue_review.v3.txt').read_text(encoding='utf-8')
+    speech = (Path(__file__).parent / 'prompts' / 'dialogue_review.v5.txt').read_text(encoding='utf-8')
     return system + '\n\n' + policy + '\n\n' + speech
 
 
@@ -209,7 +209,16 @@ def language_findings(text: str, language: str, dialogue=()) -> list[Finding]:
                            + r'\s*[,：:]?\s*' + _SPEAKER_ATOM + _VOICE_CLAUSE
                            + r'\s+' + _DELIVERY + r'\s*[,：:]?\s*<d>', re.I)
     prose_only = re.sub(r'<d>.*?</d>', '<d>', text, flags=re.S)
-    if duplicate.search(prose_only):
+    # Same speaker is introduced twice for ONE following utterance, separated by
+    # a mouth-articulation aside. Do not cross sentences, shots or dialogue blocks,
+    # and do not consume arbitrary actions or another speaker's introduction.
+    articulated_duplicate = re.compile(
+        r'(?P<speaker><Subject\s+\d+>(?:\s+\(S\d+\))?|\(S\d+\))'
+        + _VOICE_CLAUSE + r'\s+(?:responds|replies|says|speaks)\s*,\s*'
+        r'(?:his|her|their)\s+lips\s+(?:forming|shaping|articulating)\s+'
+        r'the\s+words(?:\s+(?:clearly|carefully|slowly|softly))?\s*,\s*'
+        r'(?P=speaker)' + _VOICE_CLAUSE + r'\s+' + _DELIVERY + r'\s*[,：:]?\s*<d>', re.I)
+    if duplicate.search(prose_only) or articulated_duplicate.search(prose_only):
         findings.append(Finding('DINGO-duplicate-speech-prefix', 'ERROR',
                                 'one dialogue block has repeated speaker introductions; '
                                 'keep a single speaker, delivery and voice binding before <d>'))

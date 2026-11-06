@@ -111,3 +111,28 @@ def test_voice_to_say_introduction_from_live_r04_keeps_delivery_once(subject):
 def test_unhandled_introduction_is_rejected_instead_of_shipping_a_duplicate(intro):
     text='detailed_description: [Shot 1] '+intro+'<Subject 1> (S1) says: <d>[Chinese] 你好。</d>'
     assert any(f.rule=='DINGO-duplicate-speech-prefix' for f in language_findings(text,'English'))
+
+
+@pytest.mark.parametrize('verb', ['responds', 'replies', 'says', 'speaks'])
+@pytest.mark.parametrize('aside', ['his lips forming the words clearly', 'her lips shaping the words slowly', 'their lips articulating the words'])
+def test_r04_articulation_does_not_hide_duplicate_speech_introduction(verb, aside):
+    text = f'<Subject 2> (S2) {verb}, {aside}, <Subject 2> (S2), using the voice timbre referenced from <Audio 2>, says: <d>[Chinese] 好，我来准备。</d>'
+    assert any(f.rule == 'DINGO-duplicate-speech-prefix' for f in language_findings(text, 'English'))
+
+
+@pytest.mark.parametrize('text', [
+    '<Subject 2> (S2) responds, his lips forming the words clearly: <d>[Chinese] 好。</d>',
+    '<Subject 1> (S1) responds, his lips forming the words clearly, <Subject 2> (S2) says: <d>[Chinese] 好。</d>',
+    '<Subject 2> (S2) responds: <d>[Chinese] 好。</d> <Subject 2> (S2) says: <d>[Chinese] 再见。</d>',
+    '<Subject 2> (S2) responds, his lips forming the words clearly. [Shot 2] <Subject 2> (S2) says: <d>[Chinese] 好。</d>',
+    '<Subject 2> (S2) nods, his lips forming the words clearly, <Subject 2> (S2) says: <d>[Chinese] 好。</d>',
+])
+def test_articulation_check_does_not_cross_speakers_shots_or_utterances(text):
+    assert not any(f.rule == 'DINGO-duplicate-speech-prefix' for f in language_findings(text, 'English'))
+
+
+def test_responds_placeholder_is_restored_once_with_voice_and_speech():
+    brief, speakers = example()
+    out = restore_dialogue('<Subject 2> (S2) responds: {{D2}}', brief, speakers)
+    assert out.count('<Subject 2>') == 1 and out.count('<Audio 2>') == 1
+    assert '好，我来准备。' in out and 'responds:' in out

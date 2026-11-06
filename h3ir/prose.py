@@ -142,6 +142,7 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     the composing call already hands over, and withholding it was an accident of where the split fell
     rather than a decision.
     """
+    from .dialogue_schedule import guidance as schedule_guidance
     protected = {}
     by_block = {}
     speech_tokens = {}
@@ -236,6 +237,7 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     ask = (
         purpose
         + f"ORIGINAL REQUIREMENTS (protected speech)\n{requirements}\n\n"
+        + schedule_guidance(brief)
         + f"SPEAKER BINDINGS\n{bindings}\nPROTECTED TOKENS\n{protected_inventory}\n\n"
         + f"FINDINGS\n{numbered}\n"
         f"{inventory}{dialogue_guidance}\n"
@@ -917,8 +919,11 @@ def compose_brief(backend: Backend, brief: Brief, subjects: list[SubjectPlan],
                       + (" as an off-screen voiceover" if d.voiceover else "")
                       for i,d in enumerate(brief.dialogue,1)) or "none — the video has no dialogue"
 
+    from .dialogue_schedule import guidance as schedule_guidance
     ask = (
         f"Request: {protected_intent(brief)}\n\n"
+        + schedule_guidance(brief)
+        +
         f"Resolved speaker voice references (preserve consistently):\n{voice_facts or 'unspecified'}\n\n"
         f"Duration is exactly {target.effective_seconds:.3f} seconds; every cut time strictly less "
         f"than {int(target.effective_seconds // 60):02d}:"

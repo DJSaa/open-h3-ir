@@ -287,3 +287,30 @@ Analysis cache limits default to 256 MiB and 24 hours, configurable with
 workspace budget defaults to 128 MiB (`H3IR_COMPILE_TEMP_BYTES`) and the workspace
 is removed when compilation exits. Brief lookup records are bounded in memory
 (128 entries, one hour); they are not a durable job database.
+
+
+## Dialogue duration review
+
+The compiler distinguishes total video duration from the duration of supplied dialogue.
+Composition and correction receive protected utterance lengths and advisory ordinary-speech
+duration ranges. Explicit caller timings, pauses, slow delivery and singing take priority;
+the ranges are not enforced speech rates. Review requests continuous cross-cut speech and
+explicit nonverbal actions after the supplied words end, without adding or changing dialogue.
+
+The IR provenance includes `dialogue_schedule` (policy version, requested video duration,
+utterance IDs and length estimates). These are input estimates, not measured generated-audio
+timestamps or proof that speech matches the video. Dialogue shot headers outside the requested
+video duration enter the existing bounded correction loop. Existing fallback reporting remains
+unchanged. Video generation and human listening are still required to assess extra speech.
+
+No request parameters are added. Asset analysis caches remain reusable; the service does not
+cache complete compiled briefs, so a new request executes the updated composition and review.
+
+
+The dialogue review v5 policy distinguishes voice-timbre source duration from target
+speech duration. The source metadata is preserved, including when supplied by a Gateway.
+A repeated same-speaker introduction around a mouth-articulation aside is a validation
+error, even when the first verb is `responds`. Correction preserves the supplied words
+and voice binding; the compiler does not greedily remove arbitrary intervening actions.
+Separate utterances, shot boundaries and different speakers remain valid. This check
+covers a measured failure pattern and does not prove that generated audio has no extra speech.

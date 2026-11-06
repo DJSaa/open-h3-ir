@@ -233,4 +233,4 @@ def test_official_english_prose_policy_does_not_follow_input_language(intent):
  assert b.description_language=='English'
  assert 'DESCRIPTION LANGUAGE: English.' in system
  assert 'Write in English.' in system
- assert POLICY_VERSION=='dingo-language-v2'
+ assert POLICY_VERSION=='dingo-language-v3'
