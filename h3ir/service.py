@@ -31,8 +31,9 @@ from . import uploads
 from . import asset_leases
 from .analyse import AssetAnalysisError, ToolMissing, sha256_file
 from .backend import Backend, BackendError, BackendUnavailable
-from .compile import BriefRefused, compile_brief, refine
+from .compile import BriefRefused, CompilerInvariantError, compile_brief, refine
 from .config import get_config
+from .requirements import RequirementsReviewFailed
 from .mode import needs_clarification
 from .models import AssetKind, AssetRef, Brief, DialogueLine, IRDocument, Mode, Role
 from .plan import ProfileOptions
@@ -692,6 +693,14 @@ def _create_brief(body: BriefIn) -> JSONResponse:
         doc = compile_brief(brief, opts=opts, seed=body.seed,
                             thinking_prose=(body.effort == "max"),
                             transcripts=dict(body.transcripts))
+    except RequirementsReviewFailed as e:
+        raise HTTPException(502, detail={"code": "requirements-review-failed", "message": str(e),
+            "diagnostics":e.record, "candidate_prompt_unvalidated":e.candidate}) from None
+    except CompilerInvariantError:
+        trace_id = uuid.uuid4().hex
+        log.exception("Compiler invariant failure trace_id=%s", trace_id)
+        raise HTTPException(500, detail={"code": "compiler-invariant", "trace_id": trace_id,
+                                        "message": "The compiler could not produce a validated prompt."}) from None
     except BriefRefused as e:
         # Every refusal this layer makes about the request itself, with the code it carries. The
         # capacity one is design.md 12's, and 422 rather than a silently truncated manifest: which

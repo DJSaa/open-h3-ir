@@ -479,7 +479,8 @@ class Backend:
     def json_call(self, messages: list[dict[str, Any]], schema: dict[str, Any], *,
                   required: tuple[str, ...] = (), max_tokens: int | None = None,
                   seed: int | None = None, temperature: float = 0.0,
-                  thinking: bool | None = None, retries: int = 2) -> dict[str, Any]:
+                  thinking: bool | None = None, retries: int = 2,
+                  guided: bool | None = None) -> dict[str, Any]:
         """A structured call that never trusts the grammar.
 
         Two modes, and the default is the one without grammar. With guided decoding off we ask
@@ -488,7 +489,7 @@ class Backend:
         With it on, the schema is a hint only; the shape is still checked here, because the
         grammar constrains shape but neither completion nor sense.
         """
-        use_grammar = self.cfg.guided_decoding
+        use_grammar = self.cfg.guided_decoding if guided is None else guided
         if thinking is None:
             # OFF unless a caller asks. arXiv:2505.11423's effective mitigation is
             # classifier-selective reasoning -- think for the PLANNING call, not for emission or

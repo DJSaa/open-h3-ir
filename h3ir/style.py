@@ -50,7 +50,8 @@ def classify_medium(text: str) -> str | None:
     hits: list[tuple[int, str]] = []
     for bucket, terms in MEDIUM_BUCKETS.items():
         for t in terms:
-            i = low.find(t)
+            m = re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", low)
+            i = m.start() if m else -1
             if i >= 0:
                 hits.append((i, bucket))
     if not hits:
@@ -64,7 +65,8 @@ def style_terms_in(text: str) -> list[str]:
     low = (text or "").lower()
     found: list[tuple[int, str]] = []
     for t in ALL_STYLE_TERMS:
-        i = low.find(t)
+        m = re.search(r"(?<!\w)" + re.escape(t) + r"(?!\w)", low)
+        i = m.start() if m else -1
         if i < 0:
             continue
         # Skip a term already covered by a longer overlapping match.
@@ -155,6 +157,10 @@ def resolve_style(brief: Brief, cards: dict[str, AssetCard],
     from .licence import MEDIUM, resolve_licence, transform_target
     lic = licence or resolve_licence(brief, cards)
 
+    context = brief.requirements_context or {}
+    explicit = context.get("style", {}).get("description")
+    if explicit:
+        return StyleDecision(phrase=explicit, source="request", requested_medium=classify_medium(explicit))
     asked_terms = style_terms_in(brief.intent)
     asked_medium = [t for t in asked_terms if t not in TREATMENT_TERMS]
     asked_treatment = [t for t in asked_terms if t in TREATMENT_TERMS]

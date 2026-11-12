@@ -52,7 +52,7 @@ from .shots import PINNED_SHOTS_MAX
 # 2 are interchangeable" -- what it needs to know is whether the particular field, role or limit IT
 # is about to use exists on the other side, and that is answered by comparing the sections, not the
 # number. The number is what a message quotes so two people can say which contract they each have.
-CONTRACT_VERSION = 4
+CONTRACT_VERSION = 6
 
 
 # --------------------------------------------------------------------------- the wire
@@ -136,6 +136,10 @@ ERROR_CODES: dict[str, dict[str, Any]] = {
     "asset-lease-already-executing": {"status": 409, "on": [BRIEFS]},
     "analysis-tool-missing": {"status": 503, "on": [BRIEFS]},
     "aspect-invalid": {"status": 422, "on": [BRIEFS]},
+    "input-shot-conflict": {"status": 422, "on": [BRIEFS]},
+    "input-dialogue-conflict": {"status": 422, "on": [BRIEFS]},
+    "requirements-review-failed": {"status": 502, "on": [BRIEFS]},
+    "compiler-invariant": {"status": 500, "on": [BRIEFS]},
     "asset-digest-mismatch": {"status": 422, "on": [ASSETS]},
     "asset-missing": {"status": 422, "on": [BRIEFS]},
     "asset-name-not-a-digest": {"status": 422, "on": [ASSETS, BRIEFS]},

@@ -314,3 +314,96 @@ error, even when the first verb is `responds`. Correction preserves the supplied
 and voice binding; the compiler does not greedily remove arbitrary intervening actions.
 Separate utterances, shot boundaries and different speakers remain valid. This check
 covers a measured failure pattern and does not prove that generated audio has no extra speech.
+
+
+### Existing H3 and mixed-format input
+
+`intent` can contain an existing H3 document. Reliably parsed shots and cut times
+are retained; `<d>` speech is extracted into the protected dialogue channel.
+Markdown, JSON and ambiguous formatting go to the existing writing call with
+the original text intact, rather than being embedded into a nested H3 draft.
+No separate classifier call is added. `ir.provenance.input_normalization` records
+the route and original-text hash. All final outputs still pass the existing
+validators and bounded correction loop.
+
+An invalid provisional draft is not a successful fallback. A genuine internal
+validation failure returns HTTP 500 with `compiler-invariant` and a trace ID,
+without exposing internal paths. Explicit API shot-count or dialogue-language
+conflicts return HTTP 422 with `input-shot-conflict` or `input-dialogue-conflict`.
+This compatibility path is not a guarantee of semantic fidelity: review the
+compiled prompt, especially ambiguous instructions, dialogue and reference roles.
+
+
+### Experimental original-request preservation audit
+
+Operators can enable `H3IR_REQUIREMENTS_REVIEW=1` on an isolated service. It is
+off by default until the quality/cost comparison is reviewed. The write-first
+path extracts evidence-backed requirements, then audits the final candidate
+against the full protected original request, the ledger and source images.
+The audit does not replace the original with a model summary. Literal quote
+membership and schemas are checked by code; semantic conclusions remain model
+judgements. Spoken text stays behind the existing protected-token channel.
+
+Invalid extraction/audit JSON or non-verbatim evidence receives at most one explicit repair call.
+The common path adds one extraction and one audit call. At most two semantic
+corrections and their re-audits are allowed; every correction passes the existing
+mechanical and speech checks. Audit failure does not return an unaudited draft as
+success. Source images are included for visual verification; audio is never
+claimed to have been heard.
+
+`ir.provenance.requirements_review` records the ledger, audit findings and semantic
+call count. Stage timings are in `ir.provenance.timings`. The call count excludes
+existing composition, asset analysis, mechanical corrections and backend transport
+retries, which must not be mistaken for total model calls. Draft-only and the old
+additive path do not claim this audit. Passing it is not proof of video quality.
+
+An unresolved audit returns HTTP 502 `requirements-review-failed`. Its diagnostics
+include evidence, audits and `candidate_prompt_unvalidated`; that candidate is
+NOT an accepted prompt and must not be sent automatically to video generation.
+Image-based objections are not converted into new hard facts. Corrections retain
+explicit source requirements and reference bindings instead of replacing one VLM
+guess with another. The final audit can still fail, and its uncertainty is reported.
+
+The audit receives the compiler's actual frame-grid contract (nominal duration,
+frames, FPS, effective duration and final-frame marker). For example, a requested
+10 seconds can legitimately render as 243 frames at 24 FPS (10.125 seconds,
+with a 10.13 marker). Review must not treat that rounding as a lost requirement.
+Visual reviewers can still disagree about occluded or cropped objects; unresolved
+conflicts remain explicit failures rather than silently changing the original.
+
+
+### Experimental professional-input local repair
+
+`H3IR_PROFESSIONAL_REPAIR=1` routes reliably parsed H3 documents on the write-first
+path to a separate reviewer instead of the composer. This flag is disabled by
+default pending validation. Plain and ambiguous inputs keep their existing route.
+
+A valid document is returned verbatim if no concrete defect is found. The reviewer
+receives the original, candidate, H3 specification, runtime findings and previous
+edits. It may propose only unique exact local replacements, with a reason; up to
+two correction rounds are followed by revalidation. Local review requests schema-constrained output independently of the composer
+configuration. There is one bounded backend JSON retry and one explicit feedback
+attempt for an invalid local-edit proposal. Duplicate/overlapping spans, broad rewrites, changes to speech tokens,
+shot structure, reference bindings or protected sections are rejected. Audio,
+summary, definitions and retention sections are preserved in this initial version;
+an error requiring edits there fails explicitly rather than reopening full rewrite.
+
+Dialogue blocks are opaque to the model and restored exactly. Necessary canonical
+camera terms must retain the original angle and framing. No correction may add
+motion amplitude or speed to a static shot. Each corrected candidate goes through
+mechanical, speech, binding and input-shot checks again. Source images still support
+upstream mode/wiring analysis, but the local reviewer does not reinterpret image
+contents or replace explicit user requirements with visual guesses.
+
+`ir.provenance.professional_review` records rounds, reasons, whether text changed
+and whether review passed. A failure returns `requirements-review-failed` with
+unvalidated diagnostic content, never a successful draft fallback. Text review
+cannot establish visual output quality or perfect physics. No model change or
+Gateway configuration change is required to exercise the isolated service.
+
+
+Gateway integration caveat: a semantic review refusal currently uses HTTP 502.
+A Gateway that treats all upstream 5xx responses as execution-unknown may quarantine
+this backend even though the local review has finished. This classification needs
+an explicit cross-service contract before enabling these experimental gates on a
+shared Gateway route; do not equate a quality refusal with unconfirmed execution.

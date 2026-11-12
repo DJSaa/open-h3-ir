@@ -45,6 +45,22 @@ def delivery_language(context: str, text: str) -> str:
 def prepare(brief: Brief) -> Brief:
     """Run at the shared compile boundary, for HTTP, CLI and in-process callers alike."""
     lines = [replace(d, language=canonical_language(d.language or '', d.text)) for d in brief.dialogue]
+    # Existing H3 input carries literal speech in <d>, not necessarily quotes.
+    from .structured_input import SPEECH as NATIVE_SPEECH
+    for match in NATIVE_SPEECH.finditer(brief.intent):
+        lang, literal = match.group(1), match.group(2).strip()
+        if not literal:
+            continue
+        same = [d for d in lines if d.text == literal]
+        if same:
+            if any(canonical_language(d.language, d.text) != canonical_language(lang, literal) for d in same):
+                from .compile import BriefRefused
+                raise BriefRefused("input-dialogue-conflict", "The explicit dialogue and H3 text specify different languages for the same line.")
+            continue
+        before = brief.intent[:match.start()].split("\n")[-1]
+        speakers = list(re.finditer(r"\bS\d+\b", before))
+        lines.append(DialogueLine(text=literal, language=canonical_language(lang, literal),
+                                  speaker_hint=speakers[-1].group() if speakers else None))
     known = {d.text for d in lines}
     extracted = []
     for m, text in quoted(brief.intent):
@@ -159,7 +175,10 @@ def prompt_policy(system: str, brief: Brief) -> str:
     from pathlib import Path
     policy = (Path(__file__).parent / 'prompts' / 'language_policy.v2.txt').read_text(encoding='utf-8')
     speech = (Path(__file__).parent / 'prompts' / 'dialogue_review.v5.txt').read_text(encoding='utf-8')
-    return system + '\n\n' + policy + '\n\n' + speech
+    input_policy = (Path(__file__).parent / 'prompts' / 'input_understanding.v1.txt').read_text(encoding='utf-8')
+    import json
+    requirements = ("\n\nEVIDENCE-BACKED REQUIREMENTS (original request remains authoritative):\n" + json.dumps(brief.requirements_context, ensure_ascii=False)) if brief.requirements_context else ""
+    return system + '\n\n' + policy + '\n\n' + speech + '\n\n' + input_policy + requirements
 
 
 

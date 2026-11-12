@@ -200,7 +200,11 @@ _SEQUENCE = re.compile(r"\b(?:then|before|after|until|once|later|afterwards?|fir
 
 
 def _contradiction_is_real(gap: str) -> bool:
-    return not (_NEW_ACTOR.search(gap) or _SEQUENCE.search(gap))
+    # A subordinate clause can name any physical actor, not only the old person list.
+    # "static shot as a hand slowly tilts" says the hand moves, not the camera.
+    actor = re.search(r"\b(?:as|while)\s+(?:a|an|the)\s+([\w -]+)$", gap, re.I)
+    changed_actor = bool(actor and not re.search(r"\b(?:camera|lens|shot)\b", actor[1], re.I))
+    return not (changed_actor or _NEW_ACTOR.search(gap) or _SEQUENCE.search(gap))
 
 # "Do not use abstract mood words or explain the emotional function of the score" (base-en.txt 4.7).
 # Two shapes: a word that names a feeling instead of a sound, and a clause that explains what the
@@ -1389,7 +1393,7 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
     # contact with the camera" is a train, in a sentence that mentions the camera. The repair is two
     # words either way, so a true positive converges immediately and a false one would not.
     off_amp = [m.group(1) for m in AMPLITUDES_WRITTEN.finditer(desc)
-               if m.group(1).lower() not in AMPLITUDES]
+               if m.group(1).lower() not in (*AMPLITUDES, "the", "a", "an")]
     off_speed = [m.group(1) for m in SPEEDS_WRITTEN.finditer(desc)
                  if m.group(1).lower() not in SPEEDS
                  and (desc[max(0, m.start() - 12):m.start()].rstrip().lower().endswith("amplitude")
@@ -1716,9 +1720,19 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
         # lines echoed in prose, which the draft does whenever the request quotes a line in the
         # sentence. The caller's words are speech wherever they appear, never added lettering.
         spoken = {" ".join(d.split()) for d in ctx.expected_dialogue}
-        bare_quotes = [q for q in re.findall(r'"([^"]*)"',
-                                             re.sub(r"<d>.*?</d>", " ", desc, flags=re.S))
-                       if " ".join(q.split()) not in spoken]
+        prose_only = re.sub(r"<d>.*?</d>", " ", desc, flags=re.S)
+        bare_quotes = []
+        for quote in re.finditer(r'"([^"]*)"', prose_only):
+            if " ".join(quote[1].split()) in spoken:
+                continue
+            # A quoted NAME of a gesture/pose is not visible lettering. Keep explicit
+            # text cues authoritative, including text that happens to name a gesture.
+            before = re.split(r"[.!?\n]", prose_only[:quote.start()])[-1]
+            names_pose = re.match(r"\s+(?:hand\s+)?(?:gesture|pose)\b", prose_only[quote.end():], re.I)
+            visible = re.search(r"\b(?:text|words?|lettering|caption|subtitle|label|reads?|displays?)\b", before, re.I)
+            if names_pose and not visible:
+                continue
+            bare_quotes.append(quote[1])
         present = {
             SPEECH: bool(re.search(r"<d>", text)),
             SCORE: music.strip() not in ("", "N/A"),

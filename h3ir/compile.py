@@ -21,6 +21,7 @@ from typing import Any
 
 from .analyse import analyse_all, measure_assets
 from .backend import Backend, BackendError
+from .requirements import RequirementsReviewFailed
 from .config import get_config
 from . import creativity
 from .creativity import Scope
@@ -258,14 +259,25 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                   omit: tuple[str, ...] = (),
                   transcripts: dict[str, str] | None = None) -> IRDocument:
     from .language import prepare, POLICY_VERSION, HAN, draft_intent
+    from .structured_input import parse as parse_input, constraints as input_constraints
+    parsed_input = parse_input(brief.intent)
+    if parsed_input.reliable:
+        if brief.shots is not None and brief.shots != len(parsed_input.shots):
+            raise BriefRefused("input-shot-conflict", "Explicit shot count conflicts with the H3 input shots.")
+        brief = replace(brief, shots=len(parsed_input.shots))
     brief = prepare(brief)
     from .reference_roles import resolve_motion_references
     brief = resolve_motion_references(brief)
     cfg = get_config()
+    professional_route = cfg.professional_repair and parsed_input.reliable and llm and write_first
     opts = opts or ProfileOptions(name=cfg.profile)
     own_backend = backend is None
     backend = backend or Backend(cfg)
     timings: dict[str, float] = {}
+    semantic_record = {"enabled": cfg.requirements_review and llm and write_first and not professional_route, "audits": [], "calls": 0}
+    def record_semantic_call():
+        semantic_record["calls"] += 1
+
     # arXiv:2606.09662: thinking helps PLANNING constraints (+5.3pp) and hurts PRECISION ones
     # (-8.5pp). Planning is what the beat sheet does; every precision field is owned by code.
     # That contingency is what makes thinking safe here -- see the note in prose.beat_sheet.
@@ -282,6 +294,13 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
         # not match the bytes.
         measure_assets(brief.assets)
         backend.require_available()
+        if semantic_record["enabled"]:
+            from . import requirements
+            start_requirements = time.time()
+            ledger = requirements.extract(backend, brief, seed, on_call=record_semantic_call)
+            brief = requirements.apply(brief, ledger)
+            timings["requirements_extract_s"] = round(time.time()-start_requirements, 3)
+            semantic_record.update(ledger=ledger)
 
         t = time.time()
         cards: dict[str, AssetCard] = analyse_all(
@@ -359,6 +378,14 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                          mode_decision=decision)
         # Before anything is written or scored: a swap the wiring cannot make unambiguous is a
         # caller error, and the draft plan is the first object that holds the binding to check.
+        if parsed_input.reliable:
+            # The renderer owns headers. Populate only parsed body slots, never the document.
+            protected = parse_input(draft_intent(brief))
+            for shot, source in zip(draft_plan.shots, protected.shots):
+                shot.body = source["body"]
+                shot.start_ms = source["start_ms"]
+            for i, shot in enumerate(draft_plan.shots):
+                shot.end_ms = draft_plan.shots[i+1].start_ms if i+1 < len(draft_plan.shots) else round(draft_plan.target.effective_seconds * 1000)
         check_swap(brief, draft_plan)
         _inject_lora_triggers(draft_plan, opts)
         sheet_flags = tuple(c.is_reference_sheet for c in cards.values())
@@ -367,7 +394,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
             audio_transcripts=_audio_transcripts(draft_plan, cards), is_draft=True)
         timings["draft_s"] = round(time.time() - t, 2)
         draft_errors = [f for f in draft_findings if f.severity == "ERROR"]
-        if draft_errors:
+        if draft_errors and not (llm and write_first):
             # The draft is deterministic. If it is invalid that is our bug, not the model's,
             # and there is nothing to fall back to -- so it raises rather than shipping.
             raise CompilerInvariantError(
@@ -378,7 +405,14 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
         shot_plan_record: dict[str, Any] = {}
         review_record: dict[str, Any] = {}
 
+        locals_candidate = [""]
+
         def _document(plan, result, findings, n_tokens, source, reason=None) -> IRDocument:
+            if source == "draft" and semantic_record["enabled"]:
+                raise requirements.RequirementsReviewFailed("Requirement preservation did not pass; an unaudited draft is not a successful fallback. " + str(reason), semantic_record, locals_candidate[0])
+            # A bad provisional draft must not prevent understanding, or escape as fallback.
+            if source == "draft" and draft_errors:
+                raise CompilerInvariantError("No valid fallback after input understanding: " + "; ".join(f.rule for f in draft_errors))
             return IRDocument(
                 ir_version=IR_VERSION, profile=opts.name, mode=mode,
                 prompt=result.prompt, plan=plan, sections=result.sections,
@@ -401,6 +435,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     "director": director_mod.note(director),
                     "omit": list(omit) or None,
                     "request": brief.intent,
+                    "input_normalization": parsed_input.evidence(),
+                    "requirements_review": semantic_record,
                     "description_language": brief.description_language,
                     "language_policy": POLICY_VERSION,
                     "draft_retains_source_language": source == "draft" and bool(HAN.search(draft_intent(brief))),
@@ -448,40 +484,51 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                   if m.kind is AssetKind.AUDIO)
                 worlds = _edit_source_worlds(draft_plan, cards)
                 taken = _taken_over(draft_plan)
-                written = compose_brief(backend, brief, draft_plan.subjects, cards,
-                                       draft_plan.target, labels,
-                                       prompt_name=chosen_compose, seed=seed,
-                                       thinking=thinking_planning, images=imgs,
-                                       style=style, licence=licence, scope=scope,
-                                       director=director,
-                                       mode=mode, task_types=tuple(draft_plan.task_types),
-                                       picture_roles=pic_roles, video_roles=vid_roles,
-                                       audio_roles=aud_roles,
-                                       ignored_audio_labels=tuple(m.label for m in draft_plan.manifest if m.soundtrack_policy == "ignore"),
-                                       audio_transcripts=transcribed,
-                                       video_worlds=worlds, taken_over=taken,
-                                       generation_task=("video editing"
-                                                        not in draft_plan.task_types),
-                                       omit=omit)
+                if professional_route:
+                    written = brief.intent
+                else:
+                    written = compose_brief(backend, brief, draft_plan.subjects, cards,
+                                           draft_plan.target, labels,
+                                           prompt_name=chosen_compose, seed=seed,
+                                           thinking=thinking_planning, images=imgs,
+                                           style=style, licence=licence, scope=scope,
+                                           director=director,
+                                           mode=mode, task_types=tuple(draft_plan.task_types),
+                                           picture_roles=pic_roles, video_roles=vid_roles,
+                                           audio_roles=aud_roles,
+                                           ignored_audio_labels=tuple(m.label for m in draft_plan.manifest if m.soundtrack_policy == "ignore"),
+                                           audio_transcripts=transcribed,
+                                           video_worlds=worlds, taken_over=taken,
+                                           generation_task=("video editing"
+                                                            not in draft_plan.task_types),
+                                           omit=omit)
                 timings["compose_s"] = round(time.time() - t, 2)
 
                 from .prose import _definition_lines, fix_with_findings
 
                 def _verify(candidate: str):
-                    fx = repair_brief(candidate, target=draft_plan.target, mode=mode,
-                                      labels=labels,
-                                      dialogue=tuple(d.text for d in brief.dialogue),
-                                      style_phrase=style.phrase,
-                                      definitions=tuple(_definition_lines(
-                                          draft_plan.subjects, cards, labels)),
-                                      task_types=tuple(draft_plan.task_types),
-                                      motion_labels=tuple(lb for lb, role in vid_roles
-                                                          if role == "motion_reference"))
+                    locals_candidate[0] = requirements.mask_candidate(candidate, brief) if semantic_record["enabled"] else ""
+                    if professional_route:
+                        from types import SimpleNamespace
+                        fx = SimpleNamespace(text=candidate, repairs=[], findings=[])
+                    else:
+                        fx = repair_brief(candidate, target=draft_plan.target, mode=mode,
+                                          labels=labels,
+                                          dialogue=tuple(d.text for d in brief.dialogue),
+                                          style_phrase=style.phrase,
+                                          definitions=tuple(_definition_lines(
+                                              draft_plan.subjects, cards, labels)),
+                                          task_types=tuple(draft_plan.task_types),
+                                          motion_labels=tuple(lb for lb, role in vid_roles
+                                                              if role == "motion_reference"))
                     n = token_count(fx.text)
                     found = validate(fx.text, _written_context(
                         brief, mode, draft_plan, cards, n, style, licence))
                     from .dialogue_schedule import findings as schedule_findings
                     found += schedule_findings(fx.text, brief)
+                    found += input_constraints(parsed_input, fx.text)
+                    if semantic_record["enabled"]:
+                        found += requirements.mechanical(brief, fx.text)
                     from .voice_binding import findings as voice_findings
                     found += voice_findings(fx.text, draft_plan.speakers, aud_roles)
                     if brief.dialogue and creativity.SPEECH not in scope.licensed:
@@ -498,6 +545,18 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                 'Restore all caller lines exactly, preserving ordered split parts; '
                                 'remove any extra spoken content or duplicate occurrence.'))
                     return fx, found, n
+
+                if professional_route:
+                    from .professional import run as repair_professional
+                    t_professional = time.time()
+                    fixed, found, n_tokens, professional_record = repair_professional(
+                        backend, brief, written, _verify, draft_plan.target, _sections_for(mode), seed)
+                    timings["professional_review_s"] = round(time.time()-t_professional, 3)
+                    doc = _document(draft_plan, draft_result, draft_findings, draft_tokens, "written")
+                    doc.prompt, doc.sections = fixed.text, _split_written(fixed.text)
+                    doc.prompt_tokens, doc.findings = n_tokens, list(lora_findings)+found
+                    doc.provenance.update(professional_review=professional_record, timings=timings)
+                    return doc
 
                 review_bindings = tuple((sp.sid, sp.subject, sp.voice_ref) for sp in draft_plan.speakers)
                 if brief.dialogue:
@@ -570,6 +629,33 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     mechanical_repairs += fixed.repairs
                     errors = [f for f in found if f.severity == "ERROR"]
 
+                if semantic_record["enabled"] and not errors:
+                    for semantic_round in range(3):
+                        t_semantic = time.time()
+                        audit = requirements.review(backend, brief, fixed.text, seed, on_call=record_semantic_call, target=draft_plan.target)
+                        audit["seconds"] = round(time.time()-t_semantic, 3)
+                        semantic_record["audits"].append(audit)
+                        timings[f"requirements_review{semantic_round}_s"] = audit["seconds"]
+                        semantic_errors = requirements.findings(audit)
+                        if not semantic_errors:
+                            semantic_record["passed"] = True
+                            break
+                        if semantic_round == 2 or any(x["kind"] == "uncertain" for x in audit["issues"]):
+                            errors = semantic_errors
+                            break
+                        t_semantic = time.time()
+                        record_semantic_call()
+                        candidate = fix_with_findings(backend, fixed.text, semantic_errors,
+                            labels=labels + tuple(x.label for x in draft_plan.subjects),
+                            sections=_sections_for(mode), seed=seed, brief=brief,
+                            speaker_bindings=review_bindings)
+                        timings[f"requirements_fix{semantic_round}_s"] = round(time.time()-t_semantic,3)
+                        fixed, found, n_tokens = _verify(candidate)
+                        mechanical_repairs += fixed.repairs
+                        errors = [f for f in found if f.severity == "ERROR"]
+                        if errors:
+                            break  # Never ship a semantic repair that broke mechanical/speech rules.
+
                 for r in mechanical_repairs:
                     lora_findings.append(Finding("X12-brief-repaired", "INFO", r))
                 for rule in dict.fromkeys(stuck):
@@ -611,6 +697,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                 doc.provenance["compose_prompt"] = chosen_compose
                 doc.provenance["timings"] = timings
                 return doc
+            except RequirementsReviewFailed:
+                raise
             except BackendError as e:
                 reason = f"the composing model failed: {type(e).__name__}: {e}"
                 log.warning("falling back to the draft — %s", reason)

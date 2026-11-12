@@ -32,16 +32,16 @@ REPO = pathlib.Path(__file__).resolve().parents[1]
 # than a discovery somebody makes on a user's machine. A failure here is not a bug: it means the
 # thing that crossed the boundary moved, and the fix is to bump `CONTRACT_VERSION` and paste the new
 # digest in. That is the whole ceremony, and it exists so the version number means something.
-PINNED_VERSION = 3
+PINNED_VERSION = 6
 PINNED = {
-    "asset_fields": "38190799fcfb6cf1",
+    "asset_fields": "5707405acb1491e5",
     "brief_fields": "cf2fb5307dd7d72f",
     "dialogue_fields": "a63047779f907e58",
-    "error_codes": "19906fa6afaf0a20",
+    "error_codes": "904ce53c102352a8",
     "roles": "a62d21b69578bce8",
     "directors": "8e50d53980fd8777",
     "camera_moves": "e0ebdca0a4dcaea8",
-    "limits": "78554cef21934947",
+    "limits": "78554cef21934947"
 }
 
 
@@ -158,7 +158,7 @@ def test_the_contract_lists_every_refusal_the_service_can_raise():
     # code as its first argument, and raised through a subclass that passes it to `super()`. The
     # version of this scan that looked only for `super()` saw one refusal out of twelve, and the
     # eleven it missed included every one about who a picture replaces.
-    compiler = (REPO / "h3ir" / "compile.py").read_text(encoding="utf-8")
+    compiler = "\n".join((REPO / "h3ir" / name).read_text(encoding="utf-8") for name in ("compile.py", "language.py"))
     refusals = set(re.findall(r'BriefRefused\(\s*\n?\s*"([a-z-]+)"', compiler))
     refusals |= set(re.findall(r'super\(\)\.__init__\("([a-z-]+)"', compiler))
     assert len(refusals) > 1, (

@@ -162,6 +162,8 @@ class Paths:
 
 @dataclass(frozen=True)
 class Config:
+    professional_repair: bool = field(default_factory=lambda: _env_bool("H3IR_PROFESSIONAL_REPAIR", False))
+    requirements_review: bool = field(default_factory=lambda: _env_bool("H3IR_REQUIREMENTS_REVIEW", False))
     llm: LLMConfig = field(default_factory=LLMConfig)
     comfy: ComfyConfig = field(default_factory=ComfyConfig)
     paths: Paths = field(default_factory=Paths)

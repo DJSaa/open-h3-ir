@@ -223,6 +223,7 @@ class Brief:
     director: str = ""
     director_profile: dict[str, Any] | None = None
     description_language: str = ""
+    requirements_context: dict | None = None  # internal, evidence-backed; not an API field
 
     def hash(self) -> str:
         return _sha(asdict(self))
