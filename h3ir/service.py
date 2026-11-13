@@ -400,6 +400,7 @@ def _envelope(brief_id: str, doc: IRDocument, brief: Brief) -> dict[str, Any]:
         "presentation": doc.presentation(),
         "plan": _plan_layer(doc),
         "ir": _ir_layer(doc),
+        "usage": doc.provenance.get("usage"),
     }
 
 
@@ -695,21 +696,21 @@ def _create_brief(body: BriefIn) -> JSONResponse:
                             transcripts=dict(body.transcripts))
     except RequirementsReviewFailed as e:
         raise HTTPException(502, detail={"code": "requirements-review-failed", "message": str(e),
-            "diagnostics":e.record, "candidate_prompt_unvalidated":e.candidate}) from None
-    except CompilerInvariantError:
+            "diagnostics":e.record, "candidate_prompt_unvalidated":e.candidate, "usage":getattr(e,"usage",None)}) from None
+    except CompilerInvariantError as e:
         trace_id = uuid.uuid4().hex
         log.exception("Compiler invariant failure trace_id=%s", trace_id)
         raise HTTPException(500, detail={"code": "compiler-invariant", "trace_id": trace_id,
-                                        "message": "The compiler could not produce a validated prompt."}) from None
+                                        "message": "The compiler could not produce a validated prompt.", "usage":getattr(e,"usage",None)}) from None
     except BriefRefused as e:
         # Every refusal this layer makes about the request itself, with the code it carries. The
         # capacity one is design.md 12's, and 422 rather than a silently truncated manifest: which
         # reference matters is the caller's call, not ours.
-        raise HTTPException(422, detail={"code": e.code, "message": str(e)}) from e
+        raise HTTPException(422, detail={"code": e.code, "message": str(e), "usage":getattr(e,"usage",None)}) from e
     except BackendUnavailable as e:
-        raise HTTPException(503, detail={"code": "llm-unavailable", "message": str(e)}) from e
+        raise HTTPException(503, detail={"code": "llm-unavailable", "message": str(e), "usage":getattr(e,"usage",None)}) from e
     except BackendError as e:
-        raise HTTPException(502, detail={"code": "llm-error", "message": str(e)}) from e
+        raise HTTPException(502, detail={"code": "llm-error", "message": str(e), "usage":getattr(e,"usage",None)}) from e
     # The analyser writes its refusals for a person to read, and nothing caught them: a corrupt
     # clip, a still attached as `kind: video`, or a machine with no ffmpeg all reached the caller
     # as `Internal Server Error` with an empty body, and every one of those carefully worded
@@ -717,9 +718,9 @@ def _create_brief(body: BriefIn) -> JSONResponse:
     # not something the caller can correct, so it keeps the 503 shape the LLM outage already uses.
     except ToolMissing as e:
         raise HTTPException(503, detail={"code": "analysis-tool-missing",
-                                         "message": str(e)}) from e
+                                         "message": str(e), "usage":getattr(e,"usage",None)}) from e
     except AssetAnalysisError as e:
-        raise HTTPException(422, detail={"code": "asset-unreadable", "message": str(e)}) from e
+        raise HTTPException(422, detail={"code": "asset-unreadable", "message": str(e), "usage":getattr(e,"usage",None)}) from e
 
     brief_id = uuid.uuid4().hex[:16]
     _remember(brief_id, brief, doc)

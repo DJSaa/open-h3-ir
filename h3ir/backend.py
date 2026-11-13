@@ -43,6 +43,7 @@ from typing import Any
 import httpx
 
 from .config import get_config
+from .usage import account_attempt, reported
 
 log = logging.getLogger("h3ir.backend")
 
@@ -425,6 +426,7 @@ class Backend:
             raise last
         raise BackendError(f"chat failed after {retries + 1} attempt(s): {last}") from last
 
+    @account_attempt
     def _once(self, body: dict[str, Any]) -> Reply:
         t0 = time.time()
         r = self._http().post(f"{self.base_url()}/chat/completions", json=body,
@@ -433,6 +435,7 @@ class Backend:
         if r.status_code >= 400:
             raise EndpointRefused(r.status_code, r.text)
         data = r.json()
+        reported(data.get('usage') if isinstance(data, dict) else None)
         choice = (data.get("choices") or [{}])[0]
         msg = choice.get("message") or {}
         content = msg.get("content")

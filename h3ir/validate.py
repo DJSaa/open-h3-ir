@@ -12,6 +12,7 @@ Severities: ERROR blocks the render. WARN is reported. INFO is advisory only.
 from __future__ import annotations
 
 import re
+from collections import Counter
 from dataclasses import dataclass, field
 from typing import Iterable
 
@@ -1516,10 +1517,42 @@ def validate(text: str, ctx: Context | None = None, **kw) -> list[Finding]:
     # has to be present, word for word and punctuation mark for punctuation mark, either inside one
     # block or as the concatenation of consecutive ones.
     spoken = [re.sub(r"\s+", " ", re.sub(r"^\s*\[[^\]]*\]\s*", "", b)).strip() for b in blocks]
-    for want in ctx.expected_dialogue:
+    quotas = Counter(re.sub(r"\s+", " ", d).strip() for d in ctx.expected_dialogue if d)
+    for want in dict.fromkeys(ctx.expected_dialogue):
         if not want:
             continue
         w = re.sub(r"\s+", " ", want).strip()
+        if quotas[w] > 1:
+            # Allocate non-overlapping speech runs, including legal cut splits.
+            runs = []
+            start = 0
+            while start < len(spoken):
+                found = None
+                for i in range(start, len(spoken)):
+                    for j in range(i, len(spoken)):
+                        if w in ''.join(spoken[i:j+1]) or w in ' '.join(spoken[i:j+1]):
+                            found = (i,j)
+                            break
+                    if found:
+                        break
+                if not found:
+                    break
+                runs.append(found); start = found[1]+1
+            if len(runs) != quotas[w]:
+                add('D10-dialogue-line-duplicated' if len(runs) > quotas[w] else 'D4-dialogue-not-verbatim',
+                    'ERROR', f'the caller supplied {quotas[w]} independent occurrences of {w[:48]!r}; '
+                    f'the brief contains {len(runs)}. Preserve each requested occurrence exactly once.')
+            used = {k for i,j in runs for k in range(i,j+1)}
+            if any(_shared_phrase(w, value, 4) for k,value in enumerate(spoken) if k not in used):
+                add('D10-dialogue-line-duplicated', 'ERROR', 'A supplied utterance is echoed beyond its authorized occurrence count.')
+            for i,j in runs:
+                for k in range(i,j):
+                    gap = desc[spans[k].end():spans[k+1].start()]
+                    if not re.search(r'\[Shot\s+\d+\]',gap):
+                        add('D13-line-split-without-a-cut','ERROR','An utterance is split without a shot cut.')
+                    elif gap.count('<scenetrans>') < 2:
+                        add('D11-split-line-no-scenetrans','ERROR','A repeated utterance crossing a cut still needs both continuity markers.')
+            continue
         whole = [i for i, s in enumerate(spoken) if w in s]
         if whole:
             if len(whole) > 1:

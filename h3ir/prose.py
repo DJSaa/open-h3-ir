@@ -147,6 +147,8 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     by_block = {}
     speech_tokens = {}
     dialogue_inventory = []
+    literal_events = {}
+    event_uses = {}
     duplicate_error = any(f.rule == "D10-dialogue-line-duplicated" for f in findings)
     if brief is not None:
         # Identities come from caller lines, not whichever split the previous draft
@@ -157,7 +159,8 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
             from .language import canonical_language
             language = canonical_language(line.language, line.text)
             protected[token] = f'<d>[{language}] {line.text}</d>'
-            speech_tokens[line.text] = token
+            speech_tokens[i] = token
+            literal_events.setdefault(line.text, []).append(token)
             literal_tokens.setdefault(line.text, token)
             cuts = [m.end() for m in re.finditer(r'[,，;；:：.!?。！？]+\s*', line.text)
                     if m.end() < len(line.text)]
@@ -170,6 +173,7 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
                     alias = token[:-2] + '_PART%d}}' % n
                     protected[alias] = f'<d>[{language}] {part}</d>'
                     literal_tokens.setdefault(part, alias)
+                    literal_events.setdefault(part, []).append(alias)
                     aliases.append(alias)
                 dialogue_inventory.append(
                     token + ' is ONE caller-supplied line. Its exact ordered parts are: '
@@ -184,7 +188,12 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
             block = m.group()
             inner = re.fullmatch(r'<d>\s*\[([^\]]+)\]\s*(.*?)</d>', block, re.S)
             if inner and inner.group(2) in literal_tokens:
-                return literal_tokens[inner.group(2)]
+                literal = inner.group(2)
+                events = literal_events.get(literal, [])
+                if len(events) > 1:
+                    n = event_uses.get(literal, 0); event_uses[literal] = n+1
+                    return events[min(n, len(events)-1)]
+                return literal_tokens[literal]
             # Preserve unrecognised/generated speech opaquely for the validator and
             # correction loop. It must never steal a caller utterance's identity.
             if block not in by_block:
@@ -205,7 +214,7 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     numbered = "\n".join(f"{i}. [{f.rule}] {f.msg}" for i, f in enumerate(findings, 1))
     if brief is not None:
         for i, d in enumerate(brief.dialogue, 1):
-            numbered = numbered.replace(d.text, speech_tokens.get(d.text, '{{D%d}}' % i))
+            numbered = numbered.replace(d.text, speech_tokens.get(i, '{{D%d}}' % i))
     dialogue_guidance = ""
     if dialogue_inventory:
         dialogue_guidance = "\nPROTECTED SPEECH INVENTORY\n" + "\n".join(dialogue_inventory) + "\n"
@@ -215,6 +224,12 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
             "drop a caller-supplied line, change its speaker, translate it, or remove the requested "
             "audio continuity across the cut. Token spelling is immutable; duplicate occurrences "
             "are NOT immutable. Do not remove unrelated utterances.\n")
+    for literal, events in literal_events.items():
+        if len(events) > 1 and brief is not None and any(d.text == literal for d in brief.dialogue):
+            dialogue_guidance += ('The caller explicitly supplied ' + str(len(events)) +
+                ' independent utterances with identical words: ' + ', '.join(events) +
+                '. Preserve every event once in order, including its speaker and pauses. '
+                'These different tokens must not be deduplicated.\n')
     inventory = ""
     if labels:
         inventory = (
@@ -229,8 +244,8 @@ def fix_with_findings(backend: Backend, written: str, findings: list, *,
     requirements = protected_intent(brief) if brief else 'not supplied'
     if brief:
         for i, line in enumerate(brief.dialogue, 1):
-            if line.text in speech_tokens:
-                requirements = requirements.replace('{{D%d}}' % i, speech_tokens[line.text])
+            if i in speech_tokens:
+                requirements = requirements.replace('{{D%d}}' % i, speech_tokens[i])
 
     bindings = '\n'.join(f'{sid}: subject={subject or "unspecified"}, voice={voice or "unspecified"}'
                          for sid, subject, voice in speaker_bindings) or 'preserve the existing bindings'

@@ -97,7 +97,7 @@ def test_an_unreadable_asset_is_a_422_carrying_the_analysers_message(client, mon
     monkeypatch.setattr(service, "compile_brief", boom)
     r = client.post("/v1/briefs", json=_body(STILL))
     assert r.status_code == 422, r.text
-    assert r.json()["detail"] == {"code": "asset-unreadable", "message": written}
+    assert r.json()["detail"] == {"code": "asset-unreadable", "message": written, "usage": None}
 
 
 def test_a_missing_ffmpeg_is_a_503_about_the_deployment(client, monkeypatch):

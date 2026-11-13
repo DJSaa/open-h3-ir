@@ -1,0 +1,29 @@
+{
+  "prompt": "subject_definitions:\n<Subject 1> is the young man in <Picture 1>, with blond hair parted in the middle, fair skin, a navy blue quilted jacket with a zippered chest pocket, a beige crew-neck sweater, and black trousers.\n<Subject 2> is the man in <Picture 2>, with dark skin, short black hair visible under a grey knit beanie, a blue zip-up work jacket with horizontal yellow and white reflective stripes, a white t-shirt, and a logo on the left chest.\n<Subject 3> is the office environment in <Picture 3>, featuring long rectangular white desks with integrated storage pedestals, silver metal legs, and smooth matte finishes.\n<Subject 4> is the office chairs in <Picture 3>, with beige fabric upholstery, curved backrests, chrome five-star bases, black caster wheels, and adjustable armrests.\n<Subject 5> is the computer monitors in <Picture 3>, with silver aluminum frames, black screens, thin bezels, and silver stands.\n<Subject 6> is the wall clocks in <Picture 3>, with round black frames, white faces, black hands, and small black rectangular labels underneath.\n<Subject 7> is the wooden partition in <Picture 3>, with vertical light wood slats and natural wood grain.\n<Subject 8> is the pendant lights in <Picture 3>, with long linear black fixtures and thin suspension cables.\n<Audio 1> is a voice-timbre reference for <Subject 1> (S1).\n<Audio 2> is a voice-timbre reference for <Subject 2> (S2).\n\nsummary:\n[reference generation + audio reference] The target video shows <Subject 1> and <Subject 2> conversing in <Subject 3>. <Subject 1> speaks first, and the camera cuts to <Subject 2> listening while <Subject 1>'s voice continues, before <Subject 2> replies. The scene uses <Audio 1> and <Audio 2> as voice-timbre references.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1], [Shot 2]): fully_preserved - the blond hair, navy blue quilted jacket, beige sweater, and black trousers are retained.\n<Subject 2> (appears in [Shot 1], [Shot 2]): fully_preserved - the dark skin, grey knit beanie, blue work jacket with reflective stripes, and white t-shirt are retained.\n<Subject 3> (appears in [Shot 1], [Shot 2]): fully_preserved - the white desks, silver legs, and matte finishes are retained.\n<Subject 4> (appears in [Shot 1], [Shot 2]): fully_preserved - the beige fabric chairs and chrome bases are retained.\n<Subject 5> (appears in [Shot 1], [Shot 2]): fully_preserved - the silver monitors and black screens are retained.\n<Subject 6> (appears in [Shot 1], [Shot 2]): fully_preserved - the round black clocks and white faces are retained.\n<Subject 7> (appears in [Shot 1], [Shot 2]): fully_preserved - the vertical light wood slats are retained.\n<Subject 8> (appears in [Shot 1], [Shot 2]): fully_preserved - the linear black pendant lights are retained.\n<Audio 1>: reference - the target speaker follows <Audio 1>'s voice timbre and delivery without copying the original signal.\n<Audio 2>: reference - the target speaker follows <Audio 2>'s voice timbre and delivery without copying the original signal.\n\ndetailed_description:\nThe target video uses a clean, commercial photography style with a shallow depth of field, bright diffuse natural daylight, and a high-key look.\n[Shot 1] A medium shot establishes <Subject 1> and <Subject 2> sitting in <Subject 3>, the office with white desks, silver monitors, and beige chairs. <Subject 1>, the young man with blond hair and a navy blue quilted jacket, sits on the left, leaning slightly forward with his hands resting on his knees. <Subject 2>, the man with dark skin and a grey knit beanie, sits on the right, facing <Subject 1>. The camera pushes in slowly with small amplitude, tightening the frame on <Subject 1> as he begins to speak. <Subject 1> (S1), using the voice timbre referenced from <Audio 1>, says: <d>[Chinese] 周末一起去看海，</d> <scenetrans>\n[Shot 2] At 00:04.000, the shot cuts to a medium close-up of <Subject 2>, the man in the grey beanie and blue work jacket, listening intently. <Subject 1>'s voice continues off-screen, finishing the sentence naturally. <Subject 1> (S1) continues seamlessly across the cut: <d>[Chinese] 我们早点出发。</d> <scenetrans> <Subject 2> nods slightly, his expression attentive and engaged, his eyes tracking the unseen speaker. As the voice concludes, <Subject 2> (S2) leans forward slightly, his shoulders relaxing, and replies using the voice timbre referenced from <Audio 2>, <Subject 2> (S2) says: <d>[Chinese] 好，我来准备。</d> He finishes speaking and holds a calm, friendly gaze toward <Subject 1>, closing his mouth as the ambient office hum remains.\n\noverall_soundscape:\nA quiet, low-level office hum and the faint sound of distant ventilation continue throughout the video.\n\nnon_diegetic_music:\nN/A\n",
+  "dialogue": [
+    {
+      "text": "周末一起去看海，我们早点出发。",
+      "language": "Chinese",
+      "speaker_hint": "图1"
+    },
+    {
+      "text": "好，我来准备。",
+      "language": "Chinese",
+      "speaker_hint": "图2"
+    }
+  ],
+  "speakers": [
+    {
+      "sid": "(S1)",
+      "subject": "<Subject 1>",
+      "descriptor": "图1",
+      "voice_ref": "<Audio 1>"
+    },
+    {
+      "sid": "(S2)",
+      "subject": "<Subject 2>",
+      "descriptor": "图2",
+      "voice_ref": "<Audio 2>"
+    }
+  ]
+}

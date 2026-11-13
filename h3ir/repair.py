@@ -454,6 +454,8 @@ def _fix_echoed_dialogue(text: str, expected: tuple[str, ...], res: RepairResult
     if not expected:
         return text
     for want in expected:
+        if expected.count(want) > 1:
+            continue
         blocks = list(re.finditer(r"<d>(\s*\[[^\]]*\]\s*)?(.*?)</d>", text, re.S))
         idx = next((i for i, b in enumerate(blocks) if want in b.group(2)), None)
         if idx is None:

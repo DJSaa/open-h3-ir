@@ -7,10 +7,11 @@ Nothing in this module translates user text or guesses spoken content from audio
 from __future__ import annotations
 
 import re
-from dataclasses import replace
+from dataclasses import dataclass, replace
+from collections import Counter, defaultdict, deque
 from .models import Brief, DialogueLine, Finding
 
-POLICY_VERSION = "dingo-language-v3"
+POLICY_VERSION = "dingo-language-v4"
 QUOTES = re.compile(r'“([^”]*)”|「([^」]*)」|『([^』]*)』|"((?:\\.|[^"\\])*)"|(?<!\w)\'([^\'\n]+)\'', re.S)
 HAN = re.compile(r'[\u3400-\u9fff]')
 SPEECH = re.compile(r'说(?:道|一句|一次|出)?|回答|回复|喊(?:道)?|念(?:出)?|口播|台词|对白|朗读|旁白|\b(?:say|says|said|saying|speak|speaks|speaking|spoken|reply|replies|replied|replying|shout|shouts|shouting|whisper|whispers|whispering|dialogue|voiceover|reads?|reading)\b', re.I)
@@ -42,48 +43,112 @@ def delivery_language(context: str, text: str) -> str:
     return canonical_language(hits[-1].group()) if hits else content_language(text)
 
 
-def prepare(brief: Brief) -> Brief:
-    """Run at the shared compile boundary, for HTTP, CLI and in-process callers alike."""
-    lines = [replace(d, language=canonical_language(d.language or '', d.text)) for d in brief.dialogue]
-    # Existing H3 input carries literal speech in <d>, not necessarily quotes.
+@dataclass(frozen=True)
+class _SpeechOccurrence:
+    start: int
+    end: int
+    line: DialogueLine
+    count: int = 1
+
+
+def _negated_speech(context: str, verb_start: int) -> bool:
+    """A local negator governs THIS speech verb, not a previous quoted sentence.
+
+    Causative/prepositional subjects are allowed between the negator and verb.
+    A comma or contrast starts a new clause; 'do not worry, say ...' stays positive.
+    Unrecognised prose is left intact for the writer, never silently rewritten.
+    """
+    prefix = re.split(r'[,，;；]', context[:verb_start])[-1]
+    negator = r'(?:不要|不许|禁止|无需|不能|不得|别)'
+    subject = r'(?:(?:让|叫|使|要求|允许|对|向|跟)\s*[^，,;；。！？.!?]{1,16}?|(?:他|她|他们|她们|人物|角色|任何人))?'
+    if re.search(negator + r'\s*' + subject + r'\s*(?:再|去|开口|直接|大声|小声)?\s*$', prefix):
+        return True
+    return bool(re.search(
+        r"\b(?:do\s+not|does\s+not|don['’]t|must\s+not|mustn['’]t|should\s+not|never|without)\s+"
+        r'(?:(?:let|make|have|allow)\s+(?:him|her|them|the\s+(?:person|character))\s+(?:to\s+)?)?'
+        r'(?:(?:ever|again|aloud)\s+)*$', prefix, re.I))
+
+
+def _repeat_count(context: str, tail: str) -> int:
+    # Explicit adjacent counts only. A second quoted utterance is a separate event,
+    # not another count to apply to the preceding event.
+    numbers = {'一':1, '二':2, '两':2, '三':3, '四':4, '五':5,
+               '六':6, '七':7, '八':8, '九':9, '十':10}
+    for is_tail, part in ((True, tail), (False, context)):
+        pat = (r'^\s*(?:重复|连说|说)?\s*(\d{1,3}|[一二两三四五六七八九十])\s*(?:次|遍)'
+               if is_tail else
+               r'(?:说|重复|连说)\s*(\d{1,3}|[一二两三四五六七八九十])\s*(?:次|遍)\s*[：:]?\s*$')
+        m = re.search(pat, part)
+        if m:
+            return max(1, int(m[1]) if m[1].isdigit() else numbers[m[1]])
+    m = re.match(r'\s*(once|twice|three\s+times|\d{1,3}\s+times)\b', tail, re.I)
+    if m:
+        word = m[1].lower()
+        return {'once':1, 'twice':2, 'three times':3}.get(word, int(word.split()[0]) if word[0].isdigit() else 1)
+    return 1
+
+
+def _speech_occurrences(intent: str) -> list[_SpeechOccurrence]:
+    """Positive speech occurrences with source spans; repeated text is NOT deduped."""
     from .structured_input import SPEECH as NATIVE_SPEECH
-    for match in NATIVE_SPEECH.finditer(brief.intent):
-        lang, literal = match.group(1), match.group(2).strip()
+    native = list(NATIVE_SPEECH.finditer(intent))
+    occurrences = []
+    for m in native:
+        literal = m[2].strip()
         if not literal:
             continue
-        same = [d for d in lines if d.text == literal]
-        if same:
-            if any(canonical_language(d.language, d.text) != canonical_language(lang, literal) for d in same):
-                from .compile import BriefRefused
-                raise BriefRefused("input-dialogue-conflict", "The explicit dialogue and H3 text specify different languages for the same line.")
+        before = intent[:m.start()].split('\n')[-1]
+        speakers = list(re.finditer(r'\bS\d+\b', before))
+        occurrences.append(_SpeechOccurrence(m.start(2), m.end(2),
+            DialogueLine(literal, canonical_language(m[1], literal),
+                         speakers[-1].group() if speakers else None)))
+    # Quote punctuation inside a prior utterance is not a sentence boundary or speaker cue.
+    scan = list(intent)
+    for m, _ in quoted(intent):
+        scan[m.start():m.end()] = ' ' * (m.end()-m.start())
+    scan = ''.join(scan)
+    previous_quote_end = 0
+    for m, literal in quoted(intent):
+        clause_start = previous_quote_end
+        previous_quote_end = m.end()
+        if not literal or any(n.start() <= m.start() < n.end() for n in native):
             continue
-        before = brief.intent[:match.start()].split("\n")[-1]
-        speakers = list(re.finditer(r"\bS\d+\b", before))
-        lines.append(DialogueLine(text=literal, language=canonical_language(lang, literal),
-                                  speaker_hint=speakers[-1].group() if speakers else None))
-    known = {d.text for d in lines}
-    extracted = []
-    for m, text in quoted(brief.intent):
-        if not text or text in known:
-            continue
-        before = brief.intent[:m.start()]
-        # Only the current clause can classify a quotation; an earlier person's utterance
-        # must not license a later sign as dialogue.
-        context = re.split(r'[。！？\n.!?]', before)[-1][-160:]
-        speech = list(SPEECH.finditer(context))
-        lettering = list(LETTERING.finditer(context))
+        context = re.split(r'[。！？\n.!?]', scan[clause_start:m.start()])[-1][-160:]
+        speech = list(SPEECH.finditer(context)); lettering = list(LETTERING.finditer(context))
         if not speech or (lettering and lettering[-1].start() > speech[-1].start()):
             continue
-        trigger = context[:speech[-1].end()]
-        if re.search(r'(?:不要|不许|禁止|无需)\s*(?:说|口播|朗读)|\b(?:do not|don.t|never)\s+(?:say|speak)\b', trigger, re.I):
+        verb = speech[-1]
+        if _negated_speech(context, verb.start()):
             continue
-        speaker = re.search(r'(?:<Picture\s+(\d+)>|图\s*(\d+)|(甲|乙|丙)|\b(S\d+)\b)', context)
-        hint = speaker.group() if speaker else None
-        extracted.append(DialogueLine(text=text, language=delivery_language(context, text), speaker_hint=hint,
-                                      voiceover=bool(re.search(r'旁白|画外音|voiceover', context, re.I))))
-        known.add(text)
-    lines.extend(extracted)
-    # Explicit language in the intent also applies to structured lines lacking a language.
+        speakers = list(re.finditer(r'(?:<Picture\s+(\d+)>|图\s*(\d+)|(甲|乙|丙)|\b(S\d+)\b)', context))
+        hint = speakers[0].group() if speakers else None
+        occurrences.append(_SpeechOccurrence(m.start(), m.end(),
+            DialogueLine(literal, delivery_language(context, literal), hint,
+                         bool(re.search(r'旁白|画外音|voiceover', context, re.I))),
+            _repeat_count(context, intent[m.end():])))
+    return sorted(occurrences, key=lambda o:o.start)
+
+
+def prepare(brief: Brief) -> Brief:
+    """Merge explicit metadata and inline occurrences without losing multiplicity.
+
+    Metadata and prose may describe the SAME speech, so use occurrence counts instead
+    of adding both sources. Each independently requested utterance keeps its own entry.
+    """
+    lines = [replace(d, language=canonical_language(d.language or '', d.text)) for d in brief.dialogue]
+    explicit = Counter(d.text for d in lines)
+    seen = Counter()
+    for occurrence in _speech_occurrences(brief.intent):
+        line = occurrence.line
+        # An explicit metadata/inline language disagreement must still be refused.
+        if brief.dialogue and any(d.text == line.text for d in lines):
+            if any(d.text == line.text and d.language and canonical_language(d.language, d.text) != line.language for d in brief.dialogue):
+                from .compile import BriefRefused
+                raise BriefRefused("input-dialogue-conflict", "The explicit dialogue and H3 text specify different languages for the same line.")
+        for _ in range(occurrence.count):
+            seen[line.text] += 1
+            if seen[line.text] > explicit[line.text]:
+                lines.append(line)
     for i, d in enumerate(brief.dialogue):
         if not d.language:
             lines[i] = replace(lines[i], language=delivery_language(brief.intent, d.text))
@@ -91,10 +156,43 @@ def prepare(brief: Brief) -> Brief:
 
 
 def protected_intent(brief: Brief) -> str:
-    tokens={d.text:'{{D%d}}'%i for i,d in enumerate(brief.dialogue,1)}
-    text=QUOTES.sub(lambda m:tokens.get(next(x for x in m.groups() if x is not None),m.group()), brief.intent)
-    for literal,token in tokens.items():text=text.replace(literal,token)
+    counts = Counter(d.text for d in brief.dialogue)
+    if all(n == 1 for n in counts.values()):
+        # Preserve the established single-utterance path byte-for-byte.
+        tokens = {d.text:'{{D%d}}'%i for i,d in enumerate(brief.dialogue,1)}
+        text = QUOTES.sub(lambda m:tokens.get(next(x for x in m.groups() if x is not None),m.group()), brief.intent)
+        for literal, token in tokens.items():
+            text = text.replace(literal, token)
+        return text
+    tokens = defaultdict(deque)
+    for i, line in enumerate(brief.dialogue, 1):
+        tokens[line.text].append('{{D%d}}'%i)
+    replacements = []
+    for occurrence in _speech_occurrences(brief.intent):
+        available = tokens[occurrence.line.text]
+        if available:
+            replacements.append((occurrence.start, occurrence.end, available.popleft()))
+    text = brief.intent
+    for start, end, token in reversed(replacements):
+        text = text[:start] + token + text[end:]
+    # Explicit API metadata can accompany unquoted prose. Protect those literal
+    # mentions too, without substituting inside already-assigned event tokens.
+    for literal in sorted(tokens, key=len, reverse=True):
+        fallback = '{{D%d}}' % next(i for i,d in enumerate(brief.dialogue,1) if d.text == literal)
+        def hide(match):
+            if match.group(1):
+                return match.group()
+            return tokens[literal].popleft() if tokens[literal] else fallback
+        text = re.sub(r'(\{\{D\d+\}\})|' + re.escape(literal), hide, text)
     return text
+
+
+def explicit_no_speech(brief: Brief) -> bool:
+    """Only a global speech prohibition; never infer all-audio silence from it."""
+    if brief.dialogue:
+        return False
+    return bool(re.search(r'(?:静默|无声)(?:视频|片段)|不说话|(?:无|没有|禁止)(?:对白|台词|旁白)|'
+                          r'(?:不要|不能|不许)(?:有|出现|添加)?任何(?:说话声音|话语|对白)', brief.intent))
 
 
 # Only immediate speech introductions are consumed. Never match across a sentence,
@@ -153,6 +251,33 @@ def _restore_token(text, token, markup, speaker):
     return ''.join(parts)
 
 
+def _speech_references_outside_shots(text: str, brief: Brief) -> str:
+    """Only shot descriptions schedule the protected speech events.
+
+    A generated summary may repeat a protected token to describe the plot. Restoring
+    that mention as another <d> block duplicates the event. Keep it as a prose
+    reference instead. Unknown/generated speech is NOT removed: verification must
+    still report it. Missing speech in the actual shots still fails D4.
+    """
+    from .structured_input import NAMES
+    headers = list(re.finditer(r'(?m)^(' + '|'.join(NAMES) + r')\s*:', text))
+    if not headers or not brief.dialogue:
+        return text
+    expected = {d.text.strip() for d in brief.dialogue}
+    out = [text[:headers[0].start()]]
+    for i, header in enumerate(headers):
+        end = headers[i+1].start() if i+1 < len(headers) else len(text)
+        segment = text[header.start():end]
+        if header[1] not in ('detailed_description','integrated_multimodal_description'):
+            token = '{{SPEECH_REFERENCE}}'
+            def reference(match):
+                return token if match[1].strip() in expected else match.group()
+            segment = re.sub(r'<d>\s*\[[^]]+\]\s*(.*?)</d>', reference, segment, flags=re.S)
+            segment = _restore_token(segment, token, 'a supplied utterance', None)
+        out.append(segment)
+    return ''.join(out)
+
+
 def restore_dialogue(text: str, brief: Brief, speakers=None) -> str:
     from .render import dialogue_markup
     # A writer may ignore the no-wrapper instruction. Never paste a full speech
@@ -168,7 +293,7 @@ def restore_dialogue(text: str, brief: Brief, speakers=None) -> str:
         speaker = next((s for s in speakers if s.descriptor == (line.speaker_hint or "")), None)
         text = _restore_token(text, '{{D%d}}' % i,
                               dialogue_markup(line, speaker, brief.description_language), speaker)
-    return text
+    return _speech_references_outside_shots(text, brief)
 
 
 def prompt_policy(system: str, brief: Brief) -> str:
@@ -178,6 +303,14 @@ def prompt_policy(system: str, brief: Brief) -> str:
     input_policy = (Path(__file__).parent / 'prompts' / 'input_understanding.v1.txt').read_text(encoding='utf-8')
     import json
     requirements = ("\n\nEVIDENCE-BACKED REQUIREMENTS (original request remains authoritative):\n" + json.dumps(brief.requirements_context, ensure_ascii=False)) if brief.requirements_context else ""
+    repeated = Counter(d.text for d in brief.dialogue)
+    if any(n > 1 for n in repeated.values()):
+        events = ', '.join('{{D%d}}'%i for i in range(1, len(brief.dialogue)+1))
+        requirements += ('\nAUTHORIZED SPEECH EVENTS: ' + events +
+            '. Each entry is one independent requested utterance, used once, in order. '
+            'Identical words in different entries are authorized repetitions, not duplicates. '
+            'Repetition counts in the original request are already expanded into these entries; '
+            'do not multiply them again. Preserve requested pauses and speakers.')
     return system + '\n\n' + policy + '\n\n' + speech + '\n\n' + input_policy + requirements
 
 

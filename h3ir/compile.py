@@ -21,6 +21,7 @@ from typing import Any
 
 from .analyse import analyse_all, measure_assets
 from .backend import Backend, BackendError
+from .usage import track_compilation
 from .requirements import RequirementsReviewFailed
 from .config import get_config
 from . import creativity
@@ -243,6 +244,7 @@ def check_capacity(brief: Brief) -> None:
                 "outright, so there is nothing to compile against")
 
 
+@track_compilation
 def compile_brief(brief: Brief, *, backend: Backend | None = None,
                   opts: ProfileOptions | None = None, seed: int | None = None,
                   use_cache: bool = True, thinking_prose: bool = False, llm: bool = True,
@@ -506,6 +508,8 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
 
                 from .prose import _definition_lines, fix_with_findings
 
+                compatibility_allowed = professional_route
+
                 def _verify(candidate: str):
                     locals_candidate[0] = requirements.mask_candidate(candidate, brief) if semantic_record["enabled"] else ""
                     if professional_route:
@@ -544,6 +548,9 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                                 'Spoken content differs from the supplied dialogue inventory. '
                                 'Restore all caller lines exactly, preserving ordered split parts; '
                                 'remove any extra spoken content or duplicate occurrence.'))
+                    if compatibility_allowed:
+                        from .dialogue_format import classify_late_scenetrans
+                        found = classify_late_scenetrans(fx.text, brief, draft_plan.speakers, found)
                     return fx, found, n
 
                 if professional_route:
@@ -628,6 +635,15 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     fixed, found, n_tokens = _verify(candidate)
                     mechanical_repairs += fixed.repairs
                     errors = [f for f in found if f.severity == "ERROR"]
+
+                # Keep the existing bounded correction and dialogue passes. Early
+                # acceptance can retain intermediate duplicate voice introductions.
+                # Classify the final candidate, before any enabled requirements
+                # review, so that optional review is never silently bypassed.
+                compatibility_allowed = True
+                from .dialogue_format import classify_late_scenetrans
+                found = classify_late_scenetrans(fixed.text, brief, draft_plan.speakers, found)
+                errors = [f for f in found if f.severity == "ERROR"]
 
                 if semantic_record["enabled"] and not errors:
                     for semantic_round in range(3):
@@ -1057,13 +1073,19 @@ def _scope(brief: Brief, plan) -> Scope:
     abstain than to strip a legitimate reperformance.
     """
     counts = plan.label_counts()
-    return creativity.build(
+    scope = creativity.build(
         brief.intent, level=brief.creativity, constraints=tuple(brief.constraints),
         has_dialogue=bool(brief.dialogue) or counts["Audio"] > 0,
         has_onscreen_text=bool(brief.onscreen_text),
         has_music_reference=any(m.role is Role.BGM and m.soundtrack_policy != "ignore" for m in plan.manifest),
         dialogue_texts=tuple(d.text for d in brief.dialogue),
         silent=brief.silent)
+
+    from .language import explicit_no_speech
+    if explicit_no_speech(brief):
+        scope = replace(scope, forbidden=scope.forbidden | {creativity.SPEECH},
+                        requested=scope.requested - {creativity.SPEECH})
+    return scope
 
 
 def _transformed_from(style=None, licence=None) -> str:

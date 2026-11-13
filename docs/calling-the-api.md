@@ -407,3 +407,88 @@ A Gateway that treats all upstream 5xx responses as execution-unknown may quaran
 this backend even though the local review has finished. This classification needs
 an explicit cross-service contract before enabling these experimental gates on a
 shared Gateway route; do not equate a quality refusal with unconfirmed execution.
+
+
+### Aggregate LLM usage
+
+Compile envelopes expose top-level `usage`, also recorded in IR provenance. It
+sums upstream `prompt_tokens`, `completion_tokens` and their `total_tokens` across
+all actual model HTTP attempts in this compilation: asset analysis, composition,
+review, corrections, JSON retries and truncated responses. Asset-cache hits that
+make no model call add nothing; upstream prefix-cache tokens remain counted as
+reported. Completion tokens already include reasoning when the server reports it
+that way. This is not `ir.prompt_tokens` (the final prompt length).
+
+`llm_requests`, `requests_with_usage`, `requests_without_usage` and `complete`
+qualify the totals. A timeout or absent/invalid usage makes `complete=false`; the
+sums then cover only known responses, never an estimate of missing execution.
+A genuine no-call compilation returns complete zero totals. Request scopes isolate
+concurrent compilations and repeated use of a Backend. Errors handled by the
+compile API include known usage in `detail.usage`; no complete aggregate can be
+recovered after a process crash or lost response merely from this accounting.
+Gateway stores this snapshot for public task queries and idempotent replay. Billing
+consumers must key records by task ID and must not settle incomplete totals as
+complete usage; whether failed tasks are billable is their policy.
+
+
+`usage.prompt_tokens_details.cached_tokens` aggregates reported prefix-cache hits,
+a subset of prompt tokens, never an extra addition to total tokens. If any actual
+LLM attempt lacks valid cache details, this aggregate is null rather than a guessed
+zero or partial sum. Explicit zero hits remain zero. The basic `complete` flag does
+not certify cache-detail completeness; discount billing also requires non-null
+cached tokens. vLLM may require `--enable-prompt-tokens-details` to return these
+per-request details; this change does not alter model deployment settings.
+Multimodal image tokens, including video frames actually sent for analysis, are
+counted exactly as the upstream prompt usage reports, not estimated from files.
+
+
+#### Live multimodal usage acceptance
+
+`tests/test_usage_multimodal_live.py` is opt-in (`H3IR_LIVE_USAGE_TEST=1`). Configure
+`H3IR_LLM_URL`, `H3IR_LLM_MODEL`, `H3IR_USAGE_VIDEO` (a test video at least 8 seconds),
+optional `H3IR_USAGE_FFMPEG` and `H3IR_USAGE_EVIDENCE_DIR`. The test sends the same
+text alone, with one actual extracted image, and with three video frames. It saves
+raw server usage and verifies visual inputs increase prompt usage beyond textual
+image-label overhead, and that the task aggregate equals all raw responses.
+It does not claim the delta isolates vision-only tokens from multimodal markers.
+The default suite skips it rather than unexpectedly spending remote model compute.
+
+
+### Repeated and prohibited speech
+
+Dialogue entries are independent requested utterances. Identical text can occur in
+multiple entries when it is meant to be spoken multiple times. Inline positive
+speech occurrences retain their order and multiplicity; an inline description
+of the same explicit `dialogue` metadata does not add another copy of those entries.
+Explicit adjacent repetition counts are expanded into independent protected events.
+
+Quoted text under a negated speaking instruction, such as “do not let him say
+‘hello’”, is not a required dialogue line. An explicit no-dialogue request forbids
+speech without automatically forbidding room tone or music. Merely omitting
+dialogue does not itself mean that the user requested silence.
+
+The existing verbatim, speaker/voice binding and cross-cut continuity checks
+remain in effect. Occurrence checks compare with the caller's authorized count;
+a continuous line split across a cut is still one utterance. These protections
+do not require enabling the optional requirements-review stage.
+
+Protected speech mentions in summary/definition sections remain prose references;
+only the main shot description schedules those utterances. Unknown extra speech
+is preserved for verification, and missing speech in the actual shots still fails.
+
+
+### Late cross-cut speech marker warning
+
+A written compilation can retain `D11-split-line-no-scenetrans` as a `WARN` and
+return `ready` / `written` when both markers exist and only the incoming marker
+immediately follows the final part of a two-part utterance. This classification
+runs after structural, literal-inventory, language, timing and voice-binding checks;
+any other hard error prevents it. All supplied utterances must match exactly in
+order/count, with explicit consistent speaker IDs and established voice references.
+Missing/ambiguous bindings, missing markers, extra words, reordered speech, and
+ambiguous longer splits retain the original hard checks. The prompt is not edited
+and the original finding remains visible in `ir.diagnostics`. The normal written
+route retains its existing bounded correction/dialogue passes before this final
+classification; no extra LLM review or retry is added. If optional requirements
+review is enabled, it still runs after compatible mechanical findings pass. This is a bounded compiler compatibility policy, not a global
+relaxation of the standalone validator or a guarantee of rendered video quality.
