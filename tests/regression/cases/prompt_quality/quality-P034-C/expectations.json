@@ -1,0 +1,53 @@
+{
+  "case_id": "quality-P034-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "空间站微重力舱内",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "空间站微重力舱内",
+      "h3_refined_evidence": "the interior of a space-station compartment in microgravity."
+    },
+    {
+      "id": "R2",
+      "text": "一只手轻推悬着的小球",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一只手轻推悬着的小球",
+      "h3_refined_evidence": "One small ball initially floats nearly still relative to the cabin, with clear space between it and the floor and walls. A hand approaches, makes gentle contact, and gives the ball a small push."
+    },
+    {
+      "id": "R3",
+      "text": "小球离手后沿推的方向缓慢漂移",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "小球离手后沿推的方向缓慢漂移",
+      "h3_refined_evidence": "After separation, the same ball slowly drifts onward in the direction of the push."
+    },
+    {
+      "id": "R4",
+      "text": "不要掉向地面",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "不要掉向地面",
+      "h3_refined_evidence": "The ball remains suspended clear of the cabin surfaces through the end, without curving downward toward the floor."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "推动发生后小球在微重力设定下继续漂移。",
+      "observable_evidence": "手球接触后分离，小球向推动方向移动，离开支撑面。",
+      "fail_examples": [
+        "未有接触就突然向反方向高速飞走",
+        "离手后强行加入明显地球重力落地",
+        "需要持续托着才能移动"
+      ],
+      "not_required": [
+        "不要求严格恒速或精确直线",
+        "不要求模拟轨道力学",
+        "允许细微空气阻力或姿态旋转"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

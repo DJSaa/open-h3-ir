@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a static side-on close shot frames a transparent water pitcher containing water beside an empty drinking glass on a level table. Keep the pitcher spout, the glass opening, and the space between them unobstructed. A hand lifts the pitcher, positions its spout above the glass, and gently tilts it. Water leaves the spout as a downward stream and enters the glass through its opening. The water collecting inside the glass becomes visible as the pour continues. Keep the original pitcher and glass identifiable, showing the route from the spout through the air into the glass in one continuous view. Let the pour finish with the glass containing the transferred water, preserving a clear view of both containers and their resulting contents.
+
+overall_soundscape: Natural pouring and gentle splashing inside the glass accompany the visible water stream over quiet room ambience. No dialogue or voiceover.
+
+non_diegetic_music: N/A

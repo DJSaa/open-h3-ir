@@ -1,0 +1,69 @@
+{
+  "direct": {
+    "intent": "把视频1里的杯子换成图1、图2、图3那个黑色有线鼠标，三张图都是同一款。保留视频里的环境和拍法，做个10秒产品展示，拍得平稳自然些。",
+    "seconds": 10.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "video",
+        "sha256": "84e0f411842e5008ece7177aa5f3c5e84adc9aa44512a2431ae02606bcfcf2f2",
+        "role": "edit_source"
+      },
+      {
+        "kind": "image",
+        "sha256": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "cdafa499381dda3e57053878c79e8ebf4bcb04ec1d02c765bec955a6016bb23d",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "a08cbfc4eed7ac14b7ec02ef0f94d7f767ec851ad1e04fdc03df1abca0428344",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "把视频1里的杯子换成图1、图2、图3那个黑色有线鼠标，三张图都是同一款。保留视频里的环境和拍法，做个10秒产品展示，拍得平稳自然些。",
+    "seconds": "10.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"edit_source\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "84e0f411842e5008ece7177aa5f3c5e84adc9aa44512a2431ae02606bcfcf2f2",
+      "kind": "video",
+      "filename": "video_1.mp4"
+    },
+    {
+      "asset_id": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+      "kind": "image",
+      "filename": "image_2.jpg"
+    },
+    {
+      "asset_id": "cdafa499381dda3e57053878c79e8ebf4bcb04ec1d02c765bec955a6016bb23d",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "a08cbfc4eed7ac14b7ec02ef0f94d7f767ec851ad1e04fdc03df1abca0428344",
+      "kind": "image",
+      "filename": "image_4.jpg"
+    }
+  ]
+}

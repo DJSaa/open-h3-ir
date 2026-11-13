@@ -1,0 +1,69 @@
+{
+  "direct": {
+    "intent": "用图1的女生，衣服换成图2那件，在图3的办公室里，照视频1的样子转个头。视频只学转头，人物和场景按图片来。做12秒，自然一点，不说话。",
+    "seconds": 12.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "557dc78fc2f3592d1f672bc18a9245419cac1d1a614116eb588db51d8b85ac79",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "57b20b812ea89f390f8c42e5bb75a90a35437820233874c524a7e053abf609eb",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "video",
+        "sha256": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+        "role": "motion_reference"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "用图1的女生，衣服换成图2那件，在图3的办公室里，照视频1的样子转个头。视频只学转头，人物和场景按图片来。做12秒，自然一点，不说话。",
+    "seconds": "12.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 3, \"role\": \"motion_reference\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "557dc78fc2f3592d1f672bc18a9245419cac1d1a614116eb588db51d8b85ac79",
+      "kind": "image",
+      "filename": "image_1.jpg"
+    },
+    {
+      "asset_id": "57b20b812ea89f390f8c42e5bb75a90a35437820233874c524a7e053abf609eb",
+      "kind": "image",
+      "filename": "image_2.jpg"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+      "kind": "video",
+      "filename": "video_4.mp4"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "用蛋糕刀从一块柔软的海绵蛋糕上切下一小块，再把切下的那块轻轻移开，拍清楚切开的过程。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "用蛋糕刀从一块柔软的海绵蛋糕上切下一小块，再把切下的那块轻轻移开，拍清楚切开的过程。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

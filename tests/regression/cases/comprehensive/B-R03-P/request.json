@@ -1,0 +1,69 @@
+{
+  "direct": {
+    "intent": "让<Picture 1>中的女性穿上<Picture 2>的浅蓝色卷袖衬衫，在<Picture 3>的办公室内完成转头动作。<Picture 1>只给外貌与发型，不保留黑T恤或工作间；<Picture 2>只给衣服，不采用穿衣者身份。<Video 1>只借头部先看画面左下方、再平稳转向画面右侧的动作顺序，不要源男子、帽子、围巾、耳饰、公园背景或声音。生成12秒单镜头、固定机位、腰部以上中景。0–3秒人物站稳，头朝画面左下方；3–8秒按参考的转头方向缓慢转向画面右侧；8–12秒保持该朝向，自然呼吸。双肩与身体不要跟着大幅旋转，人物不说话，不加音乐或字幕，只保留轻微办公室环境声。",
+    "seconds": 12.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "557dc78fc2f3592d1f672bc18a9245419cac1d1a614116eb588db51d8b85ac79",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "57b20b812ea89f390f8c42e5bb75a90a35437820233874c524a7e053abf609eb",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "video",
+        "sha256": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+        "role": "motion_reference"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "让<Picture 1>中的女性穿上<Picture 2>的浅蓝色卷袖衬衫，在<Picture 3>的办公室内完成转头动作。<Picture 1>只给外貌与发型，不保留黑T恤或工作间；<Picture 2>只给衣服，不采用穿衣者身份。<Video 1>只借头部先看画面左下方、再平稳转向画面右侧的动作顺序，不要源男子、帽子、围巾、耳饰、公园背景或声音。生成12秒单镜头、固定机位、腰部以上中景。0–3秒人物站稳，头朝画面左下方；3–8秒按参考的转头方向缓慢转向画面右侧；8–12秒保持该朝向，自然呼吸。双肩与身体不要跟着大幅旋转，人物不说话，不加音乐或字幕，只保留轻微办公室环境声。",
+    "seconds": "12.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 3, \"role\": \"motion_reference\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "557dc78fc2f3592d1f672bc18a9245419cac1d1a614116eb588db51d8b85ac79",
+      "kind": "image",
+      "filename": "image_1.jpg"
+    },
+    {
+      "asset_id": "57b20b812ea89f390f8c42e5bb75a90a35437820233874c524a7e053abf609eb",
+      "kind": "image",
+      "filename": "image_2.jpg"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+      "kind": "video",
+      "filename": "video_4.mp4"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "一根均匀、能绕中央支点自由转动的平衡木，两端离支点一样远。一端放两个相同木块，另一端放一个同样的，看它怎样倾斜。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "一根均匀、能绕中央支点自由转动的平衡木，两端离支点一样远。一端放两个相同木块，另一端放一个同样的，看它怎样倾斜。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

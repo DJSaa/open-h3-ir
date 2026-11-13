@@ -1,0 +1,21 @@
+{
+  "direct": {
+    "intent": "Create a five-second realistic video of one woman facing the camera. She says exactly once in English: \"Ready, let us begin.\" Then she closes her mouth and smiles. Static camera; no captions or music.",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "Create a five-second realistic video of one woman facing the camera. She says exactly once in English: \"Ready, let us begin.\" Then she closes her mouth and smiles. Static camera; no captions or music.",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,43 @@
+{
+  "direct": {
+    "intent": "用图1开头、图2结尾，做10秒视频。她先看着镜头用普通话说一句\"准备好了，现在开始。\"，再慢慢转成图2的样子，镜头别动，自然一点。",
+    "seconds": 10.0,
+    "aspect": "768:1344",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "3576d7bd12927f07800956ace2edacbb455e0d092cddfba9945850111bb2fa8b",
+        "role": "frame_anchor_first"
+      },
+      {
+        "kind": "image",
+        "sha256": "c08b54228e95d3fbcae0617fd0bb106136c1d4d492ef395fba2c7bc0ed3e3fae",
+        "role": "frame_anchor_last"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "用图1开头、图2结尾，做10秒视频。她先看着镜头用普通话说一句\"准备好了，现在开始。\"，再慢慢转成图2的样子，镜头别动，自然一点。",
+    "seconds": "10.0",
+    "size": "768x1344",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"frame_anchor_first\"}, {\"index\": 1, \"role\": \"frame_anchor_last\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "3576d7bd12927f07800956ace2edacbb455e0d092cddfba9945850111bb2fa8b",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "c08b54228e95d3fbcae0617fd0bb106136c1d4d492ef395fba2c7bc0ed3e3fae",
+      "kind": "image",
+      "filename": "image_2.png"
+    }
+  ]
+}

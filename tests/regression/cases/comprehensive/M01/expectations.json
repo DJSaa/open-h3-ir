@@ -1,0 +1,27 @@
+{
+  "case_id": "M01",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "M01-C01",
+      "requirement": "第2个上传的人物先点头，第1个再挥手",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "M01-C02",
+      "requirement": "素材顺序不能被文件名或旧缓存覆盖",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "M01-C03",
+      "requirement": "动作先后保持",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

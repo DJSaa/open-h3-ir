@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static close shot shows a single dry, soft sponge lying flat on a tabletop. Its top surface, thickness, and contact with the table are clearly visible. A hand descends until the palm touches the sponge, then presses downward, making the same sponge visibly thinner and softly deformed. The hand briefly holds the compression, then lifts away until there is a clear gap above the sponge. After the pressure is removed, the sponge slowly rebounds in place, gradually regaining a thicker shape. Keep the contact, compression, hand separation, and recovery continuously visible in the same composition. The sponge retains its original color, porous texture, and identity through the whole action. End with the same sponge still regaining its thickness while the hand stays clear.\n\noverall_soundscape: Subdued room ambience accompanies soft contact and faint sponge friction during the press and release. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static close shot shows a single dry, soft sponge lying flat on a tabletop. Its top surface, thickness, and contact with the table are clearly visible. A hand descends until the palm touches the sponge, then presses downward, making the same sponge visibly thinner and softly deformed. The hand briefly holds the compression, then lifts away until there is a clear gap above the sponge. After the pressure is removed, the sponge slowly rebounds in place, gradually regaining a thicker shape. Keep the contact, compression, hand separation, and recovery continuously visible in the same composition. The sponge retains its original color, porous texture, and identity through the whole action. End with the same sponge still regaining its thickness while the hand stays clear.\n\noverall_soundscape: Subdued room ambience accompanies soft contact and faint sponge friction during the press and release. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

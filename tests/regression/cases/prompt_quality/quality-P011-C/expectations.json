@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P011-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "用一根绳子拉动桌上的木块",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "用一根绳子拉动桌上的木块",
+      "h3_refined_evidence": "a wooden block on a level tabletop and a rope securely attached to it. A hand holds the other end of the rope, with a clearly visible loose curve between the hand and the block at the beginning. The hand pulls gently away, first taking up the slack until the rope becomes straight and taut. As pulling continues, tension in the rope draws the same wooden block along the tabletop toward the hand."
+    },
+    {
+      "id": "R2",
+      "text": "先把松绳拉直",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "先把松绳拉直",
+      "h3_refined_evidence": "The hand pulls gently away, first taking up the slack until the rope becomes straight and taut."
+    },
+    {
+      "id": "R3",
+      "text": "再把木块沿着桌面拖过来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "再把木块沿着桌面拖过来",
+      "h3_refined_evidence": "As pulling continues, tension in the rope draws the same wooden block along the tabletop toward the hand."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "绳子先形成可传递拉力的连接，随后木块朝拉动方向移动，接触与连接保持。",
+      "observable_evidence": "能看见松弛段被收紧，之后木块沿支撑面移动。",
+      "fail_examples": [
+        "绳子仍完全松弛时木块就被隔空拖走",
+        "绳结脱离木块后木块仍跟随手移动",
+        "绳子弯曲着像硬杆一样把木块推走"
+      ],
+      "not_required": [
+        "绳子拉紧后木块可以短暂停留以克服静摩擦",
+        "不规定绳子伸长量或木块起动瞬间"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

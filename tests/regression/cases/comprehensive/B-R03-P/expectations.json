@@ -1,0 +1,39 @@
+{
+  "case_id": "B-R03-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R03-P-C01",
+      "requirement": "身份与发型取图片1，服装只取图片2浅蓝卷袖衬衫，不复制衣服供体身份。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-P-C02",
+      "requirement": "场景只取图片3办公室，排除人物图原背景和视频户外背景。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-P-C03",
+      "requirement": "视频只取头部动作，不转移源男性、帽子、围巾或耳饰。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-P-C04",
+      "requirement": "0–3秒看左下→3–8秒转向画面右→8–12秒保持，双肩身体不大幅转动。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-P-C05",
+      "requirement": "固定机位、腰部以上中景、一个镜头；无对白音乐字幕，只有轻微环境声。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

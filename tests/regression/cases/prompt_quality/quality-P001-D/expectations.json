@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P001-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把一个小球从手中静止松开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把一个小球从手中静止松开",
+      "h3_refined_evidence": "one hand holding a small ball motionless above an unobstructed floor. The camera holds a static shot with both the release point and the floor visible. After a brief still hold, the fingers open and withdraw without throwing or pushing the ball."
+    },
+    {
+      "id": "R2",
+      "text": "让它落到地面",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让它落到地面",
+      "h3_refined_evidence": "falls downward along one continuous path until it reaches the floor."
+    },
+    {
+      "id": "R3",
+      "text": "画面里看清松手和下落过程",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "画面里看清松手和下落过程",
+      "h3_refined_evidence": "Keep the opening fingers, the ball in flight, and its arrival at the floor readable within the frame."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "静止释放且失去支撑后，小球整体向地面下落，并与地面发生可解释的接触。",
+      "observable_evidence": "能辨认手指释放、小球离手和到达地面的先后关系。",
+      "fail_examples": [
+        "球离手后无外力持续悬停或向上飞走",
+        "球在空中直接消失并在地面重新出现",
+        "球未接触地面就停在半空"
+      ],
+      "not_required": [
+        "不测重力加速度或逐帧位移",
+        "不规定触地后的弹跳次数或高度"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

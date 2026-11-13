@@ -1,0 +1,38 @@
+{
+  "case_id": "quality-P006-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一颗红色台球滚过去撞上原本静止的蓝色台球",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一颗红色台球滚过去撞上原本静止的蓝色台球",
+      "h3_refined_evidence": "a red billiard ball rolling across a level billiard table toward a blue billiard ball that is initially stationary. Frame both balls and the space between them so their approach remains easy to read. The red ball reaches the blue ball and makes visible contact."
+    },
+    {
+      "id": "R2",
+      "text": "拍清接触后蓝球开始移动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清接触后蓝球开始移动",
+      "h3_refined_evidence": "The red ball reaches the blue ball and makes visible contact. Only after that contact does the blue ball begin moving away across the cloth."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "蓝球由静止到运动与两球的实际接触相联系，球体身份和接触关系连续。",
+      "observable_evidence": "两球在接触前可分别追踪，蓝球在接触后离开原位置。",
+      "fail_examples": [
+        "两球仍有明显间隙时蓝球已经自行弹走",
+        "两球相互穿过而无接触反应",
+        "碰撞时一球消失、变色或复制"
+      ],
+      "not_required": [
+        "红球减速、停下或偏转都可能合理",
+        "不要求两球速度精确交换或轨迹对称"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

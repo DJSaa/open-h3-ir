@@ -1,0 +1,15 @@
+{
+  "id": "V04",
+  "title": "结构化输入丢台词",
+  "artifact": "V04.txt",
+  "expected_check": "dialogue_inventory_check",
+  "purpose": "以P02的指定台词为期望；检查历史输出是否遗漏，不能把该历史输出当成金标。",
+  "status": "NOT_RUN",
+  "do_not_submit_as_user_prompt": true,
+  "interface": "internal_validator_or_review_harness",
+  "reference_case": "P02",
+  "expected_dialogue": [
+    "这个手感，办公正合适。"
+  ],
+  "video_seconds": 15
+}

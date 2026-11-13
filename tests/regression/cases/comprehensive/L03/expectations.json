@@ -1,0 +1,36 @@
+{
+  "case_id": "L03",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "准备好了吗？",
+      "occurrences": 1
+    },
+    {
+      "text": "Yes, let us start.",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "L03-C01",
+      "requirement": "两句语言分别正确",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "L03-C02",
+      "requirement": "图1先说中文、图2后说英语",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "L03-C03",
+      "requirement": "不交换说话人或重复对白",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

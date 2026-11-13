@@ -1,0 +1,39 @@
+{
+  "case_id": "B-R05-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R05-P-C01",
+      "requirement": "源视频负责场景与摄影，三张图共同定义一个替换产品。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R05-P-C02",
+      "requirement": "只有一只同款黑色AOC有线鼠标，玻璃杯、杯柄和透明材质被移除。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R05-P-C03",
+      "requirement": "保留棕色平面和两手电筒布置，鼠标自然平放，线缆自然延伸。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R05-P-C04",
+      "requirement": "摄影机慢速环绕靠近，物体静止，鼠标按钮滚轮外壳线缆跨角度一致。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R05-P-C05",
+      "requirement": "无人物、源声音、对白、音乐、字幕或切镜；只有轻微环境声。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

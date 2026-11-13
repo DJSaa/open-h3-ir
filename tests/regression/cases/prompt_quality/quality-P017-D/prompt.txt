@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a steady close shot frames a transparent cup on a level tabletop. Clear water forms the lower layer and edible oil forms the upper layer, with a readable boundary between them. A hand gently rocks the cup once through a small movement, creating a mild wave at the interface, then sets the cup steady again. The camera continues watching the same contents as the movement subsides. The water remains mainly below the oil, and the wavering boundary gradually becomes calmer and more clearly separated into upper and lower layers. A few small droplets can remain near the interface while the main layers become distinct again. End with the cup at rest and the layered liquid visible through its wall.
+
+overall_soundscape: A soft liquid slosh and a light cup-to-table touch are heard against low indoor ambience. There is no dialogue or narration.
+
+non_diegetic_music: N/A

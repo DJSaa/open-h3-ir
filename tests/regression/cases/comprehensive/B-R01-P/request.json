@@ -1,0 +1,71 @@
+{
+  "direct": {
+    "intent": "<Picture 1>、<Picture 2>和<Picture 3>是同一个人的不同参考，合并为一个角色，不要生成三个人。只采用<Picture 1>的衣着：米色细条纹短袖、白色短裤、赤脚。<Picture 2>和<Picture 3>只补充脸部和身体外形，不采用<Picture 3>的黑长裤或黑鞋。人物坐在<Picture 4>办公室的一张办公桌旁，不带入三张人物图的原背景。生成12秒自然写实视频，固定机位、一个完整单镜头，构图从头到脚，白短裤和赤脚可见。0–4秒人物看桌上的书；4–8秒缓慢抬头看向窗边；8–12秒转回镜头方向，轻微微笑。全片只出现这一个人。只保留轻微办公室环境声，不说话，不加字幕或音乐。",
+    "seconds": 12.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "1d89df534f7b0dcb2be71997c3edd072f89b2532fd13e65e1743485105d2a1fc",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "2f1f765d5103cdc54c42148a21c93081cae4d831377b476fc2ef2a6a9932c5f9",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "0f6925e5e4d8788651b5ef72ee593be9c0a14950eacbfb280128ee37846399a1",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "<Picture 1>、<Picture 2>和<Picture 3>是同一个人的不同参考，合并为一个角色，不要生成三个人。只采用<Picture 1>的衣着：米色细条纹短袖、白色短裤、赤脚。<Picture 2>和<Picture 3>只补充脸部和身体外形，不采用<Picture 3>的黑长裤或黑鞋。人物坐在<Picture 4>办公室的一张办公桌旁，不带入三张人物图的原背景。生成12秒自然写实视频，固定机位、一个完整单镜头，构图从头到脚，白短裤和赤脚可见。0–4秒人物看桌上的书；4–8秒缓慢抬头看向窗边；8–12秒转回镜头方向，轻微微笑。全片只出现这一个人。只保留轻微办公室环境声，不说话，不加字幕或音乐。",
+    "seconds": "12.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "1d89df534f7b0dcb2be71997c3edd072f89b2532fd13e65e1743485105d2a1fc",
+      "kind": "image",
+      "filename": "image_1.jpg"
+    },
+    {
+      "asset_id": "2f1f765d5103cdc54c42148a21c93081cae4d831377b476fc2ef2a6a9932c5f9",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "0f6925e5e4d8788651b5ef72ee593be9c0a14950eacbfb280128ee37846399a1",
+      "kind": "image",
+      "filename": "image_3.png"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_4.jpg"
+    }
+  ]
+}

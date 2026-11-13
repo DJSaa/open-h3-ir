@@ -1,0 +1,91 @@
+{
+  "direct": {
+    "intent": "图1和图2的人坐在图4的办公室，图1把图3的鼠标递给图2，做15秒。图1照视频1的样子转头看图2，用音频1那样的声音说：“先看这里，拿稳一下。”再把鼠标交过去，图2接住后点头，不说话。视频只参考转头。",
+    "seconds": 15.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "video",
+        "sha256": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+        "role": "motion_reference"
+      },
+      {
+        "kind": "audio",
+        "sha256": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+        "role": "voice_timbre"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "图1和图2的人坐在图4的办公室，图1把图3的鼠标递给图2，做15秒。图1照视频1的样子转头看图2，用音频1那样的声音说：“先看这里，拿稳一下。”再把鼠标交过去，图2接住后点头，不说话。视频只参考转头。",
+    "seconds": "15.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 4, \"role\": \"motion_reference\"}, {\"index\": 5, \"role\": \"voice_timbre\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_4.jpg"
+    },
+    {
+      "asset_id": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+      "kind": "video",
+      "filename": "video_5.mp4"
+    },
+    {
+      "asset_id": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+      "kind": "audio",
+      "filename": "audio_6.wav"
+    }
+  ]
+}

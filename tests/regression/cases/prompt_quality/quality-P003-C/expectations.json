@@ -1,0 +1,38 @@
+{
+  "case_id": "quality-P003-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一个人轻轻把小球向前上方抛出去",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一个人轻轻把小球向前上方抛出去",
+      "h3_refined_evidence": "one adult standing on level ground with a small ball in one hand. Leave enough open space ahead and above the person to contain the complete flight. The person gently throws the ball forward and upward, releasing it cleanly from the hand."
+    },
+    {
+      "id": "R2",
+      "text": "拍清小球先升起、再落向地面的完整弧线",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清小球先升起、再落向地面的完整弧线",
+      "h3_refined_evidence": "Follow the same ball within the stationary composition as it rises while moving forward, curves through the top of its arc, and then descends toward the ground farther ahead."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "球离手后呈连续的先升后降趋势，没有无接触的突变或重复升空。",
+      "observable_evidence": "可以追踪同一颗球经过离手、上升、顶部转折、下降和落地。",
+      "fail_examples": [
+        "球在最高处突然直角转向或长时间悬停",
+        "下降途中无外力重新升高",
+        "球沿路径分裂成多颗或跳到远处"
+      ],
+      "not_required": [
+        "不要求精确抛物线拟合",
+        "不规定抛射角、最高点位置和落点距离"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "在粗糙木桌上轻推一个木块，手离开后让它滑一小段并停下，别滑出桌边。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "在粗糙木桌上轻推一个木块，手离开后让它滑一小段并停下，别滑出桌边。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

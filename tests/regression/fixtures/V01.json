@@ -1,0 +1,15 @@
+{
+  "id": "V01",
+  "title": "重复说话引导夹动作",
+  "artifact": "V01.txt",
+  "expected_check": "DINGO-duplicate-speech-prefix",
+  "purpose": "机械校验应拒绝；纠错只保留一次说话引导，不改台词或音色。",
+  "status": "NOT_RUN",
+  "do_not_submit_as_user_prompt": true,
+  "interface": "internal_validator_or_review_harness",
+  "reference_case": "B-R04-A",
+  "expected_dialogue": [
+    "好，我来准备。"
+  ],
+  "video_seconds": 15
+}

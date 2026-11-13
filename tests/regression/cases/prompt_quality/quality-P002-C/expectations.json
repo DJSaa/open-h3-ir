@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P002-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把一颗小球放在倾斜木板的高处",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把一颗小球放在倾斜木板的高处",
+      "h3_refined_evidence": "One hand places a single small ball at the high end and holds it completely still against the board."
+    },
+    {
+      "id": "R2",
+      "text": "静止松手",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "静止松手",
+      "h3_refined_evidence": "The fingers open and the hand moves away without adding a push."
+    },
+    {
+      "id": "R3",
+      "text": "让它自己沿着木板滚下来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让它自己沿着木板滚下来",
+      "h3_refined_evidence": "The ball begins moving down the slope on its own and rolls along the wooden surface toward the low end."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "没有后续推动时，小球沿斜面向低处运动，接触过程连续。",
+      "observable_evidence": "板的高低方向可辨，小球释放后经过中段并到达低端。",
+      "fail_examples": [
+        "释放后小球无外力持续逆坡向上运动",
+        "球穿过木板或跳过中间路径",
+        "木板自行抬起把球运到低处"
+      ],
+      "not_required": [
+        "允许少量滑动，不要求严格无滑动滚动",
+        "不测滚动加速度、摩擦系数或最终速度"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

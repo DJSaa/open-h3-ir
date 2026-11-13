@@ -1,0 +1,52 @@
+{
+  "case_id": "quality-P014-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把装着半杯水的透明玻璃杯慢慢倾斜一点",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把装着半杯水的透明玻璃杯慢慢倾斜一点",
+      "h3_refined_evidence": "a transparent drinking glass holding about half a glass of water. A level tabletop and an upright background edge provide clear orientation references. A hand slowly tilts the glass by a small amount, keeping the rim high enough to retain the water."
+    },
+    {
+      "id": "R2",
+      "text": "倾斜后停一会儿",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "倾斜后停一会儿",
+      "h3_refined_evidence": "The hand then holds the glass still in its tilted position."
+    },
+    {
+      "id": "R3",
+      "text": "水不要倒出来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "水不要倒出来",
+      "h3_refined_evidence": "Finish on the tilted glass held steady with all of its water retained."
+    },
+    {
+      "id": "R4",
+      "text": "拍清杯子和水面的变化",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清杯子和水面的变化",
+      "h3_refined_evidence": "Keep the whole glass, the rim and the water boundary readable throughout."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "杯子停止倾斜并保持后，自由液面总体趋于重力下的水平，而不会刚性粘随杯口倾斜。",
+      "observable_evidence": "能区分杯口倾斜方向、水面方向及静置后的状态。",
+      "fail_examples": [
+        "静置后液面仍像固体一样始终平行于倾斜杯口",
+        "液体贴在杯壁上形成没有支撑的整体斜块",
+        "倾杯时水量无流出却大量消失"
+      ],
+      "not_required": [
+        "运动中允许水面晃动、弯曲和壁面润湿",
+        "不要求像素级水平或完全没有波纹"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

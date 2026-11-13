@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a static slightly elevated medium shot frames a wooden block on a level tabletop and a rope securely attached to it. A hand holds the other end of the rope, with a clearly visible loose curve between the hand and the block at the beginning. The hand pulls gently away, first taking up the slack until the rope becomes straight and taut. As pulling continues, tension in the rope draws the same wooden block along the tabletop toward the hand. Show the loose rope, the transition to tautness, and the block moving afterward in one continuous view. The hand stays away from the block itself, and the block remains supported by the table. Finish with the block visibly closer to the pulling hand.
+
+overall_soundscape: A soft rope-handling rustle is followed by a short wooden scrape as the block moves over the table. Quiet room ambience continues without dialogue or voiceover.
+
+non_diegetic_music: N/A

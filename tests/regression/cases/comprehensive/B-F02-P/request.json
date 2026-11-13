@@ -1,0 +1,43 @@
+{
+  "direct": {
+    "intent": "<Picture 1>是首帧，<Picture 2>是尾帧，生成10秒视频。保持同一个卷发人物、黑色上衣、粉色背景和固定镜头。先看向镜头，在第2到第4秒之间用自然普通话只说一次：\"准备好了，现在开始。\"说完闭嘴，再缓慢向画面左侧转头，到达尾帧所示以后脑和侧面为主的朝向，第8秒前完成，保持到结束。不要转回正面，不要把转头变成摄影机绕拍，也不要换人、加手持物、字幕、音乐或切镜。只保留这句台词与轻微环境声。",
+    "seconds": 10.0,
+    "aspect": "768:1344",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "3576d7bd12927f07800956ace2edacbb455e0d092cddfba9945850111bb2fa8b",
+        "role": "frame_anchor_first"
+      },
+      {
+        "kind": "image",
+        "sha256": "c08b54228e95d3fbcae0617fd0bb106136c1d4d492ef395fba2c7bc0ed3e3fae",
+        "role": "frame_anchor_last"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "<Picture 1>是首帧，<Picture 2>是尾帧，生成10秒视频。保持同一个卷发人物、黑色上衣、粉色背景和固定镜头。先看向镜头，在第2到第4秒之间用自然普通话只说一次：\"准备好了，现在开始。\"说完闭嘴，再缓慢向画面左侧转头，到达尾帧所示以后脑和侧面为主的朝向，第8秒前完成，保持到结束。不要转回正面，不要把转头变成摄影机绕拍，也不要换人、加手持物、字幕、音乐或切镜。只保留这句台词与轻微环境声。",
+    "seconds": "10.0",
+    "size": "768x1344",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"frame_anchor_first\"}, {\"index\": 1, \"role\": \"frame_anchor_last\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "3576d7bd12927f07800956ace2edacbb455e0d092cddfba9945850111bb2fa8b",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "c08b54228e95d3fbcae0617fd0bb106136c1d4d492ef395fba2c7bc0ed3e3fae",
+      "kind": "image",
+      "filename": "image_2.png"
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "direct": {
+    "intent": "生成10秒写实办公室视频。甲使用<Picture 1>的外貌和深蓝夹克、卡其内搭；乙使用<Picture 2>的外貌、黑针织帽和带浅绿反光带的蓝工装。<Picture 3>只说明摄影机看到的空间关系：甲在画面左边，乙在右边，前景办公桌居中。环境采用<Picture 4>的开放办公室，让两人在同一张前景办公桌两侧坐下，桌上放一张方案纸。全程固定机位、稳定双人中景。甲先低头看方案纸，再用手示意纸上内容；乙先看甲的手势，再点头回应。两人不交换位置或身份，不说话，不加字幕或音乐。只保留轻微办公室环境声。不要带入两张人物图的原背景，也不要把布局图的箭头、标记、文字、线条或绘画风格放进视频。",
+    "seconds": 10.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "5920107534e9b7779ee6fda879d881e5d230cd3c68bfed882544585ed35af5bf",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "生成10秒写实办公室视频。甲使用<Picture 1>的外貌和深蓝夹克、卡其内搭；乙使用<Picture 2>的外貌、黑针织帽和带浅绿反光带的蓝工装。<Picture 3>只说明摄影机看到的空间关系：甲在画面左边，乙在右边，前景办公桌居中。环境采用<Picture 4>的开放办公室，让两人在同一张前景办公桌两侧坐下，桌上放一张方案纸。全程固定机位、稳定双人中景。甲先低头看方案纸，再用手示意纸上内容；乙先看甲的手势，再点头回应。两人不交换位置或身份，不说话，不加字幕或音乐。只保留轻微办公室环境声。不要带入两张人物图的原背景，也不要把布局图的箭头、标记、文字、线条或绘画风格放进视频。",
+    "seconds": "10.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "5920107534e9b7779ee6fda879d881e5d230cd3c68bfed882544585ed35af5bf",
+      "kind": "image",
+      "filename": "image_3.png"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_4.jpg"
+    }
+  ]
+}

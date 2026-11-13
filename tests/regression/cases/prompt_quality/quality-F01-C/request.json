@@ -1,0 +1,45 @@
+{
+  "direct": {
+    "intent": "图1是开头，图2是结尾。做10秒视频，慢慢绕着杯子和两个手电筒拍，东西别动，画面平稳自然。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "38ef631832ea93f727b86d6c74200dedd586342acb1813cef66fdd3236e97a72",
+        "role": "frame_anchor_first"
+      },
+      {
+        "kind": "image",
+        "sha256": "b657b49dfce532f9bb39de66e0add48e705eb5c457072de129b7e6fd93b2bd67",
+        "role": "frame_anchor_last"
+      }
+    ],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "图1是开头，图2是结尾。做10秒视频，慢慢绕着杯子和两个手电筒拍，东西别动，画面平稳自然。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"frame_anchor_first\"}, {\"index\": 1, \"role\": \"frame_anchor_last\"}]",
+    "dialogue": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "38ef631832ea93f727b86d6c74200dedd586342acb1813cef66fdd3236e97a72",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "b657b49dfce532f9bb39de66e0add48e705eb5c457072de129b7e6fd93b2bd67",
+      "kind": "image",
+      "filename": "image_2.png"
+    }
+  ]
+}

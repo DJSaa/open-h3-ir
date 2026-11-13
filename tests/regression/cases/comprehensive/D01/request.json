@@ -1,0 +1,79 @@
+{
+  "direct": {
+    "intent": "图1和图2两个人在图3的办公室聊天，做5秒。图1说：“周末一起去看海，我们早点出发。”图2接着说：“好，我来准备。”两人的声音分别参考音频1、音频2。图1还在说的时候切到图2听的表情，图1的声音继续，拍得自然一点。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "audio",
+        "sha256": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+        "role": "voice_timbre"
+      },
+      {
+        "kind": "audio",
+        "sha256": "b2093ab180a3715f63d9a03789b04615c213e7a0b63a07649d75784f873e0e64",
+        "role": "voice_timbre"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "图1和图2两个人在图3的办公室聊天，做5秒。图1说：“周末一起去看海，我们早点出发。”图2接着说：“好，我来准备。”两人的声音分别参考音频1、音频2。图1还在说的时候切到图2听的表情，图1的声音继续，拍得自然一点。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 3, \"role\": \"voice_timbre\"}, {\"index\": 4, \"role\": \"voice_timbre\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+      "kind": "audio",
+      "filename": "audio_4.wav"
+    },
+    {
+      "asset_id": "b2093ab180a3715f63d9a03789b04615c213e7a0b63a07649d75784f873e0e64",
+      "kind": "audio",
+      "filename": "audio_5.wav"
+    }
+  ]
+}

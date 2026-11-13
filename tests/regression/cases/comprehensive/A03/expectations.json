@@ -1,0 +1,27 @@
+{
+  "case_id": "A03",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "A03-C01",
+      "requirement": "Audio1为背景音乐复用，不是音色或仅风格",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A03-C02",
+      "requirement": "原旋律节奏不能替换",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A03-C03",
+      "requirement": "无人物、对白和歌词",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

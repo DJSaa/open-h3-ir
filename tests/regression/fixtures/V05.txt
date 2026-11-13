@@ -1,0 +1,1 @@
+detailed_description: [Shot 1] 图1继续说道 <Subject 1> (S1) says: <d>[Chinese] 准备好了，现在开始。</d>

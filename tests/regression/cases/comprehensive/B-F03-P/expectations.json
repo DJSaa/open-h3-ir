@@ -1,0 +1,39 @@
+{
+  "case_id": "B-F03-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-F03-P-C01",
+      "requirement": "首尾分别锚定展开和弯指末态，保持原3D风格与背景。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F03-P-C02",
+      "requirement": "一次连续弯指过渡，第6秒前完成并保持，不重新张开。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F03-P-C03",
+      "requirement": "同一只手、五根手指和正确关节连接，没有多手或新增脸部。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F03-P-C04",
+      "requirement": "机位、手腕位置和掌心朝向保持。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F03-P-C05",
+      "requirement": "无文字、对白、音乐或切镜。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

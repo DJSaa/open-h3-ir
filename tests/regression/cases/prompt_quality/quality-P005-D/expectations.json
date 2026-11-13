@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P005-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "在粗糙木桌上轻推一个木块",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "在粗糙木桌上轻推一个木块",
+      "h3_refined_evidence": "a wooden block on a rough wooden tabletop, with the nearby table edge clearly visible and ample space between the block and that edge. A hand gives the block one gentle push along the surface, then lifts away completely."
+    },
+    {
+      "id": "R2",
+      "text": "手离开后让它滑一小段并停下",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "手离开后让它滑一小段并停下",
+      "h3_refined_evidence": "The same block continues sliding a short distance after contact with the hand ends. Its motion gradually slows against the rough wood until it stops safely on the tabletop before reaching the edge."
+    },
+    {
+      "id": "R3",
+      "text": "别滑出桌边",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "别滑出桌边",
+      "h3_refined_evidence": "until it stops safely on the tabletop before reaching the edge."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "手离开后木块仍有一段滑动，在无新外力的粗糙水平面上总体减速并停下。",
+      "observable_evidence": "能看清手与木块分离，随后木块移动一段并在桌面静止。",
+      "fail_examples": [
+        "手刚离开木块就无过渡瞬移到终点",
+        "无新外力时木块持续加速",
+        "木块离桌悬浮滑行或变成带轮小车"
+      ],
+      "not_required": [
+        "不测减速度或摩擦系数",
+        "不限定停止距离和滑行时间"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

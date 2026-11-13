@@ -1,0 +1,39 @@
+{
+  "case_id": "B-F01-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-F01-P-C01",
+      "requirement": "两图分别作为首尾时间锚点，连续到达尾帧。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F01-P-C02",
+      "requirement": "玻璃杯和两只手电筒保持同一身份和绝对位置，不碎裂或自行旋转。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F01-P-C03",
+      "requirement": "视点变化由摄影机环绕并略微靠近产生，第9秒到达终态并保持。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F01-P-C04",
+      "requirement": "杯柄、光束与两灯的空间关系连续合理。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F01-P-C05",
+      "requirement": "单镜头，无人物、对白、音乐或字幕；只有轻微环境声。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

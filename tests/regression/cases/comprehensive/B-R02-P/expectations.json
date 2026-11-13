@@ -1,0 +1,45 @@
+{
+  "case_id": "B-R02-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R02-P-C01",
+      "requirement": "甲、乙、布局和办公室四份参考用途分开。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-P-C02",
+      "requirement": "甲全程画面左、乙全程画面右；外貌和服装不交换。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-P-C03",
+      "requirement": "甲先看方案纸再示意纸面，乙看手势后点头，发起与回应角色不反转。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-P-C04",
+      "requirement": "环境采用图片4的开放办公室，不带入人物原背景或布局图画面。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-P-C05",
+      "requirement": "固定机位、完整单镜头、稳定双人中景，不交换左右关系。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-P-C06",
+      "requirement": "无布局图箭头、标记、文字或线条；只有轻微环境声，无对白、字幕或音乐。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

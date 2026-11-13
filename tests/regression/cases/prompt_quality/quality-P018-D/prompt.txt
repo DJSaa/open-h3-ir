@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a steady side close shot clearly frames the edge of a table and the space below it. Hands place a piece of soft fabric across the edge so that most of it rests on the tabletop and a smaller portion extends beyond the edge. The hands release the fabric and move clear. The unsupported portion drops into a loose downward drape while the larger portion remains in contact with the table. The fabric bends over the edge and develops soft folds as its small movements settle. Keep the tabletop contact, the bend at the edge and the hanging section visible together. Finish with the same cloth resting naturally, most on the table and the smaller part hanging below.
+
+overall_soundscape: Soft fabric rustling and light handling sounds are heard over quiet room ambience. There is no speech or voiceover.
+
+non_diegetic_music: N/A

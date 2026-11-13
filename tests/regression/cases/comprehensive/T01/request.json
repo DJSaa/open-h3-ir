@@ -1,0 +1,21 @@
+{
+  "direct": {
+    "intent": "生成5秒写实视频：一只红色陶瓷杯静置在木桌上，摄影机缓慢靠近。只有窗外雨声，没有人物、说话、音乐或字幕。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "生成5秒写实视频：一只红色陶瓷杯静置在木桌上，摄影机缓慢靠近。只有窗外雨声，没有人物、说话、音乐或字幕。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": []
+}

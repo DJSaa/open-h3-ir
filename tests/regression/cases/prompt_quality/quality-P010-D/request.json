@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static frontal medium shot shows a uniform balance beam that rotates freely around its central pivot. Its two ends are equally distant from the pivot and remain fully visible. Begin with the beam held level while two identical wooden blocks are placed at one end and one matching wooden block is placed at the other end. Once the blocks are in position, the supporting hand moves clear so the beam can tilt freely. The end carrying two blocks descends while the end carrying one block rises. Keep the pivot fixed and show the change continuously from the level starting state to the tilted result. Preserve the equal arm lengths and the three matching blocks throughout.\n\noverall_soundscape: Small wooden placement taps are followed by a faint creak as the beam tilts over quiet room ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static frontal medium shot shows a uniform balance beam that rotates freely around its central pivot. Its two ends are equally distant from the pivot and remain fully visible. Begin with the beam held level while two identical wooden blocks are placed at one end and one matching wooden block is placed at the other end. Once the blocks are in position, the supporting hand moves clear so the beam can tilt freely. The end carrying two blocks descends while the end carrying one block rises. Keep the pivot fixed and show the change continuously from the level starting state to the tilted result. Preserve the equal arm lengths and the three matching blocks throughout.\n\noverall_soundscape: Small wooden placement taps are followed by a faint creak as the beam tilts over quiet room ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

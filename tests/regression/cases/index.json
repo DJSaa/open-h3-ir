@@ -1,0 +1,1278 @@
+{
+  "schema_version": 1,
+  "case_count": 126,
+  "normal_count": 121,
+  "negative_count": 5,
+  "cases": [
+    {
+      "id": "B-F01-A",
+      "suite": "comprehensive",
+      "title": "玻璃杯与双手电筒：环绕运镜到达尾帧／业余",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-F01-A/request.json",
+      "prompt_file": "cases/comprehensive/B-F01-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-F01-A/expectations.json"
+    },
+    {
+      "id": "B-F01-P",
+      "suite": "comprehensive",
+      "title": "玻璃杯与双手电筒：环绕运镜到达尾帧／专业",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-F01-P/request.json",
+      "prompt_file": "cases/comprehensive/B-F01-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-F01-P/expectations.json"
+    },
+    {
+      "id": "B-F02-A",
+      "suite": "comprehensive",
+      "title": "真人转头口播：先说话再到达背侧终态／业余",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-F02-A/request.json",
+      "prompt_file": "cases/comprehensive/B-F02-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-F02-A/expectations.json"
+    },
+    {
+      "id": "B-F02-P",
+      "suite": "comprehensive",
+      "title": "真人转头口播：先说话再到达背侧终态／专业",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-F02-P/request.json",
+      "prompt_file": "cases/comprehensive/B-F02-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-F02-P/expectations.json"
+    },
+    {
+      "id": "B-F03-A",
+      "suite": "comprehensive",
+      "title": "辅助手势：3D手模型弯指与终态保持／业余",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-F03-A/request.json",
+      "prompt_file": "cases/comprehensive/B-F03-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-F03-A/expectations.json"
+    },
+    {
+      "id": "B-F03-P",
+      "suite": "comprehensive",
+      "title": "辅助手势：3D手模型弯指与终态保持／专业",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-F03-P/request.json",
+      "prompt_file": "cases/comprehensive/B-F03-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-F03-P/expectations.json"
+    },
+    {
+      "id": "B-R01-A",
+      "suite": "comprehensive",
+      "title": "同人三视图与服装冲突：白短裤优先／业余",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R01-A/request.json",
+      "prompt_file": "cases/comprehensive/B-R01-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R01-A/expectations.json"
+    },
+    {
+      "id": "B-R01-P",
+      "suite": "comprehensive",
+      "title": "同人三视图与服装冲突：白短裤优先／专业",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R01-P/request.json",
+      "prompt_file": "cases/comprehensive/B-R01-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R01-P/expectations.json"
+    },
+    {
+      "id": "B-R02-A",
+      "suite": "comprehensive",
+      "title": "两人、布局与办公室：甲左乙右和动作回应／业余",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R02-A/request.json",
+      "prompt_file": "cases/comprehensive/B-R02-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R02-A/expectations.json"
+    },
+    {
+      "id": "B-R02-P",
+      "suite": "comprehensive",
+      "title": "两人、布局与办公室：甲左乙右和动作回应／专业",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R02-P/request.json",
+      "prompt_file": "cases/comprehensive/B-R02-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R02-P/expectations.json"
+    },
+    {
+      "id": "B-R03-A",
+      "suite": "comprehensive",
+      "title": "身份＋衬衫＋办公室＋转头视频：四类来源分离／业余",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R03-A/request.json",
+      "prompt_file": "cases/comprehensive/B-R03-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R03-A/expectations.json"
+    },
+    {
+      "id": "B-R03-P",
+      "suite": "comprehensive",
+      "title": "身份＋衬衫＋办公室＋转头视频：四类来源分离／专业",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R03-P/request.json",
+      "prompt_file": "cases/comprehensive/B-R03-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R03-P/expectations.json"
+    },
+    {
+      "id": "B-R04-A",
+      "suite": "comprehensive",
+      "title": "办公室双音色对话：切到听者后保留画外甲／业余",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R04-A/request.json",
+      "prompt_file": "cases/comprehensive/B-R04-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R04-A/expectations.json"
+    },
+    {
+      "id": "B-R04-P",
+      "suite": "comprehensive",
+      "title": "办公室双音色对话：切到听者后保留画外甲／专业",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R04-P/request.json",
+      "prompt_file": "cases/comprehensive/B-R04-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R04-P/expectations.json"
+    },
+    {
+      "id": "B-R05-A",
+      "suite": "comprehensive",
+      "title": "源摄影＋同款鼠标三视图：产品替换／业余",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R05-A/request.json",
+      "prompt_file": "cases/comprehensive/B-R05-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R05-A/expectations.json"
+    },
+    {
+      "id": "B-R05-P",
+      "suite": "comprehensive",
+      "title": "源摄影＋同款鼠标三视图：产品替换／专业",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R05-P/request.json",
+      "prompt_file": "cases/comprehensive/B-R05-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R05-P/expectations.json"
+    },
+    {
+      "id": "B-R07-A",
+      "suite": "comprehensive",
+      "title": "四图＋转头视频＋音色：双人物递鼠标／业余",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R07-A/request.json",
+      "prompt_file": "cases/comprehensive/B-R07-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R07-A/expectations.json"
+    },
+    {
+      "id": "B-R07-P",
+      "suite": "comprehensive",
+      "title": "四图＋转头视频＋音色：双人物递鼠标／专业",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R07-P/request.json",
+      "prompt_file": "cases/comprehensive/B-R07-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R07-P/expectations.json"
+    },
+    {
+      "id": "B-R08-A",
+      "suite": "comprehensive",
+      "title": "同款有线鼠标三视图＋双人物＋办公室＋BGM／业余",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R08-A/request.json",
+      "prompt_file": "cases/comprehensive/B-R08-A/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R08-A/expectations.json"
+    },
+    {
+      "id": "B-R08-P",
+      "suite": "comprehensive",
+      "title": "同款有线鼠标三视图＋双人物＋办公室＋BGM／专业",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/B-R08-P/request.json",
+      "prompt_file": "cases/comprehensive/B-R08-P/prompt.txt",
+      "expectations_file": "cases/comprehensive/B-R08-P/expectations.json"
+    },
+    {
+      "id": "quality-F01-C",
+      "suite": "prompt_quality",
+      "title": "玻璃杯与双手电筒：环绕运镜到达尾帧／普通描述",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-F01-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-F01-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-F01-C/expectations.json"
+    },
+    {
+      "id": "quality-F01-D",
+      "suite": "prompt_quality",
+      "title": "玻璃杯与双手电筒：环绕运镜到达尾帧／H3精修",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-F01-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-F01-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-F01-D/expectations.json"
+    },
+    {
+      "id": "quality-F02-C",
+      "suite": "prompt_quality",
+      "title": "真人转头口播：先说话再到达背侧终态／普通描述",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-F02-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-F02-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-F02-C/expectations.json"
+    },
+    {
+      "id": "quality-F02-D",
+      "suite": "prompt_quality",
+      "title": "真人转头口播：先说话再到达背侧终态／H3精修",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-F02-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-F02-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-F02-D/expectations.json"
+    },
+    {
+      "id": "quality-F03-C",
+      "suite": "prompt_quality",
+      "title": "3D手模型：首尾手势连续变化／普通描述",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-F03-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-F03-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-F03-C/expectations.json"
+    },
+    {
+      "id": "quality-F03-D",
+      "suite": "prompt_quality",
+      "title": "3D手模型：首尾手势连续变化／H3精修",
+      "mode": "fl2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-F03-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-F03-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-F03-D/expectations.json"
+    },
+    {
+      "id": "quality-P001-C",
+      "suite": "prompt_quality",
+      "title": "静止松手后的自由落体／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P001-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P001-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P001-C/expectations.json"
+    },
+    {
+      "id": "quality-P001-D",
+      "suite": "prompt_quality",
+      "title": "静止松手后的自由落体／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P001-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P001-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P001-D/expectations.json"
+    },
+    {
+      "id": "quality-P002-C",
+      "suite": "prompt_quality",
+      "title": "小球沿斜面自然滚下／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P002-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P002-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P002-C/expectations.json"
+    },
+    {
+      "id": "quality-P002-D",
+      "suite": "prompt_quality",
+      "title": "小球沿斜面自然滚下／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P002-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P002-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P002-D/expectations.json"
+    },
+    {
+      "id": "quality-P003-C",
+      "suite": "prompt_quality",
+      "title": "向前抛球的空中弧线／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P003-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P003-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P003-C/expectations.json"
+    },
+    {
+      "id": "quality-P003-D",
+      "suite": "prompt_quality",
+      "title": "向前抛球的空中弧线／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P003-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P003-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P003-D/expectations.json"
+    },
+    {
+      "id": "quality-P004-C",
+      "suite": "prompt_quality",
+      "title": "橡胶球反弹逐渐减弱／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P004-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P004-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P004-C/expectations.json"
+    },
+    {
+      "id": "quality-P004-D",
+      "suite": "prompt_quality",
+      "title": "橡胶球反弹逐渐减弱／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P004-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P004-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P004-D/expectations.json"
+    },
+    {
+      "id": "quality-P005-C",
+      "suite": "prompt_quality",
+      "title": "木块滑行后的摩擦减速／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P005-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P005-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P005-C/expectations.json"
+    },
+    {
+      "id": "quality-P005-D",
+      "suite": "prompt_quality",
+      "title": "木块滑行后的摩擦减速／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P005-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P005-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P005-D/expectations.json"
+    },
+    {
+      "id": "quality-P006-C",
+      "suite": "prompt_quality",
+      "title": "台球接触后的运动传递／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P006-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P006-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P006-C/expectations.json"
+    },
+    {
+      "id": "quality-P006-D",
+      "suite": "prompt_quality",
+      "title": "台球接触后的运动传递／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P006-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P006-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P006-D/expectations.json"
+    },
+    {
+      "id": "quality-P007-C",
+      "suite": "prompt_quality",
+      "title": "骨牌倒下的接触传递／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P007-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P007-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P007-C/expectations.json"
+    },
+    {
+      "id": "quality-P007-D",
+      "suite": "prompt_quality",
+      "title": "骨牌倒下的接触传递／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P007-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P007-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P007-D/expectations.json"
+    },
+    {
+      "id": "quality-P008-C",
+      "suite": "prompt_quality",
+      "title": "悬挂小球的自由摆动／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P008-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P008-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P008-C/expectations.json"
+    },
+    {
+      "id": "quality-P008-D",
+      "suite": "prompt_quality",
+      "title": "悬挂小球的自由摆动／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P008-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P008-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P008-D/expectations.json"
+    },
+    {
+      "id": "quality-P009-C",
+      "suite": "prompt_quality",
+      "title": "弹簧滑块的阻尼振动／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P009-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P009-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P009-C/expectations.json"
+    },
+    {
+      "id": "quality-P009-D",
+      "suite": "prompt_quality",
+      "title": "弹簧滑块的阻尼振动／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P009-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P009-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P009-D/expectations.json"
+    },
+    {
+      "id": "quality-P010-C",
+      "suite": "prompt_quality",
+      "title": "等臂跷跷板的配重倾斜／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P010-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P010-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P010-C/expectations.json"
+    },
+    {
+      "id": "quality-P010-D",
+      "suite": "prompt_quality",
+      "title": "等臂跷跷板的配重倾斜／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P010-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P010-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P010-D/expectations.json"
+    },
+    {
+      "id": "quality-P011-C",
+      "suite": "prompt_quality",
+      "title": "绳子拉紧后拖动木块／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P011-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P011-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P011-C/expectations.json"
+    },
+    {
+      "id": "quality-P011-D",
+      "suite": "prompt_quality",
+      "title": "绳子拉紧后拖动木块／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P011-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P011-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P011-D/expectations.json"
+    },
+    {
+      "id": "quality-P012-C",
+      "suite": "prompt_quality",
+      "title": "水壶倒水的重力流动／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P012-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P012-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P012-C/expectations.json"
+    },
+    {
+      "id": "quality-P012-D",
+      "suite": "prompt_quality",
+      "title": "水壶倒水的重力流动／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P012-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P012-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P012-D/expectations.json"
+    },
+    {
+      "id": "quality-P013-C",
+      "suite": "prompt_quality",
+      "title": "两容器转移水量的对应变化／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P013-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P013-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P013-C/expectations.json"
+    },
+    {
+      "id": "quality-P013-D",
+      "suite": "prompt_quality",
+      "title": "两容器转移水量的对应变化／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P013-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P013-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P013-D/expectations.json"
+    },
+    {
+      "id": "quality-P014-C",
+      "suite": "prompt_quality",
+      "title": "倾杯后静置的自由液面／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P014-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P014-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P014-C/expectations.json"
+    },
+    {
+      "id": "quality-P014-D",
+      "suite": "prompt_quality",
+      "title": "倾杯后静置的自由液面／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P014-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P014-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P014-D/expectations.json"
+    },
+    {
+      "id": "quality-P015-C",
+      "suite": "prompt_quality",
+      "title": "软木塞松手后浮回水面／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P015-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P015-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P015-C/expectations.json"
+    },
+    {
+      "id": "quality-P015-D",
+      "suite": "prompt_quality",
+      "title": "软木塞松手后浮回水面／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P015-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P015-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P015-D/expectations.json"
+    },
+    {
+      "id": "quality-P016-C",
+      "suite": "prompt_quality",
+      "title": "完全浸水的实心不锈钢茶匙下沉／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P016-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P016-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P016-C/expectations.json"
+    },
+    {
+      "id": "quality-P016-D",
+      "suite": "prompt_quality",
+      "title": "完全浸水的实心不锈钢茶匙下沉／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P016-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P016-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P016-D/expectations.json"
+    },
+    {
+      "id": "quality-P017-C",
+      "suite": "prompt_quality",
+      "title": "轻晃油水后恢复上下分层／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P017-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P017-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P017-C/expectations.json"
+    },
+    {
+      "id": "quality-P017-D",
+      "suite": "prompt_quality",
+      "title": "轻晃油水后恢复上下分层／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P017-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P017-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P017-D/expectations.json"
+    },
+    {
+      "id": "quality-P018-C",
+      "suite": "prompt_quality",
+      "title": "桌边软布的支撑与下垂／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P018-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P018-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P018-C/expectations.json"
+    },
+    {
+      "id": "quality-P018-D",
+      "suite": "prompt_quality",
+      "title": "桌边软布的支撑与下垂／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P018-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P018-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P018-D/expectations.json"
+    },
+    {
+      "id": "quality-P019-C",
+      "suite": "prompt_quality",
+      "title": "右手放稳半杯水后松手／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P019-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P019-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P019-C/expectations.json"
+    },
+    {
+      "id": "quality-P019-D",
+      "suite": "prompt_quality",
+      "title": "右手放稳半杯水后松手／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P019-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P019-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P019-D/expectations.json"
+    },
+    {
+      "id": "quality-P020-C",
+      "suite": "prompt_quality",
+      "title": "双人交接同一本书／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P020-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P020-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P020-C/expectations.json"
+    },
+    {
+      "id": "quality-P020-D",
+      "suite": "prompt_quality",
+      "title": "双人交接同一本书／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P020-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P020-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P020-D/expectations.json"
+    },
+    {
+      "id": "quality-P021-C",
+      "suite": "prompt_quality",
+      "title": "成人缓慢坐稳椅子／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P021-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P021-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P021-C/expectations.json"
+    },
+    {
+      "id": "quality-P021-D",
+      "suite": "prompt_quality",
+      "title": "成人缓慢坐稳椅子／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P021-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P021-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P021-D/expectations.json"
+    },
+    {
+      "id": "quality-P022-C",
+      "suite": "prompt_quality",
+      "title": "平地行走中的脚地接触／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P022-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P022-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P022-C/expectations.json"
+    },
+    {
+      "id": "quality-P022-D",
+      "suite": "prompt_quality",
+      "title": "平地行走中的脚地接触／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P022-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P022-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P022-D/expectations.json"
+    },
+    {
+      "id": "quality-P023-C",
+      "suite": "prompt_quality",
+      "title": "勺子搅动咖啡带动奶纹／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P023-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P023-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P023-C/expectations.json"
+    },
+    {
+      "id": "quality-P023-D",
+      "suite": "prompt_quality",
+      "title": "勺子搅动咖啡带动奶纹／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P023-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P023-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P023-D/expectations.json"
+    },
+    {
+      "id": "quality-P024-C",
+      "suite": "prompt_quality",
+      "title": "切下软蛋糕的一块／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P024-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P024-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P024-C/expectations.json"
+    },
+    {
+      "id": "quality-P024-D",
+      "suite": "prompt_quality",
+      "title": "切下软蛋糕的一块／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P024-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P024-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P024-D/expectations.json"
+    },
+    {
+      "id": "quality-P025-C",
+      "suite": "prompt_quality",
+      "title": "毛巾搭椅背后的自然垂落／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P025-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P025-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P025-C/expectations.json"
+    },
+    {
+      "id": "quality-P025-D",
+      "suite": "prompt_quality",
+      "title": "毛巾搭椅背后的自然垂落／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P025-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P025-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P025-D/expectations.json"
+    },
+    {
+      "id": "quality-P026-C",
+      "suite": "prompt_quality",
+      "title": "海绵受压后回弹／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P026-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P026-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P026-C/expectations.json"
+    },
+    {
+      "id": "quality-P026-D",
+      "suite": "prompt_quality",
+      "title": "海绵受压后回弹／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P026-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P026-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P026-D/expectations.json"
+    },
+    {
+      "id": "quality-P027-C",
+      "suite": "prompt_quality",
+      "title": "单侧台灯照射形成背光侧阴影／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P027-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P027-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P027-C/expectations.json"
+    },
+    {
+      "id": "quality-P027-D",
+      "suite": "prompt_quality",
+      "title": "单侧台灯照射形成背光侧阴影／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P027-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P027-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P027-D/expectations.json"
+    },
+    {
+      "id": "quality-P028-C",
+      "suite": "prompt_quality",
+      "title": "玩具车移动与平面镜倒影／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P028-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P028-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P028-C/expectations.json"
+    },
+    {
+      "id": "quality-P028-D",
+      "suite": "prompt_quality",
+      "title": "玩具车移动与平面镜倒影／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P028-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P028-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P028-D/expectations.json"
+    },
+    {
+      "id": "quality-P029-C",
+      "suite": "prompt_quality",
+      "title": "薄黄油在预热锅中融化／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P029-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P029-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P029-C/expectations.json"
+    },
+    {
+      "id": "quality-P029-D",
+      "suite": "prompt_quality",
+      "title": "薄黄油在预热锅中融化／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P029-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P029-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P029-D/expectations.json"
+    },
+    {
+      "id": "quality-P030-C",
+      "suite": "prompt_quality",
+      "title": "潮湿空气中冷杯外壁水珠聚并／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P030-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P030-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P030-C/expectations.json"
+    },
+    {
+      "id": "quality-P030-D",
+      "suite": "prompt_quality",
+      "title": "潮湿空气中冷杯外壁水珠聚并／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P030-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P030-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P030-D/expectations.json"
+    },
+    {
+      "id": "quality-P031-C",
+      "suite": "prompt_quality",
+      "title": "延时摄影中的冰块融化／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P031-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P031-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P031-C/expectations.json"
+    },
+    {
+      "id": "quality-P031-D",
+      "suite": "prompt_quality",
+      "title": "延时摄影中的冰块融化／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P031-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P031-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P031-D/expectations.json"
+    },
+    {
+      "id": "quality-P032-C",
+      "suite": "prompt_quality",
+      "title": "吸水纸接触色水后的向上浸润／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P032-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P032-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P032-C/expectations.json"
+    },
+    {
+      "id": "quality-P032-D",
+      "suite": "prompt_quality",
+      "title": "吸水纸接触色水后的向上浸润／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P032-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P032-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P032-D/expectations.json"
+    },
+    {
+      "id": "quality-P033-C",
+      "suite": "prompt_quality",
+      "title": "魔法设定下的悬浮水晶球／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P033-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P033-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P033-C/expectations.json"
+    },
+    {
+      "id": "quality-P033-D",
+      "suite": "prompt_quality",
+      "title": "魔法设定下的悬浮水晶球／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P033-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P033-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P033-D/expectations.json"
+    },
+    {
+      "id": "quality-P034-C",
+      "suite": "prompt_quality",
+      "title": "微重力舱内轻推小球漂移／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P034-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P034-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P034-C/expectations.json"
+    },
+    {
+      "id": "quality-P034-D",
+      "suite": "prompt_quality",
+      "title": "微重力舱内轻推小球漂移／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P034-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P034-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P034-D/expectations.json"
+    },
+    {
+      "id": "quality-P035-C",
+      "suite": "prompt_quality",
+      "title": "明确倒放的掉球镜头／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P035-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P035-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P035-C/expectations.json"
+    },
+    {
+      "id": "quality-P035-D",
+      "suite": "prompt_quality",
+      "title": "明确倒放的掉球镜头／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P035-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P035-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P035-D/expectations.json"
+    },
+    {
+      "id": "quality-P036-C",
+      "suite": "prompt_quality",
+      "title": "卡通方块夸张拉伸后恢复／普通描述",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P036-C/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P036-C/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P036-C/expectations.json"
+    },
+    {
+      "id": "quality-P036-D",
+      "suite": "prompt_quality",
+      "title": "卡通方块夸张拉伸后恢复／H3精修",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/prompt_quality/quality-P036-D/request.json",
+      "prompt_file": "cases/prompt_quality/quality-P036-D/prompt.txt",
+      "expectations_file": "cases/prompt_quality/quality-P036-D/expectations.json"
+    },
+    {
+      "id": "A01",
+      "suite": "comprehensive",
+      "title": "单人明确绑定女性参考音色",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/A01/request.json",
+      "prompt_file": "cases/comprehensive/A01/prompt.txt",
+      "expectations_file": "cases/comprehensive/A01/expectations.json"
+    },
+    {
+      "id": "A02",
+      "suite": "comprehensive",
+      "title": "双人交换音色引用",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/A02/request.json",
+      "prompt_file": "cases/comprehensive/A02/prompt.txt",
+      "expectations_file": "cases/comprehensive/A02/expectations.json"
+    },
+    {
+      "id": "A03",
+      "suite": "comprehensive",
+      "title": "参考音乐原旋律复用",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/A03/request.json",
+      "prompt_file": "cases/comprehensive/A03/prompt.txt",
+      "expectations_file": "cases/comprehensive/A03/expectations.json"
+    },
+    {
+      "id": "A04",
+      "suite": "comprehensive",
+      "title": "源音频长短不决定目标台词长度",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/A04/request.json",
+      "prompt_file": "cases/comprehensive/A04/prompt.txt",
+      "expectations_file": "cases/comprehensive/A04/expectations.json"
+    },
+    {
+      "id": "D01",
+      "suite": "comprehensive",
+      "title": "R04短对白／5秒",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/D01/request.json",
+      "prompt_file": "cases/comprehensive/D01/prompt.txt",
+      "expectations_file": "cases/comprehensive/D01/expectations.json"
+    },
+    {
+      "id": "D02",
+      "suite": "comprehensive",
+      "title": "R04短对白／10秒",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/D02/request.json",
+      "prompt_file": "cases/comprehensive/D02/prompt.txt",
+      "expectations_file": "cases/comprehensive/D02/expectations.json"
+    },
+    {
+      "id": "D03",
+      "suite": "comprehensive",
+      "title": "长视频短台词后静默",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/D03/request.json",
+      "prompt_file": "cases/comprehensive/D03/prompt.txt",
+      "expectations_file": "cases/comprehensive/D03/expectations.json"
+    },
+    {
+      "id": "D04",
+      "suite": "comprehensive",
+      "title": "较长台词不能被短对白优化截断",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/D04/request.json",
+      "prompt_file": "cases/comprehensive/D04/prompt.txt",
+      "expectations_file": "cases/comprehensive/D04/expectations.json"
+    },
+    {
+      "id": "D05",
+      "suite": "comprehensive",
+      "title": "明确要求重复两次",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/D05/request.json",
+      "prompt_file": "cases/comprehensive/D05/prompt.txt",
+      "expectations_file": "cases/comprehensive/D05/expectations.json"
+    },
+    {
+      "id": "D06",
+      "suite": "comprehensive",
+      "title": "禁止项中的引号不是台词",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/D06/request.json",
+      "prompt_file": "cases/comprehensive/D06/prompt.txt",
+      "expectations_file": "cases/comprehensive/D06/expectations.json"
+    },
+    {
+      "id": "D07",
+      "suite": "comprehensive",
+      "title": "用户明确要求慢语速与长停顿",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/D07/request.json",
+      "prompt_file": "cases/comprehensive/D07/prompt.txt",
+      "expectations_file": "cases/comprehensive/D07/expectations.json"
+    },
+    {
+      "id": "I01",
+      "suite": "comprehensive",
+      "title": "单首帧锚定",
+      "mode": "i2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/I01/request.json",
+      "prompt_file": "cases/comprehensive/I01/prompt.txt",
+      "expectations_file": "cases/comprehensive/I01/expectations.json"
+    },
+    {
+      "id": "L01",
+      "suite": "comprehensive",
+      "title": "英文指令保留中文台词",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/L01/request.json",
+      "prompt_file": "cases/comprehensive/L01/prompt.txt",
+      "expectations_file": "cases/comprehensive/L01/expectations.json"
+    },
+    {
+      "id": "L02",
+      "suite": "comprehensive",
+      "title": "中文指令保留英文台词",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/L02/request.json",
+      "prompt_file": "cases/comprehensive/L02/prompt.txt",
+      "expectations_file": "cases/comprehensive/L02/expectations.json"
+    },
+    {
+      "id": "L03",
+      "suite": "comprehensive",
+      "title": "双人物混合语言对白",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/L03/request.json",
+      "prompt_file": "cases/comprehensive/L03/prompt.txt",
+      "expectations_file": "cases/comprehensive/L03/expectations.json"
+    },
+    {
+      "id": "M01",
+      "suite": "comprehensive",
+      "title": "人物附件交换并同步改引用",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/M01/request.json",
+      "prompt_file": "cases/comprehensive/M01/prompt.txt",
+      "expectations_file": "cases/comprehensive/M01/expectations.json"
+    },
+    {
+      "id": "M02",
+      "suite": "comprehensive",
+      "title": "范围编号合并同一人物",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/M02/request.json",
+      "prompt_file": "cases/comprehensive/M02/prompt.txt",
+      "expectations_file": "cases/comprehensive/M02/expectations.json"
+    },
+    {
+      "id": "M03",
+      "suite": "comprehensive",
+      "title": "动作视频只借动作",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/M03/request.json",
+      "prompt_file": "cases/comprehensive/M03/prompt.txt",
+      "expectations_file": "cases/comprehensive/M03/expectations.json"
+    },
+    {
+      "id": "M04",
+      "suite": "comprehensive",
+      "title": "多角度参考不是多个物体",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/M04/request.json",
+      "prompt_file": "cases/comprehensive/M04/prompt.txt",
+      "expectations_file": "cases/comprehensive/M04/expectations.json"
+    },
+    {
+      "id": "N01",
+      "suite": "comprehensive",
+      "title": "引用不存在的素材",
+      "mode": "ref2va",
+      "negative": true,
+      "request_file": "cases/comprehensive/N01/request.json",
+      "prompt_file": "cases/comprehensive/N01/prompt.txt",
+      "expectations_file": "cases/comprehensive/N01/expectations.json"
+    },
+    {
+      "id": "N02",
+      "suite": "comprehensive",
+      "title": "视频总时长与请求字段冲突",
+      "mode": "ref2va",
+      "negative": true,
+      "request_file": "cases/comprehensive/N02/request.json",
+      "prompt_file": "cases/comprehensive/N02/prompt.txt",
+      "expectations_file": "cases/comprehensive/N02/expectations.json"
+    },
+    {
+      "id": "N03",
+      "suite": "comprehensive",
+      "title": "禁止对白与必说台词冲突",
+      "mode": "ref2va",
+      "negative": true,
+      "request_file": "cases/comprehensive/N03/request.json",
+      "prompt_file": "cases/comprehensive/N03/prompt.txt",
+      "expectations_file": "cases/comprehensive/N03/expectations.json"
+    },
+    {
+      "id": "N04",
+      "suite": "comprehensive",
+      "title": "不可实现的明确对白窗口",
+      "mode": "ref2va",
+      "negative": true,
+      "request_file": "cases/comprehensive/N04/request.json",
+      "prompt_file": "cases/comprehensive/N04/prompt.txt",
+      "expectations_file": "cases/comprehensive/N04/expectations.json"
+    },
+    {
+      "id": "N05",
+      "suite": "comprehensive",
+      "title": "空提示词",
+      "mode": "ref2va",
+      "negative": true,
+      "request_file": "cases/comprehensive/N05/request.json",
+      "prompt_file": "cases/comprehensive/N05/prompt.txt",
+      "expectations_file": "cases/comprehensive/N05/expectations.json"
+    },
+    {
+      "id": "P01",
+      "suite": "comprehensive",
+      "title": "已结构化R08业余优化稿",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/P01/request.json",
+      "prompt_file": "cases/comprehensive/P01/prompt.txt",
+      "expectations_file": "cases/comprehensive/P01/expectations.json"
+    },
+    {
+      "id": "P02",
+      "suite": "comprehensive",
+      "title": "已结构化R08专业优化稿",
+      "mode": "ref2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/P02/request.json",
+      "prompt_file": "cases/comprehensive/P02/prompt.txt",
+      "expectations_file": "cases/comprehensive/P02/expectations.json"
+    },
+    {
+      "id": "T01",
+      "suite": "comprehensive",
+      "title": "纯文本中文静默场景",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/T01/request.json",
+      "prompt_file": "cases/comprehensive/T01/prompt.txt",
+      "expectations_file": "cases/comprehensive/T01/expectations.json"
+    },
+    {
+      "id": "T02",
+      "suite": "comprehensive",
+      "title": "纯文本英文台词",
+      "mode": "t2va",
+      "negative": false,
+      "request_file": "cases/comprehensive/T02/request.json",
+      "prompt_file": "cases/comprehensive/T02/prompt.txt",
+      "expectations_file": "cases/comprehensive/T02/expectations.json"
+    }
+  ],
+  "not_covered": [
+    {
+      "id": "F04",
+      "reason": "Original package lacks suitable source assets."
+    },
+    {
+      "id": "R06",
+      "reason": "Original package lacks suitable source assets."
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "case_id": "A02",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "我们出发吧。",
+      "occurrences": 1
+    },
+    {
+      "text": "好，我来准备。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "A02-C01",
+      "requirement": "图1→Audio2、图2→Audio1，不能按上传顺序自动配对",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A02-C02",
+      "requirement": "两句按人物分配且顺序正确",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A02-C03",
+      "requirement": "参考用途只为音色",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

@@ -1,0 +1,63 @@
+{
+  "case_id": "quality-P027-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "画面左侧的一盏台灯照着桌上的小立方体",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "画面左侧的一盏台灯照着桌上的小立方体",
+      "h3_refined_evidence": "a desk lamp on screen-left, and a small opaque cube on the table. The lamp head is above the table and directs its light toward the cube."
+    },
+    {
+      "id": "R2",
+      "text": "让它在右侧桌面投下阴影",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让它在右侧桌面投下阴影",
+      "h3_refined_evidence": "Leave enough clear tabletop on screen-right to show the cube casting a readable shadow away from the lamp."
+    },
+    {
+      "id": "R3",
+      "text": "镜头固定",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "镜头固定",
+      "h3_refined_evidence": "The lamp and camera remain stationary."
+    },
+    {
+      "id": "R4",
+      "text": "慢慢把立方体向前推一点",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "慢慢把立方体向前推一点",
+      "h3_refined_evidence": "A hand slowly pushes the cube a short distance forward along the tabletop, toward its front edge, without lifting it."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "主阴影方向与给定光源和遮挡物位置相容。",
+      "observable_evidence": "台灯、立方体及背光侧桌面阴影可同时比较。",
+      "fail_examples": [
+        "只有左侧光源时清晰主阴影稳定朝向光源",
+        "阴影穿离物体且与移动完全无关"
+      ],
+      "not_required": [
+        "不要求精确影长或锐利硬边",
+        "允许半影和弱环境光填充"
+      ],
+      "id": "F1"
+    },
+    {
+      "criterion": "物体移动时阴影具有连续对应变化。",
+      "observable_evidence": "立方体位移过程中主阴影位置或轮廓同步连续变化。",
+      "fail_examples": [
+        "物体明显移动而主阴影钉在原位置",
+        "阴影无原因复制或突然翻到光源侧"
+      ],
+      "not_required": [
+        "不要求阴影与物体等尺寸或同速度"
+      ],
+      "id": "F2"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

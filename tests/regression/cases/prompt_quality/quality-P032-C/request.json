@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "一条白色吸水纸竖着放，底端蘸进有色水里，近拍颜色从接触处沿纸慢慢向上洇开。",
+    "seconds": 12,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "一条白色吸水纸竖着放，底端蘸进有色水里，近拍颜色从接触处沿纸慢慢向上洇开。",
+    "seconds": "12",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

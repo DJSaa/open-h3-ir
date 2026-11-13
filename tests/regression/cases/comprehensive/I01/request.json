@@ -1,0 +1,33 @@
+{
+  "direct": {
+    "intent": "图1是首帧，生成5秒视频。保持杯子和两个手电筒不动，摄影机轻轻靠近，不切镜，不说话。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "38ef631832ea93f727b86d6c74200dedd586342acb1813cef66fdd3236e97a72",
+        "role": "frame_anchor_first"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "图1是首帧，生成5秒视频。保持杯子和两个手电筒不动，摄影机轻轻靠近，不切镜，不说话。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"frame_anchor_first\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "38ef631832ea93f727b86d6c74200dedd586342acb1813cef66fdd3236e97a72",
+      "kind": "image",
+      "filename": "image_1.png"
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a static three-quarter view frames a tabletop, a desk lamp on screen-left, and a small opaque cube on the table. The lamp head is above the table and directs its light toward the cube. Leave enough clear tabletop on screen-right to show the cube casting a readable shadow away from the lamp. The lamp and camera remain stationary. A hand slowly pushes the cube a short distance forward along the tabletop, toward its front edge, without lifting it. As the cube moves, its shadow changes position and shape continuously on the right-hand tabletop, staying linked to the moving obstruction and the fixed light. Keep the lamp, cube, hand, and main shadow visible throughout. Finish with the cube stopped and the corresponding shadow settled in its new position.
+
+overall_soundscape: A soft scraping sound accompanies the cube sliding over the table, against quiet indoor ambience. No dialogue or voiceover.
+
+non_diegetic_music: N/A

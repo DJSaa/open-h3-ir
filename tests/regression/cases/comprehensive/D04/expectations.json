@@ -1,0 +1,32 @@
+{
+  "case_id": "D04",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "今天我们先检查设备，再整理桌上的资料，确认每个人都准备好以后，就一起出发去海边。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "D04-C01",
+      "requirement": "完整保留长台词，不压缩成摘要",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "D04-C02",
+      "requirement": "不机械要求所有对白5秒内完成",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "D04-C03",
+      "requirement": "不添加其它台词",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

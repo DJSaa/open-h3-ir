@@ -1,0 +1,57 @@
+{
+  "direct": {
+    "intent": "人物用图1，场景用图2。照视频1的方向缓慢转头，做5秒固定镜头视频。视频只借动作，不要视频中的人、衣服、背景或声音，不说话。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "557dc78fc2f3592d1f672bc18a9245419cac1d1a614116eb588db51d8b85ac79",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "video",
+        "sha256": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+        "role": "motion_reference"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "人物用图1，场景用图2。照视频1的方向缓慢转头，做5秒固定镜头视频。视频只借动作，不要视频中的人、衣服、背景或声音，不说话。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 2, \"role\": \"motion_reference\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "557dc78fc2f3592d1f672bc18a9245419cac1d1a614116eb588db51d8b85ac79",
+      "kind": "image",
+      "filename": "image_1.jpg"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_2.jpg"
+    },
+    {
+      "asset_id": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+      "kind": "video",
+      "filename": "video_3.mp4"
+    }
+  ]
+}

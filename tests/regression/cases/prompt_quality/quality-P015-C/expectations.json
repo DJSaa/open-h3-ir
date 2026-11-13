@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P015-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把一个软木塞按到水面下再松手",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把一个软木塞按到水面下再松手",
+      "h3_refined_evidence": "A hand presses a cork beneath the water surface and briefly holds it there. The fingers release the cork and withdraw, leaving its upward path unobstructed."
+    },
+    {
+      "id": "R2",
+      "text": "拍清它自己浮回水面的过程",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清它自己浮回水面的过程",
+      "h3_refined_evidence": "Keep the cork readable from the underwater release through its arrival at the surface."
+    },
+    {
+      "id": "R3",
+      "text": "最后让它自由漂着",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "最后让它自由漂着",
+      "h3_refined_evidence": "The final view holds on the cork floating freely, with no hand, thread or other object supporting it."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "完整软木塞释放后整体上浮，最终停留在水面附近自由漂浮。",
+      "observable_evidence": "能看见手离开、水下上升和接触水面后的漂浮状态。",
+      "fail_examples": [
+        "软木塞无额外约束却沉底并长期停住",
+        "手离开后软木塞瞬移到水面",
+        "软木塞在水面之上无支撑悬浮"
+      ],
+      "not_required": [
+        "允许短暂下冲、旋转和上浮后的上下晃动",
+        "不要求特定漂浮朝向或精确露出比例"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

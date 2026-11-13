@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static slightly elevated shot frames a wooden block on a rough wooden tabletop, with the nearby table edge clearly visible and ample space between the block and that edge. A hand gives the block one gentle push along the surface, then lifts away completely. The same block continues sliding a short distance after contact with the hand ends. Its motion gradually slows against the rough wood until it stops safely on the tabletop before reaching the edge. Keep the hand leaving the block, the short glide, and the final resting position continuously visible. The tabletop remains level and still. Preserve the block as one solid object in contact with the supporting surface, ending on a brief hold of the stopped block.\n\noverall_soundscape: A short wooden scraping sound follows the push and fades as the block stops. Quiet room ambience continues without dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static slightly elevated shot frames a wooden block on a rough wooden tabletop, with the nearby table edge clearly visible and ample space between the block and that edge. A hand gives the block one gentle push along the surface, then lifts away completely. The same block continues sliding a short distance after contact with the hand ends. Its motion gradually slows against the rough wood until it stops safely on the tabletop before reaching the edge. Keep the hand leaving the block, the short glide, and the final resting position continuously visible. The tabletop remains level and still. Preserve the block as one solid object in contact with the supporting surface, ending on a brief hold of the stopped block.\n\noverall_soundscape: A short wooden scraping sound follows the push and fades as the block stops. Quiet room ambience continues without dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "魔法场景里，一颗水晶球从桌面缓慢升起，悬停在空中轻轻旋转，结尾也别落回桌上。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "魔法场景里，一颗水晶球从桌面缓慢升起，悬停在空中轻轻旋转，结尾也别落回桌上。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

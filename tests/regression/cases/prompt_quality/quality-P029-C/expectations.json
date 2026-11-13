@@ -1,0 +1,46 @@
+{
+  "case_id": "quality-P029-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "预热过的平底锅里放一小片薄黄油",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "预热过的平底锅里放一小片薄黄油",
+      "h3_refined_evidence": "a close view looks into a preheated frying pan, holding a steady composition that clearly shows the pan bottom. A small, thin slice of butter is placed onto the hot surface."
+    },
+    {
+      "id": "R2",
+      "text": "拍它受热后逐渐变软、融化并摊开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍它受热后逐渐变软、融化并摊开",
+      "h3_refined_evidence": "Keep the same slice in view as the contact edge softens and a yellow liquid margin appears around it. The remaining solid gradually becomes smaller and softer while melted butter spreads outward along the pan bottom."
+    },
+    {
+      "id": "R3",
+      "text": "镜头靠近锅内",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "镜头靠近锅内",
+      "h3_refined_evidence": "a close view looks into a preheated frying pan, holding a steady composition that clearly shows the pan bottom."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "固态黄油向液态油脂的变化连续且与热锅接触相容。",
+      "observable_evidence": "边缘变软、液态油脂出现并摊开，残余固体可见缩小趋势。",
+      "fail_examples": [
+        "没有液体形成却整片凭空消失",
+        "固体黄油直接变成不相关物体",
+        "液态部分向空中无支撑上升"
+      ],
+      "not_required": [
+        "不要求十秒内完全融尽",
+        "允许细泡、残留固体和非均匀融化",
+        "不测量热量守恒"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

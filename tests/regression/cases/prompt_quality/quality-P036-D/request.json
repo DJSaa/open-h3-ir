@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] 2D cartoon animation, a static close shot frames one small blue block and two hands against a simple background. Each hand grasps one end of the block. The hands move apart and stretch the same blue shape into an exaggerated long strip, like pulling noodles, while both grips remain visibly connected to the ends. The shape stays continuous and intact as it lengthens, retaining its blue color and identity. The hands then release their grips and move clear. The stretched strip elastically recoils toward the middle, briefly overshoots with a playful squash, and settles back into its original block shape. Keep the whole deformation visible within one continuous shot. Preserve the cartoon stretch rule, with no tearing, splitting, disappearance, or replacement by another object.\n\noverall_soundscape: Soft cartoon stretching and elastic rebound sounds follow the visible actions over a quiet background. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] 2D cartoon animation, a static close shot frames one small blue block and two hands against a simple background. Each hand grasps one end of the block. The hands move apart and stretch the same blue shape into an exaggerated long strip, like pulling noodles, while both grips remain visibly connected to the ends. The shape stays continuous and intact as it lengthens, retaining its blue color and identity. The hands then release their grips and move clear. The stretched strip elastically recoils toward the middle, briefly overshoots with a playful squash, and settles back into its original block shape. Keep the whole deformation visible within one continuous shot. Preserve the cartoon stretch rule, with no tearing, splitting, disappearance, or replacement by another object.\n\noverall_soundscape: Soft cartoon stretching and elastic rebound sounds follow the visible actions over a quiet background. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

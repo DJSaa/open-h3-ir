@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a fixed side full-body shot frames an adult wearing flat-soled shoes on a level floor. The head, body and both feet stay within the frame, with stationary floor texture providing a clear reference. The adult walks several natural steps across the visible space at an ordinary pace. A foot plants and briefly supports the body as the other leg swings forward, then the advancing foot lands and support passes naturally between the feet. Keep the feet readable as they lift, swing and meet the floor. The body's forward travel follows the stepping action rather than prolonged sliding on both soles. Finish after the short walk while maintaining the same side view, the same person and a stationary camera.\n\noverall_soundscape: Natural alternating footsteps and faint clothing rustle are heard over low ambient room sound. No speech or narration accompanies the walk.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a fixed side full-body shot frames an adult wearing flat-soled shoes on a level floor. The head, body and both feet stay within the frame, with stationary floor texture providing a clear reference. The adult walks several natural steps across the visible space at an ordinary pace. A foot plants and briefly supports the body as the other leg swings forward, then the advancing foot lands and support passes naturally between the feet. Keep the feet readable as they lift, swing and meet the floor. The body's forward travel follows the stepping action rather than prolonged sliding on both soles. Finish after the short walk while maintaining the same side view, the same person and a stationary camera.\n\noverall_soundscape: Natural alternating footsteps and faint clothing rustle are heard over low ambient room sound. No speech or narration accompanies the walk.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

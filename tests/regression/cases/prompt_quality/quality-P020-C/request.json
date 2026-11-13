@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "男生把手里的一本书递给女生，女生接稳以后男生再松手。两个人都留在画面里，书不要凭空变多。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "男生把手里的一本书递给女生，女生接稳以后男生再松手。两个人都留在画面里，书不要凭空变多。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

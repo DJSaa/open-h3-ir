@@ -1,0 +1,50 @@
+{
+  "case_id": "B-R07-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "先看这里，拿稳一下。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-R07-A-C01",
+      "requirement": "图1与图2定义两位人物，图3定义要递交的鼠标，图4定义办公室。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-A-C02",
+      "requirement": "转头动作由图1人物执行，参考视频1；视频只提供转头，不能替换两位目标人物或办公室。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-A-C03",
+      "requirement": "图1人物声音参考音频1，说“先看这里，拿稳一下。”，这句台词不能交给图2人物。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-A-C04",
+      "requirement": "图1将鼠标交给图2，施动者与接收者不反转；图2接住后点头。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-A-C05",
+      "requirement": "图2人物不说话，生成目标为15秒。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-A-C06",
+      "requirement": "先转头看向图2人物并说给定台词，再把鼠标交过去；图2接住后点头。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

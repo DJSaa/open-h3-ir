@@ -1,0 +1,52 @@
+{
+  "case_id": "quality-P009-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一端固定的弹簧连着小滑块",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一端固定的弹簧连着小滑块",
+      "h3_refined_evidence": "a spring with one end secured to a fixed support and the other attached to a small slider on a straight horizontal guide."
+    },
+    {
+      "id": "R2",
+      "text": "把滑块拉开后松手",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把滑块拉开后松手",
+      "h3_refined_evidence": "A hand pulls the slider away from its resting position, extending the spring, holds it briefly, then releases it and moves clear."
+    },
+    {
+      "id": "R3",
+      "text": "让它来回振动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让它来回振动",
+      "h3_refined_evidence": "The spring draws the slider back through its resting position, and the slider travels to the other side before returning."
+    },
+    {
+      "id": "R4",
+      "text": "幅度逐渐变小",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "幅度逐渐变小",
+      "h3_refined_evidence": "Continue this connected back-and-forth oscillation with an overall reduction in amplitude from light resistance."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "滑块在弹簧恢复作用下往返，连接保持，且无再次供能时振动总体衰减。",
+      "observable_evidence": "至少可见两个方向的运动，以及较早与较晚阶段的振动范围。",
+      "fail_examples": [
+        "弹簧完全不改变形态而滑块大幅往返",
+        "滑块与弹簧脱离后仍被远距离拉回",
+        "没有新驱动时振幅持续明显放大"
+      ],
+      "not_required": [
+        "不要求精确指数衰减、胡克系数或周期",
+        "允许最后仍有小幅振动"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

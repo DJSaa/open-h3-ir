@@ -1,0 +1,48 @@
+{
+  "case_id": "B-R04-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "周末一起去看海，我们早点出发。",
+      "occurrences": 1
+    },
+    {
+      "text": "好，我来准备。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-R04-A-C01",
+      "requirement": "两位对话人物分别采用图1和图2，场景为图3办公室。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-A-C02",
+      "requirement": "图1人物声音参考音频1，图2人物声音参考音频2，不互换。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-A-C03",
+      "requirement": "图1先说“周末一起去看海，我们早点出发。”，图2随后说“好，我来准备。”，两句给定台词与说话人对应。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-A-C04",
+      "requirement": "图1说话尚未结束时，画面切到图2的聆听反应；继续发声的仍是画外图1人物，不能改成图2在说图1的台词。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-A-C05",
+      "requirement": "生成目标为15秒，保持同一场办公室对话。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action with an explicit reverse-playback effect, a static side-on medium shot frames a small ball on the floor and an open hand above it. Show the temporal reversal of a ball drop: the same ball rises from the floor and travels upward along the falling path played backward. Its upward motion is initially faster and slows as it approaches the waiting open hand, like a drop rewinding toward the release point. Keep the ball visible along the entire route and preserve the spatial positions of hand and floor. The ball reaches the open palm, and the fingers close around it to complete the reversed release. Hold the final grasp briefly. Maintain the reversed action throughout, without adding a new upward throw or turning the sequence into a normal falling ball.\n\noverall_soundscape: Subdued room tone accompanies a faint reversed movement sound during the rising motion. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action with an explicit reverse-playback effect, a static side-on medium shot frames a small ball on the floor and an open hand above it. Show the temporal reversal of a ball drop: the same ball rises from the floor and travels upward along the falling path played backward. Its upward motion is initially faster and slows as it approaches the waiting open hand, like a drop rewinding toward the release point. Keep the ball visible along the entire route and preserve the spatial positions of hand and floor. The ball reaches the open palm, and the fingers close around it to complete the reversed release. Hold the final grasp briefly. Maintain the reversed action throughout, without adding a new upward throw or turning the sequence into a normal falling ball.\n\noverall_soundscape: Subdued room tone accompanies a faint reversed movement sound during the rising motion. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

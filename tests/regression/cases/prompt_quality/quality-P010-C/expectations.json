@@ -1,0 +1,59 @@
+{
+  "case_id": "quality-P010-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一根均匀、能绕中央支点自由转动的平衡木",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一根均匀、能绕中央支点自由转动的平衡木",
+      "h3_refined_evidence": "a uniform balance beam that rotates freely around its central pivot."
+    },
+    {
+      "id": "R2",
+      "text": "两端离支点一样远",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "两端离支点一样远",
+      "h3_refined_evidence": "Its two ends are equally distant from the pivot and remain fully visible."
+    },
+    {
+      "id": "R3",
+      "text": "一端放两个相同木块",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一端放两个相同木块",
+      "h3_refined_evidence": "two identical wooden blocks are placed at one end"
+    },
+    {
+      "id": "R4",
+      "text": "另一端放一个同样的",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "另一端放一个同样的",
+      "h3_refined_evidence": "one matching wooden block is placed at the other end."
+    },
+    {
+      "id": "R5",
+      "text": "看它怎样倾斜",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "看它怎样倾斜",
+      "h3_refined_evidence": "The end carrying two blocks descends while the end carrying one block rises."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "在等臂、同样配重单元且无额外约束时，较重的一侧产生向下倾斜趋势。",
+      "observable_evidence": "支点、两端距离与三块同样木块可辨，撤去扶持后可见倾斜方向。",
+      "fail_examples": [
+        "较轻的一侧无额外外力却持续下压较重的一侧",
+        "支点随梁平移或穿过梁",
+        "较重一侧的木块凭空消失使其变轻"
+      ],
+      "not_required": [
+        "不测角加速度或最终倾角",
+        "碰到限位或地面后停止可以合理"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

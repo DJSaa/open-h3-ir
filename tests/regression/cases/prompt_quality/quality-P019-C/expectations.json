@@ -1,0 +1,70 @@
+{
+  "case_id": "quality-P019-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "女生用右手把装了半杯水的透明玻璃杯放到木桌上",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "女生用右手把装了半杯水的透明玻璃杯放到木桌上",
+      "h3_refined_evidence": "a woman beside a wooden table, keeping her right hand, a transparent drinking glass and the tabletop clearly visible. She holds the glass in her right hand with about half a glass of water inside. She lowers it steadily toward the table, keeping the glass upright. The base meets the wooden surface and becomes stable while her hand still supports it."
+    },
+    {
+      "id": "R2",
+      "text": "放稳后松手",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "放稳后松手",
+      "h3_refined_evidence": "The base meets the wooden surface and becomes stable while her hand still supports it. Only then do her right fingers open and her hand move completely away."
+    },
+    {
+      "id": "R3",
+      "text": "水别洒出来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "水别洒出来",
+      "h3_refined_evidence": "The same glass remains upright on the tabletop, with the water retained inside and no spill."
+    },
+    {
+      "id": "R4",
+      "text": "固定镜头",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "固定镜头",
+      "h3_refined_evidence": "The camera stays still"
+    },
+    {
+      "id": "R5",
+      "text": "不要字幕",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "不要字幕",
+      "h3_refined_evidence": "the picture contains no subtitles."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "手离开后杯子由桌面支撑，放下与松手顺序相容。",
+      "observable_evidence": "杯底接触桌面可见，手指随后松开，杯子留在桌面。",
+      "fail_examples": [
+        "手先完全松开而杯子悬在桌上方",
+        "杯底穿入桌面或杯子无支撑悬停"
+      ],
+      "not_required": [
+        "不要求精确接触时间或手指角度"
+      ],
+      "id": "F1"
+    },
+    {
+      "criterion": "水保持在杯内，允许合理的小幅晃动。",
+      "observable_evidence": "水仍留在杯内，没有穿过杯壁或无来源的杯外水流，水面可以近乎平静或轻微晃动。",
+      "fail_examples": [
+        "水穿过完整杯壁",
+        "无来源的水流从杯外冒出"
+      ],
+      "not_required": [
+        "不要求水面绝对静止",
+        "不按像素测量水量守恒"
+      ],
+      "id": "F2"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

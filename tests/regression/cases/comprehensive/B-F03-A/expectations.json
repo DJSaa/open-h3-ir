@@ -1,0 +1,27 @@
+{
+  "case_id": "B-F03-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-F03-A-C01",
+      "requirement": "图1作为展开的起点、图2作为弯指的终点，同一只手连续变化。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F03-A-C02",
+      "requirement": "手势缓慢过渡到图2，而不是替换为另一只手或另一段场景。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F03-A-C03",
+      "requirement": "保持固定镜头和参考图的3D手模型风格。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

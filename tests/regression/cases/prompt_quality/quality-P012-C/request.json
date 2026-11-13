@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "把透明水壶里的水倒进空玻璃杯，拍清水从壶口往下流进杯里的过程。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "把透明水壶里的水倒进空玻璃杯，拍清水从壶口往下流进杯里的过程。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

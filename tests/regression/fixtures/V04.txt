@@ -1,0 +1,28 @@
+subject_definitions:
+<Subject 1> is the young man in <Picture 1>, with blond hair parted in the middle, fair skin, a navy blue quilted jacket with silver zippers, a beige crew-neck sweater, and black trousers.
+<Subject 2> is the man in <Picture 2>, with dark skin, a grey knit beanie, a blue zip-up work jacket with horizontal yellow and white reflective stripes, and a white t-shirt.
+<Subject 3> is the black wired computer mouse, combining the shape and matte finish from <Picture 3>, the button seams and cable from <Picture 4>, and the white logo from <Picture 5>; it features an ergonomic curved shape, a textured scroll wheel, and a black cable extending from the front.
+<Subject 4> is the modern office environment in <Picture 6>, featuring white desks with metallic legs, beige fabric office chairs, silver all-in-one computer monitors, and a wooden slat partition in the background.
+<Audio 1> is the 15-second instrumental solo-piano track reused as the target video's background music.
+
+summary:
+[reference generation + audio reuse] The target video is a 15-second realistic office product demonstration. <Subject 1> and <Subject 2> sit at a foreground desk in <Subject 4>. <Subject 1> lifts <Subject 3> to demonstrate its features, followed by a close-up of the mouse, and ends with <Subject 2> nodding in approval. <Audio 1> is reused as the continuous background score.
+
+retention_analysis:
+<Subject 1> (appears in [Shot 1], [Shot 3]): fully_preserved - the blond hair, navy blue quilted jacket, and beige sweater are retained.
+<Subject 2> (appears in [Shot 1], [Shot 3]): fully_preserved - the dark skin, grey knit beanie, and blue work jacket with reflective stripes are retained.
+<Subject 3> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the black matte casing, textured scroll wheel, and white logo are retained.
+<Subject 4> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the white desks, beige chairs, silver monitors, and wooden partition are retained.
+<Audio 1>: partially_copy - the piano track runs continuously as the background score with office ambience mixed on top.
+
+detailed_description:
+The target video is a realistic, high-key office scene with bright diffuse daylight, soft shadows, and steady camera work.
+[Shot 1] A medium two-shot frames <Subject 1> on the left and <Subject 2> on the right, sitting side by side at a white foreground desk in <Subject 4>. <Subject 3>, the black wired mouse, rests on the desk between them. <Subject 1> reaches out with his right hand, grasps <Subject 3>, and lifts it a few centimeters above the desk. He turns toward <Subject 2> and gestures with the mouse, while <Subject 2> leans in slightly to watch. The camera remains static, capturing the interaction and the office background with silver monitors and a wooden slat partition.
+[Shot 2] At 00:05.000, the shot cuts to a static close-up of <Subject 1>'s right hand holding <Subject 3> just above the white desk. The matte black casing, textured scroll wheel, and button seams are clearly visible. The hand rotates the mouse about 30 degrees to present its side profile and top surface with the white logo, matching the views referenced from <Picture 3>, <Picture 4>, and <Picture 5>, then lowers it gently back onto the desk. The mouse stays supported by the hand the whole time, and the cable remains naturally curved.
+[Shot 3] At 00:10.000, the shot cuts back to the medium two-shot. <Subject 1> releases <Subject 3> and rests his hands in his lap. <Subject 2> looks at the mouse on the desk, smiles warmly, and nods in approval. The camera holds as the scene ends.
+
+overall_soundscape:
+Quiet modern office room tone with a low HVAC hum and subtle fabric rustling as the two men move.
+
+non_diegetic_music:
+<Audio 1> is reused as the continuous background score, its solo-piano melody and tempo unchanged, mixed clearly below the dialogue.

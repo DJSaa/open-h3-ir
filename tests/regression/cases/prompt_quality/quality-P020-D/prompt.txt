@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a steady medium shot keeps a man and a woman together in the frame, with both pairs of hands and the space between them readable. The man begins holding one book. He extends that same book toward the woman at a comfortable height. She reaches out and takes a secure grip while he continues supporting it. A brief shared hold connects the movement. Once she has the book steady, his fingers release and his hands withdraw. Finish with the woman holding the book independently while both people remain visible. The book keeps the same cover, thickness and identity throughout the transfer, with no duplicate book appearing in either person's hands. Keep the whole handoff visible in a continuous shot.
+
+overall_soundscape: Quiet indoor ambience, faint clothing movement and soft sounds of hands touching the book accompany the exchange. Both people remain silent, with no narration.
+
+non_diegetic_music: N/A

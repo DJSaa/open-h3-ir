@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a steady tabletop close shot frames a soft sponge cake and a cake knife. Keep the knife's edge and the area being cut clearly visible. The knife touches the cake near an outer edge and moves down through it, separating a small end piece. The soft cake can compress slightly around the blade as the cut develops. Once the piece is fully separated, the knife gently moves that piece a short distance away from the remaining cake. A matching fresh cut surface is visible on the remainder. Hold on the small piece beside the original cake so its source is clear. Preserve one continuous view from the initial contact, through the cut, to the gentle separation of the piece.\n\noverall_soundscape: Faint knife contact, a soft scrape as the piece moves and quiet room ambience accompany the action. No dialogue or narration is heard.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a steady tabletop close shot frames a soft sponge cake and a cake knife. Keep the knife's edge and the area being cut clearly visible. The knife touches the cake near an outer edge and moves down through it, separating a small end piece. The soft cake can compress slightly around the blade as the cut develops. Once the piece is fully separated, the knife gently moves that piece a short distance away from the remaining cake. A matching fresh cut surface is visible on the remainder. Hold on the small piece beside the original cake so its source is clear. Preserve one continuous view from the initial contact, through the cut, to the gentle separation of the piece.\n\noverall_soundscape: Faint knife contact, a soft scrape as the piece moves and quiet room ambience accompany the action. No dialogue or narration is heard.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

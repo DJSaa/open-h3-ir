@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P017-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "透明杯里装着已分层的水和食用油",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "透明杯里装着已分层的水和食用油",
+      "h3_refined_evidence": "a transparent cup on a level tabletop. Clear water forms the lower layer and edible oil forms the upper layer, with a readable boundary between them."
+    },
+    {
+      "id": "R2",
+      "text": "轻轻晃一下再放稳",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "轻轻晃一下再放稳",
+      "h3_refined_evidence": "A hand gently rocks the cup once through a small movement, creating a mild wave at the interface, then sets the cup steady again."
+    },
+    {
+      "id": "R3",
+      "text": "拍出它们逐渐恢复上下分层的样子",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍出它们逐渐恢复上下分层的样子",
+      "h3_refined_evidence": "The water remains mainly below the oil, and the wavering boundary gradually becomes calmer and more clearly separated into upper and lower layers."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "轻微扰动后，两种液体仍呈可辨的相分离趋势，食用油主要位于水的上部。",
+      "observable_evidence": "起始层次、晃动后的界面波动和静置阶段的上部油相可辨。",
+      "fail_examples": [
+        "原本清晰可见的油相在没有流出或其他处理时整体消失",
+        "油相无外力整体沉到清水下面并稳定停留",
+        "两种液体直接互换颜色和位置而无连续流动"
+      ],
+      "not_required": [
+        "允许残留小液滴和短时混浊",
+        "不要求十二秒内达到完全平整界面或精确层厚"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "一块干燥柔软的海绵放在桌上，用手压扁它再把手拿开，海绵慢慢回弹，别变成另一块东西。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "一块干燥柔软的海绵放在桌上，用手压扁它再把手拿开，海绵慢慢回弹，别变成另一块东西。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

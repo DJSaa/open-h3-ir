@@ -1,0 +1,15 @@
+{
+  "id": "V06",
+  "title": "切镜超过视频总长",
+  "artifact": "V06.txt",
+  "expected_check": "DINGO-dialogue-cut-outside-video",
+  "purpose": "总长5秒时应报时间越界；总长15秒时不能仅因6.5秒机械拒绝，语义合理性另外审核。",
+  "status": "NOT_RUN",
+  "do_not_submit_as_user_prompt": true,
+  "interface": "internal_validator_or_review_harness",
+  "reference_case": "B-R04-A",
+  "expected_dialogue": [
+    "周末一起去看海，我们早点出发。"
+  ],
+  "video_seconds": 5
+}

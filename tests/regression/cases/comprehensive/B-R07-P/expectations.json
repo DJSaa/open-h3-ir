@@ -1,0 +1,50 @@
+{
+  "case_id": "B-R07-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "先看这里，拿稳一下。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-R07-P-C01",
+      "requirement": "四图分别定义甲、乙、唯一鼠标和办公室，身份衣着与左右位置不交换。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-P-C02",
+      "requirement": "视频只提供甲先看左下再转向右侧乙的头部动作，不迁移源人脸、帽子围巾耳饰或公园。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-P-C03",
+      "requirement": "0–3秒转头、3–6秒甲说话、6–11秒递接、11–15秒乙看物点头，时序正确。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-P-C04",
+      "requirement": "甲只用Audio1音色说一次“先看这里，拿稳一下。”，不抄源话，乙始终不说话。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-P-C05",
+      "requirement": "甲沿桌面移鼠标→乙接稳→甲松手，单物连续，线缆松弛且保留有线结构。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R07-P-C06",
+      "requirement": "固定平视双人中景，无换位、第三人、字幕、音乐或切镜。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

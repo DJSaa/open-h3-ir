@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "潮湿的厨房里，一杯冰水的杯外已经有小水珠。近拍外壁，看水珠慢慢变大、聚在一起，别让水从杯壁里冒出来。",
+    "seconds": 12,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "潮湿的厨房里，一杯冰水的杯外已经有小水珠。近拍外壁，看水珠慢慢变大、聚在一起，别让水从杯壁里冒出来。",
+    "seconds": "12",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

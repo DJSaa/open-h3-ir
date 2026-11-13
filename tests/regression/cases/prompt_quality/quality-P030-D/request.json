@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static macro shot frames the outer wall of a glass of ice water in a humid kitchen. Small droplets are already present on the cold exterior at the start, with ice and water softly visible through the intact glass behind them. Hold the composition on a small patch of the outside surface in real time. Existing droplets slowly grow, and neighboring droplets meet and merge into a larger bead with a continuous changing outline. Keep the changes modest and readable at this close scale. Water accumulates on the exterior through condensation from the humid air; the water inside remains behind the unbroken glass wall. A larger bead may creep downward along the outside while smaller droplets remain nearby. End with the same glass and a clear view of the merged droplets.\n\noverall_soundscape: Low, steady kitchen room tone continues underneath the close view. No dialogue, voiceover, or exaggerated droplet sound effects.\n\nnon_diegetic_music: N/A",
+    "seconds": 12,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static macro shot frames the outer wall of a glass of ice water in a humid kitchen. Small droplets are already present on the cold exterior at the start, with ice and water softly visible through the intact glass behind them. Hold the composition on a small patch of the outside surface in real time. Existing droplets slowly grow, and neighboring droplets meet and merge into a larger bead with a continuous changing outline. Keep the changes modest and readable at this close scale. Water accumulates on the exterior through condensation from the humid air; the water inside remains behind the unbroken glass wall. A larger bead may creep downward along the outside while smaller droplets remain nearby. End with the same glass and a clear view of the merged droplets.\n\noverall_soundscape: Low, steady kitchen room tone continues underneath the close view. No dialogue, voiceover, or exaggerated droplet sound effects.\n\nnon_diegetic_music: N/A",
+    "seconds": "12",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

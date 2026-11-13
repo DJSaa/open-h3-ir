@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static side-on shot shows an inclined wooden board with its high end, sloping surface, and low end all visible. One hand places a single small ball at the high end and holds it completely still against the board. The fingers open and the hand moves away without adding a push. The ball begins moving down the slope on its own and rolls along the wooden surface toward the low end. Keep its contact with the board and its changing position easy to follow through the entire descent. The board stays firmly in place while the same ball travels along it. Maintain one uninterrupted view from the initial still state through the rolling motion, ending with the ball arriving at the low end.\n\noverall_soundscape: A faint hand movement is followed by the soft rolling sound of the ball against the wooden board over quiet room ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static side-on shot shows an inclined wooden board with its high end, sloping surface, and low end all visible. One hand places a single small ball at the high end and holds it completely still against the board. The fingers open and the hand moves away without adding a push. The ball begins moving down the slope on its own and rolls along the wooden surface toward the low end. Keep its contact with the board and its changing position easy to follow through the entire descent. The board stays firmly in place while the same ball travels along it. Maintain one uninterrupted view from the initial still state through the rolling motion, ending with the ball arriving at the low end.\n\noverall_soundscape: A faint hand movement is followed by the soft rolling sound of the ball against the wooden board over quiet room ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

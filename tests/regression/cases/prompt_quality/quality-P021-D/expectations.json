@@ -1,0 +1,59 @@
+{
+  "case_id": "quality-P021-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一名成年人走到稳固的椅子前",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一名成年人走到稳固的椅子前",
+      "h3_refined_evidence": "an adult approaching a sturdy chair on a level floor."
+    },
+    {
+      "id": "R2",
+      "text": "慢慢坐下并坐稳",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "慢慢坐下并坐稳",
+      "h3_refined_evidence": "The adult walks to the chair, aligns naturally with the seat according to the starting orientation, and slowly lowers their body to sit. Their knees bend as their body descends, and their feet can adjust naturally for support. The body meets the seat and settles into a stable seated position."
+    },
+    {
+      "id": "R3",
+      "text": "椅子别移动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "椅子别移动",
+      "h3_refined_evidence": "The chair stays in its original place throughout"
+    },
+    {
+      "id": "R4",
+      "text": "侧面拍",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "侧面拍",
+      "h3_refined_evidence": "a steady side full-body shot"
+    },
+    {
+      "id": "R5",
+      "text": "让人和椅子都看得清楚",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让人和椅子都看得清楚",
+      "h3_refined_evidence": "Keep the adult, the entire chair and their contact with the floor visible."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "下坐过程与椅面接触和身体支撑相容。",
+      "observable_evidence": "身体逐渐降低，最终坐在座面上，脚和椅腿与地面关系可见。",
+      "fail_examples": [
+        "臀部悬在座面上方却保持坐姿",
+        "身体穿过实心椅面",
+        "椅腿离地悬空却未受相应外力"
+      ],
+      "not_required": [
+        "不要求精确关节角度",
+        "不禁止自然的短暂重心调整"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

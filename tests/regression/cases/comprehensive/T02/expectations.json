@@ -1,0 +1,32 @@
+{
+  "case_id": "T02",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "Ready, let us begin.",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "T02-C01",
+      "requirement": "一句英文台词原文保留且只说一次",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "T02-C02",
+      "requirement": "说完闭嘴，不增加对白",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "T02-C03",
+      "requirement": "不虚构参考素材",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

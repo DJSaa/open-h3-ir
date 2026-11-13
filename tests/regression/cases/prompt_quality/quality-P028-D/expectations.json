@@ -1,0 +1,46 @@
+{
+  "case_id": "quality-P028-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一只手把桌上的蓝色玩具小车缓慢推过竖直平面镜前",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一只手把桌上的蓝色玩具小车缓慢推过竖直平面镜前",
+      "h3_refined_evidence": "a blue toy car on a tabletop in front of one upright flat mirror. Choose the view so both the actual car and its reflection are visible at the same time, with the mirror remaining still. One hand slowly pushes the same car across the table in front of the mirror."
+    },
+    {
+      "id": "R2",
+      "text": "镜子里的倒影要跟着小车一起动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "镜子里的倒影要跟着小车一起动",
+      "h3_refined_evidence": "The wheels roll along the supporting surface while the reflection moves in correspondence with the real car according to the mirror arrangement."
+    },
+    {
+      "id": "R3",
+      "text": "镜头保持不动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "镜头保持不动",
+      "h3_refined_evidence": "Live-action, a static oblique close shot"
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "镜中像随同一实物运动和停止，外观身份相对应。",
+      "observable_evidence": "实物与倒影同时可见，轮廓、颜色与动作阶段一致。",
+      "fail_examples": [
+        "实物停下但倒影继续自行行驶",
+        "镜中像无原因换成另一种颜色车型",
+        "镜像从镜面出来成为额外实体"
+      ],
+      "not_required": [
+        "不把镜像数量当作实物复制",
+        "不强制镜像在屏幕上向相反方向移动",
+        "不测量像距"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

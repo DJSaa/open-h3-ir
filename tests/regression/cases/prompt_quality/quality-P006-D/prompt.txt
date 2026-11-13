@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a static slightly elevated close view shows a red billiard ball rolling across a level billiard table toward a blue billiard ball that is initially stationary. Frame both balls and the space between them so their approach remains easy to read. The red ball reaches the blue ball and makes visible contact. Only after that contact does the blue ball begin moving away across the cloth. The red ball responds naturally to the collision, slowing, stopping, or changing direction as appropriate to the contact. Maintain an uninterrupted view of the approach, contact, and separation. Preserve the two distinct colors and the identity of each ball while they move. End with both balls still identifiable on the same table, without introducing another strike during the collision.
+
+overall_soundscape: A clear billiard-ball click coincides with contact, followed by faint rolling sounds over quiet room tone. No dialogue or voiceover.
+
+non_diegetic_music: N/A

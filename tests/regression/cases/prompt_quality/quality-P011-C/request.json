@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "用一根绳子拉动桌上的木块，先把松绳拉直，再把木块沿着桌面拖过来。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "用一根绳子拉动桌上的木块，先把松绳拉直，再把木块沿着桌面拖过来。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,33 @@
+{
+  "case_id": "B-R02-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R02-A-C01",
+      "requirement": "图1、图2分别定义两个人物，图3定义座位布局，图4定义办公室。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-A-C02",
+      "requirement": "座位遵守图3：图1人物在画面左、图2人物在右，桌子在中间。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-A-C03",
+      "requirement": "图1人物指示桌上方案纸，图2人物点头回应，发起和回应角色不反转。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R02-A-C04",
+      "requirement": "两人不说话。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

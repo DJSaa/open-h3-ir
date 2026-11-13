@@ -1,0 +1,45 @@
+{
+  "direct": {
+    "intent": "用图1中的鼠标做5秒固定镜头产品展示，不出现人物、不说话。音频1原样作为背景音乐，保留原旋律与节奏，不重新创作另一首，不加歌词或字幕。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "audio",
+        "sha256": "86fff109e15841b37e22ad3add454f418cf54c4efd6c3571ff5b6c0b7dcf585f",
+        "role": "bgm"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "用图1中的鼠标做5秒固定镜头产品展示，不出现人物、不说话。音频1原样作为背景音乐，保留原旋律与节奏，不重新创作另一首，不加歌词或字幕。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 1, \"role\": \"bgm\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+      "kind": "image",
+      "filename": "image_1.jpg"
+    },
+    {
+      "asset_id": "86fff109e15841b37e22ad3add454f418cf54c4efd6c3571ff5b6c0b7dcf585f",
+      "kind": "audio",
+      "filename": "audio_2.wav"
+    }
+  ]
+}

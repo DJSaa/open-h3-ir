@@ -1,0 +1,42 @@
+{
+  "case_id": "D01",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "周末一起去看海，我们早点出发。",
+      "occurrences": 1
+    },
+    {
+      "text": "好，我来准备。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "D01-C01",
+      "requirement": "两句指定台词完整且各一次",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "D01-C02",
+      "requirement": "一句跨镜头连续，不说完全文后再重复后半句",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "D01-C03",
+      "requirement": "视频时长和提示词一致",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "D01-C04",
+      "requirement": "不补话填充时长",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

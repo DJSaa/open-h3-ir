@@ -1,0 +1,15 @@
+{
+  "id": "V05",
+  "title": "台词之外残留中文描述",
+  "artifact": "V05.txt",
+  "expected_check": "DINGO-description-language",
+  "purpose": "允许<d>内中文，纠正<d>外中文叙述；不得翻译台词。",
+  "status": "NOT_RUN",
+  "do_not_submit_as_user_prompt": true,
+  "interface": "internal_validator_or_review_harness",
+  "reference_case": "B-R04-A",
+  "expected_dialogue": [
+    "准备好了，现在开始。"
+  ],
+  "video_seconds": 15
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "女生用右手把装了半杯水的透明玻璃杯放到木桌上，放稳后松手，水别洒出来。固定镜头，不要字幕。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "女生用右手把装了半杯水的透明玻璃杯放到木桌上，放稳后松手，水别洒出来。固定镜头，不要字幕。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,32 @@
+{
+  "case_id": "B-F02-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "准备好了，现在开始。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-F02-A-C01",
+      "requirement": "使用图1开头、图2结尾，同一人物连续转头。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F02-A-C02",
+      "requirement": "人物先看向镜头说普通话“准备好了，现在开始。”，再转头到图2的朝向。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F02-A-C03",
+      "requirement": "镜头固定，转头由人物完成。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

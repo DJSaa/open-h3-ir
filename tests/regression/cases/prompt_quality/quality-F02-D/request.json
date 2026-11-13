@@ -1,0 +1,51 @@
+{
+  "direct": {
+    "intent": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video.\n\nintegrated_multimodal_description: [Shot 1] Live-action, a fixed portrait close-up begins with the woman in Picture 1 facing the camera, her dark curly hair framing her face against the pale pink-lilac background. The woman with a natural Mandarin speaking voice (S1) looks toward the lens and says once: <d>[Chinese] 准备好了，现在开始。</d> Her visible lips move naturally with the spoken words. After the line is complete, her mouth closes and she slowly turns toward screen-left. Her head and upper body turn continuously while the camera remains still; her curls shift naturally with the movement. The same woman, hair, clothing, and background remain recognizable throughout. Progressively bring her orientation into the rear-side view shown in Picture 2, where the back of her curly hair occupies most of the portrait, reaching that final reference at the end of the shot.\n\noverall_soundscape: Low room ambience and subtle breathing accompany the portrait, with faint clothing movement during the turn.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "768:1344",
+    "megapixels": 1.032192,
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "b3f20542747cbb4c4d0196cd21b013262d94584a8a686b12315898a1f95931c7",
+        "role": "frame_anchor_first"
+      },
+      {
+        "kind": "image",
+        "sha256": "0dc1f494be25675590427b8f5a5f4a7a50d4b83d8203faa1cdfacab86261ab1b",
+        "role": "frame_anchor_last"
+      }
+    ],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": [
+      {
+        "text": "准备好了，现在开始。",
+        "language": "Chinese",
+        "speaker": "S1"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video.\n\nintegrated_multimodal_description: [Shot 1] Live-action, a fixed portrait close-up begins with the woman in Picture 1 facing the camera, her dark curly hair framing her face against the pale pink-lilac background. The woman with a natural Mandarin speaking voice (S1) looks toward the lens and says once: <d>[Chinese] 准备好了，现在开始。</d> Her visible lips move naturally with the spoken words. After the line is complete, her mouth closes and she slowly turns toward screen-left. Her head and upper body turn continuously while the camera remains still; her curls shift naturally with the movement. The same woman, hair, clothing, and background remain recognizable throughout. Progressively bring her orientation into the rear-side view shown in Picture 2, where the back of her curly hair occupies most of the portrait, reaching that final reference at the end of the shot.\n\noverall_soundscape: Low room ambience and subtle breathing accompany the portrait, with faint clothing movement during the turn.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "768x1344",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"frame_anchor_first\"}, {\"index\": 1, \"role\": \"frame_anchor_last\"}]",
+    "dialogue": "[{\"text\": \"准备好了，现在开始。\", \"language\": \"Chinese\", \"speaker\": \"S1\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "b3f20542747cbb4c4d0196cd21b013262d94584a8a686b12315898a1f95931c7",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "0dc1f494be25675590427b8f5a5f4a7a50d4b83d8203faa1cdfacab86261ab1b",
+      "kind": "image",
+      "filename": "image_2.png"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "V02",
+  "title": "合法单次引导不能误伤",
+  "artifact": "V02.txt",
+  "expected_check": "no_duplicate_error",
+  "purpose": "与V01配对，防止用扩大正则把正常句式全部拦住。",
+  "status": "NOT_RUN",
+  "do_not_submit_as_user_prompt": true,
+  "interface": "internal_validator_or_review_harness",
+  "reference_case": "B-R04-A",
+  "expected_dialogue": [
+    "好，我来准备。"
+  ],
+  "video_seconds": 15
+}

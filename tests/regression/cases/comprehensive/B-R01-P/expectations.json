@@ -1,0 +1,45 @@
+{
+  "case_id": "B-R01-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R01-P-C01",
+      "requirement": "图片1–3合并为一个身份，全片只有一人。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R01-P-C02",
+      "requirement": "衣着只采用图片1：米色细条纹短袖、白短裤、赤脚；不混入图片3的黑长裤或黑鞋。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R01-P-C03",
+      "requirement": "场景采用图片4办公室，不带入温室、室外入口或工作间。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R01-P-C04",
+      "requirement": "0–4秒看书→4–8秒看窗边→8–12秒转回镜头轻微微笑，顺序正确。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R01-P-C05",
+      "requirement": "固定机位、完整单镜头，构图可见白短裤和赤脚。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R01-P-C06",
+      "requirement": "只有轻微环境声，无对白、字幕或音乐。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

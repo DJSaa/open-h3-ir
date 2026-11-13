@@ -1,0 +1,38 @@
+{
+  "case_id": "quality-P008-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把用细绳挂着的小球拉到一侧后静止松开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把用细绳挂着的小球拉到一侧后静止松开",
+      "h3_refined_evidence": "a small ball suspended from a thin string attached to a fixed support. Include the attachment point, the complete string, and the space for the ball to swing. A hand pulls the ball to one side and holds it motionless, then opens and moves out of its path."
+    },
+    {
+      "id": "R2",
+      "text": "让它在固定支点下左右来回摆动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让它在固定支点下左右来回摆动",
+      "h3_refined_evidence": "Continue several natural left-right swings along the arc defined by the string. The support remains fixed, and the string stays connected to the same ball throughout."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "球的运动受绳长和固定支点约束，释放后摆向低处并经过下方区域来回运动。",
+      "observable_evidence": "可追踪球、绳和固定支点，绳球连接在往返过程中保持。",
+      "fail_examples": [
+        "球离开绳端独自直线飞行",
+        "绳长任意大幅变化使球沿直线往返",
+        "没有新推动时摆幅持续明显增大"
+      ],
+      "not_required": [
+        "不测摆动周期和能量",
+        "不要求片尾静止或完全二维运动"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

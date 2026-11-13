@@ -1,0 +1,91 @@
+{
+  "direct": {
+    "intent": "生成15秒写实单镜头。甲用<Picture 1>的外貌、深蓝夹克和卡其内搭，坐画面左侧；乙用<Picture 2>的外貌、黑针织帽和蓝工装，坐右侧。环境取<Picture 4>办公室，两人隔同一张桌子，桌上只有一只<Picture 3>的黑色有线鼠标作为递交物，线缆松弛地放在桌面。<Video 1>只给甲转头的动作方向，不提供递物动作：0–3秒甲从看向画面左下方平稳转头看向右侧的乙，不迁移视频中的人物、帽子、围巾、耳饰、背景或声音。3–6秒甲用<Audio 1>音色说一次：“先看这里，拿稳一下。”只借音色，不重复参考音频原话。说完闭嘴，6–11秒甲把鼠标沿桌面平稳移到乙面前，乙用手接稳后，甲才松开；保持线缆松弛，不拉扯，不把鼠标变成无线产品。11–15秒乙低头看鼠标后点头，乙全程不说话，甲不再说话。摄影机平视固定双人中景，不交换两人身份或左右位置，不加字幕、音乐、第三个人或切镜。",
+    "seconds": 15.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "video",
+        "sha256": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+        "role": "motion_reference"
+      },
+      {
+        "kind": "audio",
+        "sha256": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+        "role": "voice_timbre"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "生成15秒写实单镜头。甲用<Picture 1>的外貌、深蓝夹克和卡其内搭，坐画面左侧；乙用<Picture 2>的外貌、黑针织帽和蓝工装，坐右侧。环境取<Picture 4>办公室，两人隔同一张桌子，桌上只有一只<Picture 3>的黑色有线鼠标作为递交物，线缆松弛地放在桌面。<Video 1>只给甲转头的动作方向，不提供递物动作：0–3秒甲从看向画面左下方平稳转头看向右侧的乙，不迁移视频中的人物、帽子、围巾、耳饰、背景或声音。3–6秒甲用<Audio 1>音色说一次：“先看这里，拿稳一下。”只借音色，不重复参考音频原话。说完闭嘴，6–11秒甲把鼠标沿桌面平稳移到乙面前，乙用手接稳后，甲才松开；保持线缆松弛，不拉扯，不把鼠标变成无线产品。11–15秒乙低头看鼠标后点头，乙全程不说话，甲不再说话。摄影机平视固定双人中景，不交换两人身份或左右位置，不加字幕、音乐、第三个人或切镜。",
+    "seconds": "15.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 4, \"role\": \"motion_reference\"}, {\"index\": 5, \"role\": \"voice_timbre\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_4.jpg"
+    },
+    {
+      "asset_id": "79d552a7a94bc2b324e975ea4798339c720ae95c05887ce6fb65186526d10180",
+      "kind": "video",
+      "filename": "video_5.mp4"
+    },
+    {
+      "asset_id": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+      "kind": "audio",
+      "filename": "audio_6.wav"
+    }
+  ]
+}

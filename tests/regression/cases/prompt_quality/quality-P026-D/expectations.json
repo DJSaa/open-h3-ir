@@ -1,0 +1,52 @@
+{
+  "case_id": "quality-P026-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一块干燥柔软的海绵放在桌上",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一块干燥柔软的海绵放在桌上",
+      "h3_refined_evidence": "a single dry, soft sponge lying flat on a tabletop."
+    },
+    {
+      "id": "R2",
+      "text": "用手压扁它再把手拿开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "用手压扁它再把手拿开",
+      "h3_refined_evidence": "A hand descends until the palm touches the sponge, then presses downward, making the same sponge visibly thinner and softly deformed. The hand briefly holds the compression, then lifts away until there is a clear gap above the sponge."
+    },
+    {
+      "id": "R3",
+      "text": "海绵慢慢回弹",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "海绵慢慢回弹",
+      "h3_refined_evidence": "After the pressure is removed, the sponge slowly rebounds in place, gradually regaining a thicker shape."
+    },
+    {
+      "id": "R4",
+      "text": "别变成另一块东西",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "别变成另一块东西",
+      "h3_refined_evidence": "The sponge retains its original color, porous texture, and identity through the whole action."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "形变与施压、解除压力的阶段相对应。",
+      "observable_evidence": "接触下压时海绵变薄，手移开后恢复厚度。",
+      "fail_examples": [
+        "手在空中时海绵被隔空压扁",
+        "实体手掌穿入海绵却没有相应形变",
+        "压后直接变成别的物体"
+      ],
+      "not_required": [
+        "不要求完全恢复原尺寸",
+        "不要求固定回弹时间或线性弹性"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

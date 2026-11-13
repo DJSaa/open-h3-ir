@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a static side-on medium shot shows one hand holding a rubber ball still above a hard floor. Keep the whole drop and the floor contact area inside the composition. The fingers open without pushing the ball, and the hand withdraws. The ball drops to the floor, touches it, and rebounds upward. It makes several visible bounces, each upward motion following a floor contact. Across the sequence, the overall bounce height and motion gradually diminish until the ball settles and comes to rest on the floor. Maintain the same ball, floor surface, and camera position throughout. Let any small final wobble or short roll resolve naturally, then hold the resting ball clearly in view. The hand does not strike or catch it after release.
+
+overall_soundscape: Several rubbery impacts occur at the visible floor contacts, becoming softer as the ball settles. Quiet room ambience remains underneath, without dialogue or voiceover.
+
+non_diegetic_music: N/A

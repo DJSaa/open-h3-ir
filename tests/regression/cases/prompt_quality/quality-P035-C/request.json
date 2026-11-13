@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "做一个明确倒放的掉球镜头，小球从地面沿掉落轨迹反向升回张开的手里，最后手握住它，镜头固定。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "做一个明确倒放的掉球镜头，小球从地面沿掉落轨迹反向升回张开的手里，最后手握住它，镜头固定。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

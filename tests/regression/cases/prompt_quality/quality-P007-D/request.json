@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static low three-quarter view shows a short row of upright dominoes arranged with small gaps on a level tabletop. Frame the entire row so neighboring contacts can be followed. A hand gently tips only the first domino, then moves clear. The first piece falls against the next piece, which begins tipping after the contact, and this sequence travels down the row. Each falling domino reaches its neighbor before that neighbor falls, creating a continuous visible chain rather than a simultaneous collapse. Keep the tabletop and camera still while the original pieces retain their shapes and positions within the row. Let the last domino fall and hold the resulting arrangement briefly. The hand does not return to push another piece.\n\noverall_soundscape: A sequence of small dry clicks follows the visible domino contacts and ends when the row has fallen. Quiet room ambience continues, without dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static low three-quarter view shows a short row of upright dominoes arranged with small gaps on a level tabletop. Frame the entire row so neighboring contacts can be followed. A hand gently tips only the first domino, then moves clear. The first piece falls against the next piece, which begins tipping after the contact, and this sequence travels down the row. Each falling domino reaches its neighbor before that neighbor falls, creating a continuous visible chain rather than a simultaneous collapse. Keep the tabletop and camera still while the original pieces retain their shapes and positions within the row. Let the last domino fall and hold the resulting arrangement briefly. The hand does not return to push another piece.\n\noverall_soundscape: A sequence of small dry clicks follows the visible domino contacts and ends when the row has fallen. Quiet room ambience continues, without dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,52 @@
+{
+  "case_id": "quality-P023-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一杯咖啡表面留着少量奶纹",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一杯咖啡表面留着少量奶纹",
+      "h3_refined_evidence": "A small amount of milk forms pale, partly unmixed streaks across the coffee surface."
+    },
+    {
+      "id": "R2",
+      "text": "用勺子缓慢搅动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "用勺子缓慢搅动",
+      "h3_refined_evidence": "A hand lowers a spoon into the coffee and moves it slowly around the cup."
+    },
+    {
+      "id": "R3",
+      "text": "拍清奶纹跟着液体流动起来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清奶纹跟着液体流动起来",
+      "h3_refined_evidence": "After the immersed spoon begins moving, nearby liquid follows its motion and the milk streaks bend, stretch and drift with that flow."
+    },
+    {
+      "id": "R4",
+      "text": "杯子放在桌上不移动",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "杯子放在桌上不移动",
+      "h3_refined_evidence": "The cup stays in its original position on the table."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "奶纹变化与浸入咖啡的勺子搅动存在可见因果关系。",
+      "observable_evidence": "勺头接触并移动后，周围奶纹随液体弯曲、拉伸或混合。",
+      "fail_examples": [
+        "勺子隔着空气搅动却直接拨动液体",
+        "奶纹作为硬片完全不随咖啡运动",
+        "液体穿过完整杯壁"
+      ],
+      "not_required": [
+        "不要求标准涡旋形状或固定旋转圈数",
+        "不要求奶纹立刻均匀混合"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

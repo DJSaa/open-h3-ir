@@ -1,0 +1,45 @@
+{
+  "direct": {
+    "intent": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video.\n\nintegrated_multimodal_description: [Shot 1] Live-action, the opening view matches Picture 1: one transparent handled glass cup rests on a textured brown surface between two switched-on black flashlights. The camera moves in a slow, smooth arc around this stationary arrangement, gradually changing its viewing angle and coming a little closer as the framing approaches Picture 2. The cup and both flashlights remain in their original places and orientations on the surface; the camera movement accounts for their changing positions in the picture. Keep the glass handle, flashlight bodies, overlapping light patches, and brown surface connected through continuous changes of perspective and reflection. Continue the gentle camera movement without a cut or a sudden jump, arriving at the viewpoint, spacing, and composition established by Picture 2 at the end of the shot.\n\noverall_soundscape: Quiet, steady indoor ambience accompanies the camera move, with no added handling or impact sounds from the stationary objects.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "38ef631832ea93f727b86d6c74200dedd586342acb1813cef66fdd3236e97a72",
+        "role": "frame_anchor_first"
+      },
+      {
+        "kind": "image",
+        "sha256": "b657b49dfce532f9bb39de66e0add48e705eb5c457072de129b7e6fd93b2bd67",
+        "role": "frame_anchor_last"
+      }
+    ],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video.\n\nintegrated_multimodal_description: [Shot 1] Live-action, the opening view matches Picture 1: one transparent handled glass cup rests on a textured brown surface between two switched-on black flashlights. The camera moves in a slow, smooth arc around this stationary arrangement, gradually changing its viewing angle and coming a little closer as the framing approaches Picture 2. The cup and both flashlights remain in their original places and orientations on the surface; the camera movement accounts for their changing positions in the picture. Keep the glass handle, flashlight bodies, overlapping light patches, and brown surface connected through continuous changes of perspective and reflection. Continue the gentle camera movement without a cut or a sudden jump, arriving at the viewpoint, spacing, and composition established by Picture 2 at the end of the shot.\n\noverall_soundscape: Quiet, steady indoor ambience accompanies the camera move, with no added handling or impact sounds from the stationary objects.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"frame_anchor_first\"}, {\"index\": 1, \"role\": \"frame_anchor_last\"}]",
+    "dialogue": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "38ef631832ea93f727b86d6c74200dedd586342acb1813cef66fdd3236e97a72",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "b657b49dfce532f9bb39de66e0add48e705eb5c457072de129b7e6fd93b2bd67",
+      "kind": "image",
+      "filename": "image_2.png"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+subject_definitions:
+<Subject 1> is the light-skinned adult man in <Picture 1>, with blond hair, wearing a dark-blue jacket over a khaki shirt; his original background is not used.
+<Subject 2> is the dark-skinned adult man in <Picture 2>, wearing a black knit cap, blue workwear, and a light-green reflective strap; his original background is not used.
+<Subject 3> is the single black AOC wired mouse shown in <Picture 3>, <Picture 4>, and <Picture 5>, which provide three-quarter, side, and top views of the same product; it has left and right buttons, a scroll wheel, a white AOC logo on the top shell, and a cable trailing from its front; the white product-photography backgrounds are not used.
+<Subject 4> is the open office environment in <Picture 6>, with the product demonstrated at a foreground desk.
+<Audio 1> is the 15-second instrumental solo-piano track reused as the target video's continuous background music.
+
+summary:
+[reference generation + audio reuse] The target video is a 15-second realistic office product demonstration. <Subject 1> picks up <Subject 3> on the desk of <Subject 4> and presents it to <Subject 2>, saying one Chinese line. A close-up then shows the details of <Subject 3>, and <Subject 2> nods in approval. <Audio 1> continues as the background score throughout.
+
+retention_analysis:
+<Subject 1> (appears in [Shot 1], [Shot 3]): fully_preserved - his identity, blond hair, dark-blue jacket, and khaki shirt are retained.
+<Subject 2> (appears in [Shot 1], [Shot 3]): fully_preserved - his identity, black knit cap, blue workwear, and light-green reflective strap are retained.
+<Subject 3> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the same single black wired mouse is kept consistent across all angles, including its buttons, scroll wheel, AOC logo, and cable.
+<Subject 4> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the open office and the foreground desk are retained.
+<Audio 1>: partially_copy - the piano track continues for the whole 15 seconds as background music while dialogue and office ambience are added on top.
+
+detailed_description:
+The target video is a bright, realistic office product demonstration with natural daylight and steady, understated camera work.
+[Shot 1] A medium two-shot establishes <Subject 4>, the open office with soft daylight and desks softly blurred behind. <Subject 1> (S1), the blond man in the dark-blue jacket and khaki shirt, and <Subject 2>, the man in the black knit cap, blue workwear, and light-green reflective strap, sit side by side at the foreground desk where <Subject 3>, the black AOC wired mouse, rests. <Subject 1> (S1) picks it up and raises it slightly toward <Subject 2>, holding it steady so the top and buttons face him, and says in a natural conversational Mandarin voice, <d>[Chinese] 这个手感，办公正合适。</d> <Subject 2> leans in a little and watches the mouse while its cable drapes loosely on the desk.
+[Shot 2] At 00:05.000, the shot cuts to a close-up of <Subject 3> held in <Subject 1>'s hand just above the desk. He rotates it slowly and smoothly, showing the side profile with the cable trailing away, then tilting to reveal the top shell with its scroll wheel, left and right buttons, and the white AOC logo, matching the three-quarter, side, and top views referenced from <Picture 3>, <Picture 4>, and <Picture 5>. The mouse stays supported in his hand the whole time and the cable is never pulled taut; at the end of the shot he lowers it gently back onto the desk.
+[Shot 3] At 00:10.000, the shot cuts back to the medium two-shot. <Subject 1> (S1) releases <Subject 3>, leaving it on the desk between them. <Subject 2> looks at the mouse and gives an approving nod with a small smile. The two share a brief satisfied pause as the video ends.
+
+overall_soundscape:
+Quiet open-office room tone with a faint ventilation hum and distant soft keyboard clicks continues throughout.
+
+non_diegetic_music:
+<Audio 1> is reused as the continuous background score for the full 15 seconds; its solo-piano melody and tempo stay unchanged and sit clearly beneath the dialogue.

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "从装着半杯水的透明量杯里倒一些水进另一个空杯，拍出两边水量的变化，别洒出来。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "从装着半杯水的透明量杯里倒一些水进另一个空杯，拍出两边水量的变化，别洒出来。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

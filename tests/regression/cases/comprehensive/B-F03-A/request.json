@@ -1,0 +1,43 @@
+{
+  "direct": {
+    "intent": "图1开头、图2结尾，做8秒手势动画。这只手慢慢变成图2的手势，镜头别动，保持原来的3D风格。",
+    "seconds": 8.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "fd3629ff35ebdd0ae7657cf891ce269795f05348018600c1d035c38d2693f028",
+        "role": "frame_anchor_first"
+      },
+      {
+        "kind": "image",
+        "sha256": "85aa9bfd8633ea657b47b7718effbb694d317ff12ba1b8cb76ba79dcdec1f4fe",
+        "role": "frame_anchor_last"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "图1开头、图2结尾，做8秒手势动画。这只手慢慢变成图2的手势，镜头别动，保持原来的3D风格。",
+    "seconds": "8.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 0, \"role\": \"frame_anchor_first\"}, {\"index\": 1, \"role\": \"frame_anchor_last\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "fd3629ff35ebdd0ae7657cf891ce269795f05348018600c1d035c38d2693f028",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "85aa9bfd8633ea657b47b7718effbb694d317ff12ba1b8cb76ba79dcdec1f4fe",
+      "kind": "image",
+      "filename": "image_2.png"
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "把一把普通实心不锈钢茶匙完全浸入水后松开，拍清它下沉到透明水槽底部的过程。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "把一把普通实心不锈钢茶匙完全浸入水后松开，拍清它下沉到透明水槽底部的过程。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P013-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "从装着半杯水的透明量杯里倒一些水进另一个空杯",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "从装着半杯水的透明量杯里倒一些水进另一个空杯",
+      "h3_refined_evidence": "a transparent measuring cup containing about half a cup of water beside an empty cup on a tabletop. Both vessels and their water levels remain clearly visible. A hand lifts the measuring cup and gently tips its opening over the empty cup. A stream travels downward into the receiving cup. As some water transfers, the amount remaining in the measuring cup visibly decreases while the receiving cup fills."
+    },
+    {
+      "id": "R2",
+      "text": "拍出两边水量的变化",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍出两边水量的变化",
+      "h3_refined_evidence": "As some water transfers, the amount remaining in the measuring cup visibly decreases while the receiving cup fills."
+    },
+    {
+      "id": "R3",
+      "text": "别洒出来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "别洒出来",
+      "h3_refined_evidence": "Water remains inside the two vessels, with the tabletop dry."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "可见水流转移时，源容器的液量总体减少，接收容器总体增加，没有无来源增水。",
+      "observable_evidence": "对比倾倒前后两容器水量，并确认中间存在从源到目标的水流。",
+      "fail_examples": [
+        "接收杯明显增加而源容器水量始终不变",
+        "两杯液量同时无来源增加",
+        "源容器的水消失但接收杯未获得也无其他流出"
+      ],
+      "not_required": [
+        "不根据不同形状容器的液面高度推算精确体积",
+        "不要求实时液面变化逐帧单调，允许晃动"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

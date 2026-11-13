@@ -1,0 +1,32 @@
+{
+  "case_id": "L02",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "Ready, let us begin.",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "L02-C01",
+      "requirement": "英文台词字词和标点保留",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "L02-C02",
+      "requirement": "对白标注英语，不翻译成中文",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "L02-C03",
+      "requirement": "描述保持当前英文H3格式政策",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

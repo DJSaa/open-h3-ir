@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action time-lapse, a static close shot frames one small ice cube in a white shallow saucer in a warm room. Present a longer melting process compressed into the requested clip, keeping the same saucer and initial ice cube aligned within the composition. The ice gradually loses its sharp edges and shrinks through a sequence of readable intermediate shapes. A small pool of liquid water appears around its base and increases as the solid becomes smaller. Preserve the visible connection between the diminishing ice and the growing water in the saucer. Maintain continuous time-compressed change, avoiding a sudden replacement with an empty dry dish. The final view may retain a small piece of ice or show a shallow pool where it has melted. Keep the composition steady through the ending.
+
+overall_soundscape: Subdued indoor room ambience accompanies the time-lapse without added splashes, ticking, dialogue, or voiceover.
+
+non_diegetic_music: N/A

@@ -1,0 +1,38 @@
+{
+  "case_id": "quality-P004-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把一个橡胶球从手里静止松开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把一个橡胶球从手里静止松开",
+      "h3_refined_evidence": "one hand holding a rubber ball still above a hard floor. Keep the whole drop and the floor contact area inside the composition. The fingers open without pushing the ball, and the hand withdraws."
+    },
+    {
+      "id": "R2",
+      "text": "让它在硬地板上弹跳几下后慢慢停下来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让它在硬地板上弹跳几下后慢慢停下来",
+      "h3_refined_evidence": "It makes several visible bounces, each upward motion following a floor contact. Across the sequence, the overall bounce height and motion gradually diminish until the ball settles and comes to rest on the floor."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "反弹发生在地面接触之后，且无后续供能时反弹包络总体减弱。",
+      "observable_evidence": "至少能辨认落地接触和后续反弹，并比较前后反弹的整体幅度。",
+      "fail_examples": [
+        "球尚未接触地板就反向弹起",
+        "无新外力时后期反弹明显越来越高",
+        "地板不变形却把球直接吞没或送回手中"
+      ],
+      "not_required": [
+        "允许微小不规则弹跳和末期滚动",
+        "不要求每次反弹高度严格单调或精确恢复系数"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

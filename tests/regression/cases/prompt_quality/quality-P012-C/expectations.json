@@ -1,0 +1,39 @@
+{
+  "case_id": "quality-P012-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把透明水壶里的水倒进空玻璃杯",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把透明水壶里的水倒进空玻璃杯",
+      "h3_refined_evidence": "a transparent water pitcher containing water beside an empty drinking glass on a level table. Keep the pitcher spout, the glass opening, and the space between them unobstructed. A hand lifts the pitcher, positions its spout above the glass, and gently tilts it. Water leaves the spout as a downward stream and enters the glass through its opening."
+    },
+    {
+      "id": "R2",
+      "text": "拍清水从壶口往下流进杯里的过程",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清水从壶口往下流进杯里的过程",
+      "h3_refined_evidence": "Water leaves the spout as a downward stream and enters the glass through its opening."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "水流从壶口产生并受重力向下进入杯中，流动经过可见的源开口与接收杯口。",
+      "observable_evidence": "壶口到杯口之间的向下水流路径以及水进入杯内的过程可辨。",
+      "fail_examples": [
+        "水从封闭壶壁侧面穿出",
+        "水在无压力装置下持续向上逆流入壶",
+        "空杯内直接长出水而壶口无流出"
+      ],
+      "not_required": [
+        "允许流束破碎、滴水和少量自然飞溅",
+        "不测流速、液柱形状或精确流量",
+        "四组共同评分均不要求回正水壶或展示停止出水。"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

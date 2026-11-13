@@ -1,0 +1,39 @@
+{
+  "case_id": "B-R03-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R03-A-C01",
+      "requirement": "人物外貌和发型采用图1的女性。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-A-C02",
+      "requirement": "衣服采用图2的浅蓝卷袖衬衫，不把穿衣者变成目标人物。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-A-C03",
+      "requirement": "场景采用图3办公室。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-A-C04",
+      "requirement": "转头动作参考视频1，视频中的人物和场景不成为目标人物和场景。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R03-A-C05",
+      "requirement": "生成目标为12秒，人物不说话。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

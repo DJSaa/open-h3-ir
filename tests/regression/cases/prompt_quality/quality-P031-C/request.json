@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "用延时摄影拍白色碟子里的小冰块在温暖室内逐渐融化，碟子里的水增多，不要拍成瞬间消失。",
+    "seconds": 12,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "用延时摄影拍白色碟子里的小冰块在温暖室内逐渐融化，碟子里的水增多，不要拍成瞬间消失。",
+    "seconds": "12",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,38 @@
+{
+  "case_id": "P02",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "这个手感，办公正合适。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "P02-C01",
+      "requirement": "保留这个手感，办公正合适。且只说一次",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "P02-C02",
+      "requirement": "不能因原文已经含<d>而漏掉台词或重复包裹",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "P02-C03",
+      "requirement": "保留一只鼠标、多角度来源、两个人物及办公室",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "P02-C04",
+      "requirement": "保留背景音乐复用；专业稿中明确的时间、手势与位置不能丢",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

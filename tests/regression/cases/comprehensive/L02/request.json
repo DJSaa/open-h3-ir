@@ -1,0 +1,35 @@
+{
+  "direct": {
+    "intent": "人物参考图1，生成5秒视频。人物只用英语说一次：“Ready, let us begin.”然后闭嘴微笑，不说中文，不加字幕。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "人物参考图1，生成5秒视频。人物只用英语说一次：“Ready, let us begin.”然后闭嘴微笑，不说中文，不加字幕。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    }
+  ]
+}

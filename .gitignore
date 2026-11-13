@@ -20,3 +20,7 @@ acceptance/
 
 # Asset staging area, not part of the project
 _newassets/
+
+# Live compilation regression receipts and externally supplied media
+tests/regression/outputs/
+tests/regression/assets/local/

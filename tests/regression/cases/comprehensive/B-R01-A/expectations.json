@@ -1,0 +1,27 @@
+{
+  "case_id": "B-R01-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R01-A-C01",
+      "requirement": "图1–3作为同一个人的参考，不生成三个角色。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R01-A-C02",
+      "requirement": "人物衣服采用图1的米色条纹上衣和白短裤，不被图3的黑长裤覆盖。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R01-A-C03",
+      "requirement": "人物处在图4办公室，坐着看书、看窗边，最后朝镜头微笑。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "一个人轻轻把小球向前上方抛出去，拍清小球先升起、再落向地面的完整弧线。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "一个人轻轻把小球向前上方抛出去，拍清小球先升起、再落向地面的完整弧线。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

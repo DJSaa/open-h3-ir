@@ -1,0 +1,28 @@
+subject_definitions:
+<Subject 1> is the young man with blond hair and fair skin in <Picture 1>, wearing a dark-navy jacket over a khaki crew-neck top; his original background is not used.
+<Subject 2> is the dark-skinned man in <Picture 2>, wearing a black knit cap and a blue work jacket with a light-green reflective strap; his original background is not used.
+<Subject 3> is a single black AOC wired mouse, combined from the three-quarter view in <Picture 3>, the side profile in <Picture 4>, and the top view in <Picture 5>; it has left and right buttons, a textured scroll wheel, a white AOC logo on its top shell, and a cable extending from its front; the white product-photography backgrounds are not used.
+<Subject 4> is the open office environment in <Picture 6>, with white desks, beige fabric chairs, silver all-in-one monitors, and a wooden slat partition; the demonstration takes place at a foreground desk.
+<Audio 1> is the 15-second instrumental solo-piano track reused as the target video's background music.
+
+summary:
+[reference generation + audio reuse] The target video is a 15-second realistic office product demonstration. <Subject 1> sits on the left and <Subject 2> on the right at a foreground desk in <Subject 4>. <Subject 1> lifts <Subject 3> with his right hand and says one Chinese line, a close-up shows the mouse's details, and he puts it back while <Subject 2> smiles and nods. <Audio 1> continues as the background score beneath the only line of dialogue.
+
+retention_analysis:
+<Subject 1> (appears in [Shot 1], [Shot 3]): fully_preserved - the blond hair, dark-navy jacket, and khaki top are retained.
+<Subject 2> (appears in [Shot 1], [Shot 3]): fully_preserved - the dark skin, black knit cap, blue work jacket, and light-green reflective strap are retained.
+<Subject 3> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - one and the same black wired mouse is kept consistent in shape, matte finish, scroll wheel, AOC logo, and cable across all shots.
+<Subject 4> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the white desks, beige chairs, silver monitors, and wooden slat partition are retained.
+<Audio 1>: partially_copy - the piano track runs continuously as the background score with dialogue and office ambience mixed on top.
+
+detailed_description:
+The target video is a realistic, high-key office scene with bright diffuse daylight, soft shadows, and steady static camera work; the only audible speech is the single Chinese line below, with no subtitles, lyrics, or extra dialogue.
+[Shot 1] A medium two-shot frames <Subject 1> (S1) on the left and <Subject 2> on the right, sitting side by side at a white foreground desk in <Subject 4>. <Subject 3>, the black wired mouse, rests on the desk between them. <Subject 1> (S1) reaches out with his right hand, lightly grasps <Subject 3>, and lifts it only a couple of centimeters above the desk. He turns toward <Subject 2> and says in a natural conversational Mandarin voice, <d>[Mandarin Chinese] 这个手感，办公正合适。</d> <Subject 2> leans in slightly and watches the mouse while its cable stays loosely curved on the desk.
+[Shot 2] At 00:05.000, the shot cuts to a static close-up of <Subject 1>'s right hand holding <Subject 3> just above the white desk. The matte black casing, textured scroll wheel, and button seams are clearly visible. The hand rotates the mouse about 30 degrees to present its side profile and top surface with the white AOC logo, matching the three-quarter, side, and top views referenced from <Picture 3>, <Picture 4>, and <Picture 5>, then lowers it gently back onto the desk. The mouse stays supported by the hand the whole time, and the cable remains naturally curved, never pulled taut.
+[Shot 3] At 00:10.000, the shot cuts back to the medium two-shot. <Subject 1> (S1) releases <Subject 3> and rests his hands in his lap. <Subject 2> looks at the mouse on the desk, smiles warmly, and nods in approval. The camera holds as the scene ends.
+
+overall_soundscape:
+Quiet modern office room tone with a low HVAC hum and subtle fabric rustling as the two men move.
+
+non_diegetic_music:
+<Audio 1> is reused as the continuous background score, its solo-piano melody and tempo unchanged, mixed clearly below the dialogue.

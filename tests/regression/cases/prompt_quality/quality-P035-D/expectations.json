@@ -1,0 +1,53 @@
+{
+  "case_id": "quality-P035-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "做一个明确倒放的掉球镜头",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "做一个明确倒放的掉球镜头",
+      "h3_refined_evidence": "Live-action with an explicit reverse-playback effect, a static side-on medium shot frames a small ball on the floor and an open hand above it. Show the temporal reversal of a ball drop:"
+    },
+    {
+      "id": "R2",
+      "text": "小球从地面沿掉落轨迹反向升回张开的手里",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "小球从地面沿掉落轨迹反向升回张开的手里",
+      "h3_refined_evidence": "the same ball rises from the floor and travels upward along the falling path played backward. Its upward motion is initially faster and slows as it approaches the waiting open hand, like a drop rewinding toward the release point. Keep the ball visible along the entire route and preserve the spatial positions of hand and floor. The ball reaches the open palm, and the fingers close around it to complete the reversed release."
+    },
+    {
+      "id": "R3",
+      "text": "最后手握住它",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "最后手握住它",
+      "h3_refined_evidence": "The ball reaches the open palm, and the fingers close around it to complete the reversed release."
+    },
+    {
+      "id": "R4",
+      "text": "镜头固定",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "镜头固定",
+      "h3_refined_evidence": "a static side-on medium shot"
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "运动顺序遵从明确的时间反转要求。",
+      "observable_evidence": "球从地面向手移动，结尾回到手中并被握住。",
+      "fail_examples": [
+        "增强后改成手松开球正常落地",
+        "先新增向上抛球动作以替代倒放",
+        "球在空中消失后手里新生一只球"
+      ],
+      "not_required": [
+        "不按实时正向重力轨迹判错",
+        "不要求添加倒放字幕或图标",
+        "不要求真实源视频输入"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

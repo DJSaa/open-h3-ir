@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "把一个小球从手中静止松开，让它落到地面，画面里看清松手和下落过程。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "把一个小球从手中静止松开，让它落到地面，画面里看清松手和下落过程。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

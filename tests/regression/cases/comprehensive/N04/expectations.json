@@ -1,0 +1,21 @@
+{
+  "case_id": "N04",
+  "expected_outcome": "reject_or_clarify",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "N04-C01",
+      "requirement": "报告自然语速与0.1秒窗口无法同时满足",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "N04-C02",
+      "requirement": "不删词、倍速或偷偷延长窗口",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": false,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static side-on close view shows a spring with one end secured to a fixed support and the other attached to a small slider on a straight horizontal guide. The entire spring and slider remain visible. A hand pulls the slider away from its resting position, extending the spring, holds it briefly, then releases it and moves clear. The spring draws the slider back through its resting position, and the slider travels to the other side before returning. Continue this connected back-and-forth oscillation with an overall reduction in amplitude from light resistance. Keep the spring visibly extending and compressing with the slider, with both connections intact. End on smaller oscillations around the same resting position, without another push or any powered drive.\n\noverall_soundscape: Soft sliding and faint spring movement accompany the oscillation over quiet room ambience, becoming less prominent as the movement diminishes. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 12,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static side-on close view shows a spring with one end secured to a fixed support and the other attached to a small slider on a straight horizontal guide. The entire spring and slider remain visible. A hand pulls the slider away from its resting position, extending the spring, holds it briefly, then releases it and moves clear. The spring draws the slider back through its resting position, and the slider travels to the other side before returning. Continue this connected back-and-forth oscillation with an overall reduction in amplitude from light resistance. Keep the spring visibly extending and compressing with the slider, with both connections intact. End on smaller oscillations around the same resting position, without another push or any powered drive.\n\noverall_soundscape: Soft sliding and faint spring movement accompany the oscillation over quiet room ambience, becoming less prominent as the movement diminishes. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "12",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

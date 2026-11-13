@@ -1,0 +1,46 @@
+{
+  "case_id": "quality-P032-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一条白色吸水纸竖着放",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一条白色吸水纸竖着放",
+      "h3_refined_evidence": "a narrow strip of white absorbent paper held upright by a small clip at its upper end."
+    },
+    {
+      "id": "R2",
+      "text": "底端蘸进有色水里",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "底端蘸进有色水里",
+      "h3_refined_evidence": "Its lower tip dips into a shallow container of colored water"
+    },
+    {
+      "id": "R3",
+      "text": "近拍颜色从接触处沿纸慢慢向上洇开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "近拍颜色从接触处沿纸慢慢向上洇开",
+      "h3_refined_evidence": "a static close shot frames a narrow strip of white absorbent paper held upright by a small clip at its upper end. Its lower tip dips into a shallow container of colored water, while the upper paper begins dry and white. Keep the liquid surface, contact point, and a readable length of paper visible together. Color first appears where the paper touches the water. A wet, tinted front then slowly spreads upward through the connected paper fibers, leaving a visible boundary between damp colored paper and the dry region above."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "染色或湿润前沿从纸与液体的接触处沿材料连续发展。",
+      "observable_evidence": "下部先湿润，上方连续出现染色扩展，仍可辨识干湿边界。",
+      "fail_examples": [
+        "未接触供液处先在上端凭空出现独立湿块",
+        "水离开纸纤维形成向上飞行的自由水柱",
+        "整条纸瞬间等量染色且没有扩展过程"
+      ],
+      "not_required": [
+        "不要求特定上升高度或恒定速度",
+        "不要求杯中液面出现可见下降",
+        "不把毛细上升当作违反重力"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

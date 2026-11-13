@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "画面左侧的一盏台灯照着桌上的小立方体，让它在右侧桌面投下阴影。镜头固定，慢慢把立方体向前推一点。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "画面左侧的一盏台灯照着桌上的小立方体，让它在右侧桌面投下阴影。镜头固定，慢慢把立方体向前推一点。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

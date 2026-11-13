@@ -1,0 +1,6 @@
+{
+  "N01": "Only image 1 supplied but image 3 requested; compiler silently substitutes image 1.",
+  "N02": "Strict 15-second text conflicts with 5-second request; conflict not surfaced.",
+  "N03": "Silence and mandatory audible dialogue conflict; compiler substitutes silent lip motion.",
+  "N04": "Long natural unaccelerated dialogue requested within 0.1 seconds; impossibility not surfaced."
+}

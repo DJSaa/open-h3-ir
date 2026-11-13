@@ -1,0 +1,46 @@
+{
+  "case_id": "quality-P031-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "用延时摄影拍白色碟子里的小冰块在温暖室内逐渐融化",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "用延时摄影拍白色碟子里的小冰块在温暖室内逐渐融化",
+      "h3_refined_evidence": "Live-action time-lapse, a static close shot frames one small ice cube in a white shallow saucer in a warm room. Present a longer melting process compressed into the requested clip, keeping the same saucer and initial ice cube aligned within the composition. The ice gradually loses its sharp edges and shrinks through a sequence of readable intermediate shapes."
+    },
+    {
+      "id": "R2",
+      "text": "碟子里的水增多",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "碟子里的水增多",
+      "h3_refined_evidence": "A small pool of liquid water appears around its base and increases as the solid becomes smaller. Preserve the visible connection between the diminishing ice and the growing water in the saucer."
+    },
+    {
+      "id": "R3",
+      "text": "不要拍成瞬间消失",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "不要拍成瞬间消失",
+      "h3_refined_evidence": "The ice gradually loses its sharp edges and shrinks through a sequence of readable intermediate shapes. A small pool of liquid water appears around its base and increases as the solid becomes smaller. Preserve the visible connection between the diminishing ice and the growing water in the saucer. Maintain continuous time-compressed change, avoiding a sudden replacement with an empty dry dish."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "融化表现为可追踪的固液转化，水有初始冰的来源。",
+      "observable_evidence": "冰轮廓在多个时刻缩小，周围水迹增大或液态水累积。",
+      "fail_examples": [
+        "冰完全消失却碟子始终干燥",
+        "冰无原因越融越大",
+        "变化只由无连续关系的物体替换呈现"
+      ],
+      "not_required": [
+        "不按十二秒实时融化速度评分",
+        "允许少量残冰",
+        "不要求像素级体积守恒"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

@@ -1,0 +1,21 @@
+{
+  "case_id": "N02",
+  "expected_outcome": "reject_or_clarify",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "N02-C01",
+      "requirement": "识别文本15秒与请求字段5秒冲突",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "N02-C02",
+      "requirement": "不能静默改掉用户时长并宣称全部满足",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": false,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

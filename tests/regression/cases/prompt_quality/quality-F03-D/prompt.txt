@@ -1,0 +1,7 @@
+How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 8.00-second mark of the target video.
+
+integrated_multimodal_description: [Shot 1] 3D CG animation, a static close shot begins with the single palm-facing hand shown in Picture 1, its fingers spread in front of the gym-equipment background. The same hand slowly changes from that open pose toward the gesture in Picture 2. The middle and ring fingers curl inward toward the palm as the thumb curves toward the folded fingers; the index and little fingers remain raised as the final illustrated gesture takes shape. Show gradual joint bending and continuous changes of the finger spacing rather than replacing one hand pose with another. The wrist stays in the same general position, and the camera remains still while the existing smooth 3D surface and background style are preserved. End in the finger arrangement, hand orientation, and framing established by Picture 2.
+
+overall_soundscape: Soft, steady indoor ambience accompanies the hand animation without amplified joint or movement effects.
+
+non_diegetic_music: N/A

@@ -1,0 +1,48 @@
+{
+  "case_id": "quality-F03-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "两图分别作为同一只3D手的首尾帧锚点。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "图1开头、图2结尾",
+      "h3_refined_evidence": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 8.00-second mark of the target video."
+    },
+    {
+      "id": "R2",
+      "text": "同一只手缓慢连续变化为尾帧手势。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "这只手慢慢变成图2的手势",
+      "h3_refined_evidence": "The same hand slowly changes from that open pose toward the gesture in Picture 2. The middle and ring fingers curl inward toward the palm as the thumb curves toward the folded fingers; the index and little fingers remain raised as the final illustrated gesture takes shape."
+    },
+    {
+      "id": "R3",
+      "text": "镜头保持固定。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "镜头别动",
+      "h3_refined_evidence": "The wrist stays in the same general position, and the camera remains still"
+    },
+    {
+      "id": "R4",
+      "text": "保留参考图3D手模型风格。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "保持原来的3D风格",
+      "h3_refined_evidence": "the existing smooth 3D surface and background style are preserved."
+    },
+    {
+      "id": "R5",
+      "text": "请求生成8秒片段；四组均按固定帧合同得到192帧、8.0秒有效片长。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "做8秒手势动画",
+      "h3_refined_evidence": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 8.00-second mark of the target video.",
+      "fulfillment_channel": "request_duration_metadata_and_effective_duration_alignment",
+      "requested_duration_seconds": 8,
+      "expected_num_frames": 192,
+      "expected_effective_duration_seconds": 8.0
+    }
+  ],
+  "physics_checks": [],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

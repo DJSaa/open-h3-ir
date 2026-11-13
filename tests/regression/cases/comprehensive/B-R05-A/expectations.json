@@ -1,0 +1,33 @@
+{
+  "case_id": "B-R05-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-R05-A-C01",
+      "requirement": "图1–3合并描述同一个目标黑色有线鼠标，不把三张图变成三个独立产品。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R05-A-C02",
+      "requirement": "源视频中的杯子被目标鼠标替换，不能继续把杯子当主要产品。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R05-A-C03",
+      "requirement": "场景布置与摄影方式参考视频1，而不是把产品图片的白色背景当目标场景。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R05-A-C04",
+      "requirement": "生成目标为10秒产品展示，摄影运动平稳。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

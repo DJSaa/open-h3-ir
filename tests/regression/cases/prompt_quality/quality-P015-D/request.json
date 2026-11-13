@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a steady side close shot looks through a clear vessel of still water, with its surface and the space immediately below it visible together. A hand presses a cork beneath the water surface and briefly holds it there. The fingers release the cork and withdraw, leaving its upward path unobstructed. The same cork rises through the water on its own, reaches the surface and settles into free floating. Small ripples may spread as it emerges, and its floating orientation can adjust naturally. Keep the cork readable from the underwater release through its arrival at the surface. The final view holds on the cork floating freely, with no hand, thread or other object supporting it.\n\noverall_soundscape: Gentle water movement and a faint touch against the vessel accompany the handling, over quiet indoor ambience. No dialogue or narration is heard.\n\nnon_diegetic_music: N/A",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a steady side close shot looks through a clear vessel of still water, with its surface and the space immediately below it visible together. A hand presses a cork beneath the water surface and briefly holds it there. The fingers release the cork and withdraw, leaving its upward path unobstructed. The same cork rises through the water on its own, reaches the surface and settles into free floating. Small ripples may spread as it emerges, and its floating orientation can adjust naturally. Keep the cork readable from the underwater release through its arrival at the surface. The final view holds on the cork floating freely, with no hand, thread or other object supporting it.\n\noverall_soundscape: Gentle water movement and a faint touch against the vessel accompany the handling, over quiet indoor ambience. No dialogue or narration is heard.\n\nnon_diegetic_music: N/A",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

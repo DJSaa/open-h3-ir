@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P024-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "用蛋糕刀从一块柔软的海绵蛋糕上切下一小块",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "用蛋糕刀从一块柔软的海绵蛋糕上切下一小块",
+      "h3_refined_evidence": "a soft sponge cake and a cake knife. Keep the knife's edge and the area being cut clearly visible. The knife touches the cake near an outer edge and moves down through it, separating a small end piece."
+    },
+    {
+      "id": "R2",
+      "text": "再把切下的那块轻轻移开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "再把切下的那块轻轻移开",
+      "h3_refined_evidence": "Once the piece is fully separated, the knife gently moves that piece a short distance away from the remaining cake."
+    },
+    {
+      "id": "R3",
+      "text": "拍清楚切开的过程",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清楚切开的过程",
+      "h3_refined_evidence": "Preserve one continuous view from the initial contact, through the cut, to the gentle separation of the piece."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "蛋糕分离发生于刀的接触与切割之后，分离块有明确来源。",
+      "observable_evidence": "刀经过切割位置，切口形成，切下块从原位置移开。",
+      "fail_examples": [
+        "刀未接触时蛋糕自动裂成目标小块",
+        "移开一块后原蛋糕仍完整无缺且多出同样小块"
+      ],
+      "not_required": [
+        "不把合理的切割后块数增加判为复制",
+        "允许轻微压缩和少量碎屑",
+        "不要求精确切下体积"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

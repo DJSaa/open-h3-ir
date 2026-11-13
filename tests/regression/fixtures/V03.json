@@ -1,0 +1,15 @@
+{
+  "id": "V03",
+  "title": "完整台词后空续说",
+  "artifact": "V03.txt",
+  "expected_check": "semantic_review_required",
+  "purpose": "不是单纯标签错误；复审应修正全文已说完却还要求续说的矛盾，保留一次完整原句。",
+  "status": "NOT_RUN",
+  "do_not_submit_as_user_prompt": true,
+  "interface": "internal_validator_or_review_harness",
+  "reference_case": "B-R04-A",
+  "expected_dialogue": [
+    "周末一起去看海，我们早点出发。"
+  ],
+  "video_seconds": 15
+}

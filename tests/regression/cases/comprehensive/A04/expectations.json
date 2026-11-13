@@ -1,0 +1,32 @@
+{
+  "case_id": "A04",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "好。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "A04-C01",
+      "requirement": "目标只有好一个字且只说一次",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A04-C02",
+      "requirement": "不跟随10秒源音频时长延长对白",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A04-C03",
+      "requirement": "保留音色绑定而不复制源语音",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

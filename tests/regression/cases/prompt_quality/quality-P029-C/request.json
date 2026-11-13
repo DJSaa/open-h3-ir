@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "预热过的平底锅里放一小片薄黄油，拍它受热后逐渐变软、融化并摊开，镜头靠近锅内。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "预热过的平底锅里放一小片薄黄油，拍它受热后逐渐变软、融化并摊开，镜头靠近锅内。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

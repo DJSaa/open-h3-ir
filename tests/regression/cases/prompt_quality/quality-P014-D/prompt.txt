@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a steady side close shot frames a transparent drinking glass holding about half a glass of water. A level tabletop and an upright background edge provide clear orientation references. A hand slowly tilts the glass by a small amount, keeping the rim high enough to retain the water. The glass wall and rim visibly change angle while the water moves within the vessel. The hand then holds the glass still in its tilted position. Any brief surface motion settles, leaving the free water surface approximately level relative to the room rather than locked to the tilted rim. Keep the whole glass, the rim and the water boundary readable throughout. Finish on the tilted glass held steady with all of its water retained.
+
+overall_soundscape: Soft indoor ambience and faint handling sounds accompany the slow movement of the glass. There is no speech or voiceover.
+
+non_diegetic_music: N/A

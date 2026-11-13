@@ -1,0 +1,53 @@
+{
+  "case_id": "quality-P033-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "魔法场景里",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "魔法场景里",
+      "h3_refined_evidence": "A magical fantasy scene"
+    },
+    {
+      "id": "R2",
+      "text": "一颗水晶球从桌面缓慢升起",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一颗水晶球从桌面缓慢升起",
+      "h3_refined_evidence": "one crystal ball resting on a table, with open space above it. A faint magical glow gathers around the ball as it slowly lifts away from the tabletop."
+    },
+    {
+      "id": "R3",
+      "text": "悬停在空中轻轻旋转",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "悬停在空中轻轻旋转",
+      "h3_refined_evidence": "After rising a short distance, the ball settles into a stable hover in midair and begins rotating gently."
+    },
+    {
+      "id": "R4",
+      "text": "结尾也别落回桌上",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "结尾也别落回桌上",
+      "h3_refined_evidence": "During the ending, the crystal ball continues to hover and turn above the table; the gap remains visible and the ball does not return to the tabletop."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "画面遵守本例魔法悬浮设定，身份和运动连续。",
+      "observable_evidence": "球从桌面连续升起，与桌面分离后保持悬停，结尾仍在空中。",
+      "fail_examples": [
+        "物理增强把悬浮改成落地或必须被手托住",
+        "凭空增加第二颗球代替原球",
+        "未离开桌面却声称完成悬浮"
+      ],
+      "not_required": [
+        "不要求正常重力下落",
+        "不要求解释真实悬浮力学",
+        "光效属于允许的魔法视觉表达"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

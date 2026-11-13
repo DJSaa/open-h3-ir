@@ -1,0 +1,1024 @@
+{
+  "schema_version": 1,
+  "scope": "Historical direct-service compilation only; not a Gateway or video-quality baseline.",
+  "requirements_review": false,
+  "professional_repair": true,
+  "seed": 7,
+  "normal_ready": 121,
+  "negative_accepted_known_issues": [
+    "N01",
+    "N02",
+    "N03",
+    "N04"
+  ],
+  "cases": [
+    {
+      "id": "B-F01-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-F01-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-F02-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-F02-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-F03-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-F03-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R01-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R01-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R02-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R02-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R03-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R03-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R04-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R04-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R05-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R05-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R07-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R07-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R08-A",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "B-R08-P",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-F01-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-F01-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-F02-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-F02-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-F03-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-F03-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P001-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P001-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P002-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P002-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P003-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P003-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P004-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P004-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P005-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P005-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P006-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P006-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P007-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P007-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P008-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P008-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P009-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P009-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P010-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P010-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P011-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P011-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P012-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P012-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P013-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P013-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P014-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P014-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P015-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P015-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P016-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P016-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P017-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P017-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P018-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P018-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P019-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P019-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P020-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P020-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P021-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P021-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P022-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P022-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P023-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P023-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P024-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P024-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P025-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P025-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P026-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P026-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P027-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P027-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P028-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P028-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P029-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P029-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P030-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P030-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P031-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P031-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P032-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P032-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P033-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P033-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P034-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P034-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P035-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P035-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P036-C",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "quality-P036-D",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "A01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "A02",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "A03",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "A04",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "D01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "D02",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "D03",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "D04",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "D05",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "D06",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "D07",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "I01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "L01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "L02",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "L03",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "M01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "M02",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "M03",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "M04",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "N01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": true
+    },
+    {
+      "id": "N02",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": true
+    },
+    {
+      "id": "N03",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": true
+    },
+    {
+      "id": "N04",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": true
+    },
+    {
+      "id": "N05",
+      "http": 422,
+      "upstream_status": null,
+      "source": null,
+      "written_ready": false,
+      "known_issue": false
+    },
+    {
+      "id": "P01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "P02",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "T01",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    },
+    {
+      "id": "T02",
+      "http": 201,
+      "upstream_status": "ready",
+      "source": "written",
+      "written_ready": true,
+      "known_issue": false
+    }
+  ]
+}

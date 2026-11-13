@@ -1,0 +1,105 @@
+{
+  "direct": {
+    "intent": "subject_definitions:\n<Subject 1> is the young man with blond hair and fair skin in <Picture 1>, wearing a dark-navy jacket over a khaki crew-neck top; his original background is not used.\n<Subject 2> is the dark-skinned man in <Picture 2>, wearing a black knit cap and a blue work jacket with a light-green reflective strap; his original background is not used.\n<Subject 3> is a single black AOC wired mouse, combined from the three-quarter view in <Picture 3>, the side profile in <Picture 4>, and the top view in <Picture 5>; it has left and right buttons, a textured scroll wheel, a white AOC logo on its top shell, and a cable extending from its front; the white product-photography backgrounds are not used.\n<Subject 4> is the open office environment in <Picture 6>, with white desks, beige fabric chairs, silver all-in-one monitors, and a wooden slat partition; the demonstration takes place at a foreground desk.\n<Audio 1> is the 15-second instrumental solo-piano track reused as the target video's background music.\n\nsummary:\n[reference generation + audio reuse] The target video is a 15-second realistic office product demonstration. <Subject 1> sits on the left and <Subject 2> on the right at a foreground desk in <Subject 4>. <Subject 1> lifts <Subject 3> with his right hand and says one Chinese line, a close-up shows the mouse's details, and he puts it back while <Subject 2> smiles and nods. <Audio 1> continues as the background score beneath the only line of dialogue.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1], [Shot 3]): fully_preserved - the blond hair, dark-navy jacket, and khaki top are retained.\n<Subject 2> (appears in [Shot 1], [Shot 3]): fully_preserved - the dark skin, black knit cap, blue work jacket, and light-green reflective strap are retained.\n<Subject 3> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - one and the same black wired mouse is kept consistent in shape, matte finish, scroll wheel, AOC logo, and cable across all shots.\n<Subject 4> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the white desks, beige chairs, silver monitors, and wooden slat partition are retained.\n<Audio 1>: partially_copy - the piano track runs continuously as the background score with dialogue and office ambience mixed on top.\n\ndetailed_description:\nThe target video is a realistic, high-key office scene with bright diffuse daylight, soft shadows, and steady static camera work; the only audible speech is the single Chinese line below, with no subtitles, lyrics, or extra dialogue.\n[Shot 1] A medium two-shot frames <Subject 1> (S1) on the left and <Subject 2> on the right, sitting side by side at a white foreground desk in <Subject 4>. <Subject 3>, the black wired mouse, rests on the desk between them. <Subject 1> (S1) reaches out with his right hand, lightly grasps <Subject 3>, and lifts it only a couple of centimeters above the desk. He turns toward <Subject 2> and says in a natural conversational Mandarin voice, <d>[Mandarin Chinese] 这个手感，办公正合适。</d> <Subject 2> leans in slightly and watches the mouse while its cable stays loosely curved on the desk.\n[Shot 2] At 00:05.000, the shot cuts to a static close-up of <Subject 1>'s right hand holding <Subject 3> just above the white desk. The matte black casing, textured scroll wheel, and button seams are clearly visible. The hand rotates the mouse about 30 degrees to present its side profile and top surface with the white AOC logo, matching the three-quarter, side, and top views referenced from <Picture 3>, <Picture 4>, and <Picture 5>, then lowers it gently back onto the desk. The mouse stays supported by the hand the whole time, and the cable remains naturally curved, never pulled taut.\n[Shot 3] At 00:10.000, the shot cuts back to the medium two-shot. <Subject 1> (S1) releases <Subject 3> and rests his hands in his lap. <Subject 2> looks at the mouse on the desk, smiles warmly, and nods in approval. The camera holds as the scene ends.\n\noverall_soundscape:\nQuiet modern office room tone with a low HVAC hum and subtle fabric rustling as the two men move.\n\nnon_diegetic_music:\n<Audio 1> is reused as the continuous background score, its solo-piano melody and tempo unchanged, mixed clearly below the dialogue.",
+    "seconds": 15.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "cdafa499381dda3e57053878c79e8ebf4bcb04ec1d02c765bec955a6016bb23d",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "a08cbfc4eed7ac14b7ec02ef0f94d7f767ec851ad1e04fdc03df1abca0428344",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "audio",
+        "sha256": "86fff109e15841b37e22ad3add454f418cf54c4efd6c3571ff5b6c0b7dcf585f",
+        "role": "bgm"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "subject_definitions:\n<Subject 1> is the young man with blond hair and fair skin in <Picture 1>, wearing a dark-navy jacket over a khaki crew-neck top; his original background is not used.\n<Subject 2> is the dark-skinned man in <Picture 2>, wearing a black knit cap and a blue work jacket with a light-green reflective strap; his original background is not used.\n<Subject 3> is a single black AOC wired mouse, combined from the three-quarter view in <Picture 3>, the side profile in <Picture 4>, and the top view in <Picture 5>; it has left and right buttons, a textured scroll wheel, a white AOC logo on its top shell, and a cable extending from its front; the white product-photography backgrounds are not used.\n<Subject 4> is the open office environment in <Picture 6>, with white desks, beige fabric chairs, silver all-in-one monitors, and a wooden slat partition; the demonstration takes place at a foreground desk.\n<Audio 1> is the 15-second instrumental solo-piano track reused as the target video's background music.\n\nsummary:\n[reference generation + audio reuse] The target video is a 15-second realistic office product demonstration. <Subject 1> sits on the left and <Subject 2> on the right at a foreground desk in <Subject 4>. <Subject 1> lifts <Subject 3> with his right hand and says one Chinese line, a close-up shows the mouse's details, and he puts it back while <Subject 2> smiles and nods. <Audio 1> continues as the background score beneath the only line of dialogue.\n\nretention_analysis:\n<Subject 1> (appears in [Shot 1], [Shot 3]): fully_preserved - the blond hair, dark-navy jacket, and khaki top are retained.\n<Subject 2> (appears in [Shot 1], [Shot 3]): fully_preserved - the dark skin, black knit cap, blue work jacket, and light-green reflective strap are retained.\n<Subject 3> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - one and the same black wired mouse is kept consistent in shape, matte finish, scroll wheel, AOC logo, and cable across all shots.\n<Subject 4> (appears in [Shot 1], [Shot 2], [Shot 3]): fully_preserved - the white desks, beige chairs, silver monitors, and wooden slat partition are retained.\n<Audio 1>: partially_copy - the piano track runs continuously as the background score with dialogue and office ambience mixed on top.\n\ndetailed_description:\nThe target video is a realistic, high-key office scene with bright diffuse daylight, soft shadows, and steady static camera work; the only audible speech is the single Chinese line below, with no subtitles, lyrics, or extra dialogue.\n[Shot 1] A medium two-shot frames <Subject 1> (S1) on the left and <Subject 2> on the right, sitting side by side at a white foreground desk in <Subject 4>. <Subject 3>, the black wired mouse, rests on the desk between them. <Subject 1> (S1) reaches out with his right hand, lightly grasps <Subject 3>, and lifts it only a couple of centimeters above the desk. He turns toward <Subject 2> and says in a natural conversational Mandarin voice, <d>[Mandarin Chinese] 这个手感，办公正合适。</d> <Subject 2> leans in slightly and watches the mouse while its cable stays loosely curved on the desk.\n[Shot 2] At 00:05.000, the shot cuts to a static close-up of <Subject 1>'s right hand holding <Subject 3> just above the white desk. The matte black casing, textured scroll wheel, and button seams are clearly visible. The hand rotates the mouse about 30 degrees to present its side profile and top surface with the white AOC logo, matching the three-quarter, side, and top views referenced from <Picture 3>, <Picture 4>, and <Picture 5>, then lowers it gently back onto the desk. The mouse stays supported by the hand the whole time, and the cable remains naturally curved, never pulled taut.\n[Shot 3] At 00:10.000, the shot cuts back to the medium two-shot. <Subject 1> (S1) releases <Subject 3> and rests his hands in his lap. <Subject 2> looks at the mouse on the desk, smiles warmly, and nods in approval. The camera holds as the scene ends.\n\noverall_soundscape:\nQuiet modern office room tone with a low HVAC hum and subtle fabric rustling as the two men move.\n\nnon_diegetic_music:\n<Audio 1> is reused as the continuous background score, its solo-piano melody and tempo unchanged, mixed clearly below the dialogue.",
+    "seconds": "15.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 6, \"role\": \"bgm\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "cdafa499381dda3e57053878c79e8ebf4bcb04ec1d02c765bec955a6016bb23d",
+      "kind": "image",
+      "filename": "image_4.jpg"
+    },
+    {
+      "asset_id": "a08cbfc4eed7ac14b7ec02ef0f94d7f767ec851ad1e04fdc03df1abca0428344",
+      "kind": "image",
+      "filename": "image_5.jpg"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_6.jpg"
+    },
+    {
+      "asset_id": "86fff109e15841b37e22ad3add454f418cf54c4efd6c3571ff5b6c0b7dcf585f",
+      "kind": "audio",
+      "filename": "audio_7.wav"
+    }
+  ]
+}

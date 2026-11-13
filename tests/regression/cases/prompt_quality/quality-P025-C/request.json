@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "把一条柔软毛巾搭到椅背上，再松手，让毛巾两头自然垂下来，拍出布料的柔软感。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "把一条柔软毛巾搭到椅背上，再松手，让毛巾两头自然垂下来，拍出布料的柔软感。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

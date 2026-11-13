@@ -1,0 +1,60 @@
+{
+  "case_id": "quality-P030-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "潮湿的厨房里",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "潮湿的厨房里",
+      "h3_refined_evidence": "in a humid kitchen."
+    },
+    {
+      "id": "R2",
+      "text": "一杯冰水的杯外已经有小水珠",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一杯冰水的杯外已经有小水珠",
+      "h3_refined_evidence": "Small droplets are already present on the cold exterior at the start, with ice and water softly visible through the intact glass behind them."
+    },
+    {
+      "id": "R3",
+      "text": "近拍外壁",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "近拍外壁",
+      "h3_refined_evidence": "a static macro shot frames the outer wall of a glass of ice water"
+    },
+    {
+      "id": "R4",
+      "text": "看水珠慢慢变大、聚在一起",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "看水珠慢慢变大、聚在一起",
+      "h3_refined_evidence": "Existing droplets slowly grow, and neighboring droplets meet and merge into a larger bead with a continuous changing outline."
+    },
+    {
+      "id": "R5",
+      "text": "别让水从杯壁里冒出来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "别让水从杯壁里冒出来",
+      "h3_refined_evidence": "Water accumulates on the exterior through condensation from the humid air; the water inside remains behind the unbroken glass wall."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "外壁液滴变化与冷凝、接触聚并相容，完整杯壁不漏水。",
+      "observable_evidence": "外壁小水珠缓慢增长，相邻水珠接触后合并，或大珠沿外表面下滑。",
+      "fail_examples": [
+        "杯内水流穿透完整杯壁",
+        "未接触的小水珠隔空瞬移合并",
+        "一帧内整面凭空出现巨大水团"
+      ],
+      "not_required": [
+        "不要求每颗水珠都变大或合并",
+        "不要求十二秒内出现特定水量",
+        "不根据水珠外观断言测得露点"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

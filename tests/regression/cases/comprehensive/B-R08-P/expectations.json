@@ -1,0 +1,56 @@
+{
+  "case_id": "B-R08-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "这个手感，办公正合适。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-R08-P-C01",
+      "requirement": "图片3–5归并为同一个黑色AOC有线鼠标，成片只出现一只目标鼠标。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-P-C02",
+      "requirement": "甲、乙和办公室分别绑定图片1、2、6，甲左乙右；不带入人物原背景。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-P-C03",
+      "requirement": "0–5秒双人中景甲右手提起鼠标少许并说指定台词；第5秒切产品近景，5–10秒轻转展示后放回；第10秒切回双人中景，10–15秒甲松手、乙微笑点头。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-P-C04",
+      "requirement": "鼠标始终由手支撑，离桌不超过两厘米；线缆自然留桌上，不悬空自转、不拉直或拖扯线缆。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-P-C05",
+      "requirement": "只有甲的一句普通话“这个手感，办公正合适。”，音频1不能当音色参考或引入歌词。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-P-C06",
+      "requirement": "音频1作连续BGM，旋律和节奏保持、音量低于对白，不另创音乐。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-P-C07",
+      "requirement": "不带入产品白色摄影背景，无字幕、歌词或额外台词。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

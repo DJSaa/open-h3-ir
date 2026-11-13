@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a clear side-on medium shot frames one hand holding a small ball motionless above an unobstructed floor. The camera holds a static shot with both the release point and the floor visible. After a brief still hold, the fingers open and withdraw without throwing or pushing the ball. The same ball separates visibly from the hand and falls downward along one continuous path until it reaches the floor. Keep the opening fingers, the ball in flight, and its arrival at the floor readable within the frame. The hand remains clear of the falling ball. Preserve the ball as one continuous object through contact, allowing an ordinary natural response when it lands and a short view of the resulting state.
+
+overall_soundscape: Quiet room ambience continues beneath a soft movement of the hand and a small impact as the ball reaches the floor. No dialogue or voiceover.
+
+non_diegetic_music: N/A

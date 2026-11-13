@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a steady close shot frames a transparent measuring cup containing about half a cup of water beside an empty cup on a tabletop. Both vessels and their water levels remain clearly visible. A hand lifts the measuring cup and gently tips its opening over the empty cup. A stream travels downward into the receiving cup. As some water transfers, the amount remaining in the measuring cup visibly decreases while the receiving cup fills. The hand stops after transferring only part of the water and steadies the measuring cup. Water remains inside the two vessels, with the tabletop dry. The shot stays with the same vessels through the pouring action and the final, visibly different water levels.
+
+overall_soundscape: Quiet indoor room tone accompanies a soft pouring stream and a light sound as the measuring cup is steadied on the table. No dialogue or voiceover is heard.
+
+non_diegetic_music: N/A

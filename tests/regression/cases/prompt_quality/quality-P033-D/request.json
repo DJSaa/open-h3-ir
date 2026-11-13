@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] A magical fantasy scene, a static medium close shot frames one crystal ball resting on a table, with open space above it. A faint magical glow gathers around the ball as it slowly lifts away from the tabletop. Keep the same ball continuously visible while a clear gap opens beneath it. After rising a short distance, the ball settles into a stable hover in midair and begins rotating gently. Its surface highlights shift with the slow rotation while the table and camera remain still. Maintain the explicit magical levitation throughout, leaving the space below the ball clear of hands, stands, and strings. During the ending, the crystal ball continues to hover and turn above the table; the gap remains visible and the ball does not return to the tabletop.\n\noverall_soundscape: A restrained shimmering magical tone accompanies the lift and hover over quiet room ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] A magical fantasy scene, a static medium close shot frames one crystal ball resting on a table, with open space above it. A faint magical glow gathers around the ball as it slowly lifts away from the tabletop. Keep the same ball continuously visible while a clear gap opens beneath it. After rising a short distance, the ball settles into a stable hover in midair and begins rotating gently. Its surface highlights shift with the slow rotation while the table and camera remain still. Maintain the explicit magical levitation throughout, leaving the space below the ball clear of hands, stands, and strings. During the ending, the crystal ball continues to hover and turn above the table; the gap remains visible and the ball does not return to the tabletop.\n\noverall_soundscape: A restrained shimmering magical tone accompanies the lift and hover over quiet room ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

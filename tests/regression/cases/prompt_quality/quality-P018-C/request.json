@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "把一块柔软的布搭在桌边，大半留在桌上、小半垂下，拍清它自然落稳的样子。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "把一块柔软的布搭在桌边，大半留在桌上、小半垂下，拍清它自然落稳的样子。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

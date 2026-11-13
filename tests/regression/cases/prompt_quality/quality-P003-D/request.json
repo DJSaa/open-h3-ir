@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static wide side view frames one adult standing on level ground with a small ball in one hand. Leave enough open space ahead and above the person to contain the complete flight. The person gently throws the ball forward and upward, releasing it cleanly from the hand. Follow the same ball within the stationary composition as it rises while moving forward, curves through the top of its arc, and then descends toward the ground farther ahead. The change from rising to falling remains smooth and continuous. Keep the throwing hand and the full airborne path visible without cutting away or replacing the ball. Finish with a clear view of the end of the descent near the ground while the person remains behind the moving ball.\n\noverall_soundscape: Soft clothing movement and a restrained foot adjustment accompany the throw, with a small landing sound at the end of the descent and subdued outdoor ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static wide side view frames one adult standing on level ground with a small ball in one hand. Leave enough open space ahead and above the person to contain the complete flight. The person gently throws the ball forward and upward, releasing it cleanly from the hand. Follow the same ball within the stationary composition as it rises while moving forward, curves through the top of its arc, and then descends toward the ground farther ahead. The change from rising to falling remains smooth and continuous. Keep the throwing hand and the full airborne path visible without cutting away or replacing the ball. Finish with a clear view of the end of the descent near the ground while the person remains behind the moving ball.\n\noverall_soundscape: Soft clothing movement and a restrained foot adjustment accompany the throw, with a small landing sound at the end of the descent and subdued outdoor ambience. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

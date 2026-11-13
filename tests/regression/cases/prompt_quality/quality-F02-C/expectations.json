@@ -1,0 +1,62 @@
+{
+  "case_id": "quality-F02-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "准备好了，现在开始。",
+      "language": "Chinese",
+      "speaker": "the woman shown in the reference images",
+      "voiceover": false
+    }
+  ],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "两图分别作为同一人物的首尾帧锚点。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "用图1开头、图2结尾",
+      "h3_refined_evidence": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video."
+    },
+    {
+      "id": "R2",
+      "text": "人物先看向镜头，用普通话说给定中文原句。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "她先看着镜头用普通话说一句“准备好了，现在开始。”",
+      "h3_refined_evidence": "The woman with a natural Mandarin speaking voice (S1) looks toward the lens and says once: <d>[Chinese] 准备好了，现在开始。</d> Her visible lips move naturally with the spoken words."
+    },
+    {
+      "id": "R3",
+      "text": "说完后慢慢转成尾帧人物朝向。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "再慢慢转成图2的样子",
+      "h3_refined_evidence": "After the line is complete, her mouth closes and she slowly turns toward screen-left. Her head and upper body turn continuously while the camera remains still; her curls shift naturally with the movement. The same woman, hair, clothing, and background remain recognizable throughout. Progressively bring her orientation into the rear-side view shown in Picture 2, where the back of her curly hair occupies most of the portrait, reaching that final reference at the end of the shot."
+    },
+    {
+      "id": "R4",
+      "text": "镜头保持固定。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "镜头别动",
+      "h3_refined_evidence": "Her head and upper body turn continuously while the camera remains still;"
+    },
+    {
+      "id": "R5",
+      "text": "说话、转动与头发变化自然。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "自然一点",
+      "h3_refined_evidence": "Her visible lips move naturally with the spoken words. After the line is complete, her mouth closes and she slowly turns toward screen-left. Her head and upper body turn continuously while the camera remains still; her curls shift naturally with the movement."
+    },
+    {
+      "id": "R6",
+      "text": "请求生成10秒片段；四组均按固定帧合同得到243帧、10.125秒有效片长。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "做10秒视频",
+      "h3_refined_evidence": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video.",
+      "fulfillment_channel": "request_duration_metadata_and_effective_duration_alignment",
+      "requested_duration_seconds": 10,
+      "expected_num_frames": 243,
+      "expected_effective_duration_seconds": 10.125
+    }
+  ],
+  "physics_checks": [],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

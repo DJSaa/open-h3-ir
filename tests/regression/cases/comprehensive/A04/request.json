@@ -1,0 +1,45 @@
+{
+  "direct": {
+    "intent": "图1是唯一人物，音频1只提供音色。生成15秒视频，人物自然说一次：“好。”随即闭嘴微笑，剩余时间不说话。不要模仿参考音频的整段内容或持续时间。",
+    "seconds": 15.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "audio",
+        "sha256": "b2093ab180a3715f63d9a03789b04615c213e7a0b63a07649d75784f873e0e64",
+        "role": "voice_timbre"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "图1是唯一人物，音频1只提供音色。生成15秒视频，人物自然说一次：“好。”随即闭嘴微笑，剩余时间不说话。不要模仿参考音频的整段内容或持续时间。",
+    "seconds": "15.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 1, \"role\": \"voice_timbre\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "b2093ab180a3715f63d9a03789b04615c213e7a0b63a07649d75784f873e0e64",
+      "kind": "audio",
+      "filename": "audio_2.wav"
+    }
+  ]
+}

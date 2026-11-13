@@ -1,0 +1,60 @@
+{
+  "case_id": "quality-P022-D",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "一个成年人穿平底鞋",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一个成年人穿平底鞋",
+      "h3_refined_evidence": "an adult wearing flat-soled shoes on a level floor."
+    },
+    {
+      "id": "R2",
+      "text": "沿平整地面自然走几步",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "沿平整地面自然走几步",
+      "h3_refined_evidence": "an adult wearing flat-soled shoes on a level floor. The head, body and both feet stay within the frame, with stationary floor texture providing a clear reference. The adult walks several natural steps across the visible space at an ordinary pace."
+    },
+    {
+      "id": "R3",
+      "text": "固定侧面全身镜头",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "固定侧面全身镜头",
+      "h3_refined_evidence": "a fixed side full-body shot"
+    },
+    {
+      "id": "R4",
+      "text": "要看见双脚",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "要看见双脚",
+      "h3_refined_evidence": "Keep the feet readable as they lift, swing and meet the floor."
+    },
+    {
+      "id": "R5",
+      "text": "不要像在地上滑着走",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "不要像在地上滑着走",
+      "h3_refined_evidence": "The body's forward travel follows the stepping action rather than prolonged sliding on both soles."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "步行呈现可辨识的支撑与摆腿交替，身体移动与脚步相容。",
+      "observable_evidence": "静态地面纹理对照下，支撑和抬脚落脚阶段可见。",
+      "fail_examples": [
+        "双脚一直贴地向前滑而身体作走路摆动",
+        "人物持续离地漂移",
+        "脚穿入地面后继续行走"
+      ],
+      "not_required": [
+        "不要求每帧精确零滑移",
+        "不要求唯一标准步态",
+        "允许自然脚跟脚尖滚动"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

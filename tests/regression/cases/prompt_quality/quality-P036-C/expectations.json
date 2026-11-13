@@ -1,0 +1,53 @@
+{
+  "case_id": "quality-P036-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "卡通画面里",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "卡通画面里",
+      "h3_refined_evidence": "2D cartoon animation"
+    },
+    {
+      "id": "R2",
+      "text": "一个蓝色小方块被双手像拉面一样拉成长条",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "一个蓝色小方块被双手像拉面一样拉成长条",
+      "h3_refined_evidence": "one small blue block and two hands against a simple background. Each hand grasps one end of the block. The hands move apart and stretch the same blue shape into an exaggerated long strip, like pulling noodles"
+    },
+    {
+      "id": "R3",
+      "text": "再松手弹回方块",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "再松手弹回方块",
+      "h3_refined_evidence": "The hands then release their grips and move clear. The stretched strip elastically recoils toward the middle, briefly overshoots with a playful squash, and settles back into its original block shape."
+    },
+    {
+      "id": "R4",
+      "text": "过程夸张但不要破裂",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "过程夸张但不要破裂",
+      "h3_refined_evidence": "The hands move apart and stretch the same blue shape into an exaggerated long strip, like pulling noodles, while both grips remain visibly connected to the ends. The shape stays continuous and intact as it lengthens, retaining its blue color and identity. The hands then release their grips and move clear. The stretched strip elastically recoils toward the middle, briefly overshoots with a playful squash, and settles back into its original block shape. Keep the whole deformation visible within one continuous shot. Preserve the cartoon stretch rule, with no tearing, splitting, disappearance, or replacement by another object."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "形变符合用户明确的卡通拉伸规则，过程和身份连续。",
+      "observable_evidence": "同一蓝色实体连续拉长，松手后连续回缩为方块。",
+      "fail_examples": [
+        "物理增强把方块固定为不可形变刚体",
+        "拉伸时撕成两块或增加第二块",
+        "通过实体消失和替换完成恢复"
+      ],
+      "not_required": [
+        "不要求现实材料的应力应变曲线",
+        "不要求严格体积守恒或精确恢复时间",
+        "允许卡通过冲与弹性夸张"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

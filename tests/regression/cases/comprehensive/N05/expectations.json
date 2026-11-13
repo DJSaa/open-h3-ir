@@ -1,0 +1,21 @@
+{
+  "case_id": "N05",
+  "expected_outcome": "reject_or_clarify",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "N05-C01",
+      "requirement": "Gateway明确拒绝空提示词",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "N05-C02",
+      "requirement": "不触发模型编译、不静默填入默认场景",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": false,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

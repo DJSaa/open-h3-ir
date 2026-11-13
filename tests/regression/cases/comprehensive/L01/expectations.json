@@ -1,0 +1,32 @@
+{
+  "case_id": "L01",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "准备好了，现在开始。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "L01-C01",
+      "requirement": "英文场景说明，中文台词保持原文",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "L01-C02",
+      "requirement": "不把台词翻译为英文",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "L01-C03",
+      "requirement": "只出现一个说话人",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

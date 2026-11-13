@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "一颗红色台球滚过去撞上原本静止的蓝色台球，拍清接触后蓝球开始移动。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "一颗红色台球滚过去撞上原本静止的蓝色台球，拍清接触后蓝球开始移动。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

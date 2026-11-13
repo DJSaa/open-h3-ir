@@ -1,0 +1,27 @@
+{
+  "case_id": "T01",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "T01-C01",
+      "requirement": "杯子红色且静止，摄影机靠近",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "T01-C02",
+      "requirement": "雨声是环境声，禁止人物、对白、音乐、字幕",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "T01-C03",
+      "requirement": "无附件时不得虚构Picture/Audio引用",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

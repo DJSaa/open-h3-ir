@@ -1,0 +1,45 @@
+{
+  "direct": {
+    "intent": "图1中的男性是唯一角色，生成5秒视频。他使用音频1的女性音色，只说一次：“准备好了，现在开始。”人物性别不改变，音色不能因人物是男性而擅自改成男声。说完闭嘴，不复制参考音频原话。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "audio",
+        "sha256": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+        "role": "voice_timbre"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "图1中的男性是唯一角色，生成5秒视频。他使用音频1的女性音色，只说一次：“准备好了，现在开始。”人物性别不改变，音色不能因人物是男性而擅自改成男声。说完闭嘴，不复制参考音频原话。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 1, \"role\": \"voice_timbre\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "14f227025f5d365bb1abd68e38cd70eb04cb9c1a5ac50aa239ad220ef2116e06",
+      "kind": "audio",
+      "filename": "audio_2.wav"
+    }
+  ]
+}

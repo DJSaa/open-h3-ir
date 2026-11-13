@@ -1,0 +1,54 @@
+{
+  "case_id": "B-R04-P",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "周末一起去看海，我们早点出发。",
+      "occurrences": 1
+    },
+    {
+      "text": "好，我来准备。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-R04-P-C01",
+      "requirement": "甲绑定图片1及音频1，乙绑定图片2及音频2，音色不可交换。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-P-C02",
+      "requirement": "甲从第2秒开始说“周末一起去看海，我们早点出发。”，乙随后说“好，我来准备。”；不带参考原话。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-P-C03",
+      "requirement": "第4秒切至乙特写时，继续发声的是画外甲；乙听完甲的话前闭嘴。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-P-C04",
+      "requirement": "乙在听完后回答且第9秒前答完；第9秒起两人闭嘴微笑。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-P-C05",
+      "requirement": "第9秒切回双人中景；所有镜头保持图片3办公室、甲左乙右和同次对话的空间关系。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R04-P-C06",
+      "requirement": "只有指定两句对白和轻微环境声，无额外人物、旁白、字幕、音乐或其他台词。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

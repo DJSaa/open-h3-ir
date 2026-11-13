@@ -1,0 +1,63 @@
+{
+  "case_id": "quality-P020-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "男生把手里的一本书递给女生",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "男生把手里的一本书递给女生",
+      "h3_refined_evidence": "The man begins holding one book. He extends that same book toward the woman at a comfortable height."
+    },
+    {
+      "id": "R2",
+      "text": "女生接稳以后男生再松手",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "女生接稳以后男生再松手",
+      "h3_refined_evidence": "Once she has the book steady, his fingers release and his hands withdraw."
+    },
+    {
+      "id": "R3",
+      "text": "两个人都留在画面里",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "两个人都留在画面里",
+      "h3_refined_evidence": "a steady medium shot keeps a man and a woman together in the frame, with both pairs of hands and the space between them readable. The man begins holding one book. He extends that same book toward the woman at a comfortable height. She reaches out and takes a secure grip while he continues supporting it. A brief shared hold connects the movement. Once she has the book steady, his fingers release and his hands withdraw. Finish with the woman holding the book independently while both people remain visible."
+    },
+    {
+      "id": "R4",
+      "text": "书不要凭空变多",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "书不要凭空变多",
+      "h3_refined_evidence": "The book keeps the same cover, thickness and identity throughout the transfer, with no duplicate book appearing in either person's hands."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "交接时存在连续的持有与支撑路径。",
+      "observable_evidence": "男生持有，女生接触并接稳，男生松手，女生持有。",
+      "fail_examples": [
+        "两人都未触书时书悬停",
+        "书直接从一只手瞬移到另一人手里"
+      ],
+      "not_required": [
+        "不要求指定左右手",
+        "允许两人共同持书的过渡阶段"
+      ],
+      "id": "F1"
+    },
+    {
+      "criterion": "书在交接中保持同一实体。",
+      "observable_evidence": "封面和大致尺寸在移动中一致，最终只有目标书。",
+      "fail_examples": [
+        "交接时凭空多出一本书",
+        "接收后原书仍完整留在递出者手里"
+      ],
+      "not_required": [
+        "不以正常透视缩放判为尺寸变化"
+      ],
+      "id": "F2"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static three-quarter medium close shot frames the full back of a stable chair and a single soft towel held in two hands. The hands lay the middle of the towel across the top of the chair back, leaving an end on each side. Once the fabric rests on the chair, both hands open and withdraw completely. The two loose ends drop downward under their own weight while the middle remains supported by the chair back. Soft folds form and shift through the fabric, and a small settling sway gradually diminishes. Keep the chair, both towel ends, and the withdrawing hands visible in one continuous view. The same towel remains draped on the chair, with a pliable shape and a clear supported middle, ending with both ends hanging down.\n\noverall_soundscape: Quiet indoor ambience continues under a gentle rustle as the towel meets the chair and its folds settle. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static three-quarter medium close shot frames the full back of a stable chair and a single soft towel held in two hands. The hands lay the middle of the towel across the top of the chair back, leaving an end on each side. Once the fabric rests on the chair, both hands open and withdraw completely. The two loose ends drop downward under their own weight while the middle remains supported by the chair back. Soft folds form and shift through the fabric, and a small settling sway gradually diminishes. Keep the chair, both towel ends, and the withdrawing hands visible in one continuous view. The same towel remains draped on the chair, with a pliable shape and a clear supported middle, ending with both ends hanging down.\n\noverall_soundscape: Quiet indoor ambience continues under a gentle rustle as the towel meets the chair and its folds settle. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

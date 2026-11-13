@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a steady side close shot frames a transparent water tank with clear water and a visible bottom. A hand holds an ordinary solid stainless-steel teaspoon fully beneath the surface, well above the tank floor. The fingers open and move away, releasing the same teaspoon without a push. It sinks through the water toward the bottom, remaining clearly identifiable as it descends. Its orientation may rock or turn naturally during the fall. Show the underwater release, the downward passage and the eventual contact with the tank floor in one continuous view. The spoon comes to rest supported by the bottom, with its appearance unchanged and its path visible through the clear tank wall.\n\noverall_soundscape: Quiet room tone, faint water movement and a small contact sound when the teaspoon reaches the tank bottom accompany the action. No speech or voiceover is heard.\n\nnon_diegetic_music: N/A",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a steady side close shot frames a transparent water tank with clear water and a visible bottom. A hand holds an ordinary solid stainless-steel teaspoon fully beneath the surface, well above the tank floor. The fingers open and move away, releasing the same teaspoon without a push. It sinks through the water toward the bottom, remaining clearly identifiable as it descends. Its orientation may rock or turn naturally during the fall. Show the underwater release, the downward passage and the eventual contact with the tank floor in one continuous view. The spoon comes to rest supported by the bottom, with its appearance unchanged and its path visible through the clear tank wall.\n\noverall_soundscape: Quiet room tone, faint water movement and a small contact sound when the teaspoon reaches the tank bottom accompany the action. No speech or voiceover is heard.\n\nnon_diegetic_music: N/A",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

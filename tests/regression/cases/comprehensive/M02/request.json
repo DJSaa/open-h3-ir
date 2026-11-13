@@ -1,0 +1,59 @@
+{
+  "direct": {
+    "intent": "图1到图3都是同一个人，服装只按图1，图2和图3只补充外貌。生成5秒视频，这一个人站在简单室内背景前微笑，不说话。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "1d89df534f7b0dcb2be71997c3edd072f89b2532fd13e65e1743485105d2a1fc",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "2f1f765d5103cdc54c42148a21c93081cae4d831377b476fc2ef2a6a9932c5f9",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "0f6925e5e4d8788651b5ef72ee593be9c0a14950eacbfb280128ee37846399a1",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "图1到图3都是同一个人，服装只按图1，图2和图3只补充外貌。生成5秒视频，这一个人站在简单室内背景前微笑，不说话。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "1d89df534f7b0dcb2be71997c3edd072f89b2532fd13e65e1743485105d2a1fc",
+      "kind": "image",
+      "filename": "image_1.jpg"
+    },
+    {
+      "asset_id": "2f1f765d5103cdc54c42148a21c93081cae4d831377b476fc2ef2a6a9932c5f9",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "0f6925e5e4d8788651b5ef72ee593be9c0a14950eacbfb280128ee37846399a1",
+      "kind": "image",
+      "filename": "image_3.png"
+    }
+  ]
+}

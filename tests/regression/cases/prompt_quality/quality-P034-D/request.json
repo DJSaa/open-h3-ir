@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static medium shot looks across the interior of a space-station compartment in microgravity. One small ball initially floats nearly still relative to the cabin, with clear space between it and the floor and walls. A hand approaches, makes gentle contact, and gives the ball a small push. The hand then stops touching it and remains behind as a visible gap opens. After separation, the same ball slowly drifts onward in the direction of the push. Keep the contact, release, and subsequent free drift readable in one continuous view. The ball remains suspended clear of the cabin surfaces through the end, without curving downward toward the floor. Preserve the microgravity setting, allowing slight rotation while the slow drift continues away from the hand.\n\noverall_soundscape: A low, even cabin ventilation hum continues beneath faint fabric movement from the hand. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static medium shot looks across the interior of a space-station compartment in microgravity. One small ball initially floats nearly still relative to the cabin, with clear space between it and the floor and walls. A hand approaches, makes gentle contact, and gives the ball a small push. The hand then stops touching it and remains behind as a visible gap opens. After separation, the same ball slowly drifts onward in the direction of the push. Keep the contact, release, and subsequent free drift readable in one continuous view. The ball remains suspended clear of the cabin surfaces through the end, without curving downward toward the floor. Preserve the microgravity setting, allowing slight rotation while the slow drift continues away from the hand.\n\noverall_soundscape: A low, even cabin ventilation hum continues beneath faint fabric movement from the hand. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

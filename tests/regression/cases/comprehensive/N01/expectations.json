@@ -1,0 +1,21 @@
+{
+  "case_id": "N01",
+  "expected_outcome": "reject_or_clarify",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "N01-C01",
+      "requirement": "明确指出Picture3不存在或请求澄清",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "N01-C02",
+      "requirement": "不能虚构第三张素材或静默当作图1",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": false,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

@@ -1,0 +1,50 @@
+{
+  "case_id": "B-R08-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "这个手感，办公正合适。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "B-R08-A-C01",
+      "requirement": "人物分别采用图1和图2，场景采用图6办公室。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-A-C02",
+      "requirement": "图3–5合并成同一个目标有线鼠标的多角度参考，不生成三个独立目标鼠标。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-A-C03",
+      "requirement": "图1人物向图2展示鼠标，说“这个手感，办公正合适。”；图2点头。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-A-C04",
+      "requirement": "包含鼠标的细节镜头，而不只是远处出现一个小物件。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-A-C05",
+      "requirement": "音频1作为背景音乐，而不是角色音色或被无关音乐替代。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-R08-A-C06",
+      "requirement": "生成目标为15秒。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

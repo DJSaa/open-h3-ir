@@ -1,0 +1,52 @@
+{
+  "case_id": "quality-P025-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把一条柔软毛巾搭到椅背上",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把一条柔软毛巾搭到椅背上",
+      "h3_refined_evidence": "a single soft towel held in two hands. The hands lay the middle of the towel across the top of the chair back, leaving an end on each side."
+    },
+    {
+      "id": "R2",
+      "text": "再松手",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "再松手",
+      "h3_refined_evidence": "Once the fabric rests on the chair, both hands open and withdraw completely."
+    },
+    {
+      "id": "R3",
+      "text": "让毛巾两头自然垂下来",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让毛巾两头自然垂下来",
+      "h3_refined_evidence": "The two loose ends drop downward under their own weight while the middle remains supported by the chair back."
+    },
+    {
+      "id": "R4",
+      "text": "拍出布料的柔软感",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍出布料的柔软感",
+      "h3_refined_evidence": "Soft folds form and shift through the fabric, and a small settling sway gradually diminishes."
+    }
+  ],
+  "physics_checks": [
+    {
+      "criterion": "柔软毛巾的形状与椅背支撑及重力方向相容。",
+      "observable_evidence": "中部与椅背接触，两端在松手后向下垂落并产生自然褶皱。",
+      "fail_examples": [
+        "两端无支撑地水平悬在空中",
+        "毛巾穿过实心椅背",
+        "松手后毛巾整体停在椅背上方"
+      ],
+      "not_required": [
+        "不要求特定褶皱数量或两端等长",
+        "允许轻微摆动和接触面滑动"
+      ],
+      "id": "F1"
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

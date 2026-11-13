@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "空间站微重力舱内，一只手轻推悬着的小球，小球离手后沿推的方向缓慢漂移，不要掉向地面。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "空间站微重力舱内，一只手轻推悬着的小球，小球离手后沿推的方向缓慢漂移，不要掉向地面。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

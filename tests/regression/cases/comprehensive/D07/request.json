@@ -1,0 +1,35 @@
+{
+  "direct": {
+    "intent": "人物参考图1，生成15秒固定镜头视频。第2秒说：“准备好了。”然后闭嘴停顿到第10秒，再慢慢说：“现在开始。”两句各一次，停顿中不得说话。",
+    "seconds": 15.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "人物参考图1，生成15秒固定镜头视频。第2秒说：“准备好了。”然后闭嘴停顿到第10秒，再慢慢说：“现在开始。”两句各一次，停顿中不得说话。",
+    "seconds": "15.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    }
+  ]
+}

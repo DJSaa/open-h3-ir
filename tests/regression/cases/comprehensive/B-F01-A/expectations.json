@@ -1,0 +1,27 @@
+{
+  "case_id": "B-F01-A",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "B-F01-A-C01",
+      "requirement": "图1作为开头、图2作为结尾，首尾是同一连续场景。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F01-A-C02",
+      "requirement": "杯子和两只手电筒留在原处，不能靠移动物体完成视角变化。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "B-F01-A-C03",
+      "requirement": "由摄影机缓慢环绕产生视点变化。",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

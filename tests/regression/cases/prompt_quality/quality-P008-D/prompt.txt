@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a static frontal medium shot shows a small ball suspended from a thin string attached to a fixed support. Include the attachment point, the complete string, and the space for the ball to swing. A hand pulls the ball to one side and holds it motionless, then opens and moves out of its path. The ball swings downward beneath the support, passes through the low point, rises on the opposite side, and returns in the other direction. Continue several natural left-right swings along the arc defined by the string. The support remains fixed, and the string stays connected to the same ball throughout. Keep the full motion readable in one continuous view, ending while the ball continues its unforced swinging movement.
+
+overall_soundscape: Quiet room ambience accompanies a faint handling sound at release and subtle movement of the suspension. No dialogue or voiceover.
+
+non_diegetic_music: N/A

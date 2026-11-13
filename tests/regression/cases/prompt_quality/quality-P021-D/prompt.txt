@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a steady side full-body shot shows an adult approaching a sturdy chair on a level floor. Keep the adult, the entire chair and their contact with the floor visible. The adult walks to the chair, aligns naturally with the seat according to the starting orientation, and slowly lowers their body to sit. Their knees bend as their body descends, and their feet can adjust naturally for support. The body meets the seat and settles into a stable seated position. The chair stays in its original place throughout, its legs supported by the floor. Hold the final seated pose so that the body's support on the chair is clear. Maintain continuous visible movement from the approach through sitting down.
+
+overall_soundscape: Light footsteps, soft clothing movement and a faint seating sound accompany the action in a quiet room. There is no dialogue or voiceover.
+
+non_diegetic_music: N/A

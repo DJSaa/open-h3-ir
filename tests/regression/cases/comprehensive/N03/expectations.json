@@ -1,0 +1,21 @@
+{
+  "case_id": "N03",
+  "expected_outcome": "reject_or_clarify",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "N03-C01",
+      "requirement": "明确报告互相冲突的声音要求",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "N03-C02",
+      "requirement": "不能自行丢弃其中一个硬约束",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": false,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

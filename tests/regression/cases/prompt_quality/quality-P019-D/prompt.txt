@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a fixed medium-close shot frames a woman beside a wooden table, keeping her right hand, a transparent drinking glass and the tabletop clearly visible. She holds the glass in her right hand with about half a glass of water inside. She lowers it steadily toward the table, keeping the glass upright. The base meets the wooden surface and becomes stable while her hand still supports it. Only then do her right fingers open and her hand move completely away. The same glass remains upright on the tabletop, with the water retained inside and no spill. Hold the final supported position long enough to see that the hand has released it. The camera stays still, and the picture contains no subtitles.
+
+overall_soundscape: Quiet room tone, subtle clothing movement and a light glass-on-wood contact accompany the action. The woman remains silent and no voiceover is heard.
+
+non_diegetic_music: N/A

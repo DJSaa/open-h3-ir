@@ -1,0 +1,38 @@
+{
+  "case_id": "quality-P016-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把一把普通实心不锈钢茶匙完全浸入水后松开",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把一把普通实心不锈钢茶匙完全浸入水后松开",
+      "h3_refined_evidence": "A hand holds an ordinary solid stainless-steel teaspoon fully beneath the surface, well above the tank floor. The fingers open and move away, releasing the same teaspoon without a push."
+    },
+    {
+      "id": "R2",
+      "text": "拍清它下沉到透明水槽底部的过程",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "拍清它下沉到透明水槽底部的过程",
+      "h3_refined_evidence": "a transparent water tank with clear water and a visible bottom. A hand holds an ordinary solid stainless-steel teaspoon fully beneath the surface, well above the tank floor. The fingers open and move away, releasing the same teaspoon without a push. It sinks through the water toward the bottom, remaining clearly identifiable as it descends. Its orientation may rock or turn naturally during the fall. Show the underwater release, the downward passage and the eventual contact with the tank floor in one continuous view."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "完全浸水的普通实心不锈钢茶匙释放后整体下沉，并在接触底部后受到支撑。",
+      "observable_evidence": "可追踪茶匙完全位于水中时的释放、随后向下移动和触底过程。",
+      "fail_examples": [
+        "水下释放后茶匙无额外支撑却持续向上升并停在水面",
+        "茶匙在水中无接触瞬移到槽底",
+        "茶匙直接穿过槽底继续下落"
+      ],
+      "not_required": [
+        "允许自然翻转、摆动、附着少量气泡或短暂停顿",
+        "不要求匀速下沉或特定着底朝向"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

@@ -1,0 +1,45 @@
+{
+  "case_id": "quality-P007-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "把几块骨牌排成间距较小的一排",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "把几块骨牌排成间距较小的一排",
+      "h3_refined_evidence": "a short row of upright dominoes arranged with small gaps on a level tabletop."
+    },
+    {
+      "id": "R2",
+      "text": "轻推第一块",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "轻推第一块",
+      "h3_refined_evidence": "A hand gently tips only the first domino, then moves clear."
+    },
+    {
+      "id": "R3",
+      "text": "让它们一块碰着下一块依次倒下",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "让它们一块碰着下一块依次倒下",
+      "h3_refined_evidence": "The first piece falls against the next piece, which begins tipping after the contact, and this sequence travels down the row."
+    }
+  ],
+  "physics_checks": [
+    {
+      "id": "F1",
+      "criterion": "骨牌倒下沿排布方向通过相邻接触传递，没有无接触的远距离提前倒下。",
+      "observable_evidence": "能辨认至少几次相邻骨牌从接触到倒下的顺序。",
+      "fail_examples": [
+        "后排骨牌在前排仍直立且无接触时集体倒下",
+        "骨牌隔着大间隙遥控下一块",
+        "牌体穿过下一块后才触发变化"
+      ],
+      "not_required": [
+        "不要求骨牌数量或倒下间隔具有精确数值",
+        "边缘骨牌偏倒方向不单独判错"
+      ]
+    }
+  ],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

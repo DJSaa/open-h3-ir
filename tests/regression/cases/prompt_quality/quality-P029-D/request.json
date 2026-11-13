@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a close view looks into a preheated frying pan, holding a steady composition that clearly shows the pan bottom. A small, thin slice of butter is placed onto the hot surface. Keep the same slice in view as the contact edge softens and a yellow liquid margin appears around it. The remaining solid gradually becomes smaller and softer while melted butter spreads outward along the pan bottom. The transition remains continuous, with solid and liquid visible together during the change. Leave time to observe the spreading liquid instead of jumping directly to an empty pan. Small ordinary bubbles may appear, and a little unmelted butter may remain at the end. Keep the close framing on the cooking surface and the changing butter throughout.\n\noverall_soundscape: A gentle sizzle develops as the butter meets the hot pan, with subdued kitchen ambience underneath. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a close view looks into a preheated frying pan, holding a steady composition that clearly shows the pan bottom. A small, thin slice of butter is placed onto the hot surface. Keep the same slice in view as the contact edge softens and a yellow liquid margin appears around it. The remaining solid gradually becomes smaller and softer while melted butter spreads outward along the pan bottom. The transition remains continuous, with solid and liquid visible together during the change. Leave time to observe the spreading liquid instead of jumping directly to an empty pan. Small ordinary bubbles may appear, and a little unmelted butter may remain at the end. Keep the close framing on the cooking surface and the changing butter throughout.\n\noverall_soundscape: A gentle sizzle develops as the butter meets the hot pan, with subdued kitchen ambience underneath. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,27 @@
+{
+  "case_id": "I01",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "checks": [
+    {
+      "id": "I01-C01",
+      "requirement": "图1作为首帧，而非一般内容参考",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "I01-C02",
+      "requirement": "没有尾帧时不得虚构Picture2或末帧锚点",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "I01-C03",
+      "requirement": "物体不动，只有镜头移动",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

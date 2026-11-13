@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static oblique close shot shows a blue toy car on a tabletop in front of one upright flat mirror. Choose the view so both the actual car and its reflection are visible at the same time, with the mirror remaining still. One hand slowly pushes the same car across the table in front of the mirror. The wheels roll along the supporting surface while the reflection moves in correspondence with the real car according to the mirror arrangement. Preserve matching blue color, body shape, and motion phase between the car and its reflected image. Keep the hand, car, mirror, and reflection readable through the movement. Toward the end, the hand stops the car and the reflected car stops at the same moment. Hold the matching final positions briefly.\n\noverall_soundscape: Faint wheel and hand contact sounds occur over quiet room ambience, fading when the car stops. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static oblique close shot shows a blue toy car on a tabletop in front of one upright flat mirror. Choose the view so both the actual car and its reflection are visible at the same time, with the mirror remaining still. One hand slowly pushes the same car across the table in front of the mirror. The wheels roll along the supporting surface while the reflection moves in correspondence with the real car according to the mirror arrangement. Preserve matching blue color, body shape, and motion phase between the car and its reflected image. Keep the hand, car, mirror, and reflection readable through the movement. Toward the end, the hand stops the car and the reflected car stops at the same moment. Hold the matching final positions briefly.\n\noverall_soundscape: Faint wheel and hand contact sounds occur over quiet room ambience, fading when the car stops. No dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

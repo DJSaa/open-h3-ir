@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "把一颗小球放在倾斜木板的高处，静止松手，让它自己沿着木板滚下来。",
+    "seconds": 8,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "把一颗小球放在倾斜木板的高处，静止松手，让它自己沿着木板滚下来。",
+    "seconds": "8",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

@@ -1,0 +1,48 @@
+{
+  "case_id": "quality-F01-C",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [],
+  "common_intent_requirements": [
+    {
+      "id": "R1",
+      "text": "两图分别作为首尾帧锚点。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "图1是开头，图2是结尾。",
+      "h3_refined_evidence": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video."
+    },
+    {
+      "id": "R2",
+      "text": "摄影机缓慢环绕杯子和两只手电筒。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "慢慢绕着杯子和两个手电筒拍",
+      "h3_refined_evidence": "The camera moves in a slow, smooth arc around this stationary arrangement, gradually changing its viewing angle and coming a little closer as the framing approaches Picture 2."
+    },
+    {
+      "id": "R3",
+      "text": "杯子和两只手电筒留在原处。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "东西别动",
+      "h3_refined_evidence": "The cup and both flashlights remain in their original places and orientations on the surface; the camera movement accounts for their changing positions in the picture."
+    },
+    {
+      "id": "R4",
+      "text": "画面稳定、运动自然连续。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "画面平稳自然",
+      "h3_refined_evidence": "Continue the gentle camera movement without a cut or a sudden jump, arriving at the viewpoint, spacing, and composition established by Picture 2 at the end of the shot."
+    },
+    {
+      "id": "R5",
+      "text": "请求生成10秒片段；四组均按固定帧合同得到243帧、10.125秒有效片长。",
+      "kind": "explicit_requirement",
+      "normal_source_quote": "做10秒视频",
+      "h3_refined_evidence": "How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video.",
+      "fulfillment_channel": "request_duration_metadata_and_effective_duration_alignment",
+      "requested_duration_seconds": 10,
+      "expected_num_frames": 243,
+      "expected_effective_duration_seconds": 10.125
+    }
+  ],
+  "physics_checks": [],
+  "evaluation_boundary": "Assess only supplied requirements. Professional additions are not hidden requirements for ordinary input."
+}

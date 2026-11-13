@@ -1,0 +1,7 @@
+How the reference pictures align with the target video — Picture 1 (from Shot 1) aligns with the 0.00-second mark of the target video; Picture 2 (from Shot 1) aligns with the 10.13-second mark of the target video.
+
+integrated_multimodal_description: [Shot 1] Live-action, a fixed portrait close-up begins with the woman in Picture 1 facing the camera, her dark curly hair framing her face against the pale pink-lilac background. The woman with a natural Mandarin speaking voice (S1) looks toward the lens and says once: <d>[Chinese] 准备好了，现在开始。</d> Her visible lips move naturally with the spoken words. After the line is complete, her mouth closes and she slowly turns toward screen-left. Her head and upper body turn continuously while the camera remains still; her curls shift naturally with the movement. The same woman, hair, clothing, and background remain recognizable throughout. Progressively bring her orientation into the rear-side view shown in Picture 2, where the back of her curly hair occupies most of the portrait, reaching that final reference at the end of the shot.
+
+overall_soundscape: Low room ambience and subtle breathing accompany the portrait, with faint clothing movement during the turn.
+
+non_diegetic_music: N/A

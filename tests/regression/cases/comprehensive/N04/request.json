@@ -1,0 +1,35 @@
+{
+  "direct": {
+    "intent": "人物用图1，生成5秒视频。必须在0到0.1秒之间以自然普通话完整说完：“今天我们先检查设备，再整理桌上的资料，确认每个人都准备好以后，就一起出发去海边。”之后完全静默，不能加速或删词。",
+    "seconds": 5.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "人物用图1，生成5秒视频。必须在0到0.1秒之间以自然普通话完整说完：“今天我们先检查设备，再整理桌上的资料，确认每个人都准备好以后，就一起出发去海边。”之后完全静默，不能加速或删词。",
+    "seconds": "5.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    }
+  ]
+}

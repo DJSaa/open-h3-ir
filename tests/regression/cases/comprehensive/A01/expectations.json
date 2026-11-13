@@ -1,0 +1,32 @@
+{
+  "case_id": "A01",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "准备好了，现在开始。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "A01-C01",
+      "requirement": "唯一角色明确绑定Audio1",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A01-C02",
+      "requirement": "不擅改人物性别或音色要求",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "A01-C03",
+      "requirement": "台词正确且不复制源音频词句",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

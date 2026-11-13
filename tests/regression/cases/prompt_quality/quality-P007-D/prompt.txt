@@ -1,0 +1,5 @@
+integrated_multimodal_description: [Shot 1] Live-action, a static low three-quarter view shows a short row of upright dominoes arranged with small gaps on a level tabletop. Frame the entire row so neighboring contacts can be followed. A hand gently tips only the first domino, then moves clear. The first piece falls against the next piece, which begins tipping after the contact, and this sequence travels down the row. Each falling domino reaches its neighbor before that neighbor falls, creating a continuous visible chain rather than a simultaneous collapse. Keep the tabletop and camera still while the original pieces retain their shapes and positions within the row. Let the last domino fall and hold the resulting arrangement briefly. The hand does not return to push another piece.
+
+overall_soundscape: A sequence of small dry clicks follows the visible domino contacts and ends when the row has fallen. Quiet room ambience continues, without dialogue or voiceover.
+
+non_diegetic_music: N/A

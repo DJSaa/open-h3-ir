@@ -1,0 +1,105 @@
+{
+  "direct": {
+    "intent": "生成15秒三镜头写实视频。甲用<Picture 1>的外貌与服装，乙用<Picture 2>的外貌与服装，两人坐在<Picture 6>办公室的同一张前景办公桌旁，甲左乙右。<Picture 3>、<Picture 4>、<Picture 5>是同一款黑色AOC有线鼠标的斜前、侧面和俯视参考，只生成一只鼠标，不是三只。鼠标放在桌面，线缆自然弯曲地留在桌上。0–5秒双人中景，甲用右手轻握鼠标，向乙提起少许，并用普通话说：“这个手感，办公正合适。”第5秒切鼠标近景；5–10秒甲把握着的鼠标贴近桌面轻轻转过约30度，展示侧面和顶部，然后轻放回原处。整个动作中鼠标始终由手支撑，离桌不超过两厘米，不在空中自行旋转，不拉直或扯动线缆。第10秒切回双人中景；10–15秒甲松手，乙看鼠标微笑点头。使用<Audio 1>作为贯穿全片的背景音乐，保留原旋律和节奏，音量低于对白，不另创一首。全片只有甲的这一句对白，无字幕、歌词、额外台词或参考图的摄影背景。",
+    "seconds": 15.0,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "seed": 7,
+    "creativity": "balanced",
+    "assets": [
+      {
+        "kind": "image",
+        "sha256": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "cdafa499381dda3e57053878c79e8ebf4bcb04ec1d02c765bec955a6016bb23d",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "a08cbfc4eed7ac14b7ec02ef0f94d7f767ec851ad1e04fdc03df1abca0428344",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "image",
+        "sha256": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+        "provenance": {
+          "intended_role": "reference"
+        }
+      },
+      {
+        "kind": "audio",
+        "sha256": "86fff109e15841b37e22ad3add454f418cf54c4efd6c3571ff5b6c0b7dcf585f",
+        "role": "bgm"
+      }
+    ]
+  },
+  "gateway_fields": {
+    "model": "minimax-h3-ref2va",
+    "prompt": "生成15秒三镜头写实视频。甲用<Picture 1>的外貌与服装，乙用<Picture 2>的外貌与服装，两人坐在<Picture 6>办公室的同一张前景办公桌旁，甲左乙右。<Picture 3>、<Picture 4>、<Picture 5>是同一款黑色AOC有线鼠标的斜前、侧面和俯视参考，只生成一只鼠标，不是三只。鼠标放在桌面，线缆自然弯曲地留在桌上。0–5秒双人中景，甲用右手轻握鼠标，向乙提起少许，并用普通话说：“这个手感，办公正合适。”第5秒切鼠标近景；5–10秒甲把握着的鼠标贴近桌面轻轻转过约30度，展示侧面和顶部，然后轻放回原处。整个动作中鼠标始终由手支撑，离桌不超过两厘米，不在空中自行旋转，不拉直或扯动线缆。第10秒切回双人中景；10–15秒甲松手，乙看鼠标微笑点头。使用<Audio 1>作为贯穿全片的背景音乐，保留原旋律和节奏，音量低于对白，不另创一首。全片只有甲的这一句对白，无字幕、歌词、额外台词或参考图的摄影背景。",
+    "seconds": "15.0",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[{\"index\": 6, \"role\": \"bgm\"}]"
+  },
+  "files": [
+    {
+      "asset_id": "045e415244b2332d49dcc6925024e270810632004ef47425d325790de72f3880",
+      "kind": "image",
+      "filename": "image_1.png"
+    },
+    {
+      "asset_id": "d6dbbb758797246c10c93b7bd71dcc6d1f8bb0032ac8e65f68d965a04669f420",
+      "kind": "image",
+      "filename": "image_2.png"
+    },
+    {
+      "asset_id": "047980b92de6ab7672ae63b46f9dc22ee590ea7d57c33c761e5dbefd723cd732",
+      "kind": "image",
+      "filename": "image_3.jpg"
+    },
+    {
+      "asset_id": "cdafa499381dda3e57053878c79e8ebf4bcb04ec1d02c765bec955a6016bb23d",
+      "kind": "image",
+      "filename": "image_4.jpg"
+    },
+    {
+      "asset_id": "a08cbfc4eed7ac14b7ec02ef0f94d7f767ec851ad1e04fdc03df1abca0428344",
+      "kind": "image",
+      "filename": "image_5.jpg"
+    },
+    {
+      "asset_id": "b054cf792cf60e1d483f0d0520c00260c1377b3f5aa7a2b5fc66962e67a34153",
+      "kind": "image",
+      "filename": "image_6.jpg"
+    },
+    {
+      "asset_id": "86fff109e15841b37e22ad3add454f418cf54c4efd6c3571ff5b6c0b7dcf585f",
+      "kind": "audio",
+      "filename": "audio_7.wav"
+    }
+  ]
+}

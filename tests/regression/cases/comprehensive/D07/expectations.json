@@ -1,0 +1,36 @@
+{
+  "case_id": "D07",
+  "expected_outcome": "written_ready",
+  "exact_dialogue": [
+    {
+      "text": "准备好了。",
+      "occurrences": 1
+    },
+    {
+      "text": "现在开始。",
+      "occurrences": 1
+    }
+  ],
+  "checks": [
+    {
+      "id": "D07-C01",
+      "requirement": "保留2秒和10秒的用户时间要求",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "D07-C02",
+      "requirement": "两句分别保留，停顿期间闭嘴",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    },
+    {
+      "id": "D07-C03",
+      "requirement": "不得因普通语速估计而提前第二句",
+      "ir_status": "NOT_RUN",
+      "video_status": "NOT_RUN"
+    }
+  ],
+  "video_gate": true,
+  "evaluation_boundary": "只根据本输入明示要求与可见素材评分；不把其它版本的检查项发给模型。"
+}

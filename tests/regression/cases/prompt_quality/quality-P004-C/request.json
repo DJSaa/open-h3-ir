@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "把一个橡胶球从手里静止松开，让它在硬地板上弹跳几下后慢慢停下来。",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "把一个橡胶球从手里静止松开，让它在硬地板上弹跳几下后慢慢停下来。",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

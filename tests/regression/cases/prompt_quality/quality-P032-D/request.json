@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a static close shot frames a narrow strip of white absorbent paper held upright by a small clip at its upper end. Its lower tip dips into a shallow container of colored water, while the upper paper begins dry and white. Keep the liquid surface, contact point, and a readable length of paper visible together. Color first appears where the paper touches the water. A wet, tinted front then slowly spreads upward through the connected paper fibers, leaving a visible boundary between damp colored paper and the dry region above. The paper and container remain still while the front advances a modest distance. Keep the colored liquid within the container and the wetted paper, ending on a clear view of the continuous stained path from the dipped tip upward.\n\noverall_soundscape: Quiet indoor ambience continues beneath the close view, without dialogue, voiceover, or amplified water sounds.\n\nnon_diegetic_music: N/A",
+    "seconds": 12,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a static close shot frames a narrow strip of white absorbent paper held upright by a small clip at its upper end. Its lower tip dips into a shallow container of colored water, while the upper paper begins dry and white. Keep the liquid surface, contact point, and a readable length of paper visible together. Color first appears where the paper touches the water. A wet, tinted front then slowly spreads upward through the connected paper fibers, leaving a visible boundary between damp colored paper and the dry region above. The paper and container remain still while the front advances a modest distance. Keep the colored liquid within the container and the wetted paper, ending on a clear view of the continuous stained path from the dipped tip upward.\n\noverall_soundscape: Quiet indoor ambience continues beneath the close view, without dialogue, voiceover, or amplified water sounds.\n\nnon_diegetic_music: N/A",
+    "seconds": "12",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}

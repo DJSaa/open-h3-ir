@@ -1,0 +1,23 @@
+{
+  "direct": {
+    "intent": "integrated_multimodal_description: [Shot 1] Live-action, a steady close overhead shot frames a cup of coffee resting on a tabletop. A small amount of milk forms pale, partly unmixed streaks across the coffee surface. A hand lowers a spoon into the coffee and moves it slowly around the cup. After the immersed spoon begins moving, nearby liquid follows its motion and the milk streaks bend, stretch and drift with that flow. Continue the slow stirring so the changing pattern remains easy to observe, allowing the milk to gradually mix into the coffee. The cup stays in its original position on the table. Keep the spoon's contact with the liquid and the visible surface pattern in the same uninterrupted view, without obscuring them with the hand.\n\noverall_soundscape: Soft liquid stirring and occasional gentle spoon-to-cup touches are heard against quiet indoor ambience. There is no dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": 10,
+    "aspect": "1344:768",
+    "megapixels": 1.032192,
+    "assets": [],
+    "seed": 7,
+    "creativity": "balanced",
+    "dialogue": []
+  },
+  "gateway_fields": {
+    "model": "minimax-h3",
+    "prompt": "integrated_multimodal_description: [Shot 1] Live-action, a steady close overhead shot frames a cup of coffee resting on a tabletop. A small amount of milk forms pale, partly unmixed streaks across the coffee surface. A hand lowers a spoon into the coffee and moves it slowly around the cup. After the immersed spoon begins moving, nearby liquid follows its motion and the milk streaks bend, stretch and drift with that flow. Continue the slow stirring so the changing pattern remains easy to observe, allowing the milk to gradually mix into the coffee. The cup stays in its original position on the table. Keep the spoon's contact with the liquid and the visible surface pattern in the same uninterrupted view, without obscuring them with the hand.\n\noverall_soundscape: Soft liquid stirring and occasional gentle spoon-to-cup touches are heard against quiet indoor ambience. There is no dialogue or voiceover.\n\nnon_diegetic_music: N/A",
+    "seconds": "10",
+    "size": "1344x768",
+    "context_ir_seed": "7",
+    "creativity": "balanced",
+    "reference_options": "[]",
+    "dialogue": "[]"
+  },
+  "files": []
+}
