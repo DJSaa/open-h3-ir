@@ -84,3 +84,18 @@ def compiling(token, digests):
         with uploads._LOCK:
             entry["active"] = False
             entry["deadline"] = time.monotonic()+PREPARE_TTL_S
+
+
+@contextmanager
+def shared_workspace(token):
+    """Per-attempt analysis directory for a trusted shared-file resolver."""
+    if not re.fullmatch(r"[A-Za-z0-9_-]{1,128}", token):
+        raise ValueError("invalid compiler workspace token")
+    workspace = get_config().paths.state_dir / "compiler-work" / token
+    workspace.mkdir(parents=True, exist_ok=True)
+    context_token = _WORKSPACE.set(workspace)
+    try:
+        yield
+    finally:
+        _WORKSPACE.reset(context_token)
+        shutil.rmtree(workspace, ignore_errors=True)

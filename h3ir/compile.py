@@ -296,6 +296,11 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
         # not match the bytes.
         measure_assets(brief.assets)
         backend.require_available()
+        from .intent_resolution import resolve as resolve_input_intent
+        brief, intent_record = resolve_input_intent(brief, backend, seed=seed, llm=llm)
+        if intent_record is not None:
+            timings["intent_resolution_s"] = intent_record["seconds"]
+            parsed_input = parse_input(brief.intent)
         if semantic_record["enabled"]:
             from . import requirements
             start_requirements = time.time()
@@ -438,6 +443,7 @@ def compile_brief(brief: Brief, *, backend: Backend | None = None,
                     "omit": list(omit) or None,
                     "request": brief.intent,
                     "input_normalization": parsed_input.evidence(),
+                    "intent_resolution": intent_record,
                     "requirements_review": semantic_record,
                     "description_language": brief.description_language,
                     "language_policy": POLICY_VERSION,

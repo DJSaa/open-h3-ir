@@ -210,7 +210,8 @@ def _require_uploaded(b: BriefIn) -> None:
                                "attachment. An upload is named by the hash of its own bytes, as 64 "
                                "lowercase hexadecimal characters."})
             wanted.append(named)
-    absent = uploads.missing(wanted)
+    from .engine import shared_source
+    absent = uploads.missing([d for d in wanted if shared_source(d) is None])
     if absent:
         raise HTTPException(422, detail={
             "code": "asset-not-uploaded",
@@ -232,6 +233,10 @@ def _source_of(a: AssetIn) -> tuple[Path, str]:
                        f"({a.sha256}). They can name different files, so pick one: a path for a "
                        "service that can open your filesystem, an upload for one that cannot."})
     if a.sha256:
+        from .engine import shared_source
+        shared = shared_source(a.sha256)
+        if shared is not None:
+            return shared, a.sha256
         p = uploads.stored(a.sha256)
         if p is None:
             # `_require_uploaded` already looked, so reaching here means the asset was evicted in
@@ -569,7 +574,7 @@ def capabilities() -> dict[str, Any]:
             "upload_store_bytes": cfg.assets.upload_store_bytes,
             "upload_ttl_hours": cfg.assets.upload_ttl_hours,
         },
-        "gateway_contract": {"asset_leases": True, "paired_soundtrack_ignore": True, "version": 1},
+        "gateway_contract": {"asset_leases": True, "paired_soundtrack_ignore": True, "intent_resolution": 1, "version": 1},
         "note": "2K output needs MiniMax's closed regeneration stage; local output is 768p.",
     }
 
@@ -671,20 +676,10 @@ def release_asset_lease(token: str) -> dict:
 
 @app.post("/v1/briefs")
 def create_brief(body: BriefIn, request: Request = None) -> JSONResponse:
-    _require_uploaded(body)
+    from .engine import compile_request
     token = request.headers.get("X-H3IR-Asset-Lease") if request is not None else None
-    # Legacy callers get request-duration pins; Gateway reserves before upload.
-    own = token is None
-    token = token or "legacy-" + uuid.uuid4().hex
-    digests = [d for a in body.assets for d in (a.sha256, a.paired_video_sha256) if d]
-    if own:
-        asset_leases.reserve(token, digests)
-    try:
-        with asset_leases.compiling(token, digests):
-            return _create_brief(body)
-    finally:
-        if own:
-            asset_leases.release(token)
+    result = compile_request(body, lease_token=token)
+    return JSONResponse(status_code=result.status_code, content=result.body)
 
 
 def _create_brief(body: BriefIn) -> JSONResponse:

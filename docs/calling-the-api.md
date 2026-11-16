@@ -492,3 +492,17 @@ route retains its existing bounded correction/dialogue passes before this final
 classification; no extra LLM review or retry is added. If optional requirements
 review is enabled, it still runs after compatible mechanical findings pass. This is a bounded compiler compatibility policy, not a global
 relaxation of the standalone validator or a guarantee of rendered video quality.
+
+## Gateway input-intent bridge
+
+The Dingo Gateway bridge opts into an independent text-only input-intent stage using the existing
+asset `provenance`, with `gateway_contract.intent_resolution=1` in capabilities. It locks explicit
+choices, resolves omitted frame/audio/soundtrack choices from the user's prompt, and falls back to
+stable defaults with warnings. It does not add a public top-level `/v1/briefs` field. Direct clients
+without this bridge context retain their existing role and soundtrack contract.
+
+The bridge defaults are: one image is the first frame; two images are first/last in upload order;
+standalone audio is a voice-timbre reference; an embedded video soundtrack is preserved. This is a
+local policy, not a claim about undocumented hosted MiniMax defaults. No ASR is performed.
+Actual intent-stage requests are included in the existing aggregated `usage`. See
+[dingo-base.md](dingo-base.md) for validation scope and stage recovery.

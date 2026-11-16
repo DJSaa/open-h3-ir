@@ -371,7 +371,8 @@ class Backend:
     def chat(self, messages: list[dict[str, Any]], *, thinking: bool | None = None,
              max_tokens: int | None = None, temperature: float = 0.7,
              seed: int | None = None, response_format: dict[str, Any] | None = None,
-             stop: list[str] | None = None, retries: int = 2) -> Reply:
+             stop: list[str] | None = None, retries: int = 2,
+             timeout_s: float | None = None) -> Reply:
         if thinking is None:
             thinking = self.cfg.default_thinking
         # F16: a schema is only honoured with thinking off. Refuse the unsafe combination
@@ -400,7 +401,7 @@ class Backend:
         last: Exception | None = None
         for attempt in range(retries + 1):
             try:
-                return self._once(body)
+                return self._once(body, timeout_s=timeout_s) if timeout_s is not None else self._once(body)
             except (TruncatedResponse, httpx.HTTPError) as e:
                 last = e
                 if attempt < retries:
@@ -427,10 +428,10 @@ class Backend:
         raise BackendError(f"chat failed after {retries + 1} attempt(s): {last}") from last
 
     @account_attempt
-    def _once(self, body: dict[str, Any]) -> Reply:
+    def _once(self, body: dict[str, Any], *, timeout_s: float | None = None) -> Reply:
         t0 = time.time()
         r = self._http().post(f"{self.base_url()}/chat/completions", json=body,
-                              headers=self._headers())
+                              headers=self._headers(), **({"timeout": timeout_s} if timeout_s is not None else {}))
         wall = time.time() - t0
         if r.status_code >= 400:
             raise EndpointRefused(r.status_code, r.text)
